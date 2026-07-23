@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Plasma cutting calculator and practical CNC plasma-cutting articles.">
+  <title>Plasma Cut Lab | Cutting Calculator</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="cut-chart-data.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Plasma Cut Lab home">
+      <span class="brand-mark" aria-hidden="true">P</span>
+      <span>
+        <strong>Plasma Cut Lab</strong>
+        <small>Settings, testing, and practical guides</small>
+      </span>
+    </a>
+
+    <nav aria-label="Primary navigation">
+      <a href="#calculator">Calculator</a>
+      <a href="#articles">Articles</a>
+      <a href="#about">About</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">CNC plasma-cutting resources</p>
+        <h1>Find a practical starting point for your next cut.</h1>
+        <p class="hero-copy">
+          Select the material, thickness, machine capacity, and cutting priority.
+          The calculator reports feed rate in both unit systems, pierce delay,
+          gas pressure, and cutting amperage.
+        </p>
+        <a class="primary-link" href="#calculator">Open the calculator</a>
+      </div>
+
+      <aside class="hero-card" aria-label="Calculator outputs">
+        <span>Calculator outputs</span>
+        <strong>Feed rate</strong>
+        <strong>Pierce delay</strong>
+        <strong>Gas pressure</strong>
+        <strong>Cutting amps</strong>
+      </aside>
+    </section>
+
+    <section class="calculator-section" id="calculator">
+      <div class="section-heading">
+        <p class="eyebrow">Plasma cutting calculator</p>
+        <h2>Calculate starting settings</h2>
+        <p>
+          Version 0.1 uses validated cut-chart records only. Unsupported
+          combinations are blocked rather than estimated from unsafe generic formulas.
+        </p>
+      </div>
+
+      <div class="calculator-grid">
+        <form class="calculator-card" id="cut-form">
+          <div class="field">
+            <label for="material">Material</label>
+            <select id="material" name="material">
+              <option value="mild-steel">Mild steel</option>
+              <option value="stainless-steel">Stainless steel</option>
+              <option value="aluminum">Aluminum</option>
+            </select>
+          </div>
+
+          <fieldset class="field">
+            <legend>Thickness</legend>
+            <div class="input-group">
+              <input
+                id="thickness"
+                name="thickness"
+                type="number"
+                min="0.1"
+                step="0.1"
+                value="6"
+                inputmode="decimal"
+                required
+              >
+              <select id="thickness-unit" name="thickness-unit" aria-label="Thickness unit">
+                <option value="mm">mm</option>
+                <option value="in">inches</option>
+              </select>
+            </div>
+            <p class="field-help" id="converted-thickness">6.00 mm / 0.236 in</p>
+          </fieldset>
+
+          <div class="field">
+            <label for="machine-amps">Machine maximum amperage</label>
+            <div class="input-suffix">
+              <input
+                id="machine-amps"
+                name="machine-amps"
+                type="number"
+                min="20"
+                max="200"
+                step="1"
+                value="85"
+                required
+              >
+              <span>A max</span>
+            </div>
+            <p class="field-help">
+              This is a capacity limit—not necessarily the recommended cutting current.
+            </p>
+          </div>
+
+          <fieldset class="field">
+            <legend>Cut priority</legend>
+            <div class="priority-grid">
+              <label class="priority-option">
+                <input type="radio" name="priority" value="quality">
+                <span>
+                  <strong>Quality</strong>
+                  <small>Best edge and accuracy</small>
+                </span>
+              </label>
+
+              <label class="priority-option">
+                <input type="radio" name="priority" value="balanced" checked>
+                <span>
+                  <strong>Balanced</strong>
+                  <small>Quality and productivity</small>
+                </span>
+              </label>
+
+              <label class="priority-option">
+                <input type="radio" name="priority" value="speed">
+                <span>
+                  <strong>Speed</strong>
+                  <small>Higher production rate</small>
+                </span>
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="field">
+            <label for="machine-profile">Cut-chart profile</label>
+            <select id="machine-profile" name="machine-profile">
+              <option value="stamos-s-plasma-85">Stamos S-Plasma 85 CNC</option>
+            </select>
+            <p class="field-help">Compressed-air process, manual pressure control.</p>
+          </div>
+
+          <button class="calculate-button" type="submit">Calculate settings</button>
+        </form>
+
+        <section class="result-card" aria-live="polite" aria-labelledby="result-title">
+          <div class="result-header">
+            <div>
+              <p class="eyebrow">Calculated side</p>
+              <h3 id="result-title">Recommended starting settings</h3>
+            </div>
+            <span class="status-pill" id="result-status">Awaiting input</span>
+          </div>
+
+          <div class="result-message" id="result-message">
+            Enter your settings and select <strong>Calculate settings</strong>.
+          </div>
+
+          <div class="result-grid" id="result-grid" hidden>
+            <article class="metric metric-wide">
+              <span>Feed rate</span>
+              <strong id="feed-mm">—</strong>
+              <small id="feed-ipm">—</small>
+            </article>
+
+            <article class="metric">
+              <span>Pierce delay</span>
+              <strong id="pierce-delay">—</strong>
+            </article>
+
+            <article class="metric">
+              <span>Gas pressure</span>
+              <strong id="gas-bar">—</strong>
+              <small id="gas-psi">—</small>
+            </article>
+
+            <article class="metric">
+              <span>Cutting current</span>
+              <strong id="cutting-amps">—</strong>
+            </article>
+          </div>
+
+          <dl class="result-details" id="result-details" hidden>
+            <div>
+              <dt>Material</dt>
+              <dd id="result-material">—</dd>
+            </div>
+            <div>
+              <dt>Thickness</dt>
+              <dd id="result-thickness">—</dd>
+            </div>
+            <div>
+              <dt>Priority</dt>
+              <dd id="result-priority">—</dd>
+            </div>
+            <div>
+              <dt>Data source</dt>
+              <dd id="result-source">—</dd>
+            </div>
+          </dl>
+
+          <div class="safety-warning">
+            <strong>Important</strong>
+            <p>
+              These values are starting recommendations. Actual settings vary with
+              the plasma source, torch, consumables, air quality, table motion,
+              material composition, and consumable wear. Verify settings using the
+              manufacturer’s manual and test cuts.
+            </p>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="articles-section" id="articles">
+      <div class="section-heading">
+        <p class="eyebrow">From the blog</p>
+        <h2>Build an evidence-based plasma-cutting library</h2>
+      </div>
+
+      <div class="article-grid">
+        <article>
+          <span>Cut quality</span>
+          <h3>How to read dross, bevel, and drag lines</h3>
+          <p>Learn what the cut edge is telling you before changing several settings at once.</p>
+          <a href="#" aria-disabled="true">Coming soon</a>
+        </article>
+
+        <article>
+          <span>Air system</span>
+          <h3>Why clean, dry air changes consumable life</h3>
+          <p>A practical guide to filtration, pressure, airflow, and water contamination.</p>
+          <a href="#" aria-disabled="true">Coming soon</a>
+        </article>
+
+        <article>
+          <span>Testing</span>
+          <h3>How to build a machine-specific cut chart</h3>
+          <p>Use controlled test coupons to calibrate speed, delay, voltage, and kerf.</p>
+          <a href="#" aria-disabled="true">Coming soon</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="about-section" id="about">
+      <div>
+        <p class="eyebrow">About the project</p>
+        <h2>Practical settings backed by documented tests.</h2>
+      </div>
+      <p>
+        The long-term goal is to support machine-specific profiles, consumables,
+        cut height, pierce height, arc voltage, kerf width, and user calibration.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <span id="current-year"></span> Plasma Cut Lab.</p>
+    <p>Calculator version 0.1</p>
+  </footer>
+</body>
+</html>
