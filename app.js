@@ -20,6 +20,9 @@ const form = document.querySelector("#cut-form");
 const thicknessInput = document.querySelector("#thickness");
 const thicknessUnit = document.querySelector("#thickness-unit");
 const convertedThickness = document.querySelector("#converted-thickness");
+const machineAmpsInput = document.querySelector("#machine-amps");
+const machineProfileSelect = document.querySelector("#machine-profile");
+const profileHelp = machineProfileSelect.nextElementSibling;
 const resultStatus = document.querySelector("#result-status");
 const resultMessage = document.querySelector("#result-message");
 const resultGrid = document.querySelector("#result-grid");
@@ -44,12 +47,9 @@ function mmMinToIpm(value) {
   return value / 25.4;
 }
 
-function barToPsi(value) {
-  return value * 14.5037738;
-}
-
 function updateConvertedThickness() {
   const entered = Number.parseFloat(thicknessInput.value);
+
   if (!Number.isFinite(entered) || entered <= 0) {
     convertedThickness.textContent = "Enter a valid thickness.";
     return;
@@ -58,6 +58,53 @@ function updateConvertedThickness() {
   const mm = toMillimeters(entered, thicknessUnit.value);
   convertedThickness.textContent =
     `${round(mm, 2).toFixed(2)} mm / ${round(toInches(mm), 3).toFixed(3)} in`;
+}
+
+function getProfiles() {
+  return window.PLASMA_MACHINE_PROFILES || [];
+}
+
+function getSelectedProfile() {
+  return getProfiles().find(
+    (profile) => profile.id === machineProfileSelect.value
+  );
+}
+
+function populateMachineProfiles() {
+  const profiles = getProfiles();
+  const groupNames = [...new Set(profiles.map((profile) => profile.group))];
+
+  machineProfileSelect.innerHTML = "";
+
+  for (const groupName of groupNames) {
+    const optgroup = document.createElement("optgroup");
+    optgroup.label = groupName;
+
+    for (const profile of profiles.filter(
+      (item) => item.group === groupName
+    )) {
+      const option = document.createElement("option");
+      option.value = profile.id;
+      option.textContent = profile.label;
+      optgroup.appendChild(option);
+    }
+
+    machineProfileSelect.appendChild(optgroup);
+  }
+
+  machineProfileSelect.value = "stamos-s-plasma-85";
+  updateSelectedProfile(true);
+}
+
+function updateSelectedProfile(setDefaultAmps = false) {
+  const profile = getSelectedProfile();
+  if (!profile) return;
+
+  profileHelp.textContent = profile.help;
+
+  if (setDefaultAmps || profile.id !== "generic-air-plasma") {
+    machineAmpsInput.value = profile.defaultMaxAmps;
+  }
 }
 
 function setStatus(label, type = "") {
@@ -75,16 +122,23 @@ function interpolate(x, x1, x2, y1, y2) {
   return y1 + ((x - x1) / (x2 - x1)) * (y2 - y1);
 }
 
-function selectProcessSeries({ machineProfile, material, thicknessMm, machineMaxAmps }) {
-  const allRecords = (window.PLASMA_CUT_CHARTS || []).filter((record) =>
-    record.machineProfile === machineProfile &&
-    record.material === material &&
-    record.processAmps <= machineMaxAmps &&
-    record.validated === true
+function selectProcessSeries({
+  machineProfile,
+  material,
+  thicknessMm,
+  machineMaxAmps
+}) {
+  const allRecords = (window.PLASMA_CUT_CHARTS || []).filter(
+    (record) =>
+      record.machineProfile === machineProfile &&
+      record.material === material &&
+      record.processAmps <= machineMaxAmps &&
+      record.validated === true
   );
 
-  const availableAmps = [...new Set(allRecords.map((record) => record.processAmps))]
-    .sort((a, b) => a - b);
+  const availableAmps = [
+    ...new Set(allRecords.map((record) => record.processAmps))
+  ].sort((a, b) => a - b);
 
   for (const amps of availableAmps) {
     const series = allRecords
@@ -117,7 +171,10 @@ function getCalculatedRecord(values) {
   const lower = [...series]
     .reverse()
     .find((record) => record.thicknessMm < values.thicknessMm);
-  const upper = series.find((record) => record.thicknessMm > values.thicknessMm);
+
+  const upper = series.find(
+    (record) => record.thicknessMm > values.thicknessMm
+  );
 
   if (!lower || !upper) return null;
 
@@ -154,50 +211,84 @@ function getCalculatedRecord(values) {
 
 function calculateFeedRate(record, priority) {
   const blend = PRIORITY_BLEND[priority];
-  return record.qualitySpeedMmMin +
-    blend * (record.productionSpeedMmMin - record.qualitySpeedMmMin);
+
+  return (
+    record.qualitySpeedMmMin +
+    blend *
+      (record.productionSpeedMmMin - record.qualitySpeedMmMin)
+  );
 }
 
-function renderResult(record, values) {
+function renderGasPressure(record) {
+  document.querySelector("#gas-bar").textContent =
+    record.gasPressurePrimary || "Machine-specific";
+
+  document.querySelector("#gas-psi").textContent =
+    record.gasPressureSecondary || "Use manufacturer setting";
+}
+
+function renderResult(record, values, profile) {
   const feedMmMin = calculateFeedRate(record, values.priority);
 
   document.querySelector("#feed-mm").textContent =
     `${Math.round(feedMmMin).toLocaleString()} mm/min`;
+
   document.querySelector("#feed-ipm").textContent =
     `${round(mmMinToIpm(feedMmMin), 1).toFixed(1)} IPM`;
+
   document.querySelector("#pierce-delay").textContent =
     `${round(record.pierceDelaySeconds, 2).toFixed(2)} sec`;
-  document.querySelector("#gas-bar").textContent =
-    `${round(record.gasPressureBar, 1).toFixed(1)} bar`;
-  document.querySelector("#gas-psi").textContent =
-    `${round(barToPsi(record.gasPressureBar), 1).toFixed(1)} PSI`;
+
+  renderGasPressure(record);
+
   document.querySelector("#cutting-amps").textContent =
     `${record.processAmps} A`;
 
   document.querySelector("#result-material").textContent =
     MATERIAL_LABELS[values.material];
+
   document.querySelector("#result-thickness").textContent =
-    `${round(values.thicknessMm, 2).toFixed(2)} mm / ${round(toInches(values.thicknessMm), 3).toFixed(3)} in`;
+    `${round(values.thicknessMm, 2).toFixed(2)} mm / ${round(
+      toInches(values.thicknessMm),
+      3
+    ).toFixed(3)} in`;
+
   document.querySelector("#result-priority").textContent =
     PRIORITY_LABELS[values.priority];
-  document.querySelector("#result-source").textContent = record.source;
+
+  document.querySelector("#result-source").textContent =
+    `${profile.label}. ${record.source}`;
 
   resultMessage.hidden = false;
-  resultMessage.innerHTML =
-    `<strong>Reference profile:</strong> Speed and pierce delay are based on the
-    Hypertherm Powermax65/85 shielded-air chart. They are not Stamos factory
-    settings. Begin with a test coupon and tune your machine from this starting point.`;
+
+  if (record.referenceOnly) {
+    resultMessage.innerHTML =
+      `<strong>Reference profile:</strong> ${profile.label} uses Hypertherm
+      shielded-air speed and pierce-delay data as a starting point. It is not
+      factory data for every torch or plasma source. Test a coupon and tune the
+      result for your machine.`;
+  } else {
+    resultMessage.innerHTML =
+      `<strong>Manufacturer profile:</strong> ${profile.label} uses the official
+      Hypertherm Powermax65/85 shielded-air chart. Hypertherm normally controls
+      gas pressure automatically in standard operation.`;
+  }
 
   resultGrid.hidden = false;
   resultDetails.hidden = false;
 
-  setStatus(
-    record.interpolated ? "Interpolated reference" : "Reference chart",
-    "success"
-  );
+  if (record.interpolated && record.referenceOnly) {
+    setStatus("Interpolated reference", "success");
+  } else if (record.interpolated) {
+    setStatus("Interpolated chart", "success");
+  } else if (record.referenceOnly) {
+    setStatus("Reference chart", "success");
+  } else {
+    setStatus("Manufacturer chart", "success");
+  }
 }
 
-function showUnavailable(message, status = "No reference data") {
+function showUnavailable(message, status = "No chart data") {
   clearResult();
   resultMessage.hidden = false;
   resultMessage.innerHTML = message;
@@ -210,6 +301,23 @@ form.addEventListener("submit", (event) => {
   const data = new FormData(form);
   const enteredThickness = Number.parseFloat(data.get("thickness"));
   const machineMaxAmps = Number.parseFloat(data.get("machine-amps"));
+  const profile = getSelectedProfile();
+
+  if (!profile) {
+    showUnavailable("Select a valid machine profile.", "Check profile");
+    return;
+  }
+
+  if (!profile.supported) {
+    showUnavailable(
+      `<strong>${profile.label}</strong> is included in the machine list, but
+      its official cut-chart rows have not been loaded yet. The calculator will
+      not substitute Hypertherm values and label them as this manufacturer's
+      factory settings.`,
+      "Chart coming soon"
+    );
+    return;
+  }
 
   if (!Number.isFinite(enteredThickness) || enteredThickness <= 0) {
     showUnavailable("Enter a thickness greater than zero.", "Check input");
@@ -217,36 +325,46 @@ form.addEventListener("submit", (event) => {
   }
 
   if (!Number.isFinite(machineMaxAmps) || machineMaxAmps <= 0) {
-    showUnavailable("Enter the plasma cutter’s maximum amperage.", "Check input");
+    showUnavailable(
+      "Enter the plasma cutter’s maximum amperage.",
+      "Check input"
+    );
     return;
   }
 
   const values = {
     material: data.get("material"),
-    thicknessMm: toMillimeters(enteredThickness, data.get("thickness-unit")),
+    thicknessMm: toMillimeters(
+      enteredThickness,
+      data.get("thickness-unit")
+    ),
     machineMaxAmps,
     priority: data.get("priority"),
-    machineProfile: data.get("machine-profile")
+    machineProfile: profile.id
   };
 
   const record = getCalculatedRecord(values);
 
   if (!record) {
     showUnavailable(
-      `No supported Hypertherm reference process was found for
+      `No supported process was found for
       <strong>${MATERIAL_LABELS[values.material]}</strong> at
-      <strong>${round(values.thicknessMm, 2)} mm</strong> with a machine limit of
-      <strong>${machineMaxAmps} A</strong>. Increase machine capacity only if your
-      actual plasma cutter supports it, or use an edge-start procedure for material
-      beyond the piercing range.`,
+      <strong>${round(values.thicknessMm, 2)} mm</strong> with a limit of
+      <strong>${machineMaxAmps} A</strong> in the
+      <strong>${profile.label}</strong> profile.`,
       "Outside chart range"
     );
     return;
   }
 
-  renderResult(record, values);
+  renderResult(record, values, profile);
 });
 
 thicknessInput.addEventListener("input", updateConvertedThickness);
 thicknessUnit.addEventListener("change", updateConvertedThickness);
+machineProfileSelect.addEventListener("change", () =>
+  updateSelectedProfile(true)
+);
+
+populateMachineProfiles();
 updateConvertedThickness();

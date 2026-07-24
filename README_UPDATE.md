@@ -1,29 +1,37 @@
-# Hypertherm Reference Update v0.2
+# Plasma Cut Lab — Multi-Profile Update v0.3
 
-Replace these two files in the root of your GitHub repository:
+Upload and replace these two files in the root of the GitHub repository:
 
 - `cut-chart-data.js`
 - `app.js`
 
-## What changes
+No `index.html` change is required. JavaScript rebuilds the profile selector
+automatically and organizes machines by manufacturer.
 
-- Adds shielded-air reference records for mild steel, stainless steel, and aluminum
-- Includes 45 A, 65 A, and 85 A process charts
-- Automatically selects the lowest supported process current
-- Interpolates between neighboring thickness rows
-- Keeps Stamos gas pressure at 5.5 bar / approximately 79.8 PSI
-- Clearly labels results as Hypertherm reference settings
+## Working profiles
+
+- Generic air plasma — Hypertherm reference
+- Stamos S-Plasma 85 CNC — Hypertherm reference with 5.5 bar displayed
+- Hypertherm Powermax65 — official 45 A and 65 A shielded-air rows
+- Hypertherm Powermax85 — official 45 A, 65 A, and 85 A shielded-air rows
+
+## Listed for future chart data
+
+- Hypertherm Powermax45 XP
+- Hypertherm Powermax SYNC
+- ESAB Thermal Dynamics Cutmaster 60i
+- ESAB Thermal Dynamics Cutmaster 82
+- Lincoln Electric Tomahawk 45
+- Lincoln Electric Tomahawk 1000
+- Miller Spectrum 625 X-TREME
+- Miller Spectrum 875
+- Everlast PowerPlasma 62i
+- Everlast PowerPlasma 82i
+
+Selecting a future profile displays "Chart coming soon." It does not silently
+reuse another manufacturer's settings.
 
 ## Source
 
-Cut speeds and pierce delays are transcribed from:
-
-Hypertherm Powermax65/85 Operator Manual  
-Document 806650, Revision 4  
-Shielded-air cut charts, 45 A, 65 A, and 85 A
-
-## Important limitation
-
-Hypertherm and Stamos use different power supplies, torches, consumables, gas
-management, and arc characteristics. These values are reference starting points,
-not guaranteed Stamos settings. Test-cut and calibrate each combination.
+Hypertherm Powermax65/85 Operator Manual 806650, Revision 4,
+shielded-air mechanized cut charts.
