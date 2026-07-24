@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Learn how to choose plasma cutting amperage, feed rate, pierce delay, air pressure, and torch height for mild steel, stainless steel, and aluminum.">
+  <meta name="author" content="Plasma Cut Lab">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="How to Choose Plasma Cutting Settings: A Beginner’s Guide">
+  <meta property="og:description" content="A practical beginner guide to plasma cutting amperage, speed, pierce delay, pressure, and torch height.">
+  <title>How to Choose Plasma Cutting Settings | Plasma Cut Lab</title>
+  <link rel="stylesheet" href="styles.css?v=6.0">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "How to Choose Plasma Cutting Settings: A Beginner’s Guide",
+    "description": "A practical beginner guide to choosing plasma cutting amperage, feed rate, pierce delay, air pressure, and torch height.",
+    "datePublished": "2026-07-23",
+    "dateModified": "2026-07-23",
+    "author": {
+      "@type": "Organization",
+      "name": "Plasma Cut Lab"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Plasma Cut Lab"
+    }
+  }
+  </script>
+</head>
+<body class="article-page">
+  <header class="site-header">
+    <a class="brand" href="index.html#top" aria-label="Plasma Cut Lab home">
+      <span class="brand-mark" aria-hidden="true">P</span>
+      <span>
+        <strong>Plasma Cut Lab</strong>
+        <small>Settings, testing, and practical guides</small>
+      </span>
+    </a>
+
+    <nav aria-label="Primary navigation">
+      <a href="index.html#calculator">Calculator</a>
+      <a href="index.html#articles">Articles</a>
+      <a href="index.html#about">About</a>
+    </nav>
+  </header>
+
+  <main class="article-main">
+    <header class="article-header">
+      <a class="article-back" href="index.html#articles">← Back to articles</a>
+      <p class="eyebrow">Beginner plasma guide</p>
+      <h1>How to Choose Plasma Cutting Settings</h1>
+      <p class="article-deck">
+        Learn what amperage, feed rate, pierce delay, air pressure, and torch height
+        actually control—and how to turn a cut chart into a clean first test cut.
+      </p>
+      <div class="article-meta" aria-label="Article information">
+        <span>Published July 23, 2026</span>
+        <span>Beginner with technical detail</span>
+        <span>Approximately 12-minute read</span>
+      </div>
+    </header>
+
+    <div class="article-layout">
+      <aside class="article-toc" aria-labelledby="contents-title">
+        <p class="eyebrow" id="contents-title">In this guide</p>
+        <ol>
+          <li><a href="#main-settings">The five main settings</a></li>
+          <li><a href="#cut-chart">Choose a cut chart</a></li>
+          <li><a href="#material">Select the material</a></li>
+          <li><a href="#thickness">Enter thickness</a></li>
+          <li><a href="#amperage">Choose amperage</a></li>
+          <li><a href="#feed-rate">Set feed rate</a></li>
+          <li><a href="#pierce-delay">Set pierce delay</a></li>
+          <li><a href="#gas-pressure">Set air pressure</a></li>
+          <li><a href="#torch-height">Confirm torch height</a></li>
+          <li><a href="#test-coupon">Run a test coupon</a></li>
+          <li><a href="#read-edge">Read the cut edge</a></li>
+        </ol>
+      </aside>
+
+      <article class="article-content">
+        <p class="article-lead">
+          Plasma cutting can feel complicated when you first encounter values such
+          as amperage, feed rate, pierce delay, air pressure, and torch height.
+          Fortunately, you do not need to guess every value. Begin with a reliable
+          cut chart, understand what each setting controls, and make small
+          adjustments based on what the finished edge tells you.
+        </p>
+
+        <section id="main-settings">
+          <h2>The Five Main Plasma-Cutting Settings</h2>
+          <p>The most important process settings are:</p>
+          <ol class="article-number-list">
+            <li><strong>Cutting amperage</strong></li>
+            <li><strong>Feed rate</strong></li>
+            <li><strong>Pierce delay</strong></li>
+            <li><strong>Gas or air pressure</strong></li>
+            <li><strong>Torch height</strong></li>
+          </ol>
+          <p>
+            These settings work together. Increasing amperage without changing the
+            nozzle, speed, or torch height can produce a wider kerf, more bevel,
+            heavier dross, or shorter consumable life. Treat the process as one
+            system rather than five unrelated numbers.
+          </p>
+        </section>
+
+        <section id="cut-chart">
+          <h2>Start With the Correct Cut-Chart Profile</h2>
+          <p>
+            A cut chart is a tested collection of settings for a particular plasma
+            source, torch, consumable set, material, thickness, amperage, and gas.
+            Two machines rated at 85 amps may behave differently because their
+            torches, nozzle geometry, gas control, and arc characteristics are not
+            identical.
+          </p>
+          <div class="article-callout">
+            <strong>Reference chart versus factory chart</strong>
+            <p>
+              When the exact manufacturer chart is unavailable, another
+              manufacturer’s chart can provide a useful starting point—but it must
+              be labeled as a reference and confirmed with test cuts.
+            </p>
+          </div>
+          <p>
+            The Plasma Cut Lab calculator distinguishes official manufacturer
+            profiles from generic or machine-specific reference profiles so the
+            source of the recommendation remains clear.
+          </p>
+        </section>
+
+        <section id="material">
+          <h2>Step 1: Select the Material</h2>
+          <p>Begin by selecting the material being cut:</p>
+          <ul>
+            <li>Mild steel</li>
+            <li>Stainless steel</li>
+            <li>Aluminum</li>
+          </ul>
+          <p>
+            All three can be cut using compressed air, but their recommended speeds
+            and cut behavior are not identical. Industrial systems may also use
+            oxygen, nitrogen, F5, argon-hydrogen, or other gas combinations. Never
+            mix values from a specialized-gas chart into an ordinary compressed-air
+            process.
+          </p>
+          <p>
+            Compressed air must be clean and dry. Water, oil, or debris can reduce
+            cut quality and shorten the life of the electrode and nozzle.
+          </p>
+        </section>
+
+        <section id="thickness">
+          <h2>Step 2: Enter the Actual Material Thickness</h2>
+          <p>
+            Measure the plate when accuracy matters. Material sold as 6 mm may
+            measure slightly above or below its nominal size, especially when
+            coatings or mill scale are present.
+          </p>
+          <p>
+            The calculator accepts millimeters or inches and displays the result in
+            both unit systems. When an exact thickness is not in the chart, it may
+            interpolate between neighboring rows only when the material, amperage,
+            torch family, and gas process match.
+          </p>
+          <div class="code-example" aria-label="Interpolation example">
+            <span>Available chart rows</span>
+            <strong>6 mm and 8 mm</strong>
+            <span>Entered thickness</span>
+            <strong>7 mm</strong>
+          </div>
+        </section>
+
+        <section id="amperage">
+          <h2>Step 3: Choose the Cutting Amperage</h2>
+          <p>
+            A common beginner mistake is running the plasma cutter at maximum
+            amperage for every job. An 85-amp machine does not need to cut every
+            plate at 85 amps.
+          </p>
+          <p>Lower-current processes are often preferable on thin material because they can provide:</p>
+          <ul>
+            <li>A narrower kerf</li>
+            <li>Better detail</li>
+            <li>Less heat input</li>
+            <li>Cleaner edge quality</li>
+            <li>Longer consumable life</li>
+          </ul>
+          <p>
+            Higher amperage becomes useful as the plate becomes thicker or when the
+            chart calls for a faster production process.
+          </p>
+
+          <h3>Machine Maximum Versus Cutting Amperage</h3>
+          <p>
+            The machine maximum is a capacity limit. Cutting amperage is the process
+            current selected for the material and thickness.
+          </p>
+          <div class="code-example" aria-label="Amperage example">
+            <span>Machine maximum</span>
+            <strong>85 A</strong>
+            <span>Selected cutting process</span>
+            <strong>45 A</strong>
+          </div>
+          <p>
+            Always install consumables rated for the selected process. A 45-amp
+            nozzle should not be operated at 85 amps.
+          </p>
+        </section>
+
+        <section id="feed-rate">
+          <h2>Step 4: Set the Feed Rate</h2>
+          <p>
+            Feed rate is the speed at which the torch travels across the plate. It
+            has a major effect on dross, edge angle, kerf width, and dimensional
+            accuracy.
+          </p>
+
+          <div class="comparison-grid">
+            <div>
+              <h3>Too slow</h3>
+              <ul>
+                <li>Thick, bubbly bottom dross</li>
+                <li>Wider kerf</li>
+                <li>Excessive heat input</li>
+                <li>Rounded or melted details</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Too fast</h3>
+              <ul>
+                <li>Narrow kerf</li>
+                <li>Heavily angled edge</li>
+                <li>Trailing or curved drag lines</li>
+                <li>Hard bottom bead or incomplete cut</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3>Quality, Balanced, and Speed Priority</h3>
+          <p><strong>Quality Priority</strong> favors edge finish, detail, and dimensional accuracy.</p>
+          <p><strong>Balanced</strong> is the recommended starting point for most users.</p>
+          <p><strong>Speed Priority</strong> favors production rate, but should remain within the tested chart range.</p>
+
+          <a class="article-calculator-link" href="index.html#calculator">
+            Try the calculator with your material and thickness
+            <span aria-hidden="true">→</span>
+          </a>
+        </section>
+
+        <section id="pierce-delay">
+          <h2>Step 5: Set the Pierce Delay</h2>
+          <p>
+            Pierce delay is how long the torch remains at the starting point before
+            cutting motion begins. The arc needs enough time to penetrate the plate
+            completely.
+          </p>
+          <div class="comparison-grid">
+            <div>
+              <h3>Delay too short</h3>
+              <ul>
+                <li>The plate may not fully pierce</li>
+                <li>The first part of the profile may remain attached</li>
+                <li>Molten material may be dragged into the cut</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Delay too long</h3>
+              <ul>
+                <li>The pierce hole grows unnecessarily</li>
+                <li>Molten metal blows back toward the torch</li>
+                <li>Consumable life can decrease</li>
+              </ul>
+            </div>
+          </div>
+          <p>
+            Start with the chart value and change it in small increments. A few
+            tenths of a second can make a noticeable difference.
+          </p>
+        </section>
+
+        <section id="gas-pressure">
+          <h2>Step 6: Set the Gas or Air Pressure</h2>
+          <p>On an air-plasma system, compressed air:</p>
+          <ul>
+            <li>Helps form and constrict the plasma arc</li>
+            <li>Removes molten metal from the kerf</li>
+            <li>Cools torch components</li>
+            <li>Supports consumable performance</li>
+          </ul>
+          <p>
+            Some machines require manual pressure adjustment. Others regulate
+            pressure automatically. Use the setting specified for the selected
+            machine rather than copying a pressure from an unrelated plasma cutter.
+          </p>
+          <div class="article-callout">
+            <strong>Pressure is not the same as airflow</strong>
+            <p>
+              A regulator can show acceptable pressure while the compressor cannot
+              supply enough liters per minute or cubic feet per minute during a long
+              cut. Check pressure while air is flowing.
+            </p>
+          </div>
+        </section>
+
+        <section id="torch-height">
+          <h2>Step 7: Confirm Torch Height</h2>
+          <p>
+            Torch height is not yet part of the first calculator version, but it is
+            one of the most important settings in mechanized plasma cutting.
+          </p>
+
+          <h3>Pierce Height</h3>
+          <p>
+            The torch normally begins the pierce farther away from the plate to
+            reduce molten-metal blowback toward the shield and nozzle.
+          </p>
+
+          <h3>Cut Height</h3>
+          <p>
+            After the pierce, the torch lowers to the cut height. Incorrect height
+            can cause bevel, poor arc stability, a wider or narrower kerf, increased
+            dross, and faster consumable wear.
+          </p>
+          <p>
+            On a CNC table with torch-height control, arc voltage is commonly used
+            to maintain the desired torch-to-plate distance as the plate moves or
+            warps.
+          </p>
+        </section>
+
+        <section id="test-coupon">
+          <h2>Run a Test Coupon Before the Final Part</h2>
+          <p>
+            Even a manufacturer chart is a starting point for your particular
+            table, air system, material batch, and consumables. Before cutting an
+            expensive part, test on a small piece of the same material.
+          </p>
+          <p>A useful coupon includes:</p>
+          <ul>
+            <li>A straight line</li>
+            <li>A square</li>
+            <li>A circle</li>
+            <li>A small internal hole</li>
+            <li>Several lines at slightly different speeds</li>
+          </ul>
+          <ol class="article-number-list">
+            <li>Begin with the calculated settings.</li>
+            <li>Confirm that the plate pierces completely.</li>
+            <li>Inspect the bottom dross.</li>
+            <li>Look at drag-line direction and edge bevel.</li>
+            <li>Measure the kerf.</li>
+            <li>Change only one setting at a time.</li>
+            <li>Record the cleanest result.</li>
+          </ol>
+        </section>
+
+        <section id="read-edge">
+          <h2>Read What the Finished Edge Is Telling You</h2>
+          <div class="article-table-wrap">
+            <table class="article-table">
+              <thead>
+                <tr>
+                  <th>Observation</th>
+                  <th>Possible cause</th>
+                  <th>First adjustment</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Thick, bubbly bottom dross</td>
+                  <td>Feed rate too slow</td>
+                  <td>Increase speed slightly</td>
+                </tr>
+                <tr>
+                  <td>Small, hard bottom bead</td>
+                  <td>Feed rate too fast</td>
+                  <td>Reduce speed slightly</td>
+                </tr>
+                <tr>
+                  <td>Heavy top spatter</td>
+                  <td>Speed too slow or torch too high</td>
+                  <td>Verify speed and height</td>
+                </tr>
+                <tr>
+                  <td>Strong edge bevel</td>
+                  <td>Incorrect height or excessive speed</td>
+                  <td>Verify height, then speed</td>
+                </tr>
+                <tr>
+                  <td>Cut does not penetrate</td>
+                  <td>Current too low, speed too high, or low airflow</td>
+                  <td>Check amperage, speed, and airflow</td>
+                </tr>
+                <tr>
+                  <td>Large damaged start point</td>
+                  <td>Delay too long or pierce height too low</td>
+                  <td>Reduce delay or verify height</td>
+                </tr>
+                <tr>
+                  <td>Incomplete start point</td>
+                  <td>Pierce delay too short</td>
+                  <td>Increase delay slightly</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section>
+          <h2>A Simple Beginner Workflow</h2>
+          <ol class="article-number-list">
+            <li>Select the correct machine or reference profile.</li>
+            <li>Select mild steel, stainless steel, or aluminum.</li>
+            <li>Enter the measured material thickness.</li>
+            <li>Enter the machine’s maximum amperage.</li>
+            <li>Select Quality, Balanced, or Speed priority.</li>
+            <li>Calculate the starting settings.</li>
+            <li>Install the correct amperage-rated consumables.</li>
+            <li>Confirm air pressure and airflow.</li>
+            <li>Verify pierce height and cut height.</li>
+            <li>Run a test coupon.</li>
+            <li>Change only one setting at a time.</li>
+            <li>Save the final settings for future jobs.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Final Thoughts</h2>
+          <p>
+            Choosing plasma-cutting settings is not about finding one universal
+            formula. It is about matching the material, thickness, torch,
+            consumables, amperage, speed, pressure, delay, and height as one
+            complete process.
+          </p>
+          <p>
+            Begin with a trusted chart or clearly labeled reference profile. Use the
+            calculator to organize the starting values, then confirm them through
+            controlled test cuts. The more results you record, the more accurate
+            your own machine-specific chart becomes.
+          </p>
+        </section>
+
+        <section class="article-cta">
+          <p class="eyebrow">Calculate your starting point</p>
+          <h2>Ready to choose your settings?</h2>
+          <p>
+            Select the material, thickness, machine capacity, profile, and cutting
+            priority. The calculator displays feed rate in mm/min and IPM, pierce
+            delay, gas pressure, and cutting amperage.
+          </p>
+          <a class="primary-link" href="index.html#calculator">Open the plasma calculator</a>
+        </section>
+
+        <section class="article-sources">
+          <h2>Technical References</h2>
+          <ul>
+            <li><a href="https://www.hypertherm.com/resources/more-resources/articles/guide-to-plasma-gas-selection/" rel="noopener noreferrer">Hypertherm: Guide to plasma gas selection</a></li>
+            <li><a href="https://www.hypertherm.com/resources/more-resources/blogs/how-to-plasma-cut/" rel="noopener noreferrer">Hypertherm: How to plasma cut</a></li>
+            <li><a href="https://www.hypertherm.com/resources/system-support/maintenance-and-use/cut-quality/too-much-dross/" rel="noopener noreferrer">Hypertherm: Troubleshooting excessive dross</a></li>
+            <li><a href="https://www.hypertherm.com/resources/more-resources/articles/torch-height-control-for-plasma-cutting/" rel="noopener noreferrer">Hypertherm: Torch height control</a></li>
+            <li><a href="https://esab.com/us/nam_en/esab-university/articles/how-air-pressure-affects-plasma-cut-quality/" rel="noopener noreferrer">ESAB: How air pressure affects plasma cut quality</a></li>
+          </ul>
+        </section>
+
+        <nav class="article-footer-nav" aria-label="Article navigation">
+          <a href="index.html#articles">← All articles</a>
+          <a href="index.html#calculator">Use the calculator →</a>
+        </nav>
+      </article>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2026 Plasma Cut Lab.</p>
+    <p><a href="index.html#calculator">Plasma cutting calculator</a></p>
+  </footer>
+</body>
+</html>

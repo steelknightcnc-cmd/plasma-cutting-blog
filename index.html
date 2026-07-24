@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Plasma cutting calculator and practical CNC plasma-cutting articles.">
   <title>Plasma Cut Lab | Cutting Calculator</title>
-  <link rel="stylesheet" href="styles.css?v=5.0">
+  <link rel="stylesheet" href="styles.css?v=6.0">
   <script src="cut-chart-data.js?v=3" defer></script>
   <script src="supabase-config.js?v=5.0" defer></script>
   <script src="app.js?v=5.0" defer></script>
@@ -54,8 +54,7 @@
         <p class="eyebrow">Plasma cutting calculator</p>
         <h2>Calculate starting settings</h2>
         <p>
-          Version 0.1 uses validated cut-chart records only. Unsupported
-          combinations are blocked rather than estimated from unsafe generic formulas.
+          Choose a machine profile and calculate practical starting settings. Reference profiles are clearly labeled, and unsupported combinations are blocked.
         </p>
       </div>
 
@@ -255,11 +254,11 @@
       </div>
 
       <div class="article-grid">
-        <article>
-          <span>Cut quality</span>
-          <h3>How to read dross, bevel, and drag lines</h3>
-          <p>Learn what the cut edge is telling you before changing several settings at once.</p>
-          <a href="#" aria-disabled="true">Coming soon</a>
+        <article class="article-card-featured">
+          <span>Beginner guide</span>
+          <h3>How to choose plasma cutting settings</h3>
+          <p>Understand amperage, feed rate, pierce delay, air pressure, and torch height before making your first test cut.</p>
+          <a class="read-link" href="how-to-choose-plasma-settings.html">Read the guide <span aria-hidden="true">→</span></a>
         </article>
 
         <article>
@@ -292,7 +291,7 @@
 
   <footer>
     <p>© <span id="current-year"></span> Plasma Cut Lab.</p>
-    <p>Calculator version 0.1</p>
+    <p>Calculator version 0.5</p>
   </footer>
 </body>
 </html>
