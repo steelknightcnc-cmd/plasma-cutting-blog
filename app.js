@@ -56,7 +56,8 @@ function updateConvertedThickness() {
   }
 
   const mm = toMillimeters(entered, thicknessUnit.value);
-  convertedThickness.textContent = `${round(mm, 2).toFixed(2)} mm / ${round(toInches(mm), 3).toFixed(3)} in`;
+  convertedThickness.textContent =
+    `${round(mm, 2).toFixed(2)} mm / ${round(toInches(mm), 3).toFixed(3)} in`;
 }
 
 function setStatus(label, type = "") {
@@ -69,17 +70,86 @@ function clearResult() {
   resultDetails.hidden = true;
 }
 
-function getExactRecord({ machineProfile, material, thicknessMm, machineMaxAmps }) {
-  const records = (window.PLASMA_CUT_CHARTS || []).filter((record) =>
+function interpolate(x, x1, x2, y1, y2) {
+  if (x1 === x2) return y1;
+  return y1 + ((x - x1) / (x2 - x1)) * (y2 - y1);
+}
+
+function selectProcessSeries({ machineProfile, material, thicknessMm, machineMaxAmps }) {
+  const allRecords = (window.PLASMA_CUT_CHARTS || []).filter((record) =>
     record.machineProfile === machineProfile &&
     record.material === material &&
-    Math.abs(record.thicknessMm - thicknessMm) < 0.01 &&
-    record.processAmps <= machineMaxAmps
+    record.processAmps <= machineMaxAmps &&
+    record.validated === true
   );
 
-  if (records.length === 0) return null;
+  const availableAmps = [...new Set(allRecords.map((record) => record.processAmps))]
+    .sort((a, b) => a - b);
 
-  return records.sort((a, b) => b.processAmps - a.processAmps)[0];
+  for (const amps of availableAmps) {
+    const series = allRecords
+      .filter((record) => record.processAmps === amps)
+      .sort((a, b) => a.thicknessMm - b.thicknessMm);
+
+    const minimum = series[0]?.thicknessMm;
+    const maximum = series.at(-1)?.thicknessMm;
+
+    if (thicknessMm >= minimum && thicknessMm <= maximum) {
+      return series;
+    }
+  }
+
+  return null;
+}
+
+function getCalculatedRecord(values) {
+  const series = selectProcessSeries(values);
+  if (!series) return null;
+
+  const exact = series.find(
+    (record) => Math.abs(record.thicknessMm - values.thicknessMm) < 0.001
+  );
+
+  if (exact) {
+    return { ...exact, interpolated: false };
+  }
+
+  const lower = [...series]
+    .reverse()
+    .find((record) => record.thicknessMm < values.thicknessMm);
+  const upper = series.find((record) => record.thicknessMm > values.thicknessMm);
+
+  if (!lower || !upper) return null;
+
+  return {
+    ...lower,
+    id: `interpolated-${lower.id}-${upper.id}`,
+    thicknessMm: values.thicknessMm,
+    qualitySpeedMmMin: interpolate(
+      values.thicknessMm,
+      lower.thicknessMm,
+      upper.thicknessMm,
+      lower.qualitySpeedMmMin,
+      upper.qualitySpeedMmMin
+    ),
+    productionSpeedMmMin: interpolate(
+      values.thicknessMm,
+      lower.thicknessMm,
+      upper.thicknessMm,
+      lower.productionSpeedMmMin,
+      upper.productionSpeedMmMin
+    ),
+    pierceDelaySeconds: interpolate(
+      values.thicknessMm,
+      lower.thicknessMm,
+      upper.thicknessMm,
+      lower.pierceDelaySeconds,
+      upper.pierceDelaySeconds
+    ),
+    source:
+      `${lower.source} Interpolated between ${lower.thicknessMm} mm and ${upper.thicknessMm} mm rows.`,
+    interpolated: true
+  };
 }
 
 function calculateFeedRate(record, priority) {
@@ -96,7 +166,7 @@ function renderResult(record, values) {
   document.querySelector("#feed-ipm").textContent =
     `${round(mmMinToIpm(feedMmMin), 1).toFixed(1)} IPM`;
   document.querySelector("#pierce-delay").textContent =
-    `${round(record.pierceDelaySeconds, 2)} sec`;
+    `${round(record.pierceDelaySeconds, 2).toFixed(2)} sec`;
   document.querySelector("#gas-bar").textContent =
     `${round(record.gasPressureBar, 1).toFixed(1)} bar`;
   document.querySelector("#gas-psi").textContent =
@@ -112,13 +182,22 @@ function renderResult(record, values) {
     PRIORITY_LABELS[values.priority];
   document.querySelector("#result-source").textContent = record.source;
 
-  resultMessage.hidden = true;
+  resultMessage.hidden = false;
+  resultMessage.innerHTML =
+    `<strong>Reference profile:</strong> Speed and pierce delay are based on the
+    Hypertherm Powermax65/85 shielded-air chart. They are not Stamos factory
+    settings. Begin with a test coupon and tune your machine from this starting point.`;
+
   resultGrid.hidden = false;
   resultDetails.hidden = false;
-  setStatus("Validated record", "success");
+
+  setStatus(
+    record.interpolated ? "Interpolated reference" : "Reference chart",
+    "success"
+  );
 }
 
-function showUnavailable(message, status = "No validated data") {
+function showUnavailable(message, status = "No reference data") {
   clearResult();
   resultMessage.hidden = false;
   resultMessage.innerHTML = message;
@@ -150,25 +229,17 @@ form.addEventListener("submit", (event) => {
     machineProfile: data.get("machine-profile")
   };
 
-  const record = getExactRecord(values);
+  const record = getCalculatedRecord(values);
 
   if (!record) {
     showUnavailable(
-      `There is no cut-chart record yet for <strong>${MATERIAL_LABELS[values.material]}</strong>
-      at <strong>${round(values.thicknessMm, 2)} mm</strong> with a machine limit of
-      <strong>${machineMaxAmps} A</strong>. Add and validate this combination in
-      <code>cut-chart-data.js</code>.`
-    );
-    return;
-  }
-
-  if (!record.validated) {
-    showUnavailable(
-      `A development record exists for this combination, but it has not been validated.
-      The calculator will not present its values as cutting recommendations. Verify the
-      settings against the source manual and controlled test cuts, then change
-      <code>validated: false</code> to <code>validated: true</code>.`,
-      "Validation required"
+      `No supported Hypertherm reference process was found for
+      <strong>${MATERIAL_LABELS[values.material]}</strong> at
+      <strong>${round(values.thicknessMm, 2)} mm</strong> with a machine limit of
+      <strong>${machineMaxAmps} A</strong>. Increase machine capacity only if your
+      actual plasma cutter supports it, or use an edge-start procedure for material
+      beyond the piercing range.`,
+      "Outside chart range"
     );
     return;
   }
