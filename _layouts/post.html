@@ -31,6 +31,79 @@ body_class: article-page
         <a class="primary-link" href="{{ '/#calculator' | relative_url }}">Open the plasma calculator</a>
       </section>
 
+      <section class="comments-section" id="comments" data-post-slug="{{ page.slug | escape }}">
+        <div class="comments-heading">
+          <p class="eyebrow">Reader discussion</p>
+          <h2>Comments</h2>
+          <p>
+            Share your experience or ask a question. New comments are reviewed
+            before they appear publicly.
+          </p>
+        </div>
+
+        <form class="comment-form" id="comment-form">
+          <div class="comment-field-row">
+            <div class="field">
+              <label for="comment-name">Name</label>
+              <input
+                id="comment-name"
+                name="name"
+                type="text"
+                minlength="2"
+                maxlength="60"
+                autocomplete="name"
+                required
+              >
+            </div>
+
+            <div class="field">
+              <label for="comment-email">Email</label>
+              <input
+                id="comment-email"
+                name="email"
+                type="email"
+                maxlength="200"
+                autocomplete="email"
+                required
+              >
+              <p class="field-help">Your email will never be displayed publicly.</p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="comment-text">Comment</label>
+            <textarea
+              id="comment-text"
+              name="comment"
+              minlength="2"
+              maxlength="2000"
+              rows="6"
+              required
+            ></textarea>
+            <p class="field-help">
+              Maximum 2,000 characters. Comments are moderated before publication.
+            </p>
+          </div>
+
+          <button class="calculate-button comment-submit" type="submit">
+            Submit comment
+          </button>
+
+          <p class="comment-form-message" id="comment-form-message" aria-live="polite"></p>
+        </form>
+
+        <div class="approved-comments">
+          <div class="approved-comments-header">
+            <h3>Published comments</h3>
+            <span id="comment-count">0 comments</span>
+          </div>
+
+          <div class="comments-list" id="comments-list" aria-live="polite">
+            <p class="comments-loading">Loading comments…</p>
+          </div>
+        </div>
+      </section>
+
       <nav class="article-footer-nav" aria-label="Article navigation">
         <a href="{{ '/blog/' | relative_url }}">← All blog posts</a>
         <a href="{{ '/#calculator' | relative_url }}">Use the calculator →</a>
@@ -38,3 +111,6 @@ body_class: article-page
     </article>
   </div>
 </main>
+
+<script src="{{ '/supabase-config.js?v=5.0' | relative_url }}" defer></script>
+<script src="{{ '/comments.js?v=8.0' | relative_url }}" defer></script>
