@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{ page.description | default: site.description | escape }}">
+  <title>{% if page.title %}{{ page.title | escape }} | {% endif %}{{ site.title }}</title>
+  <link rel="stylesheet" href="{{ '/styles.css?v=7.0' | relative_url }}">
+</head>
+<body class="{{ page.body_class | default: 'article-page' }}">
+  <header class="site-header">
+    <a class="brand" href="{{ '/#top' | relative_url }}" aria-label="Plasma Cut Lab home">
+      <span class="brand-mark" aria-hidden="true">P</span>
+      <span>
+        <strong>Plasma Cut Lab</strong>
+        <small>Settings, testing, and practical guides</small>
+      </span>
+    </a>
+
+    <nav aria-label="Primary navigation">
+      <a href="{{ '/#calculator' | relative_url }}">Calculator</a>
+      <a href="{{ '/blog/' | relative_url }}">Blog</a>
+      <a href="{{ '/#articles' | relative_url }}">Articles</a>
+      <a href="{{ '/#about' | relative_url }}">About</a>
+    </nav>
+  </header>
+
+  {{ content }}
+
+  <footer>
+    <p>© {{ site.time | date: '%Y' }} Plasma Cut Lab.</p>
+    <p><a href="{{ '/#calculator' | relative_url }}">Plasma cutting calculator</a></p>
+  </footer>
+</body>
+</html>

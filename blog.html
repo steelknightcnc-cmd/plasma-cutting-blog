@@ -1,0 +1,36 @@
+---
+layout: default
+title: Plasma Cutting Blog
+description: Beginner-friendly plasma cutting articles with practical technical detail.
+permalink: /blog/
+body_class: article-page
+---
+<main class="blog-main">
+  <header class="blog-header">
+    <a class="article-back" href="{{ '/#top' | relative_url }}">← Back to the calculator</a>
+    <p class="eyebrow">Plasma Cut Lab Blog</p>
+    <h1>Practical Plasma-Cutting Guides</h1>
+    <p>
+      Beginner-friendly articles covering settings, cut quality, air systems,
+      consumables, troubleshooting, and CNC plasma testing.
+    </p>
+  </header>
+
+  <section class="blog-post-grid" aria-label="Blog posts">
+    {% for post in site.posts %}
+      <article class="blog-post-card">
+        <a href="{{ post.url | relative_url }}">
+          <span>{{ post.category | default: "Plasma guide" }}</span>
+          <h2>{{ post.title }}</h2>
+          <p>{{ post.description | default: post.excerpt | strip_html | truncate: 180 }}</p>
+          <div class="blog-post-meta">
+            <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %-d, %Y" }}</time>
+            <strong>Read article →</strong>
+          </div>
+        </a>
+      </article>
+    {% else %}
+      <p>No posts have been published yet.</p>
+    {% endfor %}
+  </section>
+</main>

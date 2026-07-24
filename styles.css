@@ -1089,3 +1089,148 @@ footer {
 .article-card-link:focus-visible {
   box-shadow: inset 0 0 0 2px var(--accent);
 }
+
+
+/* Jekyll blog foundation */
+.blog-main {
+  width: min(var(--max-width), 90vw);
+  margin-inline: auto;
+  min-height: 70vh;
+  padding: 5.5rem 0;
+}
+
+.blog-header {
+  max-width: 840px;
+  margin-bottom: 2.5rem;
+}
+
+.blog-header h1 {
+  margin-bottom: 1rem;
+  font-size: clamp(2.7rem, 7vw, 5rem);
+}
+
+.blog-header > p:last-child {
+  color: var(--muted);
+  font-size: 1.1rem;
+}
+
+.blog-post-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.blog-post-card {
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.blog-post-card > a {
+  display: block;
+  padding: 1.5rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.blog-post-card > a:hover,
+.blog-post-card > a:focus-visible {
+  background: rgba(255, 138, 31, 0.07);
+  outline: none;
+}
+
+.blog-post-card > a:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+
+.blog-post-card > a > span {
+  color: var(--accent);
+  font-size: 0.76rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.blog-post-card h2 {
+  margin: 0.6rem 0 0.75rem;
+  font-size: clamp(1.5rem, 4vw, 2.3rem);
+}
+
+.blog-post-card p {
+  max-width: 780px;
+  color: var(--muted);
+}
+
+.blog-post-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.blog-post-meta strong {
+  color: var(--accent);
+}
+
+.article-layout-single {
+  grid-template-columns: minmax(0, 820px);
+  justify-content: center;
+}
+
+.jekyll-post-content > h2 {
+  margin-top: 3.4rem;
+}
+
+.jekyll-post-content > h3 {
+  margin-top: 2.2rem;
+}
+
+.jekyll-post-content blockquote {
+  margin: 1.4rem 0;
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(255, 138, 31, 0.4);
+  border-left: 4px solid var(--accent);
+  border-radius: 12px;
+  background: rgba(255, 138, 31, 0.08);
+}
+
+.jekyll-post-content blockquote p {
+  margin: 0;
+}
+
+.jekyll-post-content table {
+  width: 100%;
+  min-width: 680px;
+  border-collapse: collapse;
+  background: var(--surface);
+}
+
+.jekyll-post-content table th,
+.jekyll-post-content table td {
+  padding: 0.85rem;
+  border: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.jekyll-post-content table th {
+  background: var(--surface-2);
+}
+
+.jekyll-post-content table {
+  display: block;
+  overflow-x: auto;
+}
+
+@media (max-width: 600px) {
+  .blog-main {
+    width: min(94vw, var(--max-width));
+    padding-top: 3.5rem;
+  }
+
+  .blog-post-meta {
+    flex-direction: column;
+  }
+}
