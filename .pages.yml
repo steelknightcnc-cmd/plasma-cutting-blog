@@ -1,0 +1,51 @@
+media:
+  input: assets/images
+  output: /plasma-cutting-blog/assets/images
+
+content:
+  - name: posts
+    label: Blog posts
+    type: collection
+    path: _posts
+    format: yaml-frontmatter
+
+    filename:
+      template: "{year}-{month}-{day}-{title}.md"
+      field: false
+
+    view:
+      primary: title
+
+    fields:
+      - name: title
+        label: Post title
+        type: string
+        required: true
+
+      - name: description
+        label: Short description
+        type: text
+        required: true
+
+      - name: category
+        label: Category
+        type: string
+        required: true
+
+      - name: author
+        label: Author
+        type: string
+        required: true
+
+      - name: reading_time
+        label: Reading-time label
+        type: string
+
+      - name: body
+        label: Article
+        type: rich-text
+        required: true
+        options:
+          format: markdown
+          media: false
+          switcher: true
