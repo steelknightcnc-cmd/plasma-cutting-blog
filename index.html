@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Plasma cutting calculator and practical CNC plasma-cutting articles.">
   <title>Plasma Cut Lab | Cutting Calculator</title>
-  <link rel="stylesheet" href="styles.css?v=16.0">
+  <link rel="stylesheet" href="styles.css?v=18.0">
   <script src="cut-chart-data.js?v=3" defer></script>
   <script src="supabase-config.js?v=5.0" defer></script>
   <script src="app.js?v=5.0" defer></script>
@@ -31,7 +31,7 @@
 
   <main id="top">
     <section class="hero">
-      <div>
+      <div class="hero-copy-block">
         <p class="eyebrow">CNC plasma-cutting resources</p>
         <h1>Find a practical starting point for your next cut.</h1>
         <p class="hero-copy">
@@ -42,13 +42,23 @@
         <a class="primary-link" href="#calculator">Open the calculator</a>
       </div>
 
-      <aside class="hero-card" aria-label="Calculator outputs">
-        <span>Calculator outputs</span>
-        <strong>Feed rate</strong>
-        <strong>Pierce delay</strong>
-        <strong>Gas pressure</strong>
-        <strong>Cutting amps</strong>
-      </aside>
+      <div class="hero-visual">
+        <figure class="hero-image-card">
+          <img
+            src="plasma-torch-hero.png"
+            alt="Industrial CNC plasma torch head firing a bright plasma arc"
+            class="hero-image"
+          >
+        </figure>
+
+        <aside class="hero-card hero-output-card" aria-label="Calculator outputs">
+          <span>Calculator outputs</span>
+          <strong>Feed rate</strong>
+          <strong>Pierce delay</strong>
+          <strong>Gas pressure</strong>
+          <strong>Cutting amps</strong>
+        </aside>
+      </div>
     </section>
 
     <section class="calculator-section" id="calculator">
