@@ -1,13 +1,17 @@
 ---
-layout: default
-title: CNC Community Q&A
-description: Ask and answer practical CNC, plasma cutting, milling, motion-control, electronics, and fabrication questions.
+layout: null
 permalink: /community/
-body_class: community-page
 ---
-
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Ask and answer practical CNC, plasma cutting, milling, motion-control, electronics, and fabrication questions.">
+  <title>CNC Community Q&amp;A | Plasma Cut Lab</title>
+  <link rel="stylesheet" href="/plasma-cutting-blog/styles.css?v=13.0">
+  
 <style>
-  /* Page-specific sizing that does not modify the rest of the website. */
   #question-body {
     display: block;
     box-sizing: border-box;
@@ -34,7 +38,27 @@ body_class: community-page
   }
 </style>
 
-<main class="community-main">
+</head>
+<body class="community-page">
+  <header class="site-header">
+    <a class="brand" href="/plasma-cutting-blog/#top" aria-label="Plasma Cut Lab home">
+      <span class="brand-mark" aria-hidden="true">P</span>
+      <span>
+        <strong>Plasma Cut Lab</strong>
+        <small>Settings, testing, and practical guides</small>
+      </span>
+    </a>
+
+    <nav aria-label="Primary navigation">
+      <a href="/plasma-cutting-blog/#calculator">Calculator</a>
+      <a href="/plasma-cutting-blog/blog/">Blog</a>
+      <a href="/plasma-cutting-blog/community/">Community Q&amp;A</a>
+      <a href="/plasma-cutting-blog/#articles">Articles</a>
+      <a href="/plasma-cutting-blog/#about">About</a>
+    </nav>
+  </header>
+
+  <main class="community-main">
   <header class="community-hero">
     <div>
       <p class="eyebrow">Steel Knight CNC Community</p>
@@ -49,7 +73,7 @@ body_class: community-page
     <aside class="community-guideline-card">
       <strong>Before posting</strong>
       <p>Be respectful, stay on topic, and put safety ahead of speed.</p>
-      <a href="{{ '/community-guidelines/' | relative_url }}">Read the community guidelines →</a>
+      <a href="/plasma-cutting-blog/community-guidelines/">Read the community guidelines →</a>
     </aside>
   </header>
 
@@ -115,7 +139,7 @@ body_class: community-page
       </div>
       <label class="guideline-confirmation">
         <input type="checkbox" required>
-        <span>I agree to the <a href="{{ '/community-guidelines/' | relative_url }}">community guidelines</a>.</span>
+        <span>I agree to the <a href="/plasma-cutting-blog/community-guidelines/">community guidelines</a>.</span>
       </label>
       <button class="calculate-button question-submit" type="submit">Post question</button>
       <p class="community-form-message" id="question-message"></p>
@@ -199,5 +223,13 @@ body_class: community-page
 </dialog>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="{{ '/supabase-config.js?v=5.0' | relative_url }}"></script>
-<script src="{{ '/community.js?v=10.0' | relative_url }}"></script>
+<script src="/plasma-cutting-blog/supabase-config.js?v=5.0"></script>
+<script src="/plasma-cutting-blog/community.js?v=10.0"></script>
+
+
+  <footer>
+    <p>© 2026 Plasma Cut Lab.</p>
+    <p><a href="/plasma-cutting-blog/#calculator">Plasma cutting calculator</a></p>
+  </footer>
+</body>
+</html>
