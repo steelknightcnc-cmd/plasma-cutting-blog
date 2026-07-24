@@ -1,0 +1,174 @@
+---
+layout: default
+title: CNC Community Q&A
+description: Ask and answer practical CNC, plasma cutting, milling, motion-control, electronics, and fabrication questions.
+permalink: /community/
+body_class: community-page
+---
+<main class="community-main">
+  <header class="community-hero">
+    <div>
+      <p class="eyebrow">Steel Knight CNC Community</p>
+      <h1>CNC Community Q&amp;A</h1>
+      <p>
+        Ask practical questions about CNC plasma, milling, routers, motion control,
+        electronics, CAD/CAM, welding, and fabrication—and share what has worked
+        on your own machine.
+      </p>
+    </div>
+
+    <aside class="community-guideline-card">
+      <strong>Before posting</strong>
+      <p>Be respectful, stay on topic, and put safety ahead of speed.</p>
+      <a href="{{ '/community-guidelines/' | relative_url }}">Read the community guidelines →</a>
+    </aside>
+  </header>
+
+  <section class="community-auth-card" aria-live="polite">
+    <div>
+      <p class="eyebrow">Member access</p>
+      <h2 id="auth-title">Sign in to participate</h2>
+      <p id="auth-description">
+        Reading is public. Sign in with a one-time email link to ask questions,
+        answer members, and report content.
+      </p>
+    </div>
+
+    <form id="community-login-form">
+      <label for="community-email">Email address</label>
+      <div class="community-inline-form">
+        <input id="community-email" name="email" type="email" autocomplete="email" required>
+        <button class="calculate-button" type="submit">Email me a sign-in link</button>
+      </div>
+      <p class="community-form-message" id="auth-message"></p>
+    </form>
+
+    <div class="community-user-panel" id="community-user-panel" hidden>
+      <div><span>Signed in as</span><strong id="signed-in-email">—</strong></div>
+      <button class="secondary-button" id="sign-out-button" type="button">Sign out</button>
+    </div>
+  </section>
+
+  <section class="community-profile-card" id="profile-card" hidden>
+    <p class="eyebrow">Community profile</p>
+    <h2>Choose your public display name</h2>
+    <p>Your email stays private. Questions and answers show only this name.</p>
+    <form id="profile-form">
+      <label for="display-name">Display name</label>
+      <div class="community-inline-form">
+        <input id="display-name" name="displayName" type="text" minlength="3" maxlength="40" required>
+        <button class="calculate-button" type="submit">Save display name</button>
+      </div>
+      <p class="community-form-message" id="profile-message"></p>
+    </form>
+  </section>
+
+  <section class="ask-question-card" id="ask-question-card" hidden>
+    <div class="community-section-heading">
+      <div><p class="eyebrow">Start a discussion</p><h2>Ask a CNC question</h2></div>
+      <button class="secondary-button" id="toggle-question-form" type="button">Ask a question</button>
+    </div>
+
+    <form class="question-form" id="question-form" hidden>
+      <div class="field">
+        <label for="question-title">Question title</label>
+        <input id="question-title" name="title" type="text" minlength="10" maxlength="140"
+          placeholder="Example: Why am I getting heavy dross on 6 mm mild steel?" required>
+      </div>
+      <div class="field">
+        <label for="question-body">Details</label>
+        <textarea id="question-body" name="body" minlength="20" maxlength="5000" rows="8"
+          placeholder="Include the machine, material, settings, symptoms, and what you already tested." required></textarea>
+        <div class="wording-warning" id="question-wording-warning" hidden>
+          <strong>Please reconsider the wording before posting.</strong>
+          <p>The message appears to contain vulgar or abusive language. Rewrite it respectfully, then submit again.</p>
+        </div>
+      </div>
+      <label class="guideline-confirmation">
+        <input type="checkbox" required>
+        <span>I agree to the <a href="{{ '/community-guidelines/' | relative_url }}">community guidelines</a>.</span>
+      </label>
+      <button class="calculate-button question-submit" type="submit">Post question</button>
+      <p class="community-form-message" id="question-message"></p>
+    </form>
+  </section>
+
+  <section class="community-browser">
+    <div class="community-section-heading">
+      <div><p class="eyebrow">Recent discussions</p><h2>Community questions</h2></div>
+      <label class="community-search">
+        <span class="sr-only">Search questions</span>
+        <input id="community-search-input" type="search" placeholder="Search questions">
+      </label>
+    </div>
+
+    <div class="question-list" id="question-list">
+      <p class="comments-loading">Loading community questions…</p>
+    </div>
+
+    <article class="question-detail" id="question-detail" hidden>
+      <button class="community-back-button" id="back-to-questions" type="button">← Back to all questions</button>
+      <header class="question-detail-header">
+        <div>
+          <span class="question-status" id="detail-status">Open</span>
+          <h2 id="detail-title">—</h2>
+          <p class="question-meta" id="detail-meta">—</p>
+        </div>
+        <button class="text-button" id="report-question" type="button" hidden>Report question</button>
+      </header>
+      <div class="question-body" id="detail-body"></div>
+
+      <section class="answer-section">
+        <div class="approved-comments-header">
+          <h3>Answers</h3><span id="answer-count">0 answers</span>
+        </div>
+        <div class="answer-list" id="answer-list"></div>
+      </section>
+
+      <section class="answer-form-card" id="answer-form-card" hidden>
+        <h3>Post an answer</h3>
+        <form id="answer-form">
+          <div class="field">
+            <label for="answer-body">Your answer</label>
+            <textarea id="answer-body" name="body" minlength="10" maxlength="5000" rows="7" required></textarea>
+            <div class="wording-warning" id="answer-wording-warning" hidden>
+              <strong>Please reconsider the wording before posting.</strong>
+              <p>The answer appears to contain vulgar or abusive language.</p>
+            </div>
+          </div>
+          <button class="calculate-button" type="submit">Post answer</button>
+          <p class="community-form-message" id="answer-message"></p>
+        </form>
+      </section>
+    </article>
+  </section>
+</main>
+
+<dialog class="community-modal" id="report-modal">
+  <form method="dialog" class="community-modal-card" id="report-form">
+    <button class="community-modal-close" value="cancel" aria-label="Close">×</button>
+    <h2>Report community content</h2>
+    <div class="field">
+      <label for="report-reason">Reason</label>
+      <select id="report-reason" name="reason" required>
+        <option value="">Choose a reason</option>
+        <option value="abusive">Abusive or vulgar</option>
+        <option value="unsafe">Dangerous or unsafe advice</option>
+        <option value="spam">Spam or advertising</option>
+        <option value="off-topic">Off topic</option>
+        <option value="personal-information">Personal information</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="report-details">Additional details</label>
+      <textarea id="report-details" name="details" maxlength="500" rows="4"></textarea>
+    </div>
+    <button class="calculate-button" id="submit-report-button" type="submit">Submit report</button>
+    <p class="community-form-message" id="report-message"></p>
+  </form>
+</dialog>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="{{ '/supabase-config.js?v=5.0' | relative_url }}"></script>
+<script src="{{ '/community.js?v=10.0' | relative_url }}"></script>
