@@ -203,6 +203,13 @@ function getCalculatedRecord(values) {
       lower.pierceDelaySeconds,
       upper.pierceDelaySeconds
     ),
+    recommendedCutVoltage: interpolate(
+      values.thicknessMm,
+      lower.thicknessMm,
+      upper.thicknessMm,
+      lower.recommendedCutVoltage,
+      upper.recommendedCutVoltage
+    ),
     source:
       `${lower.source} Interpolated between ${lower.thicknessMm} mm and ${upper.thicknessMm} mm rows.`,
     interpolated: true
@@ -227,6 +234,21 @@ function renderGasPressure(record) {
     record.gasPressureSecondary || "Use manufacturer setting";
 }
 
+function renderCutVoltage(record) {
+  const voltageValue = Number(record.recommendedCutVoltage);
+  const voltageTarget = document.querySelector("#cut-voltage");
+  const voltageNote = document.querySelector("#cut-voltage-note");
+
+  if (Number.isFinite(voltageValue)) {
+    voltageTarget.textContent = `${Math.round(voltageValue)} V`;
+    voltageNote.textContent = "Starting THC value — verify on your table";
+    return;
+  }
+
+  voltageTarget.textContent = "Machine-specific";
+  voltageNote.textContent = "Set from test cuts and actual cut height";
+}
+
 function renderResult(record, values, profile) {
   const feedMmMin = calculateFeedRate(record, values.priority);
 
@@ -243,6 +265,8 @@ function renderResult(record, values, profile) {
 
   document.querySelector("#cutting-amps").textContent =
     `${record.processAmps} A`;
+
+  renderCutVoltage(record);
 
   document.querySelector("#result-material").textContent =
     MATERIAL_LABELS[values.material];
@@ -266,12 +290,12 @@ function renderResult(record, values, profile) {
       `<strong>Reference profile:</strong> ${profile.label} uses Hypertherm
       shielded-air speed and pierce-delay data as a starting point. It is not
       factory data for every torch or plasma source. Test a coupon and tune the
-      result for your machine.`;
+      result for your machine. Recommended cut voltage is a practical THC starting value and must be verified with test coupons.`;
   } else {
     resultMessage.innerHTML =
       `<strong>Manufacturer profile:</strong> ${profile.label} uses the official
       Hypertherm Powermax65/85 shielded-air chart. Hypertherm normally controls
-      gas pressure automatically in standard operation.`;
+      gas pressure automatically in standard operation. Recommended cut voltage is still a machine-specific THC starting value and must be confirmed on your table.`;
   }
 
   resultGrid.hidden = false;

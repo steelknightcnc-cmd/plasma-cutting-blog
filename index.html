@@ -6,9 +6,9 @@
   <meta name="description" content="Plasma cutting calculator and practical CNC plasma-cutting articles.">
   <title>Plasma Cut Lab | Cutting Calculator</title>
   <link rel="stylesheet" href="styles.css?v=18.0">
-  <script src="cut-chart-data.js?v=3" defer></script>
+  <script src="cut-chart-data.js?v=4.1" defer></script>
   <script src="supabase-config.js?v=5.0" defer></script>
-  <script src="app.js?v=5.0" defer></script>
+  <script src="app.js?v=5.1" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -37,7 +37,7 @@
         <p class="hero-copy">
           Select the material, thickness, machine capacity, and cutting priority.
           The calculator reports feed rate in both unit systems, pierce delay,
-          gas pressure, and cutting amperage.
+          gas pressure, cutting amperage, and a recommended starting cut voltage.
         </p>
         <a class="primary-link" href="#calculator">Open the calculator</a>
       </div>
@@ -57,6 +57,7 @@
           <strong>Pierce delay</strong>
           <strong>Gas pressure</strong>
           <strong>Cutting amps</strong>
+          <strong>Cut voltage</strong>
         </aside>
       </div>
     </section>
@@ -196,6 +197,12 @@
             <article class="metric">
               <span>Cutting current</span>
               <strong id="cutting-amps">—</strong>
+            </article>
+
+            <article class="metric">
+              <span>Recommended cut voltage</span>
+              <strong id="cut-voltage">—</strong>
+              <small id="cut-voltage-note">Verify with test coupon</small>
             </article>
           </div>
 
