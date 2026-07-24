@@ -1,37 +1,25 @@
-# Plasma Cut Lab — Multi-Profile Update v0.3
+# Plasma Cut Lab — Feedback Vote Update v0.4
 
-Upload and replace these two files in the root of the GitHub repository:
+Replace these files in the root of your GitHub repository:
 
-- `cut-chart-data.js`
 - `app.js`
+- `styles.css`
 
-No `index.html` change is required. JavaScript rebuilds the profile selector
-automatically and organizes machines by manufacturer.
+## New feature
 
-## Working profiles
+A “Did this calculator help?” section appears beneath the safety warning with:
 
-- Generic air plasma — Hypertherm reference
-- Stamos S-Plasma 85 CNC — Hypertherm reference with 5.5 bar displayed
-- Hypertherm Powermax65 — official 45 A and 65 A shielded-air rows
-- Hypertherm Powermax85 — official 45 A, 65 A, and 85 A shielded-air rows
+- Yes button
+- No button
+- Saved choice using browser localStorage
+- Thank-you response after voting
+- Mobile-friendly layout
 
-## Listed for future chart data
+## Important limitation
 
-- Hypertherm Powermax45 XP
-- Hypertherm Powermax SYNC
-- ESAB Thermal Dynamics Cutmaster 60i
-- ESAB Thermal Dynamics Cutmaster 82
-- Lincoln Electric Tomahawk 45
-- Lincoln Electric Tomahawk 1000
-- Miller Spectrum 625 X-TREME
-- Miller Spectrum 875
-- Everlast PowerPlasma 62i
-- Everlast PowerPlasma 82i
+This version remembers each visitor’s choice only on that browser/device.
+It does not create a public or global vote total because GitHub Pages is a
+static host and does not include a database.
 
-Selecting a future profile displays "Chart coming soon." It does not silently
-reuse another manufacturer's settings.
-
-## Source
-
-Hypertherm Powermax65/85 Operator Manual 806650, Revision 4,
-shielded-air mechanized cut charts.
+A future version can connect the buttons to a free form or analytics service
+to collect aggregated results.

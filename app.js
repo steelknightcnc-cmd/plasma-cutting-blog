@@ -366,5 +366,84 @@ machineProfileSelect.addEventListener("change", () =>
   updateSelectedProfile(true)
 );
 
+
+
+function installHelpfulnessVote() {
+  const resultCard = document.querySelector(".result-card");
+  const safetyWarning = resultCard?.querySelector(".safety-warning");
+
+  if (!resultCard || !safetyWarning || document.querySelector("#helpfulness-vote")) {
+    return;
+  }
+
+  const section = document.createElement("section");
+  section.className = "helpfulness-vote";
+  section.id = "helpfulness-vote";
+  section.setAttribute("aria-labelledby", "helpfulness-question");
+
+  section.innerHTML = `
+    <div class="helpfulness-copy">
+      <p class="eyebrow">Your feedback</p>
+      <h4 id="helpfulness-question">Did this calculator help?</h4>
+      <p>Your answer helps improve future cut-chart profiles and calculator features.</p>
+    </div>
+
+    <div class="helpfulness-actions" role="group" aria-label="Was this calculator helpful?">
+      <button type="button" class="vote-button" data-vote="yes" aria-pressed="false">
+        <span aria-hidden="true">👍</span>
+        Yes
+      </button>
+
+      <button type="button" class="vote-button" data-vote="no" aria-pressed="false">
+        <span aria-hidden="true">👎</span>
+        No
+      </button>
+    </div>
+
+    <p class="vote-message" id="vote-message" aria-live="polite"></p>
+  `;
+
+  safetyWarning.insertAdjacentElement("afterend", section);
+
+  const storageKey = "plasma-cut-lab-helpfulness-vote";
+  const buttons = [...section.querySelectorAll(".vote-button")];
+  const message = section.querySelector("#vote-message");
+
+  function applyVote(vote, announce = false) {
+    buttons.forEach((button) => {
+      const selected = button.dataset.vote === vote;
+      button.classList.toggle("selected", selected);
+      button.setAttribute("aria-pressed", String(selected));
+    });
+
+    if (vote === "yes") {
+      message.textContent = announce
+        ? "Thanks! We’re glad the calculator helped."
+        : "You voted that this calculator helped.";
+    } else if (vote === "no") {
+      message.textContent = announce
+        ? "Thanks for the feedback. We’ll keep improving it."
+        : "You voted that this calculator did not help.";
+    } else {
+      message.textContent = "";
+    }
+  }
+
+  const savedVote = localStorage.getItem(storageKey);
+  if (savedVote === "yes" || savedVote === "no") {
+    applyVote(savedVote);
+  }
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const vote = button.dataset.vote;
+      localStorage.setItem(storageKey, vote);
+      applyVote(vote, true);
+    });
+  });
+}
+
+
 populateMachineProfiles();
 updateConvertedThickness();
+installHelpfulnessVote();
