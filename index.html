@@ -5,9 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Plasma cutting calculator and practical CNC plasma-cutting articles.">
   <title>Plasma Cut Lab | Cutting Calculator</title>
-  <link rel="stylesheet" href="styles.css?v=4.1">
+  <link rel="stylesheet" href="styles.css?v=5.0">
   <script src="cut-chart-data.js?v=3" defer></script>
-  <script src="app.js?v=4.1" defer></script>
+  <script src="supabase-config.js?v=5.0" defer></script>
+  <script src="app.js?v=5.0" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -233,6 +234,11 @@
                 <span aria-hidden="true">👎</span>
                 No
               </button>
+            </div>
+
+            <div class="vote-totals" aria-live="polite" aria-label="Community vote totals">
+              <span><strong id="likes-count">—</strong> likes</span>
+              <span><strong id="dislikes-count">—</strong> dislikes</span>
             </div>
 
             <p class="vote-message" id="vote-message" aria-live="polite"></p>

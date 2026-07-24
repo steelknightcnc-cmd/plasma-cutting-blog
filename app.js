@@ -403,6 +403,11 @@ function installHelpfulnessVote() {
         </button>
       </div>
 
+      <div class="vote-totals" aria-live="polite" aria-label="Community vote totals">
+        <span><strong id="likes-count">—</strong> likes</span>
+        <span><strong id="dislikes-count">—</strong> dislikes</span>
+      </div>
+
       <p class="vote-message" id="vote-message" aria-live="polite"></p>
     `;
 
@@ -418,49 +423,173 @@ function installHelpfulnessVote() {
   const storageKey = "plasma-cut-lab-helpfulness-vote";
   const buttons = [...section.querySelectorAll(".vote-button")];
   const message = section.querySelector("#vote-message");
+  const likesCount = section.querySelector("#likes-count");
+  const dislikesCount = section.querySelector("#dislikes-count");
+  const config = window.PLASMA_FEEDBACK_CONFIG || {};
+  const projectUrl = String(config.supabaseUrl || "").replace(/\/+$/, "");
+  const publishableKey = String(config.supabasePublishableKey || "");
+  const configured =
+    projectUrl.startsWith("https://") &&
+    !projectUrl.includes("YOUR-PROJECT") &&
+    publishableKey.length > 20 &&
+    !publishableKey.includes("YOUR_PUBLISHABLE_KEY");
 
-  function applyVote(vote, announce = false) {
+  function readSavedVote() {
+    try {
+      const saved = localStorage.getItem(storageKey);
+      return saved === "yes" || saved === "no" ? saved : null;
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function saveVote(vote) {
+    try {
+      localStorage.setItem(storageKey, vote);
+    } catch (error) {
+      // Voting still works for this page view when storage is restricted.
+    }
+  }
+
+  function applySelectedVote(vote) {
     buttons.forEach((button) => {
       const selected = button.dataset.vote === vote;
       button.classList.toggle("selected", selected);
       button.setAttribute("aria-pressed", String(selected));
     });
+  }
 
-    if (vote === "yes") {
-      message.textContent = announce
-        ? "Thanks! We’re glad the calculator helped."
-        : "You voted that this calculator helped.";
-    } else if (vote === "no") {
-      message.textContent = announce
-        ? "Thanks for the feedback. We’ll keep improving it."
-        : "You voted that this calculator did not help.";
-    } else {
-      message.textContent = "";
+  function setButtonsDisabled(disabled) {
+    buttons.forEach((button) => {
+      button.disabled = disabled;
+    });
+  }
+
+  function renderTotals(totals) {
+    const likes = Number(totals?.likes);
+    const dislikes = Number(totals?.dislikes);
+
+    likesCount.textContent = Number.isFinite(likes)
+      ? Math.max(0, likes).toLocaleString()
+      : "—";
+
+    dislikesCount.textContent = Number.isFinite(dislikes)
+      ? Math.max(0, dislikes).toLocaleString()
+      : "—";
+  }
+
+  function apiHeaders(includeJson = false) {
+    const headers = {
+      apikey: publishableKey,
+      Authorization: `Bearer ${publishableKey}`
+    };
+
+    if (includeJson) {
+      headers["Content-Type"] = "application/json";
+    }
+
+    return headers;
+  }
+
+  async function loadTotals() {
+    if (!configured) {
+      message.textContent =
+        "Global vote totals need the Supabase connection details in supabase-config.js.";
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `${projectUrl}/rest/v1/calculator_feedback?id=eq.main&select=likes,dislikes`,
+        {
+          method: "GET",
+          headers: apiHeaders()
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Vote totals request failed: ${response.status}`);
+      }
+
+      const rows = await response.json();
+      renderTotals(rows[0]);
+    } catch (error) {
+      console.error(error);
+      message.textContent =
+        "The community vote totals could not be loaded right now.";
     }
   }
 
-  try {
-    const savedVote = localStorage.getItem(storageKey);
-    if (savedVote === "yes" || savedVote === "no") {
-      applyVote(savedVote);
+  async function submitVote(vote) {
+    if (!configured) {
+      message.textContent =
+        "Connect Supabase first so this vote can be added to the public totals.";
+      return;
     }
-  } catch (error) {
-    // Voting still works during this visit if local storage is unavailable.
+
+    const previousVote = readSavedVote();
+
+    if (previousVote === vote) {
+      applySelectedVote(vote);
+      message.textContent = "Your vote is already included in the totals.";
+      return;
+    }
+
+    setButtonsDisabled(true);
+    message.textContent = "Saving your vote…";
+
+    try {
+      const response = await fetch(
+        `${projectUrl}/rest/v1/rpc/register_calculator_vote`,
+        {
+          method: "POST",
+          headers: apiHeaders(true),
+          body: JSON.stringify({
+            p_vote: vote,
+            p_previous_vote: previousVote
+          })
+        }
+      );
+
+      if (!response.ok) {
+        const detail = await response.text();
+        throw new Error(
+          `Vote request failed: ${response.status} ${detail}`
+        );
+      }
+
+      const rows = await response.json();
+      const totals = Array.isArray(rows) ? rows[0] : rows;
+
+      saveVote(vote);
+      applySelectedVote(vote);
+      renderTotals(totals);
+
+      message.textContent =
+        vote === "yes"
+          ? "Thanks! Your like was added to the community total."
+          : "Thanks! Your dislike was added to the community total.";
+    } catch (error) {
+      console.error(error);
+      message.textContent =
+        "Your vote could not be saved. Please try again.";
+    } finally {
+      setButtonsDisabled(false);
+    }
+  }
+
+  const savedVote = readSavedVote();
+  if (savedVote) {
+    applySelectedVote(savedVote);
   }
 
   buttons.forEach((button) => {
     button.addEventListener("click", () => {
-      const vote = button.dataset.vote;
-
-      try {
-        localStorage.setItem(storageKey, vote);
-      } catch (error) {
-        // Ignore storage restrictions and still display the response.
-      }
-
-      applyVote(vote, true);
+      submitVote(button.dataset.vote);
     });
   });
+
+  loadTotals();
 }
 
 populateMachineProfiles();

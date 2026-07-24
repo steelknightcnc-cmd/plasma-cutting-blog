@@ -693,3 +693,35 @@ footer {
     flex: 1;
   }
 }
+
+
+.vote-totals {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  align-items: center;
+}
+
+.vote-totals span {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  min-width: 118px;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.vote-totals strong {
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.vote-button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
