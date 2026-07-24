@@ -1044,3 +1044,48 @@ footer {
     grid-template-columns: 1fr;
   }
 }
+
+
+/* Entire featured blog card is clickable */
+.article-card-featured {
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+.article-card-link {
+  display: block;
+  height: 100%;
+  padding: 1.4rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.article-card-link .article-card-category {
+  color: var(--accent);
+  font-size: 0.76rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.article-card-link h3 {
+  color: var(--text);
+}
+
+.article-card-link p {
+  color: var(--muted);
+}
+
+.article-card-link:hover,
+.article-card-link:focus-visible {
+  background: rgba(255, 138, 31, 0.08);
+  outline: none;
+}
+
+.article-card-link:hover .read-link,
+.article-card-link:focus-visible .read-link {
+  text-decoration: underline;
+}
+
+.article-card-link:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
