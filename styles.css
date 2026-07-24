@@ -1444,3 +1444,168 @@ footer {
 .community-guidelines-content section{margin-bottom:2.5rem}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
 @media(max-width:820px){.community-hero,.community-auth-card{grid-template-columns:1fr}.community-section-heading{align-items:flex-start;flex-direction:column}.community-search{width:100%}}
 @media(max-width:600px){.community-main{width:min(94vw,var(--max-width));padding-top:3.5rem}.community-inline-form{grid-template-columns:1fr}.community-user-panel,.question-detail-header,.community-answer-card header,.question-card-meta{align-items:flex-start;flex-direction:column}.question-submit{width:100%}}
+
+/* Futuristic multicolor identity v1.6 */
+
+/* Homepage and calculator: electric cyan + plasma blue */
+body:not(.article-page):not(.community-page) {
+  --accent: #00e5ff;
+  --accent-strong: #008cff;
+  --accent-glow: #00a8ff;
+}
+
+body:not(.article-page):not(.community-page) .eyebrow {
+  color: #62f4ff;
+}
+
+body:not(.article-page):not(.community-page) .primary-link,
+body:not(.article-page):not(.community-page) .calculate-button {
+  background: linear-gradient(135deg, #00e5ff 0%, #008cff 100%);
+  box-shadow:
+    0 16px 42px rgba(0, 168, 255, 0.24),
+    0 0 24px rgba(0, 229, 255, 0.10);
+}
+
+body:not(.article-page):not(.community-page) .hero-card {
+  background:
+    linear-gradient(145deg, rgba(0, 229, 255, 0.07), rgba(124, 92, 255, 0.035)),
+    var(--surface);
+}
+
+/* Blog and article pages: neon violet + cyan */
+body.article-page {
+  --accent: #a78bfa;
+  --accent-strong: #6d5dfc;
+  --accent-glow: #8b5cf6;
+  background:
+    radial-gradient(circle at 86% 0%, rgba(124, 92, 255, 0.16), transparent 30rem),
+    radial-gradient(circle at 8% 18%, rgba(0, 229, 255, 0.07), transparent 24rem),
+    var(--background);
+}
+
+body.article-page .brand-mark {
+  background: linear-gradient(145deg, #00e5ff, #7c5cff);
+}
+
+body.article-page .eyebrow,
+body.article-page .blog-post-card > a > span,
+body.article-page .article-card-category {
+  color: #bca8ff;
+}
+
+body.article-page .primary-link,
+body.article-page .calculate-button {
+  background: linear-gradient(135deg, #a78bfa 0%, #6d5dfc 100%);
+  color: #f8f7ff;
+  box-shadow:
+    0 16px 42px rgba(109, 93, 252, 0.25),
+    0 0 24px rgba(167, 139, 250, 0.10);
+}
+
+body.article-page .article-callout,
+body.article-page .article-cta,
+body.article-page .article-calculator-link {
+  border-color: rgba(167, 139, 250, 0.46);
+  background:
+    linear-gradient(135deg, rgba(124, 92, 255, 0.13), rgba(0, 229, 255, 0.035));
+}
+
+body.article-page .read-link,
+body.article-page .article-footer-nav a,
+body.article-page .blog-post-meta strong {
+  color: #69e9ff;
+}
+
+/* Community Q&A: teal + blue-violet */
+body.community-page {
+  --accent: #2dd4bf;
+  --accent-strong: #248cff;
+  --accent-glow: #14b8a6;
+  background:
+    radial-gradient(circle at 84% 0%, rgba(45, 212, 191, 0.14), transparent 30rem),
+    radial-gradient(circle at 8% 18%, rgba(124, 92, 255, 0.09), transparent 24rem),
+    var(--background);
+}
+
+body.community-page .brand-mark {
+  background: linear-gradient(145deg, #2dd4bf, #7c5cff);
+}
+
+body.community-page .eyebrow {
+  color: #77f4df;
+}
+
+body.community-page .calculate-button {
+  background: linear-gradient(135deg, #2dd4bf 0%, #248cff 100%);
+  box-shadow:
+    0 16px 42px rgba(36, 140, 255, 0.22),
+    0 0 24px rgba(45, 212, 191, 0.10);
+}
+
+body.community-page .community-guideline-card {
+  background:
+    linear-gradient(145deg, rgba(124, 92, 255, 0.10), rgba(45, 212, 191, 0.045)),
+    var(--surface);
+}
+
+body.community-page .community-auth-card {
+  border-color: rgba(45, 212, 191, 0.28);
+}
+
+body.community-page .ask-question-card {
+  border-color: rgba(36, 140, 255, 0.30);
+}
+
+body.community-page .community-browser {
+  border-color: rgba(124, 92, 255, 0.30);
+}
+
+body.community-page .question-card {
+  background:
+    linear-gradient(145deg, rgba(36, 140, 255, 0.045), rgba(124, 92, 255, 0.035)),
+    var(--surface-2);
+}
+
+body.community-page .question-status {
+  color: #36f1a3;
+  border-color: rgba(54, 241, 163, 0.44);
+}
+
+/* Shared variation */
+.metric:nth-child(1) {
+  border-color: rgba(0, 229, 255, 0.28);
+}
+
+.metric:nth-child(2) {
+  border-color: rgba(124, 92, 255, 0.30);
+}
+
+.metric:nth-child(3) {
+  border-color: rgba(54, 241, 163, 0.28);
+}
+
+.metric:nth-child(4) {
+  border-color: rgba(255, 209, 102, 0.30);
+}
+
+.vote-button:first-child.selected {
+  border-color: #36f1a3;
+  background: rgba(54, 241, 163, 0.10);
+  box-shadow: inset 0 0 0 1px #36f1a3;
+}
+
+.vote-button:last-child.selected {
+  border-color: #ff5c7a;
+  background: rgba(255, 92, 122, 0.10);
+  box-shadow: inset 0 0 0 1px #ff5c7a;
+}
+
+.site-header nav a:nth-child(2):hover,
+.site-header nav a:nth-child(2):focus-visible {
+  color: #bca8ff;
+}
+
+.site-header nav a:nth-child(3):hover,
+.site-header nav a:nth-child(3):focus-visible {
+  color: #77f4df;
+}
