@@ -372,38 +372,48 @@ function installHelpfulnessVote() {
   const resultCard = document.querySelector(".result-card");
   const safetyWarning = resultCard?.querySelector(".safety-warning");
 
-  if (!resultCard || !safetyWarning || document.querySelector("#helpfulness-vote")) {
+  if (!resultCard || !safetyWarning) {
     return;
   }
 
-  const section = document.createElement("section");
-  section.className = "helpfulness-vote";
-  section.id = "helpfulness-vote";
-  section.setAttribute("aria-labelledby", "helpfulness-question");
+  let section = document.querySelector("#helpfulness-vote");
 
-  section.innerHTML = `
-    <div class="helpfulness-copy">
-      <p class="eyebrow">Your feedback</p>
-      <h4 id="helpfulness-question">Did this calculator help?</h4>
-      <p>Your answer helps improve future cut-chart profiles and calculator features.</p>
-    </div>
+  if (!section) {
+    section = document.createElement("section");
+    section.className = "helpfulness-vote";
+    section.id = "helpfulness-vote";
+    section.setAttribute("aria-labelledby", "helpfulness-question");
 
-    <div class="helpfulness-actions" role="group" aria-label="Was this calculator helpful?">
-      <button type="button" class="vote-button" data-vote="yes" aria-pressed="false">
-        <span aria-hidden="true">👍</span>
-        Yes
-      </button>
+    section.innerHTML = `
+      <div class="helpfulness-copy">
+        <p class="eyebrow">Your feedback</p>
+        <h4 id="helpfulness-question">Did this calculator help?</h4>
+        <p>Your answer helps improve future cut-chart profiles and calculator features.</p>
+      </div>
 
-      <button type="button" class="vote-button" data-vote="no" aria-pressed="false">
-        <span aria-hidden="true">👎</span>
-        No
-      </button>
-    </div>
+      <div class="helpfulness-actions" role="group" aria-label="Was this calculator helpful?">
+        <button type="button" class="vote-button" data-vote="yes" aria-pressed="false">
+          <span aria-hidden="true">👍</span>
+          Yes
+        </button>
 
-    <p class="vote-message" id="vote-message" aria-live="polite"></p>
-  `;
+        <button type="button" class="vote-button" data-vote="no" aria-pressed="false">
+          <span aria-hidden="true">👎</span>
+          No
+        </button>
+      </div>
 
-  safetyWarning.insertAdjacentElement("afterend", section);
+      <p class="vote-message" id="vote-message" aria-live="polite"></p>
+    `;
+
+    safetyWarning.insertAdjacentElement("afterend", section);
+  }
+
+  if (section.dataset.voteReady === "true") {
+    return;
+  }
+
+  section.dataset.voteReady = "true";
 
   const storageKey = "plasma-cut-lab-helpfulness-vote";
   const buttons = [...section.querySelectorAll(".vote-button")];
@@ -429,20 +439,29 @@ function installHelpfulnessVote() {
     }
   }
 
-  const savedVote = localStorage.getItem(storageKey);
-  if (savedVote === "yes" || savedVote === "no") {
-    applyVote(savedVote);
+  try {
+    const savedVote = localStorage.getItem(storageKey);
+    if (savedVote === "yes" || savedVote === "no") {
+      applyVote(savedVote);
+    }
+  } catch (error) {
+    // Voting still works during this visit if local storage is unavailable.
   }
 
   buttons.forEach((button) => {
     button.addEventListener("click", () => {
       const vote = button.dataset.vote;
-      localStorage.setItem(storageKey, vote);
+
+      try {
+        localStorage.setItem(storageKey, vote);
+      } catch (error) {
+        // Ignore storage restrictions and still display the response.
+      }
+
       applyVote(vote, true);
     });
   });
 }
-
 
 populateMachineProfiles();
 updateConvertedThickness();

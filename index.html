@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Plasma cutting calculator and practical CNC plasma-cutting articles.">
   <title>Plasma Cut Lab | Cutting Calculator</title>
-  <link rel="stylesheet" href="styles.css">
-  <script src="cut-chart-data.js" defer></script>
-  <script src="app.js" defer></script>
+  <link rel="stylesheet" href="styles.css?v=4.1">
+  <script src="cut-chart-data.js?v=3" defer></script>
+  <script src="app.js?v=4.1" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -215,6 +215,29 @@
               manufacturer’s manual and test cuts.
             </p>
           </div>
+
+          <section class="helpfulness-vote" id="helpfulness-vote" aria-labelledby="helpfulness-question">
+            <div class="helpfulness-copy">
+              <p class="eyebrow">Your feedback</p>
+              <h4 id="helpfulness-question">Did this calculator help?</h4>
+              <p>Your answer helps improve future cut-chart profiles and calculator features.</p>
+            </div>
+
+            <div class="helpfulness-actions" role="group" aria-label="Was this calculator helpful?">
+              <button type="button" class="vote-button" data-vote="yes" aria-pressed="false">
+                <span aria-hidden="true">👍</span>
+                Yes
+              </button>
+
+              <button type="button" class="vote-button" data-vote="no" aria-pressed="false">
+                <span aria-hidden="true">👎</span>
+                No
+              </button>
+            </div>
+
+            <p class="vote-message" id="vote-message" aria-live="polite"></p>
+          </section>
+
         </section>
       </div>
     </section>
