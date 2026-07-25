@@ -1909,6 +1909,9 @@ footer > * {
 .industrial-hero-media {
   position: relative;
   min-width: 0;
+  max-width: 760px;
+  width: 100%;
+  justify-self: end;
   margin: 0;
   border: 1px solid rgba(255, 255, 255, 0.13);
   border-radius: 16px;
@@ -1931,9 +1934,9 @@ footer > * {
 .industrial-hero-media img {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 8.4;
+  aspect-ratio: 5 / 4;
   object-fit: cover;
-  object-position: 66% 52%;
+  object-position: center 18%;
 }
 
 .industrial-hero-media figcaption {
@@ -2098,6 +2101,7 @@ footer > * {
   }
 
   .industrial-hero-media img {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 5 / 4;
+    object-position: center 14%;
   }
 }
