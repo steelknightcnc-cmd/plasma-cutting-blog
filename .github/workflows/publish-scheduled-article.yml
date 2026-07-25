@@ -1,0 +1,92 @@
+name: Publish scheduled plasma article
+
+on:
+  schedule:
+    - cron: "0 9 * * *"
+      timezone: "Europe/Vienna"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish-article:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Publish article when due
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          TARGET_DATE="2026-08-15"
+          TODAY="$(TZ=Europe/Vienna date +%F)"
+          SOURCE="_scheduled/2026-08-15-how-to-diagnose-dross-bevel-and-rough-plasma-cuts.md"
+          DEST="_posts/2026-08-15-how-to-diagnose-dross-bevel-and-rough-plasma-cuts.md"
+
+          echo "Austria date: ${TODAY}"
+          echo "Publication date: ${TARGET_DATE}"
+
+          if [[ "${TODAY}" < "${TARGET_DATE}" ]]; then
+            echo "The article is not due yet."
+            exit 0
+          fi
+
+          if [[ ! -f "${SOURCE}" ]]; then
+            echo "The article has already been published or the scheduled file is missing."
+            exit 0
+          fi
+
+          mkdir -p _posts
+          mv "${SOURCE}" "${DEST}"
+
+          python3 <<'PY'
+          from pathlib import Path
+
+          path = Path("index.html")
+          html = path.read_text(encoding="utf-8")
+
+          start_marker = "        <!-- SCHEDULED-CUT-QUALITY-ARTICLE:START -->"
+          end_marker = "        <!-- SCHEDULED-CUT-QUALITY-ARTICLE:END -->"
+
+          live_card = """        <article class="article-card-featured">
+            <a class="article-card-link" href="blog/how-to-diagnose-dross-bevel-and-rough-plasma-cuts/">
+              <span class="article-card-category">Cut quality</span>
+              <h3>How to diagnose dross, bevel, and rough plasma cuts</h3>
+              <p>Read the cut edge to identify speed, height, air, consumable, and motion problems.</p>
+              <span class="read-link">Read the guide <span aria-hidden="true">→</span></span>
+            </a>
+          </article>"""
+
+          start = html.find(start_marker)
+          end = html.find(end_marker)
+
+          if start == -1 or end == -1:
+              raise SystemExit("Scheduled homepage card markers were not found.")
+
+          end += len(end_marker)
+          html = html[:start] + live_card + html[end:]
+          path.write_text(html, encoding="utf-8")
+          PY
+
+          rmdir _scheduled 2>/dev/null || true
+
+      - name: Commit published article
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if git diff --quiet && git diff --cached --quiet; then
+            echo "No publication changes to commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add -A
+          git commit -m "Publish scheduled cut quality article"
+          git push
