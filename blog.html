@@ -1,45 +1,350 @@
 ---
-layout: default
+layout: null
 title: Plasma Cutting Blog
 description: Beginner-friendly plasma cutting articles with practical technical detail.
 permalink: /blog/
-body_class: article-page
 ---
-<main class="blog-main">
-  <header class="blog-header">
-    <a class="article-back" href="{{ '/#top' | relative_url }}">← Back to the calculator</a>
-    <p class="eyebrow">Plasma Cut Forge Blog</p>
-    <h1>Practical Plasma-Cutting Guides</h1>
-    <p>
-      Beginner-friendly articles covering settings, cut quality, air systems,
-      consumables, troubleshooting, and CNC plasma testing.
-    </p>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Beginner-friendly CNC plasma cutting articles, testing guides, troubleshooting, air-system information, and cut-chart guidance.">
+  <title>Plasma Cut Forge Blog</title>
 
-    <aside class="article-callout">
-      <strong>Owner-published articles</strong>
-      <p>
-        Blog articles are written and published only by Steel Knight CNC.
-        Readers can join the discussion through the moderated comment section
-        beneath each article.
-      </p>
-    </aside>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#070b14">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=25.0">
+
+  <style>
+    /* Standalone fallback so the Blog never appears as a plain white page. */
+    :root {
+      color-scheme: dark;
+      --blog-bg: #080b10;
+      --blog-panel: #111824;
+      --blog-border: #27364b;
+      --blog-text: #f4f7fb;
+      --blog-muted: #a4b2c6;
+      --blog-accent: #00d9ff;
+    }
+
+    html {
+      background: var(--blog-bg);
+    }
+
+    body.blog-standalone {
+      margin: 0;
+      background:
+        radial-gradient(circle at 75% 0%, rgba(0, 217, 255, 0.10), transparent 28rem),
+        var(--blog-bg);
+      color: var(--blog-text);
+      font-family: "Inter", Arial, sans-serif;
+      line-height: 1.65;
+    }
+
+    .blog-standalone a {
+      color: inherit;
+    }
+
+    .blog-standalone .industrial-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      min-height: 80px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      padding: 0 3.6vw;
+      border-bottom: 1px solid rgba(0, 217, 255, 0.28);
+      background: rgba(8, 11, 16, 0.96);
+    }
+
+    .blog-standalone .industrial-brand {
+      display: grid;
+      gap: 0.1rem;
+      color: var(--blog-text);
+      text-decoration: none;
+    }
+
+    .blog-standalone .brand-wordmark {
+      font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+      font-size: 1.75rem;
+      font-weight: 900;
+      letter-spacing: 0.035em;
+      line-height: 1;
+    }
+
+    .blog-standalone .brand-wordmark span {
+      color: var(--blog-accent);
+    }
+
+    .blog-standalone .industrial-brand small {
+      color: #8492a7;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .blog-standalone .industrial-nav {
+      display: flex;
+      min-height: 80px;
+      align-items: stretch;
+      gap: clamp(1rem, 2vw, 2.2rem);
+    }
+
+    .blog-standalone .industrial-nav a {
+      position: relative;
+      display: grid;
+      place-items: center;
+      color: #b2bed0;
+      font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: 0.055em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .blog-standalone .industrial-nav a.active,
+    .blog-standalone .industrial-nav a:hover {
+      color: var(--blog-text);
+    }
+
+    .blog-standalone .industrial-nav a.active::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 2px;
+      background: var(--blog-accent);
+    }
+
+    .blog-standalone .blog-main {
+      width: min(1180px, 90vw);
+      margin: 0 auto;
+      padding: 5.5rem 0 6rem;
+    }
+
+    .blog-standalone .article-back {
+      display: inline-block;
+      margin-bottom: 2rem;
+      color: var(--blog-accent);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .blog-standalone .eyebrow {
+      margin: 0 0 0.8rem;
+      color: var(--blog-accent);
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .blog-standalone .blog-header h1 {
+      max-width: 850px;
+      margin: 0 0 1rem;
+      font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+      font-size: clamp(3rem, 7vw, 5.6rem);
+      font-weight: 900;
+      letter-spacing: 0.01em;
+      line-height: 0.92;
+      text-transform: uppercase;
+    }
+
+    .blog-standalone .blog-header > p:not(.eyebrow) {
+      max-width: 850px;
+      color: var(--blog-muted);
+      font-size: 1.08rem;
+    }
+
+    .blog-standalone .article-callout {
+      max-width: 850px;
+      margin-top: 2rem;
+      padding: 1.25rem;
+      border: 1px solid rgba(0, 217, 255, 0.25);
+      border-left: 4px solid var(--blog-accent);
+      border-radius: 12px;
+      background: rgba(0, 217, 255, 0.06);
+    }
+
+    .blog-standalone .article-callout p {
+      margin: 0.35rem 0 0;
+      color: var(--blog-muted);
+    }
+
+    .blog-standalone .blog-post-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.25rem;
+      margin-top: 3rem;
+    }
+
+    .blog-standalone .blog-post-card {
+      min-width: 0;
+      border: 1px solid var(--blog-border);
+      border-radius: 16px;
+      background: linear-gradient(145deg, rgba(255,255,255,0.045), rgba(255,255,255,0.018));
+      overflow: hidden;
+      transition: transform 180ms ease, border-color 180ms ease;
+    }
+
+    .blog-standalone .blog-post-card:hover {
+      border-color: rgba(0, 217, 255, 0.55);
+      transform: translateY(-4px);
+    }
+
+    .blog-standalone .blog-post-card > a {
+      display: grid;
+      height: 100%;
+      align-content: start;
+      padding: 1.5rem;
+      text-decoration: none;
+    }
+
+    .blog-standalone .blog-post-card span {
+      color: var(--blog-accent);
+      font-size: 0.76rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .blog-standalone .blog-post-card h2 {
+      margin: 0.7rem 0;
+      font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+      font-size: 2rem;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .blog-standalone .blog-post-card p {
+      color: var(--blog-muted);
+    }
+
+    .blog-standalone .blog-post-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: auto;
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--blog-border);
+      color: var(--blog-muted);
+      font-size: 0.85rem;
+    }
+
+    .blog-standalone .blog-post-meta strong {
+      color: var(--blog-accent);
+    }
+
+    .blog-standalone footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 2rem;
+      width: min(1180px, 90vw);
+      margin: 0 auto;
+      padding: 2rem 0;
+      border-top: 1px solid var(--blog-border);
+      color: var(--blog-muted);
+    }
+
+    @media (max-width: 920px) {
+      .blog-standalone .industrial-header {
+        align-items: flex-start;
+        flex-direction: column;
+        padding-top: 1rem;
+      }
+
+      .blog-standalone .industrial-nav {
+        width: 100%;
+        min-height: 58px;
+        overflow-x: auto;
+      }
+
+      .blog-standalone .industrial-nav a {
+        white-space: nowrap;
+      }
+
+      .blog-standalone .blog-post-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body class="blog-standalone">
+  <header class="industrial-header">
+    <a class="industrial-brand" href="/#top" aria-label="Plasma Cut Forge home">
+      <span class="brand-wordmark">PLASMA<span>CUT</span>FORGE</span>
+      <small>CNC plasma tools &amp; shop-floor guides</small>
+    </a>
+
+    <nav class="industrial-nav" aria-label="Primary navigation">
+      <a href="/#top">Home</a>
+      <a href="/#calculator">Calculator</a>
+      <a class="active" href="/blog/">Blog</a>
+      <a href="/community/">Community</a>
+      <a href="/#articles">Articles</a>
+      <a href="/#about">About</a>
+    </nav>
   </header>
 
-  <section class="blog-post-grid" aria-label="Blog posts">
-    {% for post in site.posts %}
-      <article class="blog-post-card">
-        <a href="{{ post.url | relative_url }}">
-          <span>{{ post.category | default: "Plasma guide" }}</span>
-          <h2>{{ post.title }}</h2>
-          <p>{{ post.description | default: post.excerpt | strip_html | truncate: 180 }}</p>
-          <div class="blog-post-meta">
-            <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %-d, %Y" }}</time>
-            <strong>Read article →</strong>
-          </div>
-        </a>
-      </article>
-    {% else %}
-      <p>No posts have been published yet.</p>
-    {% endfor %}
-  </section>
-</main>
+  <main class="blog-main">
+    <header class="blog-header">
+      <a class="article-back" href="/#calculator">← Back to the calculator</a>
+      <p class="eyebrow">Plasma Cut Forge Blog</p>
+      <h1>Practical Plasma-Cutting Guides</h1>
+      <p>
+        Beginner-friendly articles covering settings, cut quality, air systems,
+        consumables, troubleshooting, and CNC plasma testing.
+      </p>
+
+      <aside class="article-callout">
+        <strong>Owner-published articles</strong>
+        <p>
+          Blog articles are written and published only by Steel Knight CNC.
+          Readers can join the discussion through the moderated comment section
+          beneath each article.
+        </p>
+      </aside>
+    </header>
+
+    <section class="blog-post-grid" aria-label="Blog posts">
+      {% for post in site.posts %}
+        <article class="blog-post-card">
+          <a href="{{ post.url }}">
+            <span>{{ post.category | default: "Plasma guide" }}</span>
+            <h2>{{ post.title }}</h2>
+            <p>{{ post.description | default: post.excerpt | strip_html | truncate: 180 }}</p>
+            <div class="blog-post-meta">
+              <time datetime="{{ post.date | date_to_xmlschema }}">
+                {{ post.date | date: "%B %-d, %Y" }}
+              </time>
+              <strong>Read article →</strong>
+            </div>
+          </a>
+        </article>
+      {% else %}
+        <p>No posts have been published yet.</p>
+      {% endfor %}
+    </section>
+  </main>
+
+  <footer>
+    <p>© {{ site.time | date: "%Y" }} Plasma Cut Forge.</p>
+    <p><a href="/#calculator">Plasma cutting calculator</a></p>
+  </footer>
+</body>
+</html>
