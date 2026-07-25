@@ -1913,6 +1913,7 @@ footer > * {
   width: 100%;
   justify-self: end;
   margin: 0;
+  padding: 1rem;
   border: 1px solid rgba(255, 255, 255, 0.13);
   border-radius: 16px;
   background:
@@ -1934,9 +1935,13 @@ footer > * {
 .industrial-hero-media img {
   display: block;
   width: 100%;
-  aspect-ratio: 5 / 4;
-  object-fit: cover;
-  object-position: center 18%;
+  height: auto;
+  max-height: 560px;
+  aspect-ratio: auto;
+  object-fit: contain;
+  object-position: center center;
+  border-radius: 12px;
+  background: #0b1119;
 }
 
 .industrial-hero-media figcaption {
@@ -2101,7 +2106,51 @@ footer > * {
   }
 
   .industrial-hero-media img {
-    aspect-ratio: 5 / 4;
-    object-position: center 14%;
+    width: 100%;
+    height: auto;
+    max-height: none;
+    aspect-ratio: auto;
+    object-fit: contain;
+    object-position: center center;
+  }
+}
+
+
+/* Homepage hero photo no-crop override v1.3 */
+.industrial-hero-media {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 1rem !important;
+  background:
+    radial-gradient(circle at 30% 75%, rgba(0, 217, 255, 0.14), transparent 18rem),
+    #0b1119 !important;
+}
+
+.industrial-hero-media img {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  max-height: 560px !important;
+  aspect-ratio: auto !important;
+  object-fit: contain !important;
+  object-position: center center !important;
+  border-radius: 12px !important;
+  background: #0b1119 !important;
+}
+
+@media (max-width: 1060px) {
+  .industrial-hero-media {
+    justify-self: center !important;
+  }
+}
+
+@media (max-width: 460px) {
+  .industrial-hero-media {
+    padding: 0.75rem !important;
+  }
+
+  .industrial-hero-media img {
+    max-height: none !important;
   }
 }
