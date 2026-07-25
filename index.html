@@ -3,73 +3,99 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Plasma cutting calculator and practical CNC plasma-cutting articles.">
-  <title>Plasma Cut Lab | Cutting Calculator</title>
+  <meta name="description" content="CNC plasma cutting calculator, cut charts, troubleshooting guides, and practical shop-floor resources.">
+  <title>Plasma Cut Forge | CNC Plasma Tools & Guides</title>
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
   <meta name="theme-color" content="#070b14">
-  <link rel="stylesheet" href="styles.css?v=18.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20.0">
   <script src="cut-chart-data.js?v=4.1" defer></script>
   <script src="supabase-config.js?v=5.0" defer></script>
   <script src="app.js?v=5.1" defer></script>
 </head>
 <body>
-  <header class="site-header">
-    <a class="brand" href="#top" aria-label="Plasma Cut Lab home">
-      <span class="brand-mark" aria-hidden="true">P</span>
-      <span>
-        <strong>Plasma Cut Lab</strong>
-        <small>Settings, testing, and practical guides</small>
-      </span>
+  <header class="site-header industrial-header">
+    <a class="brand industrial-brand" href="#top" aria-label="Plasma Cut Forge home">
+      <span class="brand-wordmark">PLASMA<span>CUT</span>FORGE</span>
+      <small>CNC plasma tools &amp; shop-floor guides</small>
     </a>
 
-    <nav aria-label="Primary navigation">
+    <nav class="industrial-nav" aria-label="Primary navigation">
+      <a class="active" href="#top">Home</a>
       <a href="#calculator">Calculator</a>
-      <a href="blog/">Blog</a>
-      <a href="community/">Community Q&amp;A</a>
+      <a href="blog/">Guides</a>
+      <a href="community/">Community</a>
       <a href="#articles">Articles</a>
       <a href="#about">About</a>
     </nav>
   </header>
 
   <main id="top">
-    <section class="hero">
-      <div class="hero-copy-block">
-        <p class="eyebrow">CNC plasma-cutting resources</p>
-        <h1>Find a practical starting point for your next cut.</h1>
-        <p class="hero-copy">
-          Select the material, thickness, machine capacity, and cutting priority.
-          The calculator reports feed rate in both unit systems, pierce delay,
-          gas pressure, cutting amperage, and a recommended starting cut voltage.
+    <section class="hero industrial-hero">
+      <div class="industrial-hero-copy">
+        <p class="industrial-kicker">CNC plasma cutting resources</p>
+
+        <h1>
+          Built for the
+          <span>plasma table.</span>
+        </h1>
+
+        <p class="industrial-hero-description">
+          Practical calculators, cut-chart guidance, troubleshooting articles,
+          and community knowledge. No filler—just useful information for better,
+          more repeatable plasma cuts.
         </p>
-        <a class="primary-link" href="#calculator">Open the calculator</a>
+
+        <div class="industrial-hero-actions">
+          <a class="industrial-button industrial-button-primary" href="#calculator">
+            Launch calculator
+          </a>
+          <a class="industrial-button" href="blog/">
+            View guides
+          </a>
+          <a class="industrial-button" href="community/">
+            Community Q&amp;A
+          </a>
+        </div>
       </div>
 
-      <div class="hero-visual">
-        <figure class="hero-image-card">
-          <img
-            src="plasma-torch-hero.png"
-            alt="Industrial CNC plasma torch head firing a bright plasma arc"
-            class="hero-image"
-          >
-        </figure>
-
-        <aside class="hero-card hero-output-card" aria-label="Calculator outputs">
-          <span>Calculator outputs</span>
-          <strong>Feed rate</strong>
-          <strong>Pierce delay</strong>
-          <strong>Gas pressure</strong>
-          <strong>Cutting amps</strong>
-          <strong>Cut voltage</strong>
-        </aside>
-      </div>
+      <figure class="industrial-hero-media">
+        <img
+          src="plasma-torch-hero.png"
+          alt="CNC plasma torch firing a bright blue plasma arc"
+        >
+        <figcaption>Cut charts • testing • troubleshooting</figcaption>
+      </figure>
     </section>
 
-    <section class="calculator-section" id="calculator">
-      <div class="section-heading">
+    <div class="industrial-category-strip" aria-label="Main resource categories">
+      <a href="#calculator">
+        <span>01</span>
+        Cut charts
+      </a>
+      <a href="blog/why-clean-dry-air-changes-consumable-life/">
+        <span>02</span>
+        Air systems
+      </a>
+      <a href="blog/how-to-build-a-machine-specific-cut-chart/">
+        <span>03</span>
+        Machine testing
+      </a>
+      <a href="community/">
+        <span>04</span>
+        Community
+      </a>
+    </div>
+
+    <section class="calculator-section"  id="calculator">
+      <div class="section-heading industrial-section-heading">
+        <p class="industrial-section-label">Technical core</p>
         <p class="eyebrow">Plasma cutting calculator</p>
         <h2>Calculate starting settings</h2>
         <p>
@@ -332,7 +358,7 @@
   </main>
 
   <footer>
-    <p>© <span id="current-year"></span> Plasma Cut Lab.</p>
+    <p>© <span id="current-year"></span> Plasma Cut Forge.</p>
     <p>Calculator version 0.5</p>
   </footer>
 </body>
