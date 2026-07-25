@@ -93,7 +93,7 @@
   async function sendLink(event) {
     event.preventDefault();
     setMessage(el.authMsg, "Sending sign-in link…");
-    const redirect = `${window.location.origin}/plasma-cutting-blog/community/`;
+    const redirect = `${window.location.origin}/community/`;
     const { error } = await db.auth.signInWithOtp({
       email: el.email.value.trim(),
       options: { emailRedirectTo: redirect }

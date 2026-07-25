@@ -1,7 +1,7 @@
-title: Plasma Cut Lab
-description: Plasma cutting calculators, cut charts, testing, and practical guides.
-url: "https://steelknightcnc-cmd.github.io"
-baseurl: "/plasma-cutting-blog"
+title: Plasma Cut Forge
+description: CNC plasma calculators, cut charts, testing, troubleshooting, and practical shop-floor guides.
+url: "https://plasmacutforge.com"
+baseurl: ""
 timezone: Europe/Vienna
 markdown: kramdown
 permalink: /blog/:title/
@@ -12,8 +12,9 @@ defaults:
       type: posts
     values:
       layout: post
-      author: Plasma Cut Lab
+      author: Plasma Cut Forge
 
 exclude:
   - README.md
+  - README_UPDATE.md
   - README_UPLOAD.md

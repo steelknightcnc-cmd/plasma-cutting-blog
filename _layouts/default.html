@@ -5,38 +5,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="{{ page.description | default: site.description | escape }}">
   <title>{% if page.title %}{{ page.title | escape }} | {% endif %}{{ site.title }}</title>
-  <link rel="icon" href="{{ '/favicon.ico' | relative_url }}" sizes="any">
-  <link rel="icon" type="image/png" sizes="32x32" href="{{ '/favicon-32x32.png' | relative_url }}">
-  <link rel="icon" type="image/png" sizes="16x16" href="{{ '/favicon-16x16.png' | relative_url }}">
-  <link rel="apple-touch-icon" sizes="180x180" href="{{ '/apple-touch-icon.png' | relative_url }}">
-  <link rel="manifest" href="{{ '/site.webmanifest' | relative_url }}">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
   <meta name="theme-color" content="#070b14">
-  <link rel="stylesheet" href="{{ '/styles.css?v=16.0' | relative_url }}">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=24.0">
 </head>
 <body class="{{ page.body_class | default: 'article-page' }}">
-  <header class="site-header">
-    <a class="brand" href="{{ '/#top' | relative_url }}" aria-label="Plasma Cut Lab home">
-      <span class="brand-mark" aria-hidden="true">P</span>
-      <span>
-        <strong>Plasma Cut Lab</strong>
-        <small>Settings, testing, and practical guides</small>
-      </span>
+  <header class="site-header industrial-header">
+    <a class="brand industrial-brand" href="/#top" aria-label="Plasma Cut Forge home">
+      <span class="brand-wordmark">PLASMA<span>CUT</span>FORGE</span>
+      <small>CNC plasma tools &amp; shop-floor guides</small>
     </a>
 
-    <nav aria-label="Primary navigation">
-      <a href="{{ '/#calculator' | relative_url }}">Calculator</a>
-      <a href="{{ '/blog/' | relative_url }}">Blog</a>
-      <a href="{{ '/community/' | relative_url }}">Community Q&amp;A</a>
-      <a href="{{ '/#articles' | relative_url }}">Articles</a>
-      <a href="{{ '/#about' | relative_url }}">About</a>
+    <nav class="industrial-nav" aria-label="Primary navigation">
+      <a href="/#top">Home</a>
+      <a href="/#calculator">Calculator</a>
+      <a class="{% if page.url contains '/blog' %}active{% endif %}" href="/blog/">Blog</a>
+      <a class="{% if page.url contains '/community' %}active{% endif %}" href="/community/">Community</a>
+      <a href="/#articles">Articles</a>
+      <a href="/#about">About</a>
     </nav>
   </header>
 
   {{ content }}
 
   <footer>
-    <p>© {{ site.time | date: '%Y' }} Plasma Cut Lab.</p>
-    <p><a href="{{ '/#calculator' | relative_url }}">Plasma cutting calculator</a></p>
+    <p>© {{ site.time | date: '%Y' }} Plasma Cut Forge.</p>
+    <p><a href="/#calculator">Plasma cutting calculator</a></p>
   </footer>
 </body>
 </html>
