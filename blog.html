@@ -22,7 +22,7 @@ permalink: /blog/
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=25.0">
+  <link rel="stylesheet" href="/styles.css?v=26.0">
 
   <style>
     /* Standalone fallback so the Blog never appears as a plain white page. */
@@ -341,6 +341,32 @@ permalink: /blog/
       {% endfor %}
     </section>
   </main>
+
+  <section class="support-forge" aria-labelledby="support-forge-title">
+    <div class="support-forge-copy">
+      <p class="support-forge-kicker">Support independent CNC resources</p>
+      <h2 id="support-forge-title">Help Keep Plasma Cut Forge Growing</h2>
+      <p>
+        Plasma Cut Forge is built to provide practical calculators, reliable
+        technical guides, testing methods, and troubleshooting resources for the
+        CNC plasma community. The site is continually researched, tested, and
+        updated. Your support helps cover website costs and makes it possible to
+        keep improving the tools and publishing useful, independent content.
+      </p>
+    </div>
+
+    <div class="support-forge-action">
+      <a
+        class="support-forge-button"
+        href="https://ko-fi.com/plasmacutforge"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Support the Forge
+      </a>
+      <small>Secure one-time support through Ko-fi</small>
+    </div>
+  </section>
 
   <footer>
     <p>© {{ site.time | date: "%Y" }} Plasma Cut Forge.</p>
