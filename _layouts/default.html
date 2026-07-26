@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=32.0">
+  <link rel="stylesheet" href="/styles.css?v=33.0">
 </head>
 <body class="{{ page.body_class | default: 'article-page' }}">
   <header class="site-header industrial-header">
@@ -64,9 +64,21 @@
     </div>
   </section>
 
-  <footer>
-    <p>© {{ site.time | date: '%Y' }} Plasma Cut Forge.</p>
-    <p><a href="/#calculator">Plasma cutting calculator</a></p>
-  </footer>
+  <footer class="site-footer">
+  <div class="site-footer-primary">
+    <p>© {{ site.time | date: "%Y" }} Plasma Cut Forge.</p>
+    <p class="site-footer-warning">
+      Calculator values are starting recommendations—not guaranteed machine settings.
+    </p>
+  </div>
+
+  <nav class="site-footer-links" aria-label="Legal and contact links">
+    <a href="/contact.html">Contact</a>
+    <a href="/privacy-policy.html">Privacy Policy</a>
+    <a href="/website-disclaimer.html">Website Disclaimer</a>
+    <a href="/terms-of-use.html">Terms of Use</a>
+    <a href="/affiliate-disclosure.html">Affiliate Disclosure</a>
+  </nav>
+</footer>
 </body>
 </html>

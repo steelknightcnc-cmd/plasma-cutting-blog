@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta
+    name="description"
+    content="Contact Plasma Cut Forge about the calculator, guides, community, technical corrections, partnerships, or privacy requests."
+  >
+  <title>Contact | Plasma Cut Forge</title>
+
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#070b14">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap"
+  rel="stylesheet"
+>
+<link rel="stylesheet" href="/styles.css?v=33.0">
+  <script src="/supabase-config.js?v=5.0" defer></script>
+  <script src="/contact.js?v=1.0" defer></script>
+</head>
+
+<body class="contact-page">
+  <header class="site-header industrial-header">
+    <a class="brand industrial-brand" href="/#top" aria-label="Plasma Cut Forge home">
+      <span class="brand-wordmark">PLASMA<span>CUT</span>FORGE</span>
+      <small>CNC plasma tools &amp; shop-floor guides</small>
+    </a>
+
+<nav class="industrial-nav" aria-label="Primary navigation">
+  <a href="/#top">Home</a>
+  <a href="/#calculator">Calculator</a>
+  <a href="/guides/">Guides</a>
+  <a href="/blog/">Blog</a>
+  <a href="/community/">Community</a>
+  <a href="/#articles">Articles</a>
+  <a href="/about-the-builder.html">About</a>
+</nav>
+  </header>
+
+  <main class="contact-main">
+    <section class="contact-hero">
+      <div>
+        <p class="industrial-kicker">Get in touch</p>
+        <h1>Contact Plasma Cut Forge</h1>
+        <p>
+          Send a message about technical corrections, calculator feedback,
+          community questions, partnership inquiries, privacy requests, or
+          another site-related matter.
+        </p>
+      </div>
+
+      <aside class="contact-response-card">
+        <p>Before sending</p>
+        <strong>Include the machine model</strong>
+        <strong>Describe the material and thickness</strong>
+        <strong>Include the exact page or tool</strong>
+        <strong>Do not send passwords or payment information</strong>
+      </aside>
+    </section>
+
+    <section class="contact-shell" aria-labelledby="contact-form-title">
+      <div class="contact-intro">
+        <p class="eyebrow">Private contact form</p>
+        <h2 id="contact-form-title">Send a Message</h2>
+        <p>
+          Messages are stored privately for review and are not displayed
+          publicly. Required fields are marked with an asterisk.
+        </p>
+      </div>
+
+      <form class="contact-form" id="contact-form">
+        <div class="contact-form-grid">
+          <label>
+            <span>Name <strong aria-hidden="true">*</strong></span>
+            <input
+              name="name"
+              type="text"
+              maxlength="120"
+              autocomplete="name"
+              required
+            >
+          </label>
+
+          <label>
+            <span>Email address <strong aria-hidden="true">*</strong></span>
+            <input
+              name="email"
+              type="email"
+              maxlength="254"
+              autocomplete="email"
+              required
+            >
+          </label>
+
+          <label>
+            <span>Topic <strong aria-hidden="true">*</strong></span>
+            <select name="topic" required>
+              <option value="">Choose a topic</option>
+              <option value="calculator">Calculator feedback</option>
+              <option value="technical-correction">Technical correction</option>
+              <option value="guide">Guide or article</option>
+              <option value="community">Community question</option>
+              <option value="machine-profile">Machine-profile request follow-up</option>
+              <option value="privacy">Privacy or data request</option>
+              <option value="partnership">Partnership or product inquiry</option>
+              <option value="other">Other</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Related reference number</span>
+            <input
+              name="related_reference"
+              type="text"
+              maxlength="60"
+              placeholder="Example: PCF-20260726-1NRYXJEZ"
+            >
+          </label>
+
+          <label class="contact-wide">
+            <span>Subject <strong aria-hidden="true">*</strong></span>
+            <input
+              name="subject"
+              type="text"
+              maxlength="180"
+              required
+            >
+          </label>
+
+          <label class="contact-wide">
+            <span>Message <strong aria-hidden="true">*</strong></span>
+            <textarea
+              id="contact-message-input"
+              name="message"
+              rows="8"
+              minlength="10"
+              maxlength="4000"
+              required
+            ></textarea>
+            <small><span id="contact-message-count">0</span> / 4000 characters</small>
+          </label>
+        </div>
+
+        <div class="contact-honeypot" aria-hidden="true">
+          <label>
+            Leave this field empty
+            <input name="website" type="text" tabindex="-1" autocomplete="off">
+          </label>
+        </div>
+
+        <label class="contact-consent">
+          <input name="privacy_consent" type="checkbox" required>
+          <span>
+            I have read the <a href="/privacy-policy.html">Privacy Policy</a>
+            and consent to the processing of this message so Plasma Cut Forge
+            can review and respond to it. <strong aria-hidden="true">*</strong>
+          </span>
+        </label>
+
+        <div class="contact-submit-row">
+          <button id="contact-submit" type="submit">Send Message</button>
+          <p id="contact-form-message" aria-live="polite"></p>
+        </div>
+      </form>
+    </section>
+
+    <section class="contact-success" id="contact-success" hidden>
+      <p class="eyebrow">Message received</p>
+      <h2>Thank You</h2>
+      <p>
+        Your message has been added to the private review queue. Save this
+        reference number:
+      </p>
+      <strong id="contact-reference">—</strong>
+    </section>
+
+    <aside class="contact-safety-note">
+      <strong>Urgent safety issues</strong>
+      <p>
+        Do not rely on this contact form for emergencies or immediate machine
+        safety decisions. Stop the equipment, isolate hazardous energy, and
+        consult the machine manufacturer or a qualified local professional.
+      </p>
+    </aside>
+  </main>
+
+<section class="support-forge" aria-labelledby="support-forge-title">
+  <div class="support-forge-copy">
+    <p class="support-forge-kicker">Support independent CNC resources</p>
+    <h2 id="support-forge-title">Help Keep Plasma Cut Forge Growing</h2>
+    <p>
+      Plasma Cut Forge is built to provide practical calculators, reliable
+      technical guides, testing methods, and troubleshooting resources for the
+      CNC plasma community. The site is continually researched, tested, and
+      updated. Your support helps cover website costs and makes it possible to
+      keep improving the tools and publishing useful, independent content.
+    </p>
+  </div>
+
+  <div class="support-forge-action">
+    <a
+      class="support-forge-button"
+      href="https://ko-fi.com/plasmacutforge"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Support the Forge
+    </a>
+    <small>Secure one-time support through Ko-fi</small>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="site-footer-primary">
+    <p>© 2026 Plasma Cut Forge.</p>
+    <p class="site-footer-warning">
+      Calculator values are starting recommendations—not guaranteed machine settings.
+    </p>
+  </div>
+
+  <nav class="site-footer-links" aria-label="Legal and contact links">
+    <a href="/contact.html">Contact</a>
+    <a href="/privacy-policy.html">Privacy Policy</a>
+    <a href="/website-disclaimer.html">Website Disclaimer</a>
+    <a href="/terms-of-use.html">Terms of Use</a>
+    <a href="/affiliate-disclosure.html">Affiliate Disclosure</a>
+  </nav>
+</footer>
+</body>
+</html>
