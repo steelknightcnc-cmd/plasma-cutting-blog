@@ -24,10 +24,10 @@ permalink: /search-index.json
     {
       "type": "guide",
       "title": "Cut Quality Troubleshooter",
-      "description": "Diagnose low-speed dross, high-speed dross, top spatter, bevel, rough cuts, kerf problems, poor holes, incomplete cuts, and rapid consumable wear.",
+      "description": "Use a four-step CNC plasma diagnostic wizard to record the cut setup, rank likely causes, and print a controlled corrective-action plan.",
       "url": "/cut-quality-troubleshooter.html",
       "category": "Diagnostic tool",
-      "keywords": "cut quality dross bevel rough cut kerf holes top spatter consumables troubleshooting diagnose"
+      "keywords": "cut quality dross bevel rough cut kerf holes top spatter consumables troubleshooting diagnose wizard corrective action plan print thc speed pressure cut height"
     },
     {
       "type": "guide",
