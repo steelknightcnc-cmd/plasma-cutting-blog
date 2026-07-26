@@ -27,6 +27,11 @@ const resultStatus = document.querySelector("#result-status");
 const resultMessage = document.querySelector("#result-message");
 const resultGrid = document.querySelector("#result-grid");
 const resultDetails = document.querySelector("#result-details");
+const cutCardActions = document.querySelector("#cut-card-actions");
+const cutCardActionMessage = document.querySelector("#cut-card-action-message");
+const printCutCardButton = document.querySelector("#print-cut-card");
+const downloadCutCardButton = document.querySelector("#download-cut-card");
+const copyCutResultsButton = document.querySelector("#copy-cut-results");
 
 document.querySelector("#current-year").textContent = new Date().getFullYear();
 
@@ -115,6 +120,15 @@ function setStatus(label, type = "") {
 function clearResult() {
   resultGrid.hidden = true;
   resultDetails.hidden = true;
+
+  if (cutCardActions) {
+    cutCardActions.hidden = true;
+  }
+
+  if (cutCardActionMessage) {
+    cutCardActionMessage.textContent = "";
+    cutCardActionMessage.className = "cut-card-action-message";
+  }
 }
 
 function interpolate(x, x1, x2, y1, y2) {
@@ -301,6 +315,15 @@ function renderResult(record, values, profile) {
   resultGrid.hidden = false;
   resultDetails.hidden = false;
 
+  if (cutCardActions) {
+    cutCardActions.hidden = false;
+  }
+
+  if (cutCardActionMessage) {
+    cutCardActionMessage.textContent = "";
+    cutCardActionMessage.className = "cut-card-action-message";
+  }
+
   if (record.interpolated && record.referenceOnly) {
     setStatus("Interpolated reference", "success");
   } else if (record.interpolated) {
@@ -391,6 +414,531 @@ machineProfileSelect.addEventListener("change", () =>
 );
 
 
+
+
+function readResultText(selector, fallback = "—") {
+  const value = document.querySelector(selector)?.textContent?.trim();
+  return value || fallback;
+}
+
+function getCutCardData() {
+  if (resultGrid.hidden || resultDetails.hidden) {
+    return null;
+  }
+
+  const selectedMachine =
+    machineProfileSelect.options[machineProfileSelect.selectedIndex]?.textContent?.trim() ||
+    "Selected plasma profile";
+
+  return {
+    generatedAt: new Intl.DateTimeFormat("en-US", {
+      dateStyle: "medium",
+      timeStyle: "short"
+    }).format(new Date()),
+    machineProfile: selectedMachine,
+    machineMaximumAmps: `${machineAmpsInput.value || "—"} A`,
+    material: readResultText("#result-material"),
+    thickness: readResultText("#result-thickness"),
+    priority: readResultText("#result-priority"),
+    feedRateMetric: readResultText("#feed-mm"),
+    feedRateImperial: readResultText("#feed-ipm"),
+    pierceDelay: readResultText("#pierce-delay"),
+    gasPressurePrimary: readResultText("#gas-bar"),
+    gasPressureSecondary: readResultText("#gas-psi"),
+    cuttingCurrent: readResultText("#cutting-amps"),
+    recommendedVoltage: readResultText("#cut-voltage"),
+    voltageNote: readResultText("#cut-voltage-note"),
+    dataSource: readResultText("#result-source"),
+    resultStatus: readResultText("#result-status")
+  };
+}
+
+function escapeCutCardHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function createCutCardFilename(data, extension) {
+  const material = data.material
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+
+  const thickness = data.thickness
+    .split("/")[0]
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, "")
+    .replace(/[^a-z0-9.-]+/g, "-");
+
+  const amps = data.cuttingCurrent
+    .toLowerCase()
+    .replace(/\s+/g, "")
+    .replace(/[^a-z0-9.-]+/g, "");
+
+  return `plasma-cut-forge-${material || "cut"}-${thickness || "settings"}-${amps || "amps"}.${extension}`;
+}
+
+function buildCutCardDocument(data, autoPrint = false) {
+  const printScript = autoPrint
+    ? `<script>
+        window.addEventListener("load", () => {
+          setTimeout(() => window.print(), 300);
+        });
+      <\/script>`
+    : "";
+
+  return `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Plasma Cut Forge Cut Card</title>
+  <style>
+    :root {
+      --ink: #111827;
+      --muted: #5f6b7a;
+      --line: #cbd5e1;
+      --panel: #f7fafc;
+      --accent: #0089b5;
+      --accent-dark: #005c7a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #edf2f7;
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.45;
+    }
+
+    .sheet {
+      width: min(920px, calc(100% - 32px));
+      margin: 24px auto;
+      padding: 32px;
+      border: 1px solid var(--line);
+      border-top: 8px solid var(--accent);
+      background: #fff;
+      box-shadow: 0 20px 60px rgba(15, 23, 42, 0.12);
+    }
+
+    .header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .brand {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .brand span {
+      color: var(--accent);
+    }
+
+    h1 {
+      margin: 8px 0 0;
+      font-size: clamp(30px, 6vw, 52px);
+      line-height: 0.95;
+      text-transform: uppercase;
+    }
+
+    .generated {
+      min-width: 210px;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: right;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .item {
+      min-width: 0;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+
+    .item.featured {
+      border-color: var(--accent);
+      background: #eefbff;
+    }
+
+    .label {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .value {
+      display: block;
+      overflow-wrap: anywhere;
+      font-size: 19px;
+      font-weight: 800;
+    }
+
+    .subvalue {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .source,
+    .warning,
+    .notes {
+      margin-top: 18px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .source p,
+    .warning p {
+      margin: 5px 0 0;
+    }
+
+    .warning {
+      border-left: 5px solid #d97706;
+      background: #fffaf0;
+    }
+
+    .notes {
+      display: grid;
+      gap: 14px;
+    }
+
+    .note-line {
+      min-height: 34px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #94a3b8;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      margin-top: 24px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    @page {
+      size: auto;
+      margin: 0.45in;
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .sheet {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        border-right: 0;
+        border-bottom: 0;
+        border-left: 0;
+        box-shadow: none;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .header,
+      .footer {
+        flex-direction: column;
+      }
+
+      .generated {
+        text-align: left;
+      }
+
+      .summary {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="sheet">
+    <header class="header">
+      <div>
+        <p class="brand">PLASMA<span>CUT</span>FORGE</p>
+        <h1>CNC Plasma Cut Card</h1>
+      </div>
+      <div class="generated">
+        <strong>Generated</strong><br>
+        ${escapeCutCardHtml(data.generatedAt)}
+      </div>
+    </header>
+
+    <section class="summary">
+      <div class="item">
+        <span class="label">Machine profile</span>
+        <span class="value">${escapeCutCardHtml(data.machineProfile)}</span>
+        <span class="subvalue">Machine maximum: ${escapeCutCardHtml(data.machineMaximumAmps)}</span>
+      </div>
+
+      <div class="item">
+        <span class="label">Material and thickness</span>
+        <span class="value">${escapeCutCardHtml(data.material)}</span>
+        <span class="subvalue">${escapeCutCardHtml(data.thickness)}</span>
+      </div>
+
+      <div class="item featured">
+        <span class="label">Feed rate</span>
+        <span class="value">${escapeCutCardHtml(data.feedRateMetric)}</span>
+        <span class="subvalue">${escapeCutCardHtml(data.feedRateImperial)}</span>
+      </div>
+
+      <div class="item">
+        <span class="label">Pierce delay</span>
+        <span class="value">${escapeCutCardHtml(data.pierceDelay)}</span>
+      </div>
+
+      <div class="item">
+        <span class="label">Gas pressure</span>
+        <span class="value">${escapeCutCardHtml(data.gasPressurePrimary)}</span>
+        <span class="subvalue">${escapeCutCardHtml(data.gasPressureSecondary)}</span>
+      </div>
+
+      <div class="item">
+        <span class="label">Cutting current</span>
+        <span class="value">${escapeCutCardHtml(data.cuttingCurrent)}</span>
+      </div>
+
+      <div class="item featured">
+        <span class="label">Recommended cut voltage</span>
+        <span class="value">${escapeCutCardHtml(data.recommendedVoltage)}</span>
+        <span class="subvalue">${escapeCutCardHtml(data.voltageNote)}</span>
+      </div>
+
+      <div class="item">
+        <span class="label">Cutting priority</span>
+        <span class="value">${escapeCutCardHtml(data.priority)}</span>
+        <span class="subvalue">${escapeCutCardHtml(data.resultStatus)}</span>
+      </div>
+    </section>
+
+    <section class="source">
+      <strong>Data source</strong>
+      <p>${escapeCutCardHtml(data.dataSource)}</p>
+    </section>
+
+    <section class="warning">
+      <strong>Starting recommendation—not a guaranteed final setting</strong>
+      <p>
+        Confirm these values with the plasma-source manual and a controlled test
+        coupon. Actual results vary with torch height, air quality, consumables,
+        table motion, material condition, work-lead connection, and machine setup.
+      </p>
+    </section>
+
+    <section class="notes">
+      <strong>Shop-floor test notes</strong>
+      <div class="note-line">Actual tested feed rate:</div>
+      <div class="note-line">Actual stable cut voltage:</div>
+      <div class="note-line">Measured kerf:</div>
+      <div class="note-line">Consumable condition / air-system notes:</div>
+      <div class="note-line">Dross, bevel, and cut-quality observations:</div>
+    </section>
+
+    <footer class="footer">
+      <span>PlasmaCutForge.com</span>
+      <span>Calculator results should always be verified through test cuts.</span>
+    </footer>
+  </main>
+  ${printScript}
+</body>
+</html>`;
+}
+
+function buildCutCardText(data) {
+  return [
+    "PLASMA CUT FORGE — CNC PLASMA CUT CARD",
+    "========================================",
+    `Generated: ${data.generatedAt}`,
+    "",
+    `Machine profile: ${data.machineProfile}`,
+    `Machine maximum amperage: ${data.machineMaximumAmps}`,
+    `Material: ${data.material}`,
+    `Thickness: ${data.thickness}`,
+    `Priority: ${data.priority}`,
+    "",
+    `Feed rate: ${data.feedRateMetric} (${data.feedRateImperial})`,
+    `Pierce delay: ${data.pierceDelay}`,
+    `Gas pressure: ${data.gasPressurePrimary} (${data.gasPressureSecondary})`,
+    `Cutting current: ${data.cuttingCurrent}`,
+    `Recommended cut voltage: ${data.recommendedVoltage}`,
+    `Voltage note: ${data.voltageNote}`,
+    `Chart status: ${data.resultStatus}`,
+    "",
+    `Data source: ${data.dataSource}`,
+    "",
+    "IMPORTANT:",
+    "These are starting recommendations. Confirm them with the plasma-source",
+    "manual and a controlled test coupon before production cutting.",
+    "",
+    "Shop-floor test notes:",
+    "Actual tested feed rate: ______________________________",
+    "Actual stable cut voltage: _____________________________",
+    "Measured kerf: ________________________________________",
+    "Consumable / air notes: ________________________________",
+    "Dross / bevel observations: ____________________________",
+    "",
+    "https://plasmacutforge.com"
+  ].join("\n");
+}
+
+function setCutCardActionMessage(text, type = "") {
+  if (!cutCardActionMessage) return;
+
+  cutCardActionMessage.textContent = text;
+  cutCardActionMessage.className =
+    `cut-card-action-message ${type}`.trim();
+}
+
+function printCurrentCutCard() {
+  const data = getCutCardData();
+
+  if (!data) {
+    setCutCardActionMessage(
+      "Calculate a valid set of results before printing.",
+      "warning"
+    );
+    return;
+  }
+
+  const printWindow = window.open("", "_blank", "width=1000,height=820");
+
+  if (!printWindow) {
+    setCutCardActionMessage(
+      "Your browser blocked the print window. Allow pop-ups for this site and try again.",
+      "warning"
+    );
+    return;
+  }
+
+  printWindow.opener = null;
+  printWindow.document.open();
+  printWindow.document.write(buildCutCardDocument(data, true));
+  printWindow.document.close();
+
+  setCutCardActionMessage(
+    "The printable cut card opened in a new window.",
+    "success"
+  );
+}
+
+function downloadCurrentCutCard() {
+  const data = getCutCardData();
+
+  if (!data) {
+    setCutCardActionMessage(
+      "Calculate a valid set of results before downloading.",
+      "warning"
+    );
+    return;
+  }
+
+  const documentText = buildCutCardDocument(data, false);
+  const blob = new Blob([documentText], {
+    type: "text/html;charset=utf-8"
+  });
+  const downloadUrl = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+
+  link.href = downloadUrl;
+  link.download = createCutCardFilename(data, "html");
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+
+  window.setTimeout(() => URL.revokeObjectURL(downloadUrl), 1000);
+
+  setCutCardActionMessage(
+    "Cut card downloaded. Open the HTML file to view or print it.",
+    "success"
+  );
+}
+
+async function copyCurrentCutResults() {
+  const data = getCutCardData();
+
+  if (!data) {
+    setCutCardActionMessage(
+      "Calculate a valid set of results before copying.",
+      "warning"
+    );
+    return;
+  }
+
+  const resultText = buildCutCardText(data);
+
+  try {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(resultText);
+    } else {
+      const temporaryField = document.createElement("textarea");
+      temporaryField.value = resultText;
+      temporaryField.setAttribute("readonly", "");
+      temporaryField.style.position = "fixed";
+      temporaryField.style.opacity = "0";
+      document.body.appendChild(temporaryField);
+      temporaryField.select();
+
+      const copied = document.execCommand("copy");
+      temporaryField.remove();
+
+      if (!copied) {
+        throw new Error("Clipboard fallback failed.");
+      }
+    }
+
+    setCutCardActionMessage(
+      "Calculator results copied to your clipboard.",
+      "success"
+    );
+  } catch (error) {
+    console.error(error);
+    setCutCardActionMessage(
+      "The browser could not copy the results. Use Print Settings or Download Cut Card instead.",
+      "warning"
+    );
+  }
+}
+
+printCutCardButton?.addEventListener("click", printCurrentCutCard);
+downloadCutCardButton?.addEventListener("click", downloadCurrentCutCard);
+copyCutResultsButton?.addEventListener("click", copyCurrentCutResults);
 
 function installHelpfulnessVote() {
   const resultCard = document.querySelector(".result-card");

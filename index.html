@@ -14,10 +14,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=28.0">
+  <link rel="stylesheet" href="styles.css?v=30.0">
   <script src="cut-chart-data.js?v=4.1" defer></script>
   <script src="supabase-config.js?v=5.0" defer></script>
-  <script src="app.js?v=5.1" defer></script>
+  <script src="app.js?v=5.2" defer></script>
 </head>
 <body>
   <header class="site-header industrial-header">
@@ -260,6 +260,36 @@
               <dd id="result-source">—</dd>
             </div>
           </dl>
+
+          <section
+            class="cut-card-actions"
+            id="cut-card-actions"
+            aria-labelledby="cut-card-actions-title"
+            hidden
+          >
+            <div class="cut-card-actions-copy">
+              <p class="eyebrow">Save your settings</p>
+              <h4 id="cut-card-actions-title">Print or download this cut card</h4>
+              <p>
+                Keep a shop-floor copy of the recommended starting values, then
+                record your tested settings and notes.
+              </p>
+            </div>
+
+            <div class="cut-card-action-buttons">
+              <button type="button" class="cut-card-button primary" id="print-cut-card">
+                Print Settings
+              </button>
+              <button type="button" class="cut-card-button" id="download-cut-card">
+                Download Cut Card
+              </button>
+              <button type="button" class="cut-card-button" id="copy-cut-results">
+                Copy Results
+              </button>
+            </div>
+
+            <p class="cut-card-action-message" id="cut-card-action-message" aria-live="polite"></p>
+          </section>
 
           <div class="safety-warning">
             <strong>Important</strong>
