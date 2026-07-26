@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta
+    name="description"
+    content="Request a CNC plasma cutter machine profile for the Plasma Cut Forge calculator."
+  >
+  <title>Request a Machine Profile | Plasma Cut Forge</title>
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#070b14">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="/styles.css?v=31.0">
+
+  <script src="/supabase-config.js?v=5.0" defer></script>
+  <script src="/machine-profile-request.js?v=1.0" defer></script>
+</head>
+
+<body class="machine-request-page">
+  <header class="site-header industrial-header">
+    <a class="brand industrial-brand" href="/#top" aria-label="Plasma Cut Forge home">
+      <span class="brand-wordmark">PLASMA<span>CUT</span>FORGE</span>
+      <small>CNC plasma tools &amp; shop-floor guides</small>
+    </a>
+
+    <nav class="industrial-nav" aria-label="Primary navigation">
+      <a href="/#top">Home</a>
+      <a href="/#calculator">Calculator</a>
+      <a class="active" href="/guides/">Guides</a>
+      <a href="/blog/">Blog</a>
+      <a href="/community/">Community</a>
+      <a href="/#articles">Articles</a>
+      <a href="/#about">About</a>
+    </nav>
+  </header>
+
+  <main class="machine-request-main">
+    <section class="machine-request-hero">
+      <div>
+        <p class="industrial-kicker">Expand the calculator</p>
+        <h1>Request Your Plasma Cutter</h1>
+        <p>
+          Help Plasma Cut Forge decide which machine profiles to research next.
+          Submit the manufacturer, model, torch, amperage, and official
+          documentation for your plasma cutter.
+        </p>
+      </div>
+
+      <aside class="machine-request-priority">
+        <p>Requests are prioritized by</p>
+        <strong>Official documentation</strong>
+        <strong>Community demand</strong>
+        <strong>Complete cut charts</strong>
+        <strong>Data that can be verified</strong>
+      </aside>
+    </section>
+
+    <section class="machine-request-shell" aria-labelledby="request-form-title">
+      <div class="machine-request-intro">
+        <p class="eyebrow">Machine-profile request</p>
+        <h2 id="request-form-title">Tell us about your plasma cutter</h2>
+        <p>
+          Providing an official manual or mechanized cut-chart link gives the
+          request the best chance of being researched. A submission is a request
+          for review—not a guarantee that a profile will be added.
+        </p>
+      </div>
+
+      <form class="machine-request-form" id="machine-profile-request-form">
+        <div class="machine-request-grid">
+          <label>
+            <span>Manufacturer <strong aria-hidden="true">*</strong></span>
+            <input
+              id="request-manufacturer"
+              name="manufacturer"
+              type="text"
+              maxlength="100"
+              placeholder="Example: Hypertherm, ESAB, Stamos"
+              autocomplete="organization"
+              required
+            >
+          </label>
+
+          <label>
+            <span>Machine model <strong aria-hidden="true">*</strong></span>
+            <input
+              id="request-model"
+              name="model"
+              type="text"
+              maxlength="120"
+              placeholder="Example: Powermax85"
+              required
+            >
+          </label>
+
+          <label>
+            <span>Maximum output amperage <strong aria-hidden="true">*</strong></span>
+            <div class="machine-request-input-suffix">
+              <input
+                id="request-max-amps"
+                name="maximum_amps"
+                type="number"
+                min="10"
+                max="400"
+                step="1"
+                placeholder="85"
+                required
+              >
+              <span>A</span>
+            </div>
+          </label>
+
+          <label>
+            <span>Torch model</span>
+            <input
+              id="request-torch"
+              name="torch_model"
+              type="text"
+              maxlength="120"
+              placeholder="Example: Duramax mechanized torch"
+            >
+          </label>
+
+          <label>
+            <span>Process or gas type</span>
+            <select id="request-process" name="process_type">
+              <option value="compressed-air">Compressed air</option>
+              <option value="nitrogen">Nitrogen</option>
+              <option value="oxygen">Oxygen</option>
+              <option value="argon-hydrogen">Argon-hydrogen</option>
+              <option value="multi-gas">Multi-gas system</option>
+              <option value="unknown">Unknown</option>
+              <option value="other">Other</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Country or region</span>
+            <input
+              id="request-country"
+              name="country"
+              type="text"
+              maxlength="100"
+              placeholder="Example: United States, Austria"
+              autocomplete="country-name"
+            >
+          </label>
+
+          <label class="machine-request-wide">
+            <span>Official manual URL</span>
+            <input
+              id="request-manual-url"
+              name="manual_url"
+              type="url"
+              maxlength="600"
+              placeholder="https://manufacturer.com/manual.pdf"
+              inputmode="url"
+            >
+            <small>
+              Link directly to the manufacturer’s manual or official product
+              support page when possible.
+            </small>
+          </label>
+
+          <label class="machine-request-wide">
+            <span>Official mechanized cut-chart URL</span>
+            <input
+              id="request-chart-url"
+              name="cut_chart_url"
+              type="url"
+              maxlength="600"
+              placeholder="https://manufacturer.com/cut-chart.pdf"
+              inputmode="url"
+            >
+            <small>
+              A complete mechanized cut chart is the most useful supporting
+              information.
+            </small>
+          </label>
+
+          <label class="machine-request-wide">
+            <span>Additional details</span>
+            <textarea
+              id="request-notes"
+              name="notes"
+              rows="6"
+              maxlength="2500"
+              placeholder="Tell us which materials and thicknesses you cut, whether the machine has CNC connections, pressure control, divided arc voltage, or anything else that would help verify the profile."
+            ></textarea>
+            <small><span id="request-notes-count">0</span> / 2500 characters</small>
+          </label>
+
+          <label>
+            <span>Your name</span>
+            <input
+              id="request-name"
+              name="requester_name"
+              type="text"
+              maxlength="120"
+              autocomplete="name"
+              placeholder="Optional"
+            >
+          </label>
+
+          <label>
+            <span>Email address <strong aria-hidden="true">*</strong></span>
+            <input
+              id="request-email"
+              name="email"
+              type="email"
+              maxlength="254"
+              autocomplete="email"
+              placeholder="name@example.com"
+              required
+            >
+            <small>
+              Used only if clarification is needed. It will not be displayed
+              publicly.
+            </small>
+          </label>
+        </div>
+
+        <div class="machine-request-honeypot" aria-hidden="true">
+          <label>
+            Leave this field empty
+            <input name="website" type="text" tabindex="-1" autocomplete="off">
+          </label>
+        </div>
+
+        <label class="machine-request-consent">
+          <input id="request-consent" name="consent" type="checkbox" required>
+          <span>
+            I confirm that the information is accurate to the best of my
+            knowledge, and I allow Plasma Cut Forge to contact me about this
+            request. <strong aria-hidden="true">*</strong>
+          </span>
+        </label>
+
+        <div class="machine-request-submit-row">
+          <button class="machine-request-submit" id="machine-request-submit" type="submit">
+            Submit Machine Request
+          </button>
+
+          <p
+            class="machine-request-message"
+            id="machine-request-message"
+            aria-live="polite"
+          ></p>
+        </div>
+      </form>
+    </section>
+
+    <section class="machine-request-success" id="machine-request-success" hidden>
+      <p class="eyebrow">Request received</p>
+      <h2>Thank you for helping expand Plasma Cut Forge</h2>
+      <p>
+        Your request has been added to the private review queue. Save this
+        reference number:
+      </p>
+      <strong id="machine-request-reference">—</strong>
+      <div>
+        <a href="/#calculator">Return to the calculator</a>
+        <a href="/guides/">Browse Guides</a>
+      </div>
+    </section>
+
+    <aside class="machine-request-review-note">
+      <strong>How requests are reviewed</strong>
+      <p>
+        Plasma Cut Forge does not publish estimated manufacturer data as factory
+        settings. Profiles are researched from official documentation and clearly
+        labeled when they use reference information from another process.
+      </p>
+    </aside>
+  </main>
+
+  <section class="support-forge" aria-labelledby="support-forge-title">
+    <div class="support-forge-copy">
+      <p class="support-forge-kicker">Support independent CNC resources</p>
+      <h2 id="support-forge-title">Help Keep Plasma Cut Forge Growing</h2>
+      <p>
+        Plasma Cut Forge is built to provide practical calculators, reliable
+        technical guides, testing methods, and troubleshooting resources for the
+        CNC plasma community. The site is continually researched, tested, and
+        updated. Your support helps cover website costs and makes it possible to
+        keep improving the tools and publishing useful, independent content.
+      </p>
+    </div>
+
+    <div class="support-forge-action">
+      <a
+        class="support-forge-button"
+        href="https://ko-fi.com/plasmacutforge"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Support the Forge
+      </a>
+      <small>Secure one-time support through Ko-fi</small>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Plasma Cut Forge.</p>
+    <p><a href="/#calculator">Plasma cutting calculator</a></p>
+  </footer>
+</body>
+</html>
