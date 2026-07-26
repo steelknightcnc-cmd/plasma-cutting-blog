@@ -5427,8 +5427,10 @@ footer > * {
 @media print{body.quality-wizard-page{background:#fff!important;color:#000!important}.industrial-header,.quality-hero,.quality-disclaimer,.quality-wizard-shell,.quality-results-header,.quality-copy-message,.quality-method,.support-forge,.site-footer{display:none!important}.quality-main,.quality-results,.quality-plan{width:100%!important;max-width:none!important;margin:0!important;padding:0!important;border:0!important;background:#fff!important;color:#000!important}.quality-results{display:block!important}.quality-plan *{color:#000!important;box-shadow:none!important}.quality-plan-header,.quality-job-snapshot dl>div,.quality-priority-plan li,.quality-cause-card,.quality-test-log-grid>div,.quality-safety{border-color:#777!important;background:#fff!important;break-inside:avoid}.quality-priority-plan li::before{border:1px solid #000;background:#fff!important}.quality-plan-badge,.quality-confidence-badge{border-color:#000!important;background:#fff!important}.quality-cause-list{display:block!important}.quality-cause-card{margin-bottom:.65rem}.quality-job-snapshot dl{grid-template-columns:repeat(3,1fr)}@page{size:auto;margin:13mm}}
 
 
+
+
 /* ============================================================
-   Plasma Cut Forge — Ko-fi Membership Integration v1.0
+   Plasma Cut Forge — Ko-fi Membership Slide Tab v1.1
    ============================================================ */
 
 .membership-nav-button {
@@ -5456,22 +5458,70 @@ footer > * {
 }
 
 .kofi-membership-widget {
+  --membership-panel-width: 340px;
   position: fixed;
-  right: 20px;
-  bottom: 20px;
+  right: 0;
+  top: 50%;
   z-index: 120;
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  width: min(330px, calc(100vw - 40px));
+  grid-template-columns: 46px var(--membership-panel-width);
+  align-items: stretch;
+  width: calc(46px + var(--membership-panel-width));
+  transform: translateY(-50%);
+  transition: transform 280ms ease;
+  filter: drop-shadow(0 24px 54px rgba(0, 0, 0, 0.42));
+}
+
+.kofi-membership-widget.is-collapsed {
+  transform:
+    translateY(-50%)
+    translateX(var(--membership-panel-width));
+}
+
+.kofi-membership-tab {
+  display: grid;
+  min-width: 46px;
+  width: 46px;
+  min-height: 168px;
+  place-items: center;
+  padding: 0.6rem 0;
+  border: 1px solid rgba(0, 217, 255, 0.58);
+  border-right: 0;
+  border-radius: 12px 0 0 12px;
+  background:
+    linear-gradient(180deg, rgba(0, 217, 255, 0.18), rgba(8, 18, 29, 0.98));
+  color: var(--accent);
+  cursor: pointer;
+}
+
+.kofi-membership-tab span {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.kofi-membership-tab:hover,
+.kofi-membership-tab:focus-visible {
+  background: linear-gradient(180deg, var(--accent), #008dff);
+  color: #031017;
+  outline: none;
+}
+
+.kofi-membership-panel {
+  display: grid;
+  width: var(--membership-panel-width);
   padding: 1rem;
   border: 1px solid rgba(0, 217, 255, 0.42);
-  border-radius: 15px;
+  border-right: 0;
+  border-radius: 15px 0 0 15px;
   background:
     radial-gradient(circle at 100% 0%, rgba(0, 217, 255, 0.14), transparent 15rem),
     rgba(8, 15, 24, 0.97);
-  box-shadow:
-    0 24px 70px rgba(0, 0, 0, 0.45),
-    0 0 0 1px rgba(255, 255, 255, 0.025);
   backdrop-filter: blur(14px);
 }
 
@@ -5566,42 +5616,50 @@ footer > * {
 }
 
 @media (max-width: 700px) {
-  body {
-    padding-bottom: 88px;
+  .kofi-membership-widget {
+    --membership-panel-width: min(300px, calc(100vw - 54px));
+    top: auto;
+    bottom: 14px;
+    grid-template-columns: 44px var(--membership-panel-width);
+    width: calc(44px + var(--membership-panel-width));
+    transform: none;
   }
 
-  .kofi-membership-widget {
-    right: 10px;
-    bottom: 10px;
-    left: 10px;
-    grid-template-columns: minmax(0, 1fr) auto;
-    width: auto;
-    padding: 0.7rem;
-    border-radius: 12px;
+  .kofi-membership-widget.is-collapsed {
+    transform: translateX(var(--membership-panel-width));
+  }
+
+  .kofi-membership-tab {
+    width: 44px;
+    min-width: 44px;
+    min-height: 136px;
+  }
+
+  .kofi-membership-panel {
+    width: var(--membership-panel-width);
+    padding: 0.8rem;
   }
 
   .kofi-membership-widget-copy > strong {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
   }
 
-  .kofi-membership-widget-copy > small {
-    margin-top: 0.2rem;
-    font-size: 0.7rem;
-  }
-
-  .kofi-membership-widget-copy > p,
-  .kofi-membership-secondary,
-  .kofi-membership-eyebrow {
-    display: none !important;
+  .kofi-membership-widget-copy > p {
+    font-size: 0.75rem;
   }
 
   .kofi-membership-widget-actions {
-    display: block;
-    margin: 0;
+    grid-template-columns: 1fr;
   }
 
-  .kofi-membership-primary {
-    min-width: 135px;
+  .kofi-membership-secondary {
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kofi-membership-widget {
+    transition: none;
   }
 }
 
@@ -5609,9 +5667,5 @@ footer > * {
   .membership-nav-button,
   .kofi-membership-widget {
     display: none !important;
-  }
-
-  body {
-    padding-bottom: 0 !important;
   }
 }
