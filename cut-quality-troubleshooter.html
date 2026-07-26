@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta
+    name="description"
+    content="Interactive CNC plasma cut-quality troubleshooter for dross, bevel, rough edges, kerf problems, holes, incomplete cuts, and consumable wear."
+  >
+  <title>Cut Quality Troubleshooter | Plasma Cut Forge</title>
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#070b14">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="/styles.css?v=27.0">
+  <script src="/cut-quality-troubleshooter.js?v=1.0" defer></script>
+</head>
+
+<body class="cut-quality-page">
+  <header class="site-header industrial-header">
+    <a class="brand industrial-brand" href="/#top" aria-label="Plasma Cut Forge home">
+      <span class="brand-wordmark">PLASMA<span>CUT</span>FORGE</span>
+      <small>CNC plasma tools &amp; shop-floor guides</small>
+    </a>
+
+    <nav class="industrial-nav" aria-label="Primary navigation">
+      <a href="/#top">Home</a>
+      <a href="/#calculator">Calculator</a>
+      <a class="active" href="/cut-quality-troubleshooter.html">Cut Quality</a>
+      <a href="/blog/">Blog</a>
+      <a href="/community/">Community</a>
+      <a href="/#articles">Articles</a>
+      <a href="/#about">About</a>
+    </nav>
+  </header>
+
+  <main class="quality-main">
+    <section class="quality-hero">
+      <div>
+        <p class="industrial-kicker">Interactive diagnostic tool</p>
+        <h1>Diagnose Your Plasma Cut</h1>
+        <p>
+          Select the defect you see and add a few details about how it appears.
+          The troubleshooter will rank the most likely causes and give you a
+          controlled inspection order so you can change one variable at a time.
+        </p>
+      </div>
+
+      <aside class="quality-hero-note">
+        <span>Use this tool for</span>
+        <strong>Dross</strong>
+        <strong>Bevel</strong>
+        <strong>Kerf problems</strong>
+        <strong>Rough edges</strong>
+        <strong>Poor holes</strong>
+      </aside>
+    </section>
+
+    <section class="quality-tool-shell" aria-labelledby="quality-tool-title">
+      <div class="quality-tool-heading">
+        <p class="eyebrow">Step-by-step diagnosis</p>
+        <h2 id="quality-tool-title">What problem do you see?</h2>
+        <p>
+          Choose the closest match. You can run the tool again for a second
+          symptom if the cut has more than one defect.
+        </p>
+      </div>
+
+      <form class="quality-form" id="quality-form">
+        <fieldset class="quality-fieldset">
+          <legend>1. Select the main defect</legend>
+
+          <div class="symptom-grid">
+            <label class="symptom-option">
+              <input type="radio" name="symptom" value="low-speed-dross" required>
+              <span>
+                <strong>Large bubbly bottom dross</strong>
+                <small>Thick, rounded buildup that is often easier to remove</small>
+              </span>
+            </label>
+
+            <label class="symptom-option">
+              <input type="radio" name="symptom" value="high-speed-dross">
+              <span>
+                <strong>Small hard bottom bead</strong>
+                <small>Thin, tightly bonded dross that is difficult to remove</small>
+              </span>
+            </label>
+
+            <label class="symptom-option">
+              <input type="radio" name="symptom" value="top-spatter">
+              <span>
+                <strong>Top spatter</strong>
+                <small>Re-solidified metal sprayed along the top edge</small>
+              </span>
+            </label>
+
+            <label class="symptom-option">
+              <input type="radio" name="symptom" value="positive-bevel">
+              <span>
+                <strong>Positive bevel</strong>
+                <small>Top of the cut is wider than the bottom</small>
+              </span>
+            </label>
+
+            <label class="symptom-option">
+              <input type="radio" name="symptom" value="negative-bevel">
+              <span>
+                <strong>Negative bevel</strong>
+                <small>Bottom of the cut is wider than the top</small>
+              </span>
+            </label>
+
+            <label class="symptom-option">
+              <input type="radio" name="symptom" value="directional-bevel">
+              <span>
+                <strong>Bevel on one side or direction</strong>
+                <small>One machine direction is consistently worse</small>
+              </span>
+            </label>
+
+            <label class="symptom-option">
+              <input type="radio" name="symptom" value="incomplete-cut">
+              <span>
+                <strong>Incomplete cut</strong>
+                <small>The part does not fully separate</small>
+              </span>
+            </label>
+
+            <label class="symptom-option">
+              <input type="radio" name="symptom" value="poor-holes">
+              <span>
+                <strong>Poor holes</strong>
+                <small>Out-of-round, tapered, or damaged lead-in area</small>
+              </span>
+            </label>
+
+            <label class="symptom-option">
+              <input type="radio" name="symptom" value="rough-cut">
+              <span>
+                <strong>Rough or inconsistent cut face</strong>
+                <small>Heavy striations, chatter, or changing edge finish</small>
+              </span>
+            </label>
+
+            <label class="symptom-option">
+              <input type="radio" name="symptom" value="wide-kerf">
+              <span>
+                <strong>Kerf too wide</strong>
+                <small>Cut removes more material than expected</small>
+              </span>
+            </label>
+
+            <label class="symptom-option">
+              <input type="radio" name="symptom" value="narrow-kerf">
+              <span>
+                <strong>Kerf too narrow</strong>
+                <small>Cut is narrow with poor lower-edge clearing</small>
+              </span>
+            </label>
+
+            <label class="symptom-option">
+              <input type="radio" name="symptom" value="consumable-wear">
+              <span>
+                <strong>Consumables wearing too quickly</strong>
+                <small>Nozzle or electrode life is much shorter than expected</small>
+              </span>
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="quality-context-grid">
+          <label>
+            <span>2. Where does it happen?</span>
+            <select id="pattern" name="pattern">
+              <option value="everywhere">Everywhere on the part</option>
+              <option value="one-direction">Mostly on one side or machine direction</option>
+              <option value="corners-holes">Mostly in corners, holes, or short moves</option>
+              <option value="intermittent">Randomly or only in certain table areas</option>
+            </select>
+          </label>
+
+          <label>
+            <span>3. Consumable condition</span>
+            <select id="consumables" name="consumables">
+              <option value="unknown">Unknown or not recently inspected</option>
+              <option value="used">Used or visibly worn</option>
+              <option value="known-good">New or confirmed in good condition</option>
+            </select>
+          </label>
+
+          <label>
+            <span>4. Air quality and flow</span>
+            <select id="air" name="air">
+              <option value="unknown">Unknown or not checked under flow</option>
+              <option value="problem">Moisture, oil, pressure drop, or unstable flow</option>
+              <option value="known-good">Clean, dry, stable air confirmed under flow</option>
+            </select>
+          </label>
+        </div>
+
+        <button class="quality-submit" type="submit">
+          Diagnose Cut Quality
+        </button>
+
+        <p class="quality-form-message" id="quality-form-message" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section class="quality-results" id="quality-results" hidden aria-live="polite">
+      <header class="quality-results-header">
+        <div>
+          <p class="eyebrow">Priority diagnosis</p>
+          <h2 id="quality-result-title">Likely causes</h2>
+          <p id="quality-result-summary"></p>
+        </div>
+
+        <button class="quality-reset" id="quality-reset" type="button">
+          Start Over
+        </button>
+      </header>
+
+      <div class="quality-start-here">
+        <p class="quality-section-label">Start here</p>
+        <ol id="quality-check-sequence"></ol>
+      </div>
+
+      <div class="quality-cause-list" id="quality-cause-list"></div>
+
+      <aside class="quality-safety">
+        <strong>Important safety and setup note</strong>
+        <p>
+          Turn off and isolate the plasma system before removing or inspecting
+          consumables. Follow the plasma-source manual for pressure, amperage,
+          consumable selection, pierce height, cut height, and duty-cycle limits.
+          Change one variable at a time and confirm the result with a test coupon.
+        </p>
+      </aside>
+
+      <div class="quality-related-reading">
+        <p class="quality-section-label">Related Plasma Cut Forge guides</p>
+        <div>
+          <a href="/blog/how-to-choose-plasma-settings/">
+            Choosing plasma cutting settings
+          </a>
+          <a href="/blog/why-clean-dry-air-changes-consumable-life/">
+            Why clean, dry air changes consumable life
+          </a>
+          <a href="/blog/how-to-build-a-machine-specific-cut-chart/">
+            Build a machine-specific cut chart
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <section class="support-forge" aria-labelledby="support-forge-title">
+    <div class="support-forge-copy">
+      <p class="support-forge-kicker">Support independent CNC resources</p>
+      <h2 id="support-forge-title">Help Keep Plasma Cut Forge Growing</h2>
+      <p>
+        Plasma Cut Forge is built to provide practical calculators, reliable
+        technical guides, testing methods, and troubleshooting resources for the
+        CNC plasma community. The site is continually researched, tested, and
+        updated. Your support helps cover website costs and makes it possible to
+        keep improving the tools and publishing useful, independent content.
+      </p>
+    </div>
+
+    <div class="support-forge-action">
+      <a
+        class="support-forge-button"
+        href="https://ko-fi.com/plasmacutforge"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Support the Forge
+      </a>
+      <small>Secure one-time support through Ko-fi</small>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Plasma Cut Forge.</p>
+    <p><a href="/#calculator">Plasma cutting calculator</a></p>
+  </footer>
+</body>
+</html>
