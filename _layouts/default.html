@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=35.0">
+  <link rel="stylesheet" href="/styles.css?v=37.0">
 </head>
 <body class="{{ page.body_class | default: 'article-page' }}">
   <header class="site-header industrial-header">
@@ -33,6 +33,14 @@
       <a class="{% if page.url contains '/community' %}active{% endif %}" href="/community/">Community</a>
       <a href="/#articles">Articles</a>
       <a href="/about-the-builder.html">About</a>
+      <a
+      class="membership-nav-button"
+      href="https://ko-fi.com/plasmacutforge/tiers"
+      target="_blank"
+      rel="noopener noreferrer"
+      >
+      Membership
+      </a>
     </nav>
 
 <form class="global-search-form" action="/search.html" method="get" role="search">
@@ -78,6 +86,36 @@
       <small>Secure one-time support through Ko-fi</small>
     </div>
   </section>
+
+  <aside class="kofi-membership-widget" aria-label="Plasma Cut Forge membership">
+  <div class="kofi-membership-widget-copy">
+    <span class="kofi-membership-eyebrow">Ko-fi Membership</span>
+    <strong>Join the Forge</strong>
+    <small>Forge Supporter · $5/month</small>
+    <p>
+      Support new tools, machine profiles, technical articles, and project-build updates.
+    </p>
+  </div>
+
+  <div class="kofi-membership-widget-actions">
+    <a
+      class="kofi-membership-primary"
+      href="https://ko-fi.com/plasmacutforge/tiers"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Become a Member
+    </a>
+    <a
+      class="kofi-membership-secondary"
+      href="https://ko-fi.com/plasmacutforge"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      One-time support
+    </a>
+  </div>
+</aside>
 
   <footer class="site-footer">
   <div class="site-footer-primary">

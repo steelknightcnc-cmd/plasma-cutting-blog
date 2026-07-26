@@ -5425,3 +5425,193 @@ footer > * {
 @media(max-width:800px){.quality-disclaimer,.quality-wizard-header{display:grid;grid-template-columns:1fr;align-items:start}.quality-progress{width:100%}.quality-progress>span{text-align:left}.quality-step-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}.quality-input-grid{grid-template-columns:1fr}.quality-full-field{grid-column:auto}.quality-results-header{align-items:start;flex-direction:column}.quality-result-actions{justify-content:flex-start}}
 @media(max-width:560px){.quality-v2-symptom-grid,.quality-job-snapshot dl,.quality-test-log-grid{grid-template-columns:1fr}.quality-step-tabs{grid-template-columns:1fr}.quality-step-tabs button{border-right:0;border-bottom:1px solid var(--border)}.quality-wizard-controls,.quality-plan-header,.quality-plan-footer,.quality-cause-topline{align-items:stretch;flex-direction:column}.quality-wizard-controls,.quality-result-actions{display:grid}.quality-wizard-controls button,.quality-result-actions button{width:100%}.quality-plan-badge,.quality-confidence-badge{align-self:flex-start}}
 @media print{body.quality-wizard-page{background:#fff!important;color:#000!important}.industrial-header,.quality-hero,.quality-disclaimer,.quality-wizard-shell,.quality-results-header,.quality-copy-message,.quality-method,.support-forge,.site-footer{display:none!important}.quality-main,.quality-results,.quality-plan{width:100%!important;max-width:none!important;margin:0!important;padding:0!important;border:0!important;background:#fff!important;color:#000!important}.quality-results{display:block!important}.quality-plan *{color:#000!important;box-shadow:none!important}.quality-plan-header,.quality-job-snapshot dl>div,.quality-priority-plan li,.quality-cause-card,.quality-test-log-grid>div,.quality-safety{border-color:#777!important;background:#fff!important;break-inside:avoid}.quality-priority-plan li::before{border:1px solid #000;background:#fff!important}.quality-plan-badge,.quality-confidence-badge{border-color:#000!important;background:#fff!important}.quality-cause-list{display:block!important}.quality-cause-card{margin-bottom:.65rem}.quality-job-snapshot dl{grid-template-columns:repeat(3,1fr)}@page{size:auto;margin:13mm}}
+
+
+/* ============================================================
+   Plasma Cut Forge — Ko-fi Membership Integration v1.0
+   ============================================================ */
+
+.membership-nav-button {
+  display: inline-grid;
+  min-height: 38px;
+  place-items: center;
+  padding: 0.45rem 0.78rem !important;
+  border: 1px solid rgba(0, 217, 255, 0.72) !important;
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(0, 217, 255, 0.16), rgba(0, 141, 255, 0.08));
+  color: var(--accent) !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.membership-nav-button:hover,
+.membership-nav-button:focus-visible {
+  border-color: var(--accent) !important;
+  background: linear-gradient(135deg, var(--accent), #008dff);
+  color: #031017 !important;
+  box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.12);
+}
+
+.kofi-membership-widget {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 120;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  width: min(330px, calc(100vw - 40px));
+  padding: 1rem;
+  border: 1px solid rgba(0, 217, 255, 0.42);
+  border-radius: 15px;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(0, 217, 255, 0.14), transparent 15rem),
+    rgba(8, 15, 24, 0.97);
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(255, 255, 255, 0.025);
+  backdrop-filter: blur(14px);
+}
+
+.kofi-membership-widget-copy {
+  min-width: 0;
+}
+
+.kofi-membership-eyebrow {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: var(--accent);
+  font-size: 0.67rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.kofi-membership-widget-copy > strong {
+  display: block;
+  color: var(--text);
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-size: 1.85rem;
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.kofi-membership-widget-copy > small {
+  display: block;
+  margin-top: 0.3rem;
+  color: #d7e4f5;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.kofi-membership-widget-copy > p {
+  margin: 0.65rem 0 0;
+  color: var(--muted);
+  font-size: 0.79rem;
+  line-height: 1.5;
+}
+
+.kofi-membership-widget-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+}
+
+.kofi-membership-widget-actions a {
+  display: inline-grid;
+  min-height: 43px;
+  place-items: center;
+  padding: 0.55rem 0.65rem;
+  border-radius: 8px;
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.kofi-membership-primary {
+  border: 1px solid var(--accent);
+  background: linear-gradient(135deg, var(--accent), #008dff);
+  color: #031017;
+}
+
+.kofi-membership-primary:hover,
+.kofi-membership-primary:focus-visible {
+  filter: brightness(1.08);
+}
+
+.kofi-membership-secondary {
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.025);
+  color: var(--text);
+}
+
+.kofi-membership-secondary:hover,
+.kofi-membership-secondary:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+@media (max-width: 1320px) {
+  .industrial-nav .membership-nav-button {
+    flex: 0 0 auto;
+  }
+}
+
+@media (max-width: 700px) {
+  body {
+    padding-bottom: 88px;
+  }
+
+  .kofi-membership-widget {
+    right: 10px;
+    bottom: 10px;
+    left: 10px;
+    grid-template-columns: minmax(0, 1fr) auto;
+    width: auto;
+    padding: 0.7rem;
+    border-radius: 12px;
+  }
+
+  .kofi-membership-widget-copy > strong {
+    font-size: 1.4rem;
+  }
+
+  .kofi-membership-widget-copy > small {
+    margin-top: 0.2rem;
+    font-size: 0.7rem;
+  }
+
+  .kofi-membership-widget-copy > p,
+  .kofi-membership-secondary,
+  .kofi-membership-eyebrow {
+    display: none !important;
+  }
+
+  .kofi-membership-widget-actions {
+    display: block;
+    margin: 0;
+  }
+
+  .kofi-membership-primary {
+    min-width: 135px;
+  }
+}
+
+@media print {
+  .membership-nav-button,
+  .kofi-membership-widget {
+    display: none !important;
+  }
+
+  body {
+    padding-bottom: 0 !important;
+  }
+}

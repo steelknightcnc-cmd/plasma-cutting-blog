@@ -7,6 +7,14 @@ permalink: /search-index.json
   "items": [
     {
       "type": "guide",
+      "title": "Forge Supporter Membership",
+      "description": "Join Plasma Cut Forge on Ko-fi for project-build updates, early access to major tools, and voting on future guides and machine profiles.",
+      "url": "https://ko-fi.com/plasmacutforge/tiers",
+      "category": "Membership",
+      "keywords": "membership forge supporter ko-fi five dollars monthly project build updates early access vote guides machine profiles support"
+    },
+    {
+      "type": "guide",
       "title": "Plasma Cut Forge Email Updates",
       "description": "Subscribe to meaningful updates about calculator features, new machine profiles, newly published articles, and project-build progress.",
       "url": "/email-updates.html",
