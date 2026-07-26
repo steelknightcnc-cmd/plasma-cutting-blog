@@ -5,6 +5,14 @@ permalink: /search-index.json
 {
   "generated_at": {{ site.time | date_to_xmlschema | jsonify }},
   "items": [
+{
+  "type": "guide",
+  "title": "Air Compressor Sizing for Plasma Cutters",
+  "description": "Calculate SCFM margin and approximate tank reserve, then check duty cycle, hose loss, dynamic pressure, and moisture control.",
+  "url": "/air-compressor-sizing-plasma-cutters.html",
+  "category": "Air system guide and calculator",
+  "keywords": "air compressor plasma cutter scfm cfm psi receiver tank gallons runtime duty cycle hose pressure drop regulator clean dry oil free air moisture filter calculator"
+},
     {
       "type": "guide",
       "title": "Forge Supporter Membership",

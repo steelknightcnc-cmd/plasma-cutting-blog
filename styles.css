@@ -5669,3 +5669,355 @@ footer > * {
     display: none !important;
   }
 }
+
+/* Plasma Cut Forge — Air Compressor Guide v1.0 */
+
+.compressor-guide-page {
+  background: radial-gradient(circle at 78% 0%, rgba(0,217,255,.09), transparent 34rem), var(--industrial-black,#080b10);
+}
+
+.compressor-guide-main {
+  width: min(var(--max-width), 90vw);
+  margin-inline: auto;
+}
+
+.compressor-guide-hero {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) minmax(280px,.38fr);
+  gap: clamp(2rem,6vw,6rem);
+  align-items: center;
+  padding: clamp(4.5rem,8vw,7rem) 0 4rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.compressor-guide-hero h1 {
+  margin: 0 0 1rem;
+  font-family: "Barlow Condensed","Arial Narrow",sans-serif;
+  font-size: clamp(4rem,8vw,7rem);
+  font-weight: 900;
+  line-height: .84;
+  text-transform: uppercase;
+}
+
+.compressor-guide-hero > div > p {
+  max-width: 900px;
+  color: var(--muted);
+  font-size: 1.06rem;
+  line-height: 1.75;
+}
+
+.compressor-hero-actions,
+.compressor-next-tools > div:last-child {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .7rem;
+  margin-top: 1.2rem;
+}
+
+.compressor-hero-actions a,
+.compressor-next-tools a,
+.compressor-related-link {
+  display: inline-grid;
+  min-height: 48px;
+  place-items: center;
+  padding: .65rem .9rem;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  color: var(--accent);
+  font-family: "Barlow Condensed","Arial Narrow",sans-serif;
+  font-weight: 900;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.compressor-hero-actions a:first-child,
+.compressor-next-tools a:first-child {
+  background: linear-gradient(135deg,var(--accent),#008dff);
+  color: #031017;
+}
+
+.compressor-fast-answer {
+  display: grid;
+  gap: .3rem;
+  padding: 1.3rem;
+  border: 1px solid rgba(0,217,255,.3);
+  border-radius: 15px;
+  background: rgba(13,22,34,.96);
+}
+
+.compressor-fast-answer span {
+  color: var(--accent);
+  font-size: .7rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.compressor-fast-answer strong {
+  padding: .45rem 0;
+  border-bottom: 1px solid var(--border);
+  font-family: "Barlow Condensed","Arial Narrow",sans-serif;
+  font-size: 1.15rem;
+  text-transform: uppercase;
+}
+
+.compressor-warning {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  align-items: center;
+  margin: 2rem 0;
+  padding: 1rem;
+  border: 1px solid rgba(245,158,11,.4);
+  border-left-width: 4px;
+  border-radius: 10px;
+  background: rgba(245,158,11,.055);
+}
+
+.compressor-warning strong { color: var(--warning); }
+.compressor-warning p { margin: 0; color: var(--muted); }
+
+.compressor-guide-section,
+.compressor-calculator {
+  margin: 4rem 0 0;
+}
+
+.compressor-guide-section h2,
+.compressor-calculator h2,
+.compressor-next-tools h2 {
+  margin: .1rem 0 1rem;
+  font-family: "Barlow Condensed","Arial Narrow",sans-serif;
+  font-size: clamp(2.6rem,5vw,4.6rem);
+  line-height: .92;
+  text-transform: uppercase;
+}
+
+.compressor-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.compressor-guide-table {
+  width: 100%;
+  min-width: 700px;
+  border-collapse: collapse;
+}
+
+.compressor-guide-table th,
+.compressor-guide-table td {
+  padding: .85rem;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+
+.compressor-guide-table th {
+  background: rgba(0,217,255,.065);
+  color: var(--accent);
+  font-size: .72rem;
+  text-transform: uppercase;
+}
+
+.compressor-calculator {
+  padding: clamp(1.2rem,4vw,2.4rem);
+  border: 1px solid rgba(0,217,255,.3);
+  border-radius: 18px;
+  background: rgba(13,22,34,.97);
+}
+
+.compressor-input-grid {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: .9rem;
+}
+
+.compressor-input-grid label {
+  display: grid;
+  gap: .4rem;
+}
+
+.compressor-input-grid input,
+.compressor-input-grid select {
+  width: 100%;
+  min-height: 52px;
+  padding: .7rem .8rem;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.compressor-number-unit {
+  display: grid;
+  grid-template-columns: 1fr auto;
+}
+
+.compressor-number-unit input { border-radius: 9px 0 0 9px; }
+
+.compressor-number-unit small {
+  display: grid;
+  min-width: 70px;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-left: 0;
+  border-radius: 0 9px 9px 0;
+  color: var(--accent);
+  font-weight: 900;
+}
+
+.compressor-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .7rem;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.compressor-form-actions button,
+.compressor-print-checklist {
+  min-height: 50px;
+  padding: .65rem .9rem;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  background: linear-gradient(135deg,var(--accent),#008dff);
+  color: #031017;
+  font-family: "Barlow Condensed","Arial Narrow",sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.compressor-form-actions button:nth-child(2) {
+  background: rgba(255,255,255,.025);
+  color: var(--text);
+  border-color: var(--border);
+}
+
+.compressor-results {
+  margin-top: 1.4rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--border);
+}
+
+.compressor-results[hidden] { display: none; }
+
+.compressor-result-summary > span {
+  display: inline-flex;
+  padding: .35rem .55rem;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font-size: .7rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.compressor-status-good { color: var(--success); }
+.compressor-status-warning { color: var(--warning); }
+.compressor-status-danger { color: var(--danger); }
+
+.compressor-result-metrics {
+  display: grid;
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  gap: .7rem;
+  margin-top: 1rem;
+}
+
+.compressor-result-metrics article,
+.compressor-two-column article,
+.compressor-check-grid article {
+  padding: .85rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: rgba(255,255,255,.02);
+}
+
+.compressor-result-metrics span,
+.compressor-result-metrics small {
+  display: block;
+  color: var(--muted);
+  font-size: .7rem;
+}
+
+.compressor-result-metrics strong {
+  display: block;
+  margin: .35rem 0;
+  font-family: "Barlow Condensed","Arial Narrow",sans-serif;
+  font-size: 1.7rem;
+}
+
+.compressor-two-column,
+.compressor-check-grid,
+.compressor-buying-checklist {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: .8rem;
+}
+
+.compressor-buying-checklist label {
+  display: flex;
+  gap: .65rem;
+  align-items: start;
+  padding: .75rem;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: rgba(255,255,255,.02);
+}
+
+.compressor-buying-checklist input {
+  width: 19px;
+  height: 19px;
+  accent-color: var(--accent);
+}
+
+.compressor-print-checklist { margin-top: .9rem; }
+
+.compressor-faq details {
+  margin-bottom: .6rem;
+  padding: .9rem;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: rgba(255,255,255,.02);
+}
+
+.compressor-faq summary {
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.compressor-next-tools {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2rem;
+  align-items: center;
+  margin: 4rem 0 5rem;
+  padding: 1.3rem;
+  border: 1px solid rgba(0,217,255,.28);
+  border-radius: 14px;
+  background: rgba(0,217,255,.045);
+}
+
+@media (max-width: 900px) {
+  .compressor-guide-hero,
+  .compressor-next-tools { grid-template-columns: 1fr; }
+
+  .compressor-result-metrics { grid-template-columns: repeat(2,1fr); }
+}
+
+@media (max-width: 700px) {
+  .compressor-warning,
+  .compressor-input-grid,
+  .compressor-two-column,
+  .compressor-check-grid,
+  .compressor-buying-checklist { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 520px) {
+  .compressor-result-metrics { grid-template-columns: 1fr; }
+}
+
+@media print {
+  .industrial-header,
+  .compressor-hero-actions,
+  .compressor-form-actions,
+  .kofi-membership-widget,
+  .site-footer { display: none !important; }
+}
