@@ -14,10 +14,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=33.0">
+  <link rel="stylesheet" href="styles.css?v=34.0">
   <script src="cut-chart-data.js?v=4.1" defer></script>
   <script src="supabase-config.js?v=5.0" defer></script>
-  <script src="app.js?v=5.2" defer></script>
+  <script src="app.js?v=5.3" defer></script>
 </head>
 <body>
   <header class="site-header industrial-header">
@@ -35,6 +35,21 @@
       <a href="#articles">Articles</a>
       <a href="about-the-builder.html">About</a>
     </nav>
+
+<form class="global-search-form" action="/search.html" method="get" role="search">
+  <label class="sr-only" for="global-search-input">Search Plasma Cut Forge</label>
+  <input
+    id="global-search-input"
+    data-global-search-input
+    name="q"
+    type="search"
+    maxlength="100"
+    placeholder="Search the Forge"
+    autocomplete="off"
+    required
+  >
+  <button type="submit" aria-label="Search Plasma Cut Forge">Search</button>
+</form>
   </header>
 
   <main id="top">

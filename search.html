@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta
+    name="description"
+    content="Search Plasma Cut Forge articles, guides, machine profiles, and public CNC plasma Community discussions."
+  >
+  <title>Search | Plasma Cut Forge</title>
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#070b14">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="/styles.css?v=34.0">
+
+  <script src="/cut-chart-data.js?v=4.1" defer></script>
+  <script src="/supabase-config.js?v=5.0" defer></script>
+  <script src="/search.js?v=1.0" defer></script>
+</head>
+
+<body class="global-search-page">
+  <header class="site-header industrial-header">
+    <a class="brand industrial-brand" href="/#top" aria-label="Plasma Cut Forge home">
+      <span class="brand-wordmark">PLASMA<span>CUT</span>FORGE</span>
+      <small>CNC plasma tools &amp; shop-floor guides</small>
+    </a>
+
+    <nav class="industrial-nav" aria-label="Primary navigation">
+      <a href="/#top">Home</a>
+      <a href="/#calculator">Calculator</a>
+      <a href="/guides/">Guides</a>
+      <a href="/blog/">Blog</a>
+      <a href="/community/">Community</a>
+      <a href="/#articles">Articles</a>
+      <a href="/about-the-builder.html">About</a>
+    </nav>
+
+<form class="global-search-form" action="/search.html" method="get" role="search">
+  <label class="sr-only" for="global-search-input">Search Plasma Cut Forge</label>
+  <input
+    id="global-search-input"
+    data-global-search-input
+    name="q"
+    type="search"
+    maxlength="100"
+    placeholder="Search the Forge"
+    autocomplete="off"
+    required
+  >
+  <button type="submit" aria-label="Search Plasma Cut Forge">Search</button>
+</form>
+  </header>
+
+  <main class="global-search-main">
+    <section class="global-search-hero">
+      <p class="industrial-kicker">Search the entire Forge</p>
+      <h1>Articles, Guides, Machines, and Discussions</h1>
+      <p>
+        One search covers published technical content, practical guide tools,
+        calculator machine profiles, and public Community questions.
+      </p>
+    </section>
+
+    <section class="search-results-shell" aria-labelledby="search-results-title">
+      <div class="search-results-heading">
+        <div>
+          <p class="eyebrow">Search results</p>
+          <h2 id="search-results-title">Enter a Search Term</h2>
+        </div>
+        <p id="search-results-status" aria-live="polite">
+          Use the search box in the header to begin.
+        </p>
+      </div>
+
+      <div class="search-filter-row" role="group" aria-label="Filter search results">
+        <button class="search-filter active" type="button" data-search-filter="all">
+          All <span id="search-count-all">0</span>
+        </button>
+        <button class="search-filter" type="button" data-search-filter="article">
+          Articles <span id="search-count-article">0</span>
+        </button>
+        <button class="search-filter" type="button" data-search-filter="guide">
+          Guides <span id="search-count-guide">0</span>
+        </button>
+        <button class="search-filter" type="button" data-search-filter="machine">
+          Machine Profiles <span id="search-count-machine">0</span>
+        </button>
+        <button class="search-filter" type="button" data-search-filter="community">
+          Community <span id="search-count-community">0</span>
+        </button>
+      </div>
+
+      <div class="search-start-panel" id="search-start-panel">
+        <div class="search-coverage-grid">
+          <article>
+            <span>01</span>
+            <h3>Articles</h3>
+            <p>Published technical articles and future Blog posts.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Guides</h3>
+            <p>Calculator, diagnostics, testing resources, and guide tools.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Machine Profiles</h3>
+            <p>Available, reference-only, and upcoming calculator profiles.</p>
+          </article>
+          <article>
+            <span>04</span>
+            <h3>Community</h3>
+            <p>Public questions and discussions from CNC plasma users.</p>
+          </article>
+        </div>
+
+        <div class="search-example-row" aria-label="Example searches">
+          <span>Try:</span>
+          <a href="/search.html?q=dross">dross</a>
+          <a href="/search.html?q=Powermax">Powermax</a>
+          <a href="/search.html?q=cut+chart">cut chart</a>
+          <a href="/search.html?q=air+pressure">air pressure</a>
+        </div>
+      </div>
+
+      <div class="global-search-results" id="global-search-results"></div>
+
+      <div class="search-empty-panel" id="search-empty-panel" hidden>
+        <h3>No matching results</h3>
+        <p>
+          Try fewer words, check the spelling, or use a broader machine or
+          troubleshooting term.
+        </p>
+      </div>
+    </section>
+  </main>
+
+<section class="support-forge" aria-labelledby="support-forge-title">
+  <div class="support-forge-copy">
+    <p class="support-forge-kicker">Support independent CNC resources</p>
+    <h2 id="support-forge-title">Help Keep Plasma Cut Forge Growing</h2>
+    <p>
+      Plasma Cut Forge is built to provide practical calculators, reliable
+      technical guides, testing methods, and troubleshooting resources for the
+      CNC plasma community. The site is continually researched, tested, and
+      updated. Your support helps cover website costs and makes it possible to
+      keep improving the tools and publishing useful, independent content.
+    </p>
+  </div>
+
+  <div class="support-forge-action">
+    <a
+      class="support-forge-button"
+      href="https://ko-fi.com/plasmacutforge"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Support the Forge
+    </a>
+    <small>Secure one-time support through Ko-fi</small>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="site-footer-primary">
+    <p>© 2026 Plasma Cut Forge.</p>
+    <p class="site-footer-warning">
+      Calculator values are starting recommendations—not guaranteed machine settings.
+    </p>
+  </div>
+
+  <nav class="site-footer-links" aria-label="Legal and contact links">
+    <a href="/contact.html">Contact</a>
+    <a href="/privacy-policy.html">Privacy Policy</a>
+    <a href="/website-disclaimer.html">Website Disclaimer</a>
+    <a href="/terms-of-use.html">Terms of Use</a>
+    <a href="/affiliate-disclosure.html">Affiliate Disclosure</a>
+  </nav>
+</footer>
+</body>
+</html>

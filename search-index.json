@@ -1,0 +1,51 @@
+---
+layout: null
+permalink: /search-index.json
+---
+{
+  "generated_at": {{ site.time | date_to_xmlschema | jsonify }},
+  "items": [
+    {
+      "type": "guide",
+      "title": "Plasma Cutting Settings Calculator",
+      "description": "Calculate starting feed rate, pierce delay, gas pressure, cutting current, and recommended cut voltage. Print, download, or copy a shop-floor cut card.",
+      "url": "/#calculator",
+      "category": "Calculator",
+      "keywords": "calculator settings feed rate speed pierce delay gas pressure psi bar amperage amps current cut voltage thc material thickness printable cut card"
+    },
+    {
+      "type": "guide",
+      "title": "Cut Quality Troubleshooter",
+      "description": "Diagnose low-speed dross, high-speed dross, top spatter, bevel, rough cuts, kerf problems, poor holes, incomplete cuts, and rapid consumable wear.",
+      "url": "/cut-quality-troubleshooter.html",
+      "category": "Diagnostic tool",
+      "keywords": "cut quality dross bevel rough cut kerf holes top spatter consumables troubleshooting diagnose"
+    },
+    {
+      "type": "guide",
+      "title": "Plasma Cutting Guides Library",
+      "description": "Browse practical CNC plasma guides, testing methods, air-system information, cut-chart procedures, and troubleshooting resources.",
+      "url": "/guides/",
+      "category": "Guide library",
+      "keywords": "guides library how to technical testing calibration troubleshooting cnc plasma"
+    },
+    {
+      "type": "guide",
+      "title": "Request a Machine Profile",
+      "description": "Request research for a plasma-cutter model by submitting the manufacturer, machine model, torch, amperage, manual, and official cut-chart information.",
+      "url": "/machine-profile-request.html",
+      "category": "Machine research",
+      "keywords": "request machine profile manufacturer model torch manual cut chart submit plasma cutter"
+    }{% for post in site.posts %},
+    {
+      "type": {{ post.search_type | default: "article" | jsonify }},
+      "title": {{ post.title | jsonify }},
+      "description": {{ post.description | default: post.excerpt | strip_html | strip_newlines | jsonify }},
+      "url": {{ post.url | relative_url | jsonify }},
+      "category": {{ post.category | default: "Article" | jsonify }},
+      "date": {{ post.date | date_to_xmlschema | jsonify }},
+      "reading_time": {{ post.reading_time | default: "" | jsonify }},
+      "keywords": {{ post.content | strip_html | strip_newlines | truncate: 1400 | jsonify }}
+    }{% endfor %}
+  ]
+}

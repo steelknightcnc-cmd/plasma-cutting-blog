@@ -97,8 +97,25 @@ function populateMachineProfiles() {
     machineProfileSelect.appendChild(optgroup);
   }
 
-  machineProfileSelect.value = "stamos-s-plasma-85";
+  const requestedProfile = new URLSearchParams(window.location.search).get("profile");
+  const hasRequestedProfile = profiles.some(
+    (profile) => profile.id === requestedProfile
+  );
+
+  machineProfileSelect.value = hasRequestedProfile
+    ? requestedProfile
+    : "stamos-s-plasma-85";
+
   updateSelectedProfile(true);
+
+  if (hasRequestedProfile && window.location.hash === "#calculator") {
+    window.setTimeout(() => {
+      document.querySelector("#calculator")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }, 120);
+  }
 }
 
 function updateSelectedProfile(setDefaultAmps = false) {

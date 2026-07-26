@@ -19,7 +19,7 @@
   href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap"
   rel="stylesheet"
 >
-<link rel="stylesheet" href="/styles.css?v=33.0">
+<link rel="stylesheet" href="/styles.css?v=34.0">
 </head>
 
 <body class="legal-page disclaimer-page">
@@ -38,6 +38,21 @@
   <a href="/#articles">Articles</a>
   <a href="/about-the-builder.html">About</a>
 </nav>
+
+<form class="global-search-form" action="/search.html" method="get" role="search">
+  <label class="sr-only" for="global-search-input">Search Plasma Cut Forge</label>
+  <input
+    id="global-search-input"
+    data-global-search-input
+    name="q"
+    type="search"
+    maxlength="100"
+    placeholder="Search the Forge"
+    autocomplete="off"
+    required
+  >
+  <button type="submit" aria-label="Search Plasma Cut Forge">Search</button>
+</form>
   </header>
 
   <main class="legal-main">
