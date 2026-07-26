@@ -4873,3 +4873,531 @@ footer > * {
     gap: 0.35rem;
   }
 }
+
+
+/* ============================================================
+   Plasma Cut Forge — Confirmed Email Updates v1.0
+   ============================================================ */
+
+.email-updates-home {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.75fr) auto;
+  gap: clamp(1.2rem, 4vw, 3rem);
+  align-items: center;
+  width: min(var(--max-width), 90vw);
+  margin: 4rem auto;
+  padding: clamp(1.4rem, 4vw, 2.5rem);
+  border: 1px solid rgba(0, 217, 255, 0.28);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 95% 10%, rgba(0, 217, 255, 0.10), transparent 19rem),
+    linear-gradient(145deg, rgba(22, 34, 53, 0.98), rgba(8, 14, 22, 0.98));
+  box-shadow: 0 26px 75px rgba(0, 0, 0, 0.25);
+}
+
+.email-updates-home-copy h2 {
+  margin: 0.15rem 0 0.65rem;
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-size: clamp(2.4rem, 5vw, 4.5rem);
+  font-weight: 900;
+  line-height: 0.93;
+  text-transform: uppercase;
+}
+
+.email-updates-home-copy > p:last-child {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.email-updates-home-topics {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.email-updates-home-topics span {
+  padding: 0.45rem 0;
+  border-bottom: 1px solid var(--border);
+  color: #dbe6f6;
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+}
+
+.email-updates-home-button {
+  display: inline-grid;
+  min-width: 190px;
+  min-height: 54px;
+  place-items: center;
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--accent);
+  border-radius: 9px;
+  background: linear-gradient(135deg, var(--accent), #008dff);
+  color: #031017;
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-weight: 900;
+  letter-spacing: 0.055em;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.email-updates-page {
+  background:
+    radial-gradient(circle at 78% 0%, rgba(0, 217, 255, 0.10), transparent 34rem),
+    var(--industrial-black, #080b10);
+}
+
+.email-updates-main {
+  width: min(var(--max-width), 90vw);
+  margin-inline: auto;
+}
+
+.email-updates-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.42fr);
+  gap: clamp(2rem, 6vw, 6rem);
+  align-items: center;
+  min-height: 470px;
+  padding: clamp(4.5rem, 8vw, 7rem) 0 4rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.email-updates-hero h1,
+.email-updates-confirm-shell h1 {
+  max-width: 900px;
+  margin: 0 0 1rem;
+  color: var(--text);
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-size: clamp(4rem, 8vw, 7rem);
+  font-weight: 900;
+  letter-spacing: 0.005em;
+  line-height: 0.85;
+  text-transform: uppercase;
+}
+
+.email-updates-hero > div > p:last-child {
+  max-width: 850px;
+  color: var(--muted);
+  font-size: 1.06rem;
+  line-height: 1.75;
+}
+
+.email-updates-promise {
+  display: grid;
+  gap: 0.25rem;
+  padding: 1.4rem;
+  border: 1px solid rgba(0, 217, 255, 0.25);
+  border-radius: 15px;
+  background: linear-gradient(
+    145deg,
+    rgba(22, 34, 53, 0.96),
+    rgba(10, 16, 25, 0.96)
+  );
+}
+
+.email-updates-promise p {
+  margin: 0 0 0.55rem;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.email-updates-promise strong {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-size: 1.18rem;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+}
+
+.email-updates-promise strong:last-child {
+  border-bottom: 0;
+}
+
+.email-updates-shell,
+.email-updates-manage,
+.email-updates-confirm-shell {
+  margin: 4rem 0 0;
+  padding: clamp(1.4rem, 4vw, 2.7rem);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background:
+    radial-gradient(circle at 97% 3%, rgba(0, 217, 255, 0.07), transparent 22rem),
+    rgba(14, 22, 34, 0.97);
+}
+
+.email-updates-intro {
+  max-width: 850px;
+  margin-bottom: 2rem;
+}
+
+.email-updates-intro h2,
+.email-updates-manage h2 {
+  margin: 0.15rem 0 0.65rem;
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4.4rem);
+  font-weight: 900;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.email-updates-intro > p:last-child,
+.email-updates-manage > div > p:last-child {
+  color: var(--muted);
+}
+
+.email-updates-form {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.email-updates-email-field {
+  display: grid;
+  max-width: 680px;
+  gap: 0.45rem;
+}
+
+.email-updates-email-field > span,
+.email-updates-manage label > span {
+  color: var(--text);
+  font-weight: 850;
+}
+
+.email-updates-email-field strong,
+.email-updates-consent strong {
+  color: var(--warning);
+}
+
+.email-updates-email-field input,
+.email-updates-manage input {
+  width: 100%;
+  min-height: 54px;
+  padding: 0.75rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface-2);
+  color: var(--text);
+  outline: none;
+}
+
+.email-updates-email-field input:focus,
+.email-updates-manage input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.14);
+}
+
+.email-topic-fieldset {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+  padding: 0;
+  border: 0;
+}
+
+.email-topic-fieldset legend {
+  grid-column: span 2;
+  margin-bottom: 0.2rem;
+  color: var(--text);
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-size: 1.6rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.email-topic-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: start;
+  min-height: 150px;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.022);
+  cursor: pointer;
+  transition:
+    border-color 170ms ease,
+    background 170ms ease,
+    transform 170ms ease;
+}
+
+.email-topic-card:hover,
+.email-topic-card:focus-within,
+.email-topic-card:has(input:checked) {
+  border-color: rgba(0, 217, 255, 0.6);
+  background: rgba(0, 217, 255, 0.06);
+  transform: translateY(-2px);
+}
+
+.email-topic-card input {
+  width: 20px;
+  height: 20px;
+  margin-top: 0.18rem;
+  accent-color: var(--accent);
+}
+
+.email-topic-number {
+  color: rgba(0, 217, 255, 0.55);
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+
+.email-topic-card strong,
+.email-preferences-grid strong {
+  display: block;
+  color: var(--text);
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-size: 1.35rem;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+}
+
+.email-topic-card small,
+.email-preferences-grid small {
+  display: block;
+  margin-top: 0.35rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.email-updates-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  color: #dce7f7;
+  cursor: pointer;
+}
+
+.email-updates-consent input {
+  width: 20px;
+  height: 20px;
+  margin-top: 0.12rem;
+  accent-color: var(--accent);
+}
+
+.email-updates-consent a {
+  color: var(--accent);
+}
+
+.email-updates-submit-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.email-updates-submit-row button,
+.email-updates-manage button,
+.email-preferences-actions button {
+  min-height: 54px;
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--accent);
+  border-radius: 9px;
+  background: linear-gradient(135deg, var(--accent), #008dff);
+  color: #031017;
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-size: 0.96rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.email-updates-submit-row button:disabled,
+.email-updates-manage button:disabled,
+.email-preferences-actions button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+#email-updates-message,
+#email-updates-manage-message,
+#email-preferences-message {
+  min-height: 1.4rem;
+  margin: 0;
+  color: var(--muted);
+  font-weight: 750;
+}
+
+#email-updates-message.success,
+#email-updates-manage-message.success,
+#email-preferences-message.success {
+  color: var(--success);
+}
+
+#email-updates-message.error,
+#email-updates-manage-message.error,
+#email-preferences-message.error {
+  color: var(--danger);
+}
+
+.email-updates-manage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.85fr);
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: center;
+}
+
+.email-updates-manage form {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.email-updates-manage label {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.email-updates-delivery-note {
+  margin: 2rem 0 5rem;
+  padding: 1.1rem;
+  border-left: 4px solid var(--accent);
+  border-radius: 10px;
+  background: rgba(0, 217, 255, 0.055);
+}
+
+.email-updates-delivery-note strong {
+  color: var(--accent);
+}
+
+.email-updates-delivery-note p {
+  margin: 0.35rem 0 0;
+  color: var(--muted);
+}
+
+.email-updates-confirm-page .email-updates-main {
+  min-height: 68vh;
+}
+
+.email-updates-confirm-shell {
+  margin-bottom: 5rem;
+}
+
+.email-confirm-error[hidden],
+.email-preferences-panel[hidden] {
+  display: none;
+}
+
+.email-confirm-error > p:not(.eyebrow),
+.email-preferences-panel > p {
+  max-width: 780px;
+  color: var(--muted);
+}
+
+.email-confirm-error > a {
+  display: inline-flex;
+  margin-top: 1rem;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  color: var(--accent);
+  font-weight: 850;
+  text-decoration: none;
+}
+
+.email-preferences-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+
+.email-preferences-grid label {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.75rem;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.022);
+  cursor: pointer;
+}
+
+.email-preferences-grid label:has(input:checked) {
+  border-color: rgba(0, 217, 255, 0.6);
+  background: rgba(0, 217, 255, 0.06);
+}
+
+.email-preferences-grid input {
+  width: 20px;
+  height: 20px;
+  margin-top: 0.15rem;
+  accent-color: var(--accent);
+}
+
+.email-preferences-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  align-items: center;
+}
+
+#email-preferences-unsubscribe {
+  border-color: rgba(255, 107, 107, 0.5);
+  background: rgba(255, 107, 107, 0.07);
+  color: #ffb3b3;
+}
+
+.email-preferences-finish {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 1.5rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--border);
+}
+
+.email-preferences-finish a {
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+@media (max-width: 1050px) {
+  .email-updates-home,
+  .email-updates-hero,
+  .email-updates-manage {
+    grid-template-columns: 1fr;
+  }
+
+  .email-updates-home-button {
+    justify-self: start;
+  }
+
+  .email-updates-promise {
+    max-width: 600px;
+  }
+}
+
+@media (max-width: 720px) {
+  .email-topic-fieldset,
+  .email-preferences-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .email-topic-fieldset legend {
+    grid-column: auto;
+  }
+
+  .email-updates-submit-row,
+  .email-preferences-actions {
+    display: grid;
+  }
+
+  .email-updates-submit-row button,
+  .email-updates-manage button,
+  .email-preferences-actions button {
+    width: 100%;
+  }
+}

@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta
+    name="description"
+    content="Subscribe to meaningful Plasma Cut Forge updates about calculator features, machine profiles, articles, and project builds."
+  >
+  <title>Email Updates | Plasma Cut Forge</title>
+
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#070b14">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap"
+  rel="stylesheet"
+>
+<link rel="stylesheet" href="/styles.css?v=35.0">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/supabase-config.js?v=5.0" defer></script>
+  <script src="/email-updates.js?v=1.0" defer></script>
+</head>
+
+<body class="email-updates-page">
+  <header class="site-header industrial-header">
+    <a class="brand industrial-brand" href="/#top" aria-label="Plasma Cut Forge home">
+      <span class="brand-wordmark">PLASMA<span>CUT</span>FORGE</span>
+      <small>CNC plasma tools &amp; shop-floor guides</small>
+    </a>
+
+<nav class="industrial-nav" aria-label="Primary navigation">
+  <a href="/#top">Home</a>
+  <a href="/#calculator">Calculator</a>
+  <a href="/guides/">Guides</a>
+  <a href="/blog/">Blog</a>
+  <a href="/community/">Community</a>
+  <a href="/#articles">Articles</a>
+  <a href="/about-the-builder.html">About</a>
+</nav>
+
+<form class="global-search-form" action="/search.html" method="get" role="search">
+  <label class="sr-only" for="global-search-input">Search Plasma Cut Forge</label>
+  <input
+    id="global-search-input"
+    data-global-search-input
+    name="q"
+    type="search"
+    maxlength="100"
+    placeholder="Search the Forge"
+    autocomplete="off"
+    required
+  >
+  <button type="submit" aria-label="Search Plasma Cut Forge">Search</button>
+</form>
+  </header>
+
+  <main class="email-updates-main">
+    <section class="email-updates-hero">
+      <div>
+        <p class="industrial-kicker">Meaningful updates only</p>
+        <h1>Choose What Reaches Your Inbox</h1>
+        <p>
+          Subscribe only to the Plasma Cut Forge updates that matter to you.
+          No daily spam, no generic email blasts, and no automatic enrollment
+          in categories you did not select.
+        </p>
+      </div>
+
+      <aside class="email-updates-promise">
+        <p>The Plasma Cut Forge promise</p>
+        <strong>Only meaningful updates</strong>
+        <strong>You choose the categories</strong>
+        <strong>Confirmation required</strong>
+        <strong>Unsubscribe at any time</strong>
+      </aside>
+    </section>
+
+    <section class="email-updates-shell" aria-labelledby="email-updates-form-title">
+      <div class="email-updates-intro">
+        <p class="eyebrow">Email preference center</p>
+        <h2 id="email-updates-form-title">Select Your Updates</h2>
+        <p>
+          Choose at least one category. We will send a one-time confirmation link
+          to verify that you control the email address before the subscription
+          becomes active.
+        </p>
+      </div>
+
+      <form class="email-updates-form" id="email-updates-subscribe-form">
+        <label class="email-updates-email-field">
+          <span>Email address <strong aria-hidden="true">*</strong></span>
+          <input
+            id="email-updates-email"
+            name="email"
+            type="email"
+            maxlength="254"
+            autocomplete="email"
+            placeholder="name@example.com"
+            required
+          >
+        </label>
+
+        <fieldset class="email-topic-fieldset">
+          <legend>Which updates would you like?</legend>
+
+          <label class="email-topic-card">
+            <input name="topics" type="checkbox" value="calculator">
+            <span class="email-topic-number">01</span>
+            <span>
+              <strong>New Calculator Features</strong>
+              <small>
+                New calculation functions, printable tools, diagnostic features,
+                and major calculator improvements.
+              </small>
+            </span>
+          </label>
+
+          <label class="email-topic-card">
+            <input name="topics" type="checkbox" value="machines">
+            <span class="email-topic-number">02</span>
+            <span>
+              <strong>New Machine Profiles</strong>
+              <small>
+                Newly researched plasma-cutter profiles and major updates to
+                existing machine data.
+              </small>
+            </span>
+          </label>
+
+          <label class="email-topic-card">
+            <input name="topics" type="checkbox" value="articles">
+            <span class="email-topic-number">03</span>
+            <span>
+              <strong>New Articles</strong>
+              <small>
+                Important technical guides, troubleshooting articles, and
+                documented testing methods.
+              </small>
+            </span>
+          </label>
+
+          <label class="email-topic-card">
+            <input name="topics" type="checkbox" value="projects">
+            <span class="email-topic-number">04</span>
+            <span>
+              <strong>Project-Build Updates</strong>
+              <small>
+                Meaningful progress on CNC machine builds, fabrication work, and
+                engineering projects such as the Atlas Motion Controller.
+              </small>
+            </span>
+          </label>
+        </fieldset>
+
+        <label class="email-updates-consent">
+          <input name="consent" type="checkbox" required>
+          <span>
+            I consent to receiving the selected Plasma Cut Forge email updates.
+            I understand that I can change my preferences or unsubscribe at any
+            time. I have read the
+            <a href="/privacy-policy.html">Privacy Policy</a>.
+            <strong aria-hidden="true">*</strong>
+          </span>
+        </label>
+
+        <div class="email-updates-submit-row">
+          <button id="email-updates-submit" type="submit">
+            Send Confirmation Link
+          </button>
+          <p id="email-updates-message" aria-live="polite"></p>
+        </div>
+      </form>
+    </section>
+
+    <section class="email-updates-manage" aria-labelledby="email-updates-manage-title">
+      <div>
+        <p class="eyebrow">Already subscribed?</p>
+        <h2 id="email-updates-manage-title">Manage or Unsubscribe</h2>
+        <p>
+          Enter the subscribed email address. We will send a secure link that
+          opens your current preferences.
+        </p>
+      </div>
+
+      <form id="email-updates-manage-form">
+        <label>
+          <span>Email address</span>
+          <input
+            name="email"
+            type="email"
+            maxlength="254"
+            autocomplete="email"
+            required
+          >
+        </label>
+        <button id="email-updates-manage-submit" type="submit">
+          Send Management Link
+        </button>
+        <p id="email-updates-manage-message" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <aside class="email-updates-delivery-note">
+      <strong>No daily spam</strong>
+      <p>
+        An update is intended only when there is a meaningful new calculator
+        capability, verified machine-profile addition, substantial technical
+        article, or notable project milestone.
+      </p>
+    </aside>
+  </main>
+
+<section class="support-forge" aria-labelledby="support-forge-title">
+  <div class="support-forge-copy">
+    <p class="support-forge-kicker">Support independent CNC resources</p>
+    <h2 id="support-forge-title">Help Keep Plasma Cut Forge Growing</h2>
+    <p>
+      Plasma Cut Forge is built to provide practical calculators, reliable
+      technical guides, testing methods, and troubleshooting resources for the
+      CNC plasma community. The site is continually researched, tested, and
+      updated. Your support helps cover website costs and makes it possible to
+      keep improving the tools and publishing useful, independent content.
+    </p>
+  </div>
+
+  <div class="support-forge-action">
+    <a
+      class="support-forge-button"
+      href="https://ko-fi.com/plasmacutforge"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Support the Forge
+    </a>
+    <small>Secure one-time support through Ko-fi</small>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="site-footer-primary">
+    <p>© 2026 Plasma Cut Forge.</p>
+    <p class="site-footer-warning">
+      Calculator values are starting recommendations—not guaranteed machine settings.
+    </p>
+  </div>
+
+  <nav class="site-footer-links" aria-label="Legal and contact links">
+    <a href="/email-updates.html">Email Updates</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/privacy-policy.html">Privacy Policy</a>
+    <a href="/website-disclaimer.html">Website Disclaimer</a>
+    <a href="/terms-of-use.html">Terms of Use</a>
+    <a href="/affiliate-disclosure.html">Affiliate Disclosure</a>
+  </nav>
+</footer>
+</body>
+</html>

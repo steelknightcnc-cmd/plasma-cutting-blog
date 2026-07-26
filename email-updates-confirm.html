@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Confirm or manage Plasma Cut Forge email update preferences.">
+  <title>Confirm Email Updates | Plasma Cut Forge</title>
+
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#070b14">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap"
+  rel="stylesheet"
+>
+<link rel="stylesheet" href="/styles.css?v=35.0">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/supabase-config.js?v=5.0" defer></script>
+  <script src="/email-updates-confirm.js?v=1.0" defer></script>
+</head>
+
+<body class="email-updates-page email-updates-confirm-page">
+  <header class="site-header industrial-header">
+    <a class="brand industrial-brand" href="/#top" aria-label="Plasma Cut Forge home">
+      <span class="brand-wordmark">PLASMA<span>CUT</span>FORGE</span>
+      <small>CNC plasma tools &amp; shop-floor guides</small>
+    </a>
+
+<nav class="industrial-nav" aria-label="Primary navigation">
+  <a href="/#top">Home</a>
+  <a href="/#calculator">Calculator</a>
+  <a href="/guides/">Guides</a>
+  <a href="/blog/">Blog</a>
+  <a href="/community/">Community</a>
+  <a href="/#articles">Articles</a>
+  <a href="/about-the-builder.html">About</a>
+</nav>
+
+<form class="global-search-form" action="/search.html" method="get" role="search">
+  <label class="sr-only" for="global-search-input">Search Plasma Cut Forge</label>
+  <input
+    id="global-search-input"
+    data-global-search-input
+    name="q"
+    type="search"
+    maxlength="100"
+    placeholder="Search the Forge"
+    autocomplete="off"
+    required
+  >
+  <button type="submit" aria-label="Search Plasma Cut Forge">Search</button>
+</form>
+  </header>
+
+  <main class="email-updates-main">
+    <section class="email-updates-confirm-shell">
+      <div id="email-confirm-working">
+        <p class="eyebrow">Secure confirmation</p>
+        <h1>Confirming Your Email</h1>
+        <p id="email-confirm-status" aria-live="polite">
+          Checking the secure confirmation link…
+        </p>
+      </div>
+
+      <div id="email-confirm-error" class="email-confirm-error" hidden>
+        <p class="eyebrow">Confirmation problem</p>
+        <h1>The Link Could Not Be Confirmed</h1>
+        <p id="email-confirm-error-message">
+          Request a new confirmation or management link.
+        </p>
+        <a href="/email-updates.html">Return to Email Updates</a>
+      </div>
+
+      <section id="email-preferences-panel" class="email-preferences-panel" hidden>
+        <p class="eyebrow">Subscription confirmed</p>
+        <h1>Your Email Preferences</h1>
+        <p>
+          Signed in as <strong id="email-preferences-address">—</strong>.
+          Select the update categories you want to keep.
+        </p>
+
+        <form id="email-preferences-form">
+          <div class="email-preferences-grid">
+            <label>
+              <input name="topics" type="checkbox" value="calculator">
+              <span>
+                <strong>Calculator Features</strong>
+                <small>Major calculator and diagnostic improvements.</small>
+              </span>
+            </label>
+
+            <label>
+              <input name="topics" type="checkbox" value="machines">
+              <span>
+                <strong>Machine Profiles</strong>
+                <small>New and substantially updated machine data.</small>
+              </span>
+            </label>
+
+            <label>
+              <input name="topics" type="checkbox" value="articles">
+              <span>
+                <strong>New Articles</strong>
+                <small>Important technical guides and testing methods.</small>
+              </span>
+            </label>
+
+            <label>
+              <input name="topics" type="checkbox" value="projects">
+              <span>
+                <strong>Project Builds</strong>
+                <small>Meaningful CNC, fabrication, and engineering milestones.</small>
+              </span>
+            </label>
+          </div>
+
+          <div class="email-preferences-actions">
+            <button id="email-preferences-save" type="submit">
+              Save Preferences
+            </button>
+            <button id="email-preferences-unsubscribe" type="button">
+              Unsubscribe from All
+            </button>
+          </div>
+
+          <p id="email-preferences-message" aria-live="polite"></p>
+        </form>
+
+        <div class="email-preferences-finish">
+          <a href="/#top">Return to Plasma Cut Forge</a>
+          <a href="/guides/">Browse Guides</a>
+        </div>
+      </section>
+    </section>
+  </main>
+
+<footer class="site-footer">
+  <div class="site-footer-primary">
+    <p>© 2026 Plasma Cut Forge.</p>
+    <p class="site-footer-warning">
+      Calculator values are starting recommendations—not guaranteed machine settings.
+    </p>
+  </div>
+
+  <nav class="site-footer-links" aria-label="Legal and contact links">
+    <a href="/email-updates.html">Email Updates</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/privacy-policy.html">Privacy Policy</a>
+    <a href="/website-disclaimer.html">Website Disclaimer</a>
+    <a href="/terms-of-use.html">Terms of Use</a>
+    <a href="/affiliate-disclosure.html">Affiliate Disclosure</a>
+  </nav>
+</footer>
+</body>
+</html>

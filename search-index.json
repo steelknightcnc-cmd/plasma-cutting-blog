@@ -7,6 +7,14 @@ permalink: /search-index.json
   "items": [
     {
       "type": "guide",
+      "title": "Plasma Cut Forge Email Updates",
+      "description": "Subscribe to meaningful updates about calculator features, new machine profiles, newly published articles, and project-build progress.",
+      "url": "/email-updates.html",
+      "category": "Email preferences",
+      "keywords": "email updates newsletter subscribe calculator features machine profiles articles project builds preferences unsubscribe"
+    },
+    {
+      "type": "guide",
       "title": "Plasma Cutting Settings Calculator",
       "description": "Calculate starting feed rate, pierce delay, gas pressure, cutting current, and recommended cut voltage. Print, download, or copy a shop-floor cut card.",
       "url": "/#calculator",
