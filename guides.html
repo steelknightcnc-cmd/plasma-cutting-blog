@@ -1,0 +1,208 @@
+---
+layout: null
+title: Plasma Cutting Guides
+description: Searchable CNC plasma cutting guides, testing methods, cut-chart articles, air-system information, and troubleshooting resources.
+permalink: /guides/
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta
+    name="description"
+    content="Searchable CNC plasma cutting guides, testing methods, cut-chart articles, air-system information, and troubleshooting resources."
+  >
+  <title>Guides | Plasma Cut Forge</title>
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#070b14">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="/styles.css?v=28.0">
+  <script src="/guides.js?v=1.0" defer></script>
+</head>
+
+<body class="guides-page">
+  <header class="site-header industrial-header">
+    <a class="brand industrial-brand" href="/#top" aria-label="Plasma Cut Forge home">
+      <span class="brand-wordmark">PLASMA<span>CUT</span>FORGE</span>
+      <small>CNC plasma tools &amp; shop-floor guides</small>
+    </a>
+
+    <nav class="industrial-nav" aria-label="Primary navigation">
+      <a href="/#top">Home</a>
+      <a href="/#calculator">Calculator</a>
+      <a href="/cut-quality-troubleshooter.html">Cut Quality</a>
+      <a class="active" href="/guides/">Guides</a>
+      <a href="/blog/">Blog</a>
+      <a href="/community/">Community</a>
+      <a href="/#articles">Articles</a>
+      <a href="/#about">About</a>
+    </nav>
+  </header>
+
+  <main class="guides-main">
+    <section class="guides-hero">
+      <p class="industrial-kicker">Technical library</p>
+      <h1>Plasma Cutting Guides</h1>
+      <p>
+        Practical how-tos, cut-chart methods, air-system information, machine
+        testing, and troubleshooting resources—organized in one searchable
+        library.
+      </p>
+
+      <form class="guides-search" id="guides-search-form" role="search">
+        <label class="sr-only" for="guides-search-input">Search guides</label>
+        <input
+          id="guides-search-input"
+          type="search"
+          placeholder="Search settings, dross, air, voltage, cut charts..."
+          autocomplete="off"
+        >
+        <button type="submit">Search Guides</button>
+      </form>
+
+      <p class="guides-search-note">
+        Search covers guide titles, descriptions, and categories.
+      </p>
+    </section>
+
+    <section class="guides-featured" aria-labelledby="featured-resources-title">
+      <div class="guides-section-heading">
+        <p class="eyebrow">Start with a tool</p>
+        <h2 id="featured-resources-title">Featured Resources</h2>
+      </div>
+
+      <div class="guides-featured-grid">
+        <a class="guide-tool-card" href="/#calculator">
+          <span class="guide-tool-number">01</span>
+          <p class="guide-tool-label">Calculator</p>
+          <h3>Plasma Cutting Settings Calculator</h3>
+          <p>
+            Generate starting feed rate, amperage, gas pressure, pierce delay,
+            and recommended cut voltage.
+          </p>
+          <strong>Open calculator →</strong>
+        </a>
+
+        <a class="guide-tool-card" href="/cut-quality-troubleshooter.html">
+          <span class="guide-tool-number">02</span>
+          <p class="guide-tool-label">Diagnostic tool</p>
+          <h3>Cut Quality Troubleshooter</h3>
+          <p>
+            Diagnose dross, bevel, rough cuts, kerf problems, poor holes, and
+            rapid consumable wear.
+          </p>
+          <strong>Diagnose a cut →</strong>
+        </a>
+      </div>
+    </section>
+
+    <section class="guides-library" aria-labelledby="all-guides-title">
+      <div class="guides-section-heading guides-library-heading">
+        <div>
+          <p class="eyebrow">Knowledge base</p>
+          <h2 id="all-guides-title">All Guides</h2>
+        </div>
+
+        <p id="guides-result-count" aria-live="polite"></p>
+      </div>
+
+      <div class="guide-filter-row" role="group" aria-label="Filter guides by category">
+        <button class="guide-filter active" type="button" data-filter="all">All</button>
+        <button class="guide-filter" type="button" data-filter="beginner">Getting Started</button>
+        <button class="guide-filter" type="button" data-filter="air">Air &amp; Consumables</button>
+        <button class="guide-filter" type="button" data-filter="testing">Testing &amp; Calibration</button>
+        <button class="guide-filter" type="button" data-filter="quality">Cut Quality</button>
+      </div>
+
+      <div class="guide-card-grid" id="guide-card-grid">
+        {% assign guide_count = 0 %}
+        {% for post in site.posts %}
+          {% unless post.guide == false %}
+            {% assign guide_count = guide_count | plus: 1 %}
+            {% assign category_text = post.category | default: "Plasma guide" %}
+            <article
+              class="guide-library-card"
+              data-guide-card
+              data-category="{{ category_text | downcase | escape }}"
+              data-search="{{ post.title | append: ' ' | append: post.description | append: ' ' | append: category_text | downcase | strip_html | escape }}"
+            >
+              <a href="{{ post.url }}">
+                <div class="guide-library-card-top">
+                  <span>{{ category_text }}</span>
+                  <time datetime="{{ post.date | date_to_xmlschema }}">
+                    {{ post.date | date: "%b %-d, %Y" }}
+                  </time>
+                </div>
+
+                <h3>{{ post.title }}</h3>
+
+                <p>
+                  {{ post.description | default: post.excerpt | strip_html | truncate: 190 }}
+                </p>
+
+                <div class="guide-library-card-footer">
+                  <strong>Read guide →</strong>
+                  {% if post.reading_time %}
+                    <small>{{ post.reading_time }}</small>
+                  {% endif %}
+                </div>
+              </a>
+            </article>
+          {% endunless %}
+        {% endfor %}
+      </div>
+
+      {% if guide_count == 0 %}
+        <p class="guides-empty-static">No guides have been published yet.</p>
+      {% endif %}
+
+      <p class="guides-no-results" id="guides-no-results" hidden>
+        No guides matched that search. Try a broader term or another category.
+      </p>
+    </section>
+  </main>
+
+  <section class="support-forge" aria-labelledby="support-forge-title">
+    <div class="support-forge-copy">
+      <p class="support-forge-kicker">Support independent CNC resources</p>
+      <h2 id="support-forge-title">Help Keep Plasma Cut Forge Growing</h2>
+      <p>
+        Plasma Cut Forge is built to provide practical calculators, reliable
+        technical guides, testing methods, and troubleshooting resources for the
+        CNC plasma community. The site is continually researched, tested, and
+        updated. Your support helps cover website costs and makes it possible to
+        keep improving the tools and publishing useful, independent content.
+      </p>
+    </div>
+
+    <div class="support-forge-action">
+      <a
+        class="support-forge-button"
+        href="https://ko-fi.com/plasmacutforge"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Support the Forge
+      </a>
+      <small>Secure one-time support through Ko-fi</small>
+    </div>
+  </section>
+
+  <footer>
+    <p>© {{ site.time | date: "%Y" }} Plasma Cut Forge.</p>
+    <p><a href="/#calculator">Plasma cutting calculator</a></p>
+  </footer>
+</body>
+</html>
