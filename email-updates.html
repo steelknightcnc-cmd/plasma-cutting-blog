@@ -22,7 +22,7 @@
   href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap"
   rel="stylesheet"
 >
-<link rel="stylesheet" href="/styles.css?v=38.0">
+<link rel="stylesheet" href="/styles.css?v=41.0">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="/supabase-config.js?v=5.0" defer></script>
   <script src="/email-updates.js?v=1.0" defer></script>
@@ -38,7 +38,16 @@
 
 <nav class="industrial-nav" aria-label="Primary navigation">
   <a href="/#top">Home</a>
-  <a href="/#calculator">Calculator</a>
+  <div class="calculator-nav-dropdown">
+  <a class="calculator-nav-trigger" href="/calculators.html">
+    Calculators <span aria-hidden="true">▾</span>
+  </a>
+  <div class="calculator-nav-menu" aria-label="Calculator categories">
+    <a href="/calculators.html#plasma-cutting">Plasma Cutting</a>
+    <a href="/calculators.html#machining">Machining</a>
+    <a href="/calculators.html#welding">Welding</a>
+  </div>
+</div>
   <a href="/guides/">Guides</a>
   <a href="/blog/">Blog</a>
   <a href="/community/">Community</a>

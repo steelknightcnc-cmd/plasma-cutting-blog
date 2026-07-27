@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Cutting Speed & Feed Rate Calculator | Plasma Cut Forge</title>
+  <link rel="stylesheet" href="/styles.css?v=41.0">
+  <script src="/cutting-speed-feed-rate.js?v=1.0" defer></script>
+  <script src="/membership-widget.js?v=1.1" defer></script>
+</head>
+<body class="speed-feed-page">
+<header class="site-header industrial-header">
+  <a class="brand industrial-brand" href="/#top" aria-label="Plasma Cut Forge home">
+    <span class="brand-wordmark">PLASMA<span>CUT</span>FORGE</span>
+    <small>CNC plasma tools &amp; shop-floor guides</small>
+  </a>
+  <nav class="industrial-nav" aria-label="Primary navigation">
+    <a href="/#top">Home</a>
+    <div class="calculator-nav-dropdown">
+      <a class="calculator-nav-trigger active" href="/calculators.html">
+        Calculators <span aria-hidden="true">▾</span>
+      </a>
+      <div class="calculator-nav-menu" aria-label="Calculator categories">
+        <a href="/calculators.html#plasma-cutting">Plasma Cutting</a>
+        <a href="/calculators.html#machining">Machining</a>
+        <a href="/calculators.html#welding">Welding</a>
+      </div>
+    </div>
+    <a href="/guides/">Guides</a>
+    <a href="/blog/">Blog</a>
+    <a href="/community/">Community</a>
+    <a href="/#articles">Articles</a>
+    <a href="/about-the-builder.html">About</a>
+    <a class="membership-nav-button" href="https://ko-fi.com/plasmacutforge/tiers" target="_blank" rel="noopener noreferrer">Membership</a>
+  </nav>
+  <form class="global-search-form" action="/search.html" method="get" role="search">
+    <label class="sr-only" for="global-search-input">Search Plasma Cut Forge</label>
+    <input id="global-search-input" name="q" type="search" placeholder="Search the Forge" required>
+    <button type="submit">Search</button>
+  </form>
+</header>
+<main class="speed-feed-main">
+  <section class="speed-feed-hero">
+    <p class="industrial-kicker">Machining calculator</p>
+    <h1>Cutting Speed &amp; Feed Rate Calculator</h1>
+    <p>Calculate starter RPM, feed rate, chip load, and surface speed.</p>
+  </section>
+
+  <section class="speed-feed-calculator">
+    <form id="speed-feed-form">
+      <div class="speed-feed-input-grid">
+        <label><span>Units</span><select name="units" id="sf-units"><option value="imperial">Imperial</option><option value="metric">Metric</option></select></label>
+        <label><span>Material</span><select name="material">
+          <option value="mild">Mild Steel</option><option value="ss304">Stainless 304</option>
+          <option value="ss316">Stainless 316</option><option value="aluminum">Aluminum</option>
+          <option value="brass">Brass</option><option value="castiron">Cast Iron</option>
+          <option value="titanium">Titanium</option><option value="toolsteel">Tool Steel</option>
+        </select></label>
+        <label><span>Operation</span><select name="operation">
+          <option value="hss">HSS Milling</option><option value="carbide" selected>Carbide Milling</option>
+          <option value="drilling">Drilling</option><option value="turning">Turning</option>
+        </select></label>
+        <label><span>Tool diameter</span><input name="diameter" type="number" value="0.25" min="0.001" step="0.001" required></label>
+        <label><span>Flutes / teeth</span><input name="flutes" type="number" value="2" min="1" max="20" required></label>
+        <label><span>Custom surface speed <em>optional</em></span><input name="custom_sfm" type="number" min="1" step="1"></label>
+      </div>
+      <div class="speed-feed-actions">
+        <button type="submit">Calculate Parameters</button>
+        <button type="reset">Reset</button>
+      </div>
+    </form>
+
+    <section id="sf-results" class="speed-feed-results" hidden>
+      <div class="speed-feed-result-grid">
+        <article><span>Recommended RPM</span><strong id="sf-rpm">—</strong></article>
+        <article><span>Feed Rate</span><strong id="sf-feed">—</strong></article>
+        <article><span>Chip Load</span><strong id="sf-chip">—</strong></article>
+        <article><span>Surface Speed</span><strong id="sf-surface">—</strong></article>
+      </div>
+      <p>Use these as starter values. Confirm tool-manufacturer data and adjust from a controlled test cut.</p>
+    </section>
+  </section>
+
+  <section class="speed-feed-reference">
+    <p class="eyebrow">Reference</p>
+    <h2>Typical Surface-Speed Ranges</h2>
+    <div class="compressor-table-wrap"><table class="compressor-guide-table">
+      <thead><tr><th>Material</th><th>HSS Milling</th><th>Carbide Milling</th><th>Drilling</th><th>Turning</th></tr></thead>
+      <tbody>
+        <tr><td>Mild steel</td><td>80–100</td><td>250–350</td><td>80–100</td><td>100–150</td></tr>
+        <tr><td>Stainless 304</td><td>60–80</td><td>150–200</td><td>50–80</td><td>80–120</td></tr>
+        <tr><td>Stainless 316</td><td>50–70</td><td>120–180</td><td>40–70</td><td>60–100</td></tr>
+        <tr><td>Aluminum</td><td>150–200</td><td>400–600</td><td>100–200</td><td>200–400</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+</main>
+<aside class="kofi-membership-widget is-expanded" data-membership-widget aria-label="Plasma Cut Forge membership">
+  <button class="kofi-membership-tab" type="button" data-membership-toggle aria-expanded="true"><span>Join the Forge</span></button>
+  <div class="kofi-membership-panel" data-membership-panel>
+    <div class="kofi-membership-widget-copy">
+      <span class="kofi-membership-eyebrow">Ko-fi Membership</span>
+      <strong>Join the Forge</strong>
+      <small>Forge Supporter · $5/month</small>
+      <p>Support new tools, machine profiles, technical articles, and project-build updates.</p>
+    </div>
+    <div class="kofi-membership-widget-actions">
+      <a class="kofi-membership-primary" href="https://ko-fi.com/plasmacutforge/tiers" target="_blank" rel="noopener noreferrer">Become a Member</a>
+      <a class="kofi-membership-secondary" href="https://ko-fi.com/plasmacutforge" target="_blank" rel="noopener noreferrer">One-time support</a>
+    </div>
+  </div>
+</aside>
+<footer class="site-footer">
+  <div class="site-footer-primary">
+    <p>© 2026 Plasma Cut Forge.</p>
+    <p class="site-footer-warning">Calculator values are starting recommendations—not guaranteed machine settings.</p>
+  </div>
+</footer>
+</body>
+</html>

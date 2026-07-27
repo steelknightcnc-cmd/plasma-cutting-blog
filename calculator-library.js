@@ -1,0 +1,1 @@
+document.querySelectorAll(".calculator-nav-dropdown").forEach(d=>{d.addEventListener("focusin",()=>d.classList.add("open"));d.addEventListener("focusout",()=>setTimeout(()=>{if(!d.contains(document.activeElement))d.classList.remove("open")},0));});

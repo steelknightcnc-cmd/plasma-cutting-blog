@@ -7,6 +7,22 @@ permalink: /search-index.json
   "items": [
 {
   "type": "guide",
+  "title": "Calculators and Tools",
+  "description": "Browse Plasma Cut Forge tools for plasma cutting, machining, and welding.",
+  "url": "/calculators.html",
+  "category": "Calculator library",
+  "keywords": "plasma machining welding calculators tools"
+},
+{
+  "type": "guide",
+  "title": "Cutting Speed and Feed Rate Calculator",
+  "description": "Calculate RPM, feed rate, chip load, and surface speed for machining.",
+  "url": "/cutting-speed-feed-rate-calculator.html",
+  "category": "Machining calculator",
+  "keywords": "machining milling drilling turning rpm feed rate chip load sfm"
+},
+{
+  "type": "guide",
   "title": "Air Compressor Sizing for Plasma Cutters",
   "description": "Calculate SCFM margin and approximate tank reserve, then check duty cycle, hose loss, dynamic pressure, and moisture control.",
   "url": "/air-compressor-sizing-plasma-cutters.html",
