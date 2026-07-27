@@ -8,11 +8,11 @@
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="stylesheet" href="/styles.css?v=48.0">
-  <link rel="stylesheet" href="/member-quote-builder.css?v=1.0">
+  <link rel="stylesheet" href="/member-quote-builder.css?v=1.1">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js" defer></script>
   <script src="/supabase-config.js?v=5.0" defer></script>
-  <script src="/member-auth.js?v=1.2" defer></script>
+  <script src="/member-auth.js?v=1.3" defer></script>
   <script src="/member-quote-builder.js?v=1.0" defer></script>
   <script src="/membership-widget.js?v=1.1" defer></script>
 </head>
@@ -69,12 +69,20 @@
   <section class="pcf-member-gate" data-member-guest hidden>
     <p class="industrial-kicker">Member sign in required</p>
     <h2>Unlock the Quote Builder</h2>
-    <p>A paid $5 Forge Membership is required. Use the same email address used for the Ko-fi purchase.</p>
+    <p>A paid $5 Forge Membership is required. Sign in with the same email address used for the Ko-fi purchase and your member password.</p>
     <form class="pcf-member-login-form" data-member-login-form>
-      <label class="sr-only" for="builder-member-email">Member email</label>
-      <input id="builder-member-email" name="email" type="email" autocomplete="email" placeholder="member@example.com" required>
-      <button class="pcf-button" type="submit">Send Sign-In Link</button>
-      <p class="pcf-member-message" data-member-login-message></p>
+      <label class="pcf-member-field" for="builder-member-email"><span>Member email</span>
+        <input id="builder-member-email" name="email" type="email" autocomplete="email" placeholder="member@example.com" required>
+      </label>
+      <label class="pcf-member-field" for="builder-member-password"><span>Password</span>
+        <input id="builder-member-password" name="password" type="password" autocomplete="current-password" minlength="8" placeholder="At least 8 characters" required>
+      </label>
+      <div class="pcf-member-actions">
+        <button class="pcf-button" type="button" data-auth-action="sign-in">Sign In</button>
+        <button class="pcf-button secondary" type="button" data-auth-action="create-account">Create Member Account</button>
+        <button class="pcf-button secondary" type="button" data-auth-action="reset-password">Forgot / Set Password</button>
+      </div>
+      <p class="pcf-member-message" data-member-login-message aria-live="polite"></p>
     </form>
     <div class="pcf-member-actions" style="margin-top:20px">
       <a class="pcf-button secondary" href="https://ko-fi.com/plasmacutforge/tiers" target="_blank" rel="noopener noreferrer">Join for $5 on Ko-fi</a>

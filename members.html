@@ -8,10 +8,10 @@
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="stylesheet" href="/styles.css?v=48.0">
-  <link rel="stylesheet" href="/member-quote-builder.css?v=1.0">
+  <link rel="stylesheet" href="/member-quote-builder.css?v=1.1">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
   <script src="/supabase-config.js?v=5.0" defer></script>
-  <script src="/member-auth.js?v=1.2" defer></script>
+  <script src="/member-auth.js?v=1.3" defer></script>
   <script src="/membership-widget.js?v=1.1" defer></script>
 </head>
 <body data-member-page="hub">
@@ -49,7 +49,7 @@
     <p class="industrial-kicker">Forge Member exclusive</p>
     <h1>Member Access</h1>
     <p>
-      A paid <strong>$5 Forge Membership</strong> is required before the exclusive member tools can be opened. Join through Ko-fi, then sign in with the same email address used for the purchase. Plasma Cut Forge uses a secure one-time email link—no password is required.
+      A paid <strong>$5 Forge Membership</strong> is required before the exclusive member tools can be opened. Join through Ko-fi, then create or sign in to a member account using the same email address and your own password.
       <span class="pcf-member-actions" style="margin-top:18px">
         <a class="pcf-button" href="https://ko-fi.com/plasmacutforge/tiers" target="_blank" rel="noopener noreferrer">Join for $5 on Ko-fi</a>
       </span>
@@ -62,18 +62,44 @@
   </div>
 
   <section class="pcf-member-gate" data-member-guest hidden>
-    <p class="industrial-kicker">Secure sign in</p>
+    <p class="industrial-kicker">Secure member account</p>
     <h2>Open the Member Forge</h2>
-    <p>After purchasing the $5 Forge Membership, enter the exact email address used on Ko-fi. A secure access link will be sent to that address.</p>
+    <p>Use the exact email address attached to the active $5 Ko-fi membership. Existing members can sign in without receiving a new email each time.</p>
     <form class="pcf-member-login-form" data-member-login-form>
-      <label class="sr-only" for="member-email">Member email</label>
-      <input id="member-email" name="email" type="email" autocomplete="email" placeholder="member@example.com" required>
-      <button class="pcf-button" type="submit">Send Sign-In Link</button>
-      <p class="pcf-member-message" data-member-login-message></p>
+      <label class="pcf-member-field" for="member-email"><span>Member email</span>
+        <input id="member-email" name="email" type="email" autocomplete="email" placeholder="member@example.com" required>
+      </label>
+      <label class="pcf-member-field" for="member-password"><span>Password</span>
+        <input id="member-password" name="password" type="password" autocomplete="current-password" minlength="8" placeholder="At least 8 characters" required>
+      </label>
+      <div class="pcf-member-actions">
+        <button class="pcf-button" type="button" data-auth-action="sign-in">Sign In</button>
+        <button class="pcf-button secondary" type="button" data-auth-action="create-account">Create Member Account</button>
+        <button class="pcf-button secondary" type="button" data-auth-action="reset-password">Forgot / Set Password</button>
+      </div>
+      <p class="pcf-member-message" data-member-login-message aria-live="polite"></p>
     </form>
     <div class="pcf-member-actions" style="margin-top:20px">
       <a class="pcf-button secondary" href="https://ko-fi.com/plasmacutforge/tiers" target="_blank" rel="noopener noreferrer">Join for $5 on Ko-fi</a>
     </div>
+  </section>
+
+  <section class="pcf-member-gate" data-member-password-recovery hidden>
+    <p class="industrial-kicker">Password setup</p>
+    <h2>Create a New Password</h2>
+    <p>Enter a new password for this Plasma Cut Forge member account.</p>
+    <form class="pcf-member-password-form" data-member-password-form>
+      <label class="pcf-member-field" for="recovery-new-password"><span>New password</span>
+        <input id="recovery-new-password" name="new_password" type="password" autocomplete="new-password" minlength="8" required>
+      </label>
+      <label class="pcf-member-field" for="recovery-confirm-password"><span>Confirm password</span>
+        <input id="recovery-confirm-password" name="confirm_password" type="password" autocomplete="new-password" minlength="8" required>
+      </label>
+      <div class="pcf-member-actions">
+        <button class="pcf-button" type="submit">Save Password</button>
+      </div>
+      <p class="pcf-member-message" data-member-password-message aria-live="polite"></p>
+    </form>
   </section>
 
   <section class="pcf-member-hub-panel" data-member-active hidden>
@@ -88,6 +114,20 @@
       </div>
       <a class="pcf-button" href="/member-quote-builder.html">Open Tool</a>
     </article>
+    <div class="pcf-member-password-panel">
+      <h3>Set or Change Password</h3>
+      <p>Members who previously used one-time email links can set a password here while signed in.</p>
+      <form class="pcf-member-password-form" data-member-password-form>
+        <label class="pcf-member-field" for="active-new-password"><span>New password</span>
+          <input id="active-new-password" name="new_password" type="password" autocomplete="new-password" minlength="8" required>
+        </label>
+        <label class="pcf-member-field" for="active-confirm-password"><span>Confirm password</span>
+          <input id="active-confirm-password" name="confirm_password" type="password" autocomplete="new-password" minlength="8" required>
+        </label>
+        <div class="pcf-member-actions"><button class="pcf-button secondary" type="submit">Save Password</button></div>
+        <p class="pcf-member-message" data-member-password-message aria-live="polite"></p>
+      </form>
+    </div>
   </section>
 
   <section class="pcf-member-gate" data-member-inactive hidden>
