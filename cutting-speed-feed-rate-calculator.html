@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Cutting Speed & Feed Rate Calculator | Plasma Cut Forge</title>
-  <link rel="stylesheet" href="/styles.css?v=43.0">
-  <script src="/cutting-speed-feed-rate.js?v=1.2" defer></script>
+  <link rel="stylesheet" href="/styles.css?v=44.0">
+  <script src="/cutting-speed-feed-rate.js?v=1.3" defer></script>
   <script src="/membership-widget.js?v=1.1" defer></script>
 </head>
 <body class="speed-feed-page">
@@ -82,8 +82,16 @@
         </label>
 
         <label>
+          <span>Cutting-data profile</span>
+          <select name="profile" id="sf-profile">
+            <option value="sorotec-general" selected>General material table</option>
+            <option value="aluminum-hsm">High-speed aluminum end mill</option>
+          </select>
+        </label>
+
+        <label>
           <span>Material</span>
-          <select name="material">
+          <select name="material" id="sf-material">
             <option value="cast-aluminum">Cast aluminum &gt; 6% Si</option>
             <option value="wrought-aluminum" selected>Aluminum wrought alloy</option>
             <option value="soft-plastic">Soft plastic</option>
@@ -102,8 +110,8 @@
         </label>
 
         <label>
-          <span>Number of teeth / flutes</span>
-          <input name="flutes" type="number" value="2" min="1" max="12" step="1" required>
+          <span>Number of teeth / flutes — 1 through 6</span>
+          <input name="flutes" type="number" value="1" min="1" max="6" step="1" required>
         </label>
 
         <label>
@@ -157,6 +165,11 @@
         </label>
       </div>
 
+      <div class="speed-feed-profile-note" id="sf-profile-note">
+        <strong>General material table</strong>
+        <p>Uses the existing material cutting-speed and tooth-feed table.</p>
+      </div>
+
       <div class="speed-feed-actions">
         <button type="submit">Calculate Milling Parameters</button>
         <button type="reset">Reset</button>
@@ -166,6 +179,7 @@
 
     <section id="sf-results" class="speed-feed-results" hidden aria-live="polite">
       <div class="speed-feed-result-grid-v11">
+        <article><span>Data Profile</span><strong id="sf-data-profile">—</strong><small id="sf-data-detail">Selected cutting table</small></article>
         <article><span>Commanded RPM</span><strong id="sf-rpm">—</strong><small id="sf-rpm-note">Machine-limited</small></article>
         <article><span>Feed Rate</span><strong id="sf-feed">—</strong><small>vf = RPM × teeth × fz</small></article>
         <article><span>Tooth Feed</span><strong id="sf-chip">—</strong><small>Interpolated Sorotec fz</small></article>

@@ -1,264 +1,33 @@
 (() => {
   "use strict";
-
-  const DIAMETERS = [1,2,3,4,5,6,8,10,12];
-
-  const DATA = {
-    "cast-aluminum": {
-      vc:500, fz:[0.010,0.010,0.010,0.015,0.015,0.025,0.030,0.038,0.050],
-      group:"nonferrous", unitHp:0.35
-    },
-    "wrought-aluminum": {
-      vc:500, fz:[0.010,0.020,0.025,0.050,0.050,0.050,0.064,0.080,0.100],
-      group:"nonferrous", unitHp:0.35
-    },
-    "soft-plastic": {
-      vc:600, fz:[0.025,0.030,0.035,0.045,0.065,0.090,0.100,0.200,0.300],
-      group:"woodplastic", unitHp:0.18
-    },
-    "hard-plastic": {
-      vc:550, fz:[0.015,0.020,0.025,0.050,0.060,0.080,0.089,0.100,0.150],
-      group:"woodplastic", unitHp:0.22
-    },
-    "hard-wood": {
-      vc:450, fz:[0.020,0.025,0.030,0.035,0.045,0.055,0.065,0.080,0.090],
-      group:"woodplastic", unitHp:0.20
-    },
-    "soft-wood": {
-      vc:500, fz:[0.025,0.030,0.035,0.040,0.050,0.060,0.070,0.085,0.100],
-      group:"woodplastic", unitHp:0.16
-    },
-    "mdf": {
-      vc:450, fz:[0.030,0.040,0.045,0.050,0.060,0.070,0.080,0.090,0.110],
-      group:"woodplastic", unitHp:0.22
-    },
-    "brass": {
-      vc:365, fz:[0.015,0.020,0.025,0.025,0.030,0.050,0.056,0.065,0.080],
-      group:"nonferrous", unitHp:0.45
-    },
-    "steel": {
-      vc:90, fz:[0.010,0.010,0.012,0.025,0.030,0.038,0.045,0.050,0.080],
-      group:"steel", unitHp:1.00
-    }
+  const DIAMETERS=[1,2,3,4,5,6,8,10,12];
+  const GENERAL={
+    "cast-aluminum":{vc:500,fz:[.010,.010,.010,.015,.015,.025,.030,.038,.050],group:"nonferrous",unitHp:.35},
+    "wrought-aluminum":{vc:500,fz:[.010,.020,.025,.050,.050,.050,.064,.080,.100],group:"nonferrous",unitHp:.35},
+    "soft-plastic":{vc:600,fz:[.025,.030,.035,.045,.065,.090,.100,.200,.300],group:"woodplastic",unitHp:.18},
+    "hard-plastic":{vc:550,fz:[.015,.020,.025,.050,.060,.080,.089,.100,.150],group:"woodplastic",unitHp:.22},
+    "hard-wood":{vc:450,fz:[.020,.025,.030,.035,.045,.055,.065,.080,.090],group:"woodplastic",unitHp:.20},
+    "soft-wood":{vc:500,fz:[.025,.030,.035,.040,.050,.060,.070,.085,.100],group:"woodplastic",unitHp:.16},
+    "mdf":{vc:450,fz:[.030,.040,.045,.050,.060,.070,.080,.090,.110],group:"woodplastic",unitHp:.22},
+    "brass":{vc:365,fz:[.015,.020,.025,.025,.030,.050,.056,.065,.080],group:"nonferrous",unitHp:.45},
+    "steel":{vc:90,fz:[.010,.010,.012,.025,.030,.038,.045,.050,.080],group:"steel",unitHp:1.0}
   };
-
-  const MODES = {
-    conservative:{speed:0.85, chip:0.85, engagement:0.80},
-    balanced:{speed:1.00, chip:1.00, engagement:1.00},
-    aggressive:{speed:1.10, chip:1.10, engagement:1.10}
+  const HSM={
+    full:{
+      .3:{vc:38,fz:[.005,.010],ap:[.05,.05],ae:[.30,.30]},.4:{vc:50,fz:[.005,.010],ap:[.05,.05],ae:[.40,.40]},.5:{vc:63,fz:[.010,.010],ap:[.15,.15],ae:[.50,.50]},.6:{vc:75,fz:[.010,.010],ap:[.20,.20],ae:[.60,.60]},.8:{vc:101,fz:[.015,.015],ap:[.30,.30],ae:[.80,.80]},1:{vc:126,fz:[.015,.025],ap:[.50,.50],ae:[1,1]},1.5:{vc:188,fz:[.040,.060],ap:[.50,.70],ae:[1.5,1.5]},2:{vc:245,fz:[.040,.100],ap:[.50,1.0],ae:[2,2]},2.4:{vc:294,fz:[.050,.070],ap:[.60,.80],ae:[2.4,2.4]},2.5:{vc:306,fz:[.060,.100],ap:[.70,1.0],ae:[2.5,2.5]},3:{vc:358,fz:[.060,.130],ap:[.50,1.2],ae:[3,3]},3.5:{vc:418,fz:[.100,.100],ap:[.90,.90],ae:[3.5,3.5]},4:{vc:465,fz:[.040,.140],ap:[.50,1.5],ae:[4,4]},5:{vc:408,fz:[.040,.140],ap:[.30,1.6],ae:[5,5]},6:{vc:471,fz:[.080,.160],ap:[.30,1.4],ae:[6,6]},7:{vc:528,fz:[.160,.160],ap:[1,1],ae:[7,7]},8:{vc:603,fz:[.120,.160],ap:[.30,1],ae:[8,8]},10:{vc:691,fz:[.160,.180],ap:[.60,1],ae:[10,10]}},
+    partial:{
+      .3:{vc:38,fz:[.005,.005],ap:[.8,.8],ae:[.05,.05]},.4:{vc:50,fz:[.005,.005],ap:[.8,.8],ae:[.05,.05]},.5:{vc:63,fz:[.010,.010],ap:[1.2,1.2],ae:[.10,.10]},.6:{vc:75,fz:[.010,.010],ap:[2,2],ae:[.10,.10]},.8:{vc:101,fz:[.010,.010],ap:[2.5,2.5],ae:[.10,.10]},1:{vc:126,fz:[.010,.015],ap:[3,3],ae:[.10,.10]},1.5:{vc:188,fz:[.020,.040],ap:[2,6],ae:[.15,.20]},2:{vc:245,fz:[.040,.070],ap:[4,14],ae:[.10,.30]},2.4:{vc:294,fz:[.050,.070],ap:[4.5,9],ae:[.20,.30]},2.5:{vc:306,fz:[.070,.080],ap:[4,7],ae:[.30,.40]},3:{vc:358,fz:[.040,.090],ap:[4,11],ae:[.20,.50]},3.5:{vc:418,fz:[.060,.060],ap:[9,9],ae:[.20,.20]},4:{vc:465,fz:[.040,.120],ap:[4,19],ae:[.20,.80]},5:{vc:408,fz:[.050,.120],ap:[7,21],ae:[.20,.70]},6:{vc:471,fz:[.030,.120],ap:[13,29],ae:[.10,.60]},7:{vc:528,fz:[.120,.120],ap:[13,13],ae:[.50,.50]},8:{vc:603,fz:[.050,.140],ap:[11,24],ae:[.20,.60]}}
   };
-
-  const form = document.querySelector("#speed-feed-form");
-  const results = document.querySelector("#sf-results");
-  const message = document.querySelector("#speed-feed-message");
-  const cutType = document.querySelector("#sf-cut-type");
-  const customAxialField = document.querySelector("#sf-custom-axial-field");
-  const customRadialField = document.querySelector("#sf-custom-radial-field");
-
-  if (!form || !results) return;
-
-  function interpolate(values, diameter) {
-    if (diameter <= DIAMETERS[0]) return values[0];
-    if (diameter >= DIAMETERS.at(-1)) return values.at(-1);
-
-    for (let i = 0; i < DIAMETERS.length - 1; i += 1) {
-      const d1 = DIAMETERS[i];
-      const d2 = DIAMETERS[i + 1];
-      if (diameter >= d1 && diameter <= d2) {
-        const t = (diameter - d1) / (d2 - d1);
-        return values[i] + (values[i + 1] - values[i]) * t;
-      }
-    }
-    return values[0];
-  }
-
-  const fmt = (value, digits=0) => Number(value).toLocaleString("en-US", {
-    minimumFractionDigits:digits,
-    maximumFractionDigits:digits
+  const MODE={conservative:0,balanced:.5,aggressive:1};
+  const f=document.querySelector('#speed-feed-form'),r=document.querySelector('#sf-results'),msg=document.querySelector('#speed-feed-message'),profile=document.querySelector('#sf-profile'),material=document.querySelector('#sf-material'),cut=document.querySelector('#sf-cut-type'),note=document.querySelector('#sf-profile-note'),caf=document.querySelector('#sf-custom-axial-field'),crf=document.querySelector('#sf-custom-radial-field');
+  const lerp=(a,b,t)=>a+(b-a)*t, pick=(x,t)=>Array.isArray(x)?lerp(x[0],x[1],t):x, fmt=(v,d=0)=>Number(v).toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d});
+  function bounds(table,d){const k=Object.keys(table).map(Number).sort((a,b)=>a-b);if(d<=k[0])return[k[0],k[0],0];if(d>=k.at(-1))return[k.at(-1),k.at(-1),0];for(let i=0;i<k.length-1;i++)if(d>=k[i]&&d<=k[i+1])return[k[i],k[i+1],(d-k[i])/(k[i+1]-k[i])];}
+  function genInterp(vals,d){if(d<=DIAMETERS[0])return vals[0];if(d>=DIAMETERS.at(-1))return vals.at(-1);for(let i=0;i<DIAMETERS.length-1;i++)if(d>=DIAMETERS[i]&&d<=DIAMETERS[i+1])return lerp(vals[i],vals[i+1],(d-DIAMETERS[i])/(DIAMETERS[i+1]-DIAMETERS[i]));}
+  function add(t){const li=document.createElement('li');li.textContent=t;document.querySelector('#sf-notes').append(li);}
+  function ui(){const h=profile.value==='aluminum-hsm';material.disabled=h;if(h){material.value='wrought-aluminum';note.innerHTML='<strong>High-speed aluminum end mill</strong><p>Genericized full-cut and partial-cut tables. Feed is precomputed for 1–6 flutes from feed per tooth.</p>';}else note.innerHTML='<strong>General material table</strong><p>Uses the existing material cutting-speed and tooth-feed table.</p>';caf.hidden=crf.hidden=cut.value!=='custom';}
+  profile.addEventListener('change',ui);cut.addEventListener('change',ui);ui();
+  f.addEventListener('submit',e=>{e.preventDefault();msg.textContent='';if(!f.checkValidity()){f.reportValidity();return;}const d=new FormData(f),metric=d.get('units')==='metric',pn=d.get('profile'),mode=d.get('mode'),t=MODE[mode],ct=d.get('cut_type'),diam=metric?+d.get('diameter'):+d.get('diameter')*25.4,z=+d.get('flutes'),min=+d.get('min_rpm'),max=+d.get('max_rpm'),skw=+d.get('spindle_kw'),pf=+d.get('power_factor'),custom=+d.get('custom_speed');if(z<1||z>6){msg.textContent='Select 1 through 6 flutes.';return;}if(min>max){msg.textContent='Minimum RPM cannot exceed maximum RPM.';return;}let vc,fz,ap,ae,unit=.35,title,detail;if(pn==='aluminum-hsm'){const table=ct==='slot'?HSM.full:HSM.partial,[a,b,u]=bounds(table,diam),r1=table[a],r2=table[b],iv=field=>lerp(pick(r1[field],t),pick(r2[field],t),u);vc=custom>0?(metric?custom:custom*.3048):iv('vc');fz=iv('fz');ap=iv('ap');ae=iv('ae');title='High-speed aluminum';detail=ct==='slot'?'Full-width cutting':'Partial cutting';if(ct==='custom'){ap=metric?+d.get('custom_axial'):+d.get('custom_axial')*25.4;ae=metric?+d.get('custom_radial'):+d.get('custom_radial')*25.4;}}else{const m=GENERAL[d.get('material')],s={conservative:.85,balanced:1,aggressive:1.1}[mode];if(diam<1||diam>12){msg.textContent='General table covers 1–12 mm.';return;}vc=custom>0?(metric?custom:custom*.3048):m.vc*s;fz=genInterp(m.fz,diam)*s;unit=m.unitHp;if(ct==='custom'){ap=metric?+d.get('custom_axial'):+d.get('custom_axial')*25.4;ae=metric?+d.get('custom_radial'):+d.get('custom_radial')*25.4;}else if(ct==='contour'){ap=diam*s;ae=diam*.25*s;}else{ae=diam;ap=diam*(m.group==='nonferrous'?.5:m.group==='woodplastic'?2:.25)*s;}title='General material';detail='Interpolated table';}
+    const theoretical=vc*1000/(Math.PI*diam),rpm=Math.min(max,Math.max(min,theoretical));let feed=rpm*z*fz,mrr=ap*ae*feed,power=(mrr/16387.064)*unit*.7457,usable=skw*pf,limited=false;if(power>usable&&power>0){const sc=usable/power;feed*=sc;mrr*=sc;power=usable;limited=true;}const actual=Math.PI*diam*rpm/1000;document.querySelector('#sf-data-profile').textContent=title;document.querySelector('#sf-data-detail').textContent=detail;document.querySelector('#sf-rpm').textContent=fmt(rpm)+' RPM';document.querySelector('#sf-feed').textContent=fmt(metric?feed:feed/25.4,metric?1:2)+' '+(metric?'mm/min':'IPM');document.querySelector('#sf-chip').textContent=fmt(metric?fz:fz/25.4,metric?3:4)+' '+(metric?'mm/tooth':'in/tooth');document.querySelector('#sf-surface').textContent=fmt(metric?actual:actual/.3048)+' '+(metric?'m/min':'SFM');document.querySelector('#sf-axial').textContent=fmt(metric?ap:ap/25.4,metric?2:3)+' '+(metric?'mm':'in');document.querySelector('#sf-radial').textContent=fmt(metric?ae:ae/25.4,metric?2:3)+' '+(metric?'mm':'in');document.querySelector('#sf-mrr').textContent=fmt(metric?mrr:mrr/16387.064,metric?0:3)+' '+(metric?'mm³/min':'in³/min');document.querySelector('#sf-power').textContent=fmt(power,2)+' kW';document.querySelector('#sf-rpm-note').textContent=theoretical<min?'Raised to machine minimum':theoretical>max?'Limited to machine maximum':'Inside spindle range';const ps=document.querySelector('#sf-power-status');ps.className='speed-feed-power-status'+(limited?' warning':'');document.querySelector('#sf-power-title').textContent=limited?'Feed reduced by spindle-power allowance':'Power estimate inside allowance';document.querySelector('#sf-power-copy').textContent=limited?`The ${z}-flute calculation exceeded ${fmt(usable,2)} kW usable power, so feed was reduced.`:`The ${z}-flute calculation remains below the ${fmt(usable,2)} kW planning limit.`;const ul=document.querySelector('#sf-notes');ul.replaceChildren();add(`Flute count: ${z}. Feed = RPM × ${z} × feed per tooth.`);add('Axial depth and radial width remain tied to the selected cut profile.');add('More flutes require adequate chip evacuation and spindle power.');add('Confirm flute length safely exceeds axial depth.');if(pn==='aluminum-hsm')add('The high-speed aluminum profile is a genericized baseline from uploaded single-flute full-cut and partial-cut tables.');r.hidden=false;r.scrollIntoView({behavior:'smooth',block:'start'});
   });
-
-  function addNote(text) {
-    const li = document.createElement("li");
-    li.textContent = text;
-    document.querySelector("#sf-notes").append(li);
-  }
-
-  function updateCustomFields() {
-    const custom = cutType.value === "custom";
-    customAxialField.hidden = !custom;
-    customRadialField.hidden = !custom;
-  }
-
-  cutType.addEventListener("change", updateCustomFields);
-  updateCustomFields();
-
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    message.textContent = "";
-
-    if (!form.checkValidity()) {
-      form.reportValidity();
-      return;
-    }
-
-    const fd = new FormData(form);
-    const metric = fd.get("units") === "metric";
-    const material = DATA[fd.get("material")];
-    const modeName = String(fd.get("mode"));
-    const mode = MODES[modeName];
-    const cut = String(fd.get("cut_type"));
-
-    const diameterInput = Number(fd.get("diameter"));
-    const diameterMm = metric ? diameterInput : diameterInput * 25.4;
-    const diameterIn = diameterMm / 25.4;
-    const flutes = Number(fd.get("flutes"));
-    const customSpeed = Number(fd.get("custom_speed"));
-    const minRpm = Number(fd.get("min_rpm"));
-    const maxRpm = Number(fd.get("max_rpm"));
-    const spindleKw = Number(fd.get("spindle_kw"));
-    const powerFactor = Number(fd.get("power_factor"));
-
-    if (diameterMm < 1 || diameterMm > 12) {
-      message.textContent = "The Sorotec table covers cutter diameters from 1 to 12 mm.";
-      return;
-    }
-
-    if (minRpm > maxRpm) {
-      message.textContent = "Minimum spindle RPM cannot exceed maximum spindle RPM.";
-      return;
-    }
-
-    const tableFz = interpolate(material.fz, diameterMm);
-    const toothFeedMm = tableFz * mode.chip;
-    const selectedVc = customSpeed > 0
-      ? (metric ? customSpeed : customSpeed * 0.3048)
-      : material.vc * mode.speed;
-
-    const theoreticalRpm = (selectedVc * 1000) / (Math.PI * diameterMm);
-    const rpm = Math.min(maxRpm, Math.max(minRpm, theoreticalRpm));
-    let feedMmMin = rpm * flutes * toothFeedMm;
-
-    let axialMm;
-    let radialMm;
-
-    if (cut === "custom") {
-      const a = Number(fd.get("custom_axial"));
-      const r = Number(fd.get("custom_radial"));
-      axialMm = metric ? a : a * 25.4;
-      radialMm = metric ? r : r * 25.4;
-      if (!(axialMm > 0) || !(radialMm > 0)) {
-        message.textContent = "Enter both custom axial and radial engagement.";
-        return;
-      }
-    } else if (cut === "contour") {
-      axialMm = diameterMm * 1.0 * mode.engagement;
-      radialMm = diameterMm * 0.25 * mode.engagement;
-    } else {
-      radialMm = diameterMm;
-      if (material.group === "nonferrous") {
-        axialMm = diameterMm * 0.5 * mode.engagement;
-      } else if (material.group === "woodplastic") {
-        axialMm = diameterMm * 2.0 * mode.engagement;
-      } else {
-        // Sorotec does not state a steel slotting depth on page 2.
-        axialMm = diameterMm * 0.25 * mode.engagement;
-      }
-    }
-
-    const mrrMm3Min = axialMm * radialMm * feedMmMin;
-    const mrrIn3Min = mrrMm3Min / 16387.064;
-    let powerKw = mrrIn3Min * material.unitHp * 0.7457;
-    const usableKw = spindleKw * powerFactor;
-
-    let powerLimited = false;
-    if (powerKw > usableKw && powerKw > 0) {
-      const scale = usableKw / powerKw;
-      feedMmMin *= scale;
-      powerKw = usableKw;
-      powerLimited = true;
-    }
-
-    const actualVc = Math.PI * diameterMm * rpm / 1000;
-    const finalMrrMm3Min = axialMm * radialMm * feedMmMin;
-
-    const feedDisplay = metric ? feedMmMin : feedMmMin / 25.4;
-    const chipDisplay = metric ? toothFeedMm : toothFeedMm / 25.4;
-    const vcDisplay = metric ? actualVc : actualVc / 0.3048;
-    const axialDisplay = metric ? axialMm : axialMm / 25.4;
-    const radialDisplay = metric ? radialMm : radialMm / 25.4;
-    const mrrDisplay = metric ? finalMrrMm3Min : finalMrrMm3Min / 16387.064;
-
-    document.querySelector("#sf-rpm").textContent = `${fmt(rpm)} RPM`;
-    document.querySelector("#sf-feed").textContent =
-      `${fmt(feedDisplay, metric ? 1 : 2)} ${metric ? "mm/min" : "IPM"}`;
-    document.querySelector("#sf-chip").textContent =
-      `${fmt(chipDisplay, metric ? 3 : 4)} ${metric ? "mm/tooth" : "in/tooth"}`;
-    document.querySelector("#sf-surface").textContent =
-      `${fmt(vcDisplay)} ${metric ? "m/min" : "SFM"}`;
-    document.querySelector("#sf-axial").textContent =
-      `${fmt(axialDisplay, metric ? 2 : 3)} ${metric ? "mm" : "in"}`;
-    document.querySelector("#sf-radial").textContent =
-      `${fmt(radialDisplay, metric ? 2 : 3)} ${metric ? "mm" : "in"}`;
-    document.querySelector("#sf-mrr").textContent =
-      `${fmt(mrrDisplay, metric ? 0 : 3)} ${metric ? "mm³/min" : "in³/min"}`;
-    document.querySelector("#sf-power").textContent = `${fmt(powerKw,2)} kW`;
-
-    const rpmNote = document.querySelector("#sf-rpm-note");
-    if (theoreticalRpm < minRpm) {
-      rpmNote.textContent = `Raised from ${fmt(theoreticalRpm)} RPM to machine minimum`;
-    } else if (theoreticalRpm > maxRpm) {
-      rpmNote.textContent = `Limited from ${fmt(theoreticalRpm)} RPM to machine maximum`;
-    } else {
-      rpmNote.textContent = "Inside entered spindle range";
-    }
-
-    const status = document.querySelector("#sf-power-status");
-    status.className = "speed-feed-power-status";
-    const title = document.querySelector("#sf-power-title");
-    const copy = document.querySelector("#sf-power-copy");
-
-    if (powerLimited) {
-      status.classList.add("warning");
-      title.textContent = "Feed reduced by spindle-power allowance";
-      copy.textContent =
-        `The estimated cut exceeded ${fmt(usableKw,2)} kW of usable power. Feed was reduced automatically.`;
-    } else {
-      title.textContent = "Estimated cutting power is inside the entered allowance";
-      copy.textContent =
-        `The estimate is below the ${fmt(usableKw,2)} kW usable-power planning limit.`;
-    }
-
-    const notes = document.querySelector("#sf-notes");
-    notes.replaceChildren();
-
-    addNote(`Sorotec table cutting speed: ${material.vc} m/min.`);
-    addNote(`Interpolated Sorotec tooth feed before mode adjustment: ${fmt(tableFz,3)} mm/tooth.`);
-    addNote(`Mode: ${modeName.charAt(0).toUpperCase() + modeName.slice(1)}.`);
-    addNote("Use the shortest practical cutter to reduce vibration and deflection.");
-    addNote("Confirm flute length safely exceeds the axial depth.");
-    addNote("Reduce engagement for weak workholding, long stickout, poor chip evacuation, or chatter.");
-
-    if (cut === "slot" && material.group === "steel") {
-      addNote("The PDF does not provide a steel slotting depth; the calculator uses a conservative 0.25 × diameter planning value.");
-    }
-
-    if (theoreticalRpm < minRpm) {
-      addNote("The calculated Sorotec RPM is below the entered spindle minimum. The resulting cutting speed is higher than the selected target.");
-    }
-
-    if (theoreticalRpm > maxRpm) {
-      addNote("RPM was capped at the machine maximum; feed was recalculated from the capped RPM.");
-    }
-
-    results.hidden = false;
-    results.scrollIntoView({behavior:"smooth", block:"start"});
-  });
-
-  form.addEventListener("reset", () => {
-    setTimeout(() => {
-      results.hidden = true;
-      message.textContent = "";
-      updateCustomFields();
-    }, 0);
-  });
+  f.addEventListener('reset',()=>setTimeout(()=>{r.hidden=true;msg.textContent='';ui();},0));
 })();
