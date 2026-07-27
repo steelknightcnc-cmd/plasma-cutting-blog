@@ -485,3 +485,133 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Quote Builder geometry upload and process defaults v1.2 */
+.mq-geometry-box {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 18px;
+  padding: 16px;
+  border: 1px solid rgba(0, 216, 245, .28);
+  border-radius: 12px;
+  background: rgba(0, 216, 245, .045);
+}
+
+.mq-geometry-box .full,
+.mq-process-note,
+.mq-check-field.full {
+  grid-column: 1 / -1;
+}
+
+.mq-file-field input[type="file"] {
+  min-height: 48px;
+  padding: 9px 10px;
+}
+
+.mq-file-status {
+  display: grid;
+  gap: 7px;
+  color: var(--mq-muted);
+  line-height: 1.5;
+}
+
+.mq-file-status strong {
+  color: var(--mq-text);
+}
+
+.mq-file-status small,
+.mq-field-help {
+  color: var(--mq-muted);
+  font-size: .78rem;
+  font-weight: 500;
+  line-height: 1.45;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.mq-file-warning {
+  display: grid;
+  gap: 4px;
+  color: #ffd255;
+  font-size: .84rem;
+  font-weight: 700;
+}
+
+.mq-check-field {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 12px 14px;
+  border: 1px solid var(--mq-border);
+  border-radius: 10px;
+  background: rgba(17, 29, 45, .72);
+  color: var(--mq-text);
+  font-weight: 800;
+  line-height: 1.45;
+}
+
+.mq-check-field input {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+  margin-top: 1px;
+  accent-color: var(--mq-cyan);
+}
+
+.mq-process-note {
+  align-self: stretch;
+  padding: 12px 14px;
+  border-left: 3px solid var(--mq-cyan);
+  background: rgba(0, 216, 245, .055);
+  color: var(--mq-muted);
+  font-size: .88rem;
+  line-height: 1.5;
+}
+
+.mq-process-note strong {
+  color: var(--mq-text);
+}
+
+.mq-panel input[readonly],
+.mq-panel select:disabled {
+  opacity: .78;
+  cursor: not-allowed;
+  background: #0b1421;
+}
+
+.mq-item-header small {
+  display: block;
+  margin-top: 3px;
+  color: var(--mq-muted);
+  word-break: break-word;
+}
+
+.mq-logo-preview {
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.mq-logo-preview span {
+  color: var(--mq-muted);
+  font-size: .82rem;
+  line-height: 1.45;
+}
+
+@media (max-width: 980px) {
+  .mq-geometry-box {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .mq-geometry-box {
+    grid-template-columns: 1fr;
+  }
+
+  .mq-geometry-box .full,
+  .mq-process-note,
+  .mq-check-field.full {
+    grid-column: auto;
+  }
+}
