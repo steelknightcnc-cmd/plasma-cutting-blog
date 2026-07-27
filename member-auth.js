@@ -7,7 +7,10 @@
   const page = document.body?.dataset?.memberPage || '';
   const qs = (selector, root = document) => root.querySelector(selector);
   const qsa = (selector, root = document) => Array.from(root.querySelectorAll(selector));
-  let recoveryMode = new URLSearchParams(window.location.search).get('reset') === '1';
+  const initialHash = new URLSearchParams(window.location.hash.replace(/^#/, ''));
+  const initialQuery = new URLSearchParams(window.location.search);
+  let recoveryMode = initialHash.get('type') === 'recovery' || initialQuery.get('reset') === '1';
+  const initialAuthError = initialHash.get('error_description') || initialQuery.get('error_description') || '';
 
   function setMessage(target, text, type = '') {
     if (!target) return;
@@ -67,7 +70,9 @@
   }
 
   function passwordResetUrl() {
-    return `${window.location.origin}/members.html?reset=1`;
+    // Keep this URL identical to the production Redirect URL configured in Supabase.
+    // Recovery mode is detected from Supabase's PASSWORD_RECOVERY event.
+    return `${window.location.origin}/members.html`;
   }
 
   function readCredentials(form) {
@@ -362,6 +367,17 @@
 
   async function initialize() {
     bindLoginForms();
+
+    if (initialAuthError) {
+      const status = qs('[data-member-connection-status]');
+      const friendly = decodeURIComponent(String(initialAuthError).replace(/\+/g, ' '));
+      setMessage(
+        status,
+        `That password link is no longer valid (${friendly}). Request one new password-reset email and use only the newest link.`,
+        'error'
+      );
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
     const { data: { session }, error } = await client.auth.getSession();
     if (error) console.error(error);
 
