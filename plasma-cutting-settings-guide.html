@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Plasma Cut Forge reference guide for starting plasma cutting amperage, air pressure, speed, and standoff on mild steel, stainless steel, and aluminum in metric or imperial units.">
+  <title>Plasma Cutting Settings Guide | Plasma Cut Forge</title>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#070b14">
+  <link rel="stylesheet" href="/styles.css?v=48.0">
+  <script src="/plasma-cutting-settings-guide.js?v=1.0" defer></script>
+  <script src="/membership-widget.js?v=1.1" defer></script>
+</head>
+<body class="plasma-settings-guide-page">
+<header class="site-header industrial-header">
+  <a class="brand industrial-brand" href="/#top" aria-label="Plasma Cut Forge home">
+    <span class="brand-wordmark">PLASMA<span>CUT</span>FORGE</span>
+    <small>CNC plasma tools &amp; shop-floor guides</small>
+  </a>
+  <nav class="industrial-nav" aria-label="Primary navigation">
+    <a href="/#top">Home</a>
+    <div class="calculator-nav-dropdown">
+      <a class="calculator-nav-trigger active" href="/calculators.html">
+        Calculators <span aria-hidden="true">▾</span>
+      </a>
+      <div class="calculator-nav-menu" aria-label="Calculator categories">
+        <a href="/calculators.html#plasma-cutting">Plasma Cutting</a>
+        <a href="/calculators.html#machining">Machining</a>
+        <a href="/calculators.html#welding">Welding</a>
+      </div>
+    </div>
+    <a href="/guides/">Guides</a>
+    <a href="/blog/">Blog</a>
+    <a href="/community/">Community</a>
+    <a href="/#articles">Articles</a>
+    <a href="/about-the-builder.html">About</a>
+    <a class="membership-nav-button" href="https://ko-fi.com/plasmacutforge/tiers" target="_blank" rel="noopener noreferrer">Membership</a>
+  </nav>
+  <form class="global-search-form" action="/search.html" method="get" role="search">
+    <label class="sr-only" for="global-search-input">Search Plasma Cut Forge</label>
+    <input id="global-search-input" name="q" type="search" placeholder="Search the Forge" required>
+    <button type="submit">Search</button>
+  </form>
+</header>
+
+<main class="plasma-settings-guide-main">
+  <section class="plasma-settings-guide-hero">
+    <p class="industrial-kicker">Plasma cutting reference</p>
+    <h1>Plasma Cutting Settings Guide</h1>
+    <p>
+      Compare practical starting ranges for mild steel, stainless steel, and aluminum. Switch the complete guide
+      between metric and imperial units without leaving the page.
+    </p>
+    <div class="plasma-guide-hero-actions">
+      <a class="plasma-guide-primary-link" href="#settings-table">View settings</a>
+      <a class="plasma-guide-secondary-link" href="/#calculator">Open settings calculator</a>
+    </div>
+  </section>
+
+  <section class="plasma-guide-disclaimer" aria-label="Important settings notice">
+    <strong>Starting reference—not a machine-specific cut chart.</strong>
+    <p>Confirm the consumable, amperage, pressure, and duty-cycle limits in your plasma cutter manual. Make one change at a time and record proven settings for your machine.</p>
+  </section>
+
+  <section class="plasma-guide-controls" aria-labelledby="guide-controls-heading">
+    <div>
+      <p class="industrial-kicker">Display controls</p>
+      <h2 id="guide-controls-heading">Choose units and material</h2>
+    </div>
+    <div class="plasma-guide-control-grid">
+      <label>
+        <span>Measurement system</span>
+        <select id="guide-unit-system">
+          <option value="metric" selected>Millimetres — mm / mm/min / bar</option>
+          <option value="imperial">Inches — in / IPM / PSI</option>
+        </select>
+      </label>
+      <label>
+        <span>Material</span>
+        <select id="guide-material-filter">
+          <option value="mild-steel" selected>Mild steel</option>
+          <option value="stainless">Stainless steel</option>
+          <option value="aluminum">Aluminum</option>
+          <option value="all">Show all materials</option>
+        </select>
+      </label>
+    </div>
+  </section>
+
+  <section class="plasma-guide-table-section" id="settings-table" aria-labelledby="settings-heading">
+    <div class="plasma-guide-section-heading">
+      <div>
+        <p class="industrial-kicker">Quick-reference chart</p>
+        <h2 id="settings-heading">Starting cutting settings</h2>
+      </div>
+      <span id="guide-unit-badge" class="plasma-guide-unit-badge">Metric</span>
+    </div>
+    <div id="plasma-settings-tables" class="plasma-settings-tables" aria-live="polite"></div>
+  </section>
+
+  <section class="plasma-guide-factors" aria-labelledby="factors-heading">
+    <div class="plasma-guide-section-heading">
+      <div>
+        <p class="industrial-kicker">Five variables</p>
+        <h2 id="factors-heading">What controls cut quality</h2>
+      </div>
+    </div>
+    <div class="plasma-guide-factor-grid">
+      <article><span>01</span><h3>Amperage</h3><p>Match amperage to the installed consumables and material thickness. Too little power usually forces an excessively slow cut.</p></article>
+      <article><span>02</span><h3>Cutting speed</h3><p>Speed strongly affects dross and bevel. Tune it in small steps after confirming the torch, air, and consumables are correct.</p></article>
+      <article><span>03</span><h3>Air supply</h3><p>Pressure must remain stable while cutting. Clean, dry air and adequate sustained flow matter more than tank pressure alone.</p></article>
+      <article><span>04</span><h3>Standoff</h3><p>Hold the torch at the correct cut height and use a higher pierce height when required to reduce blowback damage.</p></article>
+      <article><span>05</span><h3>Consumables</h3><p>A damaged nozzle or deeply pitted electrode can ruin a cut even when every numerical setting is correct.</p></article>
+    </div>
+  </section>
+
+  <section class="plasma-guide-diagnostics" aria-labelledby="dross-heading">
+    <div class="plasma-guide-section-heading">
+      <div>
+        <p class="industrial-kicker">Shop-floor diagnosis</p>
+        <h2 id="dross-heading">Read the cut before changing settings</h2>
+      </div>
+    </div>
+    <div class="plasma-guide-diagnostic-grid">
+      <article><strong>Heavy removable bottom dross</strong><p>Usually points to a cut that is too slow. Increase speed gradually and retest.</p></article>
+      <article><strong>Top spatter or incomplete penetration</strong><p>Often means the torch is moving too fast, the amperage is too low, or the air supply is unstable.</p></article>
+      <article><strong>Excessive bevel</strong><p>Check torch squareness, standoff, consumable condition, cut direction, and machine motion before changing amperage.</p></article>
+      <article><strong>Rough or wandering cut face</strong><p>Inspect the nozzle and electrode, then verify dry air, stable pressure, correct height, and smooth motion.</p></article>
+    </div>
+  </section>
+
+  <section class="plasma-guide-air" aria-labelledby="air-heading">
+    <div class="plasma-guide-section-heading">
+      <div>
+        <p class="industrial-kicker">Air-system reference</p>
+        <h2 id="air-heading">Typical air demand by amperage</h2>
+      </div>
+    </div>
+    <div class="plasma-guide-table-wrap">
+      <table class="plasma-guide-table plasma-guide-air-table">
+        <thead><tr><th>Amperage range</th><th id="air-pressure-heading">Pressure</th><th id="air-flow-heading">Flow</th><th>Shop starting point</th></tr></thead>
+        <tbody id="plasma-air-table-body"></tbody>
+      </table>
+    </div>
+    <p class="plasma-guide-table-note">Use the pressure shown at the plasma cutter while air is flowing. Always verify the required flow and pressure in the manufacturer documentation for your exact machine.</p>
+  </section>
+</main>
+
+<aside class="kofi-membership-widget is-expanded" data-membership-widget aria-label="Plasma Cut Forge membership">
+  <button class="kofi-membership-tab" type="button" data-membership-toggle aria-expanded="true"><span>Join the Forge</span></button>
+  <div class="kofi-membership-panel" data-membership-panel>
+    <div class="kofi-membership-widget-copy">
+      <span class="kofi-membership-eyebrow">Ko-fi Membership</span>
+      <strong>Join the Forge</strong>
+      <small>Forge Supporter · $5/month</small>
+      <p>Support new tools, machine profiles, technical articles, and project-build updates.</p>
+    </div>
+    <div class="kofi-membership-widget-actions">
+      <a class="kofi-membership-primary" href="https://ko-fi.com/plasmacutforge/tiers" target="_blank" rel="noopener noreferrer">Become a Member</a>
+      <a class="kofi-membership-secondary" href="https://ko-fi.com/plasmacutforge" target="_blank" rel="noopener noreferrer">One-time support</a>
+    </div>
+  </div>
+</aside>
+
+<footer class="site-footer">
+  <div class="site-footer-primary">
+    <p>© 2026 Plasma Cut Forge.</p>
+    <p class="site-footer-warning">Guide values are starting references—not guaranteed machine settings.</p>
+  </div>
+</footer>
+</body>
+</html>
