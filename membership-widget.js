@@ -527,3 +527,28 @@
     start();
   }
 })();
+
+(() => {
+  "use strict";
+
+  function routeMembershipNavigationToPortal() {
+    const membershipLinks = document.querySelectorAll(
+      'a.membership-nav-button, header nav a[href*="ko-fi.com/plasmacutforge/tiers"], .site-header a[href*="ko-fi.com/plasmacutforge/tiers"]'
+    );
+
+    membershipLinks.forEach((link) => {
+      link.setAttribute("href", "/members.html");
+      link.removeAttribute("target");
+      link.removeAttribute("rel");
+      link.setAttribute("aria-label", "Open Plasma Cut Forge member portal");
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", routeMembershipNavigationToPortal, {
+      once: true
+    });
+  } else {
+    routeMembershipNavigationToPortal();
+  }
+})();
