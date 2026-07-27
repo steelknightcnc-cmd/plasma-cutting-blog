@@ -5,45 +5,81 @@
   const PSI_TO_BAR = 0.0689476;
   const CFM_TO_L_MIN = 28.3168;
 
-  const materials = {
+  // Requested thickness sequence: 1, 1.5, 2, 2.5, 3 mm, then every whole millimetre through 30 mm.
+  const GUIDE_THICKNESSES_MM = [1, 1.5, 2, 2.5, 3, ...Array.from({ length: 27 }, (_, index) => index + 4)];
+
+  const materialProfiles = {
     'mild-steel': {
       title: 'Mild steel',
       description: 'General air-plasma starting ranges for common mild-steel plate and sheet.',
-      rows: [
-        { label: '16 ga', thickness: 0.060, amps: '20–30 A', pressure: [55, 60], speed: [150, 200], standoff: [0.0625, 0.0625] },
-        { label: '14 ga', thickness: 0.075, amps: '30–40 A', pressure: [58, 62], speed: [120, 160], standoff: [0.0625, 0.0625] },
-        { label: '10 ga', thickness: 0.135, amps: '40 A', pressure: [60, 65], speed: [80, 100], standoff: [0.125, 0.125] },
-        { label: '3/16 in', thickness: 0.188, amps: '40–50 A', pressure: [62, 68], speed: [45, 65], standoff: [0.125, 0.125] },
-        { label: '1/4 in', thickness: 0.250, amps: '60 A', pressure: [65, 70], speed: [55, 75], standoff: [0.125, 0.125] },
-        { label: '3/8 in', thickness: 0.375, amps: '60–80 A', pressure: [68, 75], speed: [30, 45], standoff: [0.125, 0.125] },
-        { label: '1/2 in', thickness: 0.500, amps: '80 A', pressure: [70, 78], speed: [22, 35], standoff: [0.125, 0.1875] },
-        { label: '3/4 in', thickness: 0.750, amps: '80–100 A', pressure: [75, 80], speed: [12, 18], standoff: [0.1875, 0.1875] },
-        { label: '1 in', thickness: 1.000, amps: '100 A+', pressure: [78, 85], speed: [8, 12], standoff: [0.1875, 0.1875] }
-      ]
+      anchors: [
+        { mm: 1.5, pressure: [55, 60], speed: [150, 200], standoff: [0.0625, 0.0625] },
+        { mm: 1.9, pressure: [58, 62], speed: [120, 160], standoff: [0.0625, 0.0625] },
+        { mm: 3.4, pressure: [60, 65], speed: [80, 100], standoff: [0.125, 0.125] },
+        { mm: 4.8, pressure: [62, 68], speed: [45, 65], standoff: [0.125, 0.125] },
+        { mm: 6.3, pressure: [65, 70], speed: [55, 75], standoff: [0.125, 0.125] },
+        { mm: 9.5, pressure: [68, 75], speed: [30, 45], standoff: [0.125, 0.125] },
+        { mm: 12.7, pressure: [70, 78], speed: [22, 35], standoff: [0.125, 0.1875] },
+        { mm: 19.0, pressure: [75, 80], speed: [12, 18], standoff: [0.1875, 0.1875] },
+        { mm: 25.4, pressure: [78, 85], speed: [8, 12], standoff: [0.1875, 0.1875] },
+        { mm: 30.0, pressure: [82, 90], speed: [6, 9], standoff: [0.1875, 0.2500] }
+      ],
+      amps(mm) {
+        if (mm <= 1.5) return '20–30 A';
+        if (mm <= 2.5) return '30–40 A';
+        if (mm <= 4) return '40 A';
+        if (mm <= 5) return '40–50 A';
+        if (mm <= 7) return '60 A';
+        if (mm <= 10) return '60–80 A';
+        if (mm <= 13) return '80 A';
+        if (mm <= 19) return '80–100 A';
+        return '100 A+';
+      }
     },
     stainless: {
       title: 'Stainless steel',
       description: 'Conservative starting ranges for air-plasma cutting on stainless steel.',
-      rows: [
-        { label: '16 ga', thickness: 0.060, amps: '20–30 A', pressure: [55, 60], speed: [120, 160], standoff: [0.0625, 0.0625] },
-        { label: '10 ga', thickness: 0.135, amps: '40 A', pressure: [60, 65], speed: [60, 80], standoff: [0.125, 0.125] },
-        { label: '1/4 in', thickness: 0.250, amps: '60 A', pressure: [65, 70], speed: [40, 55], standoff: [0.125, 0.125] },
-        { label: '3/8 in', thickness: 0.375, amps: '80 A', pressure: [70, 75], speed: [25, 35], standoff: [0.125, 0.125] },
-        { label: '1/2 in', thickness: 0.500, amps: '80 A', pressure: [72, 78], speed: [14, 20], standoff: [0.1875, 0.1875] },
-        { label: '3/4 in', thickness: 0.750, amps: '100 A', pressure: [75, 82], speed: [8, 13], standoff: [0.1875, 0.1875] }
-      ]
+      anchors: [
+        { mm: 1.5, pressure: [55, 60], speed: [120, 160], standoff: [0.0625, 0.0625] },
+        { mm: 3.4, pressure: [60, 65], speed: [60, 80], standoff: [0.125, 0.125] },
+        { mm: 6.3, pressure: [65, 70], speed: [40, 55], standoff: [0.125, 0.125] },
+        { mm: 9.5, pressure: [70, 75], speed: [25, 35], standoff: [0.125, 0.125] },
+        { mm: 12.7, pressure: [72, 78], speed: [14, 20], standoff: [0.1875, 0.1875] },
+        { mm: 19.0, pressure: [75, 82], speed: [8, 13], standoff: [0.1875, 0.1875] },
+        { mm: 25.4, pressure: [80, 88], speed: [5, 8], standoff: [0.1875, 0.2500] },
+        { mm: 30.0, pressure: [84, 92], speed: [4, 6], standoff: [0.2500, 0.2500] }
+      ],
+      amps(mm) {
+        if (mm <= 1.5) return '20–30 A';
+        if (mm <= 3.5) return '40 A';
+        if (mm <= 7) return '60 A';
+        if (mm <= 13) return '80 A';
+        if (mm <= 19) return '100 A';
+        return '100 A+';
+      }
     },
     aluminum: {
       title: 'Aluminum',
       description: 'Starting ranges for air-plasma cutting on common aluminum plate thicknesses.',
-      rows: [
-        { label: '1/8 in', thickness: 0.125, amps: '40 A', pressure: [62, 68], speed: [150, 200], standoff: [0.0625, 0.125] },
-        { label: '3/16 in', thickness: 0.188, amps: '40–50 A', pressure: [65, 70], speed: [100, 140], standoff: [0.125, 0.125] },
-        { label: '1/4 in', thickness: 0.250, amps: '60 A', pressure: [68, 72], speed: [80, 100], standoff: [0.125, 0.125] },
-        { label: '3/8 in', thickness: 0.375, amps: '80 A', pressure: [70, 76], speed: [40, 60], standoff: [0.125, 0.125] },
-        { label: '1/2 in', thickness: 0.500, amps: '80 A', pressure: [72, 78], speed: [20, 30], standoff: [0.1875, 0.1875] },
-        { label: '3/4 in', thickness: 0.750, amps: '100 A', pressure: [75, 82], speed: [10, 16], standoff: [0.1875, 0.1875] }
-      ]
+      anchors: [
+        { mm: 1.0, pressure: [58, 64], speed: [180, 240], standoff: [0.0625, 0.0625] },
+        { mm: 3.2, pressure: [62, 68], speed: [150, 200], standoff: [0.0625, 0.125] },
+        { mm: 4.8, pressure: [65, 70], speed: [100, 140], standoff: [0.125, 0.125] },
+        { mm: 6.3, pressure: [68, 72], speed: [80, 100], standoff: [0.125, 0.125] },
+        { mm: 9.5, pressure: [70, 76], speed: [40, 60], standoff: [0.125, 0.125] },
+        { mm: 12.7, pressure: [72, 78], speed: [20, 30], standoff: [0.1875, 0.1875] },
+        { mm: 19.0, pressure: [75, 82], speed: [10, 16], standoff: [0.1875, 0.1875] },
+        { mm: 25.4, pressure: [80, 88], speed: [6, 10], standoff: [0.1875, 0.2500] },
+        { mm: 30.0, pressure: [84, 92], speed: [4, 7], standoff: [0.2500, 0.2500] }
+      ],
+      amps(mm) {
+        if (mm <= 3.5) return '40 A';
+        if (mm <= 5) return '40–50 A';
+        if (mm <= 7) return '60 A';
+        if (mm <= 13) return '80 A';
+        if (mm <= 19) return '100 A';
+        return '100 A+';
+      }
     }
   };
 
@@ -75,11 +111,53 @@
     return first === second ? first : `${first}–${second}`;
   }
 
-  function thicknessText(row, system) {
-    if (system === 'metric') {
-      return `${rounded(row.thickness * IN_TO_MM, 1)} mm${row.label.includes('ga') ? ` (${row.label})` : ''}`;
+  function interpolateNumber(first, second, amount) {
+    return first + ((second - first) * amount);
+  }
+
+  function interpolatePair(first, second, amount) {
+    return [
+      interpolateNumber(first[0], second[0], amount),
+      interpolateNumber(first[1], second[1], amount)
+    ];
+  }
+
+  function valuesAtThickness(anchors, thicknessMm) {
+    if (thicknessMm <= anchors[0].mm) return { ...anchors[0] };
+    if (thicknessMm >= anchors[anchors.length - 1].mm) return { ...anchors[anchors.length - 1] };
+
+    for (let index = 0; index < anchors.length - 1; index += 1) {
+      const lower = anchors[index];
+      const upper = anchors[index + 1];
+      if (thicknessMm >= lower.mm && thicknessMm <= upper.mm) {
+        const amount = (thicknessMm - lower.mm) / (upper.mm - lower.mm);
+        return {
+          pressure: interpolatePair(lower.pressure, upper.pressure, amount),
+          speed: interpolatePair(lower.speed, upper.speed, amount),
+          standoff: interpolatePair(lower.standoff, upper.standoff, amount)
+        };
+      }
     }
-    return `${row.label.includes('ga') ? `${row.label} · ` : ''}${rounded(row.thickness, 3)} in`;
+
+    return { ...anchors[anchors.length - 1] };
+  }
+
+  function materialRows(profile) {
+    return GUIDE_THICKNESSES_MM.map(thicknessMm => {
+      const values = valuesAtThickness(profile.anchors, thicknessMm);
+      return {
+        thicknessMm,
+        amps: profile.amps(thicknessMm),
+        pressure: values.pressure,
+        speed: values.speed,
+        standoff: values.standoff
+      };
+    });
+  }
+
+  function thicknessText(row, system) {
+    if (system === 'metric') return `${rounded(row.thicknessMm, 1)} mm`;
+    return `${rounded(row.thicknessMm / IN_TO_MM, 3)} in`;
   }
 
   function speedText(values, system) {
@@ -98,8 +176,9 @@
   }
 
   function renderMaterialTable(key, system) {
-    const material = materials[key];
-    const rows = material.rows.map(row => `
+    const material = materialProfiles[key];
+    const rowsData = materialRows(material);
+    const rows = rowsData.map(row => `
       <tr>
         <td data-label="Thickness"><strong>${thicknessText(row, system)}</strong></td>
         <td data-label="Amperage">${row.amps}</td>
@@ -112,7 +191,7 @@
       <article class="plasma-guide-material-card">
         <header>
           <div><p>Material reference</p><h3>${material.title}</h3></div>
-          <span>${material.rows.length} thicknesses</span>
+          <span>${rowsData.length} thicknesses</span>
         </header>
         <p class="plasma-guide-material-description">${material.description}</p>
         <div class="plasma-guide-table-wrap">
@@ -144,7 +223,7 @@
     unitBadge.textContent = system === 'metric' ? 'Metric · mm' : 'Imperial · in';
     unitBadge.dataset.system = system;
 
-    const keys = material === 'all' ? Object.keys(materials) : [material];
+    const keys = material === 'all' ? Object.keys(materialProfiles) : [material];
     tableHost.innerHTML = keys.map(key => renderMaterialTable(key, system)).join('');
     renderAirTable(system);
 
