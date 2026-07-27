@@ -6091,3 +6091,7 @@ footer > * {
 @media(max-width:1000px){.speed-feed-result-grid-v11{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:700px){.machining-mode-grid,.speed-feed-result-grid-v11{grid-template-columns:1fr}.industrial-nav{align-items:initial!important}.calculator-nav-dropdown,.calculator-nav-trigger{min-height:auto!important}}
 
 .speed-feed-profile-note{margin:1rem 0 0;padding:.85rem;border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:9px;background:rgba(0,217,255,.04)}.speed-feed-profile-note strong{display:block;margin-bottom:.25rem;font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-size:1.25rem;text-transform:uppercase}.speed-feed-profile-note p{margin:0;color:var(--muted)}
+
+/* Machining calculator v1.4 — 20 mm and fixed flute selector */
+.speed-feed-input-grid label > small {display:block;color:var(--muted);font-size:.72rem;line-height:1.4}
+#sf-flutes {cursor:pointer}
