@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="/member-quote-builder.css?v=1.0">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
   <script src="/supabase-config.js?v=5.0" defer></script>
-  <script src="/member-auth.js?v=1.0" defer></script>
+  <script src="/member-auth.js?v=1.2" defer></script>
   <script src="/membership-widget.js?v=1.1" defer></script>
 </head>
 <body data-member-page="hub">
@@ -48,7 +48,12 @@
   <section class="member-access-hero">
     <p class="industrial-kicker">Forge Member exclusive</p>
     <h1>Member Access</h1>
-    <p>Sign in with the same email address used for your Ko-fi membership. Plasma Cut Forge uses a secure one-time email link—no password is required.</p>
+    <p>
+      A paid <strong>$5 Forge Membership</strong> is required before the exclusive member tools can be opened. Join through Ko-fi, then sign in with the same email address used for the purchase. Plasma Cut Forge uses a secure one-time email link—no password is required.
+      <span class="pcf-member-actions" style="margin-top:18px">
+        <a class="pcf-button" href="https://ko-fi.com/plasmacutforge/tiers" target="_blank" rel="noopener noreferrer">Join for $5 on Ko-fi</a>
+      </span>
+    </p>
   </section>
 
   <div class="pcf-member-status-bar">
@@ -59,7 +64,7 @@
   <section class="pcf-member-gate" data-member-guest hidden>
     <p class="industrial-kicker">Secure sign in</p>
     <h2>Open the Member Forge</h2>
-    <p>Enter the exact email address attached to your active Ko-fi membership. A secure access link will be sent to that address.</p>
+    <p>After purchasing the $5 Forge Membership, enter the exact email address used on Ko-fi. A secure access link will be sent to that address.</p>
     <form class="pcf-member-login-form" data-member-login-form>
       <label class="sr-only" for="member-email">Member email</label>
       <input id="member-email" name="email" type="email" autocomplete="email" placeholder="member@example.com" required>
@@ -67,7 +72,7 @@
       <p class="pcf-member-message" data-member-login-message></p>
     </form>
     <div class="pcf-member-actions" style="margin-top:20px">
-      <a class="pcf-button secondary" href="https://ko-fi.com/plasmacutforge/tiers" target="_blank" rel="noopener noreferrer">Become a Member</a>
+      <a class="pcf-button secondary" href="https://ko-fi.com/plasmacutforge/tiers" target="_blank" rel="noopener noreferrer">Join for $5 on Ko-fi</a>
     </div>
   </section>
 
@@ -88,9 +93,9 @@
   <section class="pcf-member-gate" data-member-inactive hidden>
     <p class="industrial-kicker">Membership not active</p>
     <h2>Access Is Locked</h2>
-    <p>Signed in as <strong data-member-account-email>—</strong>, but this email is not on the active Forge Member list. Confirm that your Ko-fi membership uses the same email address.</p>
+    <p>Signed in as <strong data-member-account-email>—</strong>, but an active paid $5 Forge Membership was not found for this email. Confirm that the Ko-fi purchase used the same email address.</p>
     <div class="pcf-member-actions">
-      <a class="pcf-button" href="https://ko-fi.com/plasmacutforge/tiers" target="_blank" rel="noopener noreferrer">View Membership</a>
+      <a class="pcf-button" href="https://ko-fi.com/plasmacutforge/tiers" target="_blank" rel="noopener noreferrer">Buy the $5 Membership</a>
       <a class="pcf-button secondary" href="/contact.html">Contact Plasma Cut Forge</a>
     </div>
   </section>

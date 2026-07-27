@@ -43,7 +43,7 @@
   async function sendMagicLink(email, button, messageTarget) {
     const normalizedEmail = String(email || '').trim().toLowerCase();
     if (!normalizedEmail || !normalizedEmail.includes('@')) {
-      setMessage(messageTarget, 'Enter the email address used for your Ko-fi membership.', 'error');
+      setMessage(messageTarget, 'Enter the email address used to purchase the $5 Forge Membership.', 'error');
       return;
     }
 
@@ -111,7 +111,7 @@
       show(guestPanel, true);
       show(memberPanel, false);
       show(inactivePanel, false);
-      setMessage(statusTarget, 'Sign in with the same email address used for your Ko-fi membership.');
+      setMessage(statusTarget, 'Purchase the $5 Forge Membership, then sign in with the same email address used on Ko-fi.');
       return;
     }
 
@@ -132,7 +132,7 @@
         show(inactivePanel, true);
         setMessage(
           statusTarget,
-          'This email is signed in, but an active Forge membership was not found. Use the same email as Ko-fi or contact Plasma Cut Forge.',
+          'This email is signed in, but an active paid $5 Forge Membership was not found. Use the same email as Ko-fi or contact Plasma Cut Forge.',
           'warning'
         );
       }
@@ -176,7 +176,7 @@
         show(inactiveGate, true);
         setMessage(
           statusTarget,
-          'You are signed in, but this email does not currently have active Forge Member access.',
+          'You are signed in, but this email does not currently have an active paid $5 Forge Membership.',
           'warning'
         );
         return;

@@ -12,7 +12,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js" defer></script>
   <script src="/supabase-config.js?v=5.0" defer></script>
-  <script src="/member-auth.js?v=1.0" defer></script>
+  <script src="/member-auth.js?v=1.2" defer></script>
   <script src="/member-quote-builder.js?v=1.0" defer></script>
   <script src="/membership-widget.js?v=1.1" defer></script>
 </head>
@@ -69,7 +69,7 @@
   <section class="pcf-member-gate" data-member-guest hidden>
     <p class="industrial-kicker">Member sign in required</p>
     <h2>Unlock the Quote Builder</h2>
-    <p>Use the same email address attached to your active Ko-fi membership.</p>
+    <p>A paid $5 Forge Membership is required. Use the same email address used for the Ko-fi purchase.</p>
     <form class="pcf-member-login-form" data-member-login-form>
       <label class="sr-only" for="builder-member-email">Member email</label>
       <input id="builder-member-email" name="email" type="email" autocomplete="email" placeholder="member@example.com" required>
@@ -77,16 +77,16 @@
       <p class="pcf-member-message" data-member-login-message></p>
     </form>
     <div class="pcf-member-actions" style="margin-top:20px">
-      <a class="pcf-button secondary" href="https://ko-fi.com/plasmacutforge/tiers" target="_blank" rel="noopener noreferrer">Become a Member</a>
+      <a class="pcf-button secondary" href="https://ko-fi.com/plasmacutforge/tiers" target="_blank" rel="noopener noreferrer">Join for $5 on Ko-fi</a>
     </div>
   </section>
 
   <section class="pcf-member-gate" data-member-inactive hidden>
     <p class="industrial-kicker">Membership not active</p>
     <h2>Member Tool Locked</h2>
-    <p>Signed in as <strong data-member-account-email>—</strong>. Active Forge Member access was not found for this email.</p>
+    <p>Signed in as <strong data-member-account-email>—</strong>. An active paid $5 Forge Membership was not found for this email.</p>
     <div class="pcf-member-actions">
-      <a class="pcf-button" href="https://ko-fi.com/plasmacutforge/tiers" target="_blank" rel="noopener noreferrer">View Membership</a>
+      <a class="pcf-button" href="https://ko-fi.com/plasmacutforge/tiers" target="_blank" rel="noopener noreferrer">Buy the $5 Membership</a>
       <a class="pcf-button secondary" href="/contact.html">Contact Plasma Cut Forge</a>
     </div>
   </section>
