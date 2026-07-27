@@ -6170,3 +6170,56 @@ footer > * {
 @media(max-width:700px){
   .cut-cost-estimator-shell iframe{min-height:1750px;height:1750px}
 }
+
+/* Plasma Cut Cost & Time Estimator v1.1 — native Plasma Cut Forge calculator */
+.pcf-cost-form{display:grid;gap:1rem;margin:2rem 0}
+.pcf-cost-panel{padding:clamp(1rem,3vw,1.7rem);border:1px solid rgba(0,229,255,.24);border-radius:16px;background:linear-gradient(145deg,rgba(16,24,39,.94),rgba(9,15,25,.96));box-shadow:0 18px 48px rgba(0,0,0,.2)}
+.pcf-cost-panel-heading{display:flex;gap:1rem;align-items:center;margin-bottom:1.2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+.pcf-cost-panel-heading>span{display:grid;width:48px;height:48px;place-items:center;border:1px solid var(--accent);border-radius:12px;color:var(--accent);font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-size:1.65rem;font-weight:900}
+.pcf-cost-panel-heading p{margin:0;color:var(--accent);font-size:.72rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.pcf-cost-panel-heading h2{margin:.1rem 0 0;font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);line-height:1;text-transform:uppercase}
+.pcf-segmented{display:inline-grid;grid-template-columns:repeat(2,minmax(130px,1fr));gap:.35rem;margin-bottom:1rem;padding:.3rem;border:1px solid var(--border);border-radius:10px;background:#080e17}
+.pcf-segmented button{min-height:44px;padding:.55rem .9rem;border:0;border-radius:7px;background:transparent;color:var(--muted);font-weight:900;cursor:pointer}
+.pcf-segmented button.is-active{background:linear-gradient(135deg,var(--accent),#008dff);color:#041019}
+.pcf-cost-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.9rem}
+.pcf-cost-grid label{display:grid;align-content:start;gap:.4rem;min-width:0}
+.pcf-cost-grid label>span{font-weight:800}
+.pcf-cost-grid label>small{color:var(--muted);font-size:.72rem;line-height:1.45}
+.pcf-cost-grid input,.pcf-cost-grid select{width:100%;min-height:50px;padding:.72rem .78rem;border:1px solid var(--border);border-radius:9px;background:var(--surface-2);color:var(--text);outline:none}
+.pcf-cost-grid input:focus,.pcf-cost-grid select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,229,255,.1)}
+.pcf-file-field{grid-column:span 2}
+.pcf-file-field input{padding:.55rem}
+.pcf-input-prefix,.pcf-input-suffix{display:grid;align-items:center;overflow:hidden;border:1px solid var(--border);border-radius:9px;background:var(--surface-2)}
+.pcf-input-prefix{grid-template-columns:auto 1fr auto}.pcf-input-suffix{grid-template-columns:1fr auto}
+.pcf-input-prefix input,.pcf-input-suffix input{border:0;border-radius:0;background:transparent;box-shadow:none!important}
+.pcf-input-prefix b,.pcf-input-suffix b{padding:0 .75rem;color:var(--muted);font-size:.82rem;white-space:nowrap}
+.pcf-dxf-panel{display:grid;gap:1rem}
+.pcf-dxf-status,.pcf-dxf-warning{padding:.85rem 1rem;border:1px solid var(--border);border-radius:9px;background:rgba(255,255,255,.025);color:var(--muted);font-size:.86rem;line-height:1.5}
+.pcf-dxf-status strong{color:var(--text)}
+.pcf-dxf-warning{margin:0;border-color:rgba(255,209,102,.45);color:var(--warning);background:rgba(255,209,102,.05)}
+#dxf-preview{display:block;width:100%;height:auto;min-height:260px;border:1px solid var(--border);border-radius:12px;background:#07101b}
+.pcf-cost-actions{display:flex;gap:.7rem;flex-wrap:wrap;margin:.2rem 0 1rem}
+.pcf-primary-button,.pcf-secondary-button,.pcf-export-actions button{min-height:50px;padding:.7rem 1rem;border:1px solid var(--accent);border-radius:9px;font-weight:900;cursor:pointer}
+.pcf-primary-button{background:linear-gradient(135deg,var(--accent),#008dff);color:#041019}
+.pcf-secondary-button,.pcf-export-actions button{background:transparent;color:var(--text);border-color:var(--border)}
+.pcf-secondary-button:hover,.pcf-export-actions button:hover{border-color:var(--accent)}
+.pcf-results{margin:3rem 0;padding:clamp(1.2rem,4vw,2rem);scroll-margin-top:6rem;border:1px solid rgba(54,241,163,.42);border-radius:18px;background:linear-gradient(145deg,rgba(9,24,29,.96),rgba(9,15,25,.98));box-shadow:0 22px 70px rgba(0,0,0,.26)}
+.pcf-results-header{display:flex;justify-content:space-between;gap:1rem;align-items:end;margin-bottom:1.2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+.pcf-results-header h2{margin:.15rem 0 0;font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-size:clamp(2.5rem,5vw,4.2rem);line-height:.9;text-transform:uppercase}
+.pcf-export-actions{display:flex;gap:.55rem;flex-wrap:wrap}
+.pcf-results-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.75rem}
+.pcf-results-grid article{padding:1rem;border:1px solid var(--border);border-radius:11px;background:rgba(255,255,255,.025)}
+.pcf-results-grid span{display:block;color:var(--muted);font-size:.72rem;font-weight:750;text-transform:uppercase}
+.pcf-results-grid strong{display:block;margin-top:.35rem;font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-size:1.75rem;line-height:1.1}
+.pcf-results-grid .pcf-result-total{border-color:rgba(54,241,163,.45);background:rgba(54,241,163,.06)}
+.pcf-results-grid .pcf-result-total strong{color:var(--success);font-size:2.15rem}
+.pcf-estimate-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.55rem;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)}
+.pcf-estimate-summary div{padding:.7rem;border-radius:8px;background:rgba(255,255,255,.02)}
+.pcf-estimate-summary span,.pcf-estimate-summary strong{display:block}.pcf-estimate-summary span{color:var(--muted);font-size:.7rem}.pcf-estimate-summary strong{margin-top:.2rem}
+.pcf-cost-explanation{margin:3rem 0 5rem;padding:1.2rem;border-left:4px solid var(--accent);border-radius:10px;background:rgba(0,229,255,.04)}
+.pcf-cost-explanation h2{margin:0 0 .5rem;font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-size:2rem;text-transform:uppercase}
+.pcf-cost-explanation p{margin:0;color:var(--muted)}
+[hidden]{display:none!important}
+@media(max-width:1000px){.pcf-cost-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.pcf-results-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.pcf-estimate-summary{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.pcf-cost-grid,.pcf-results-grid,.pcf-estimate-summary{grid-template-columns:1fr}.pcf-file-field{grid-column:auto}.pcf-results-header{align-items:flex-start;flex-direction:column}.pcf-export-actions{width:100%}.pcf-export-actions button{flex:1}.pcf-segmented{display:grid;width:100%}}
+@media print{.site-header,.kofi-membership-widget,.site-footer,.pcf-cost-form,.cut-cost-estimator-notice,.pcf-cost-explanation,.pcf-export-actions{display:none!important}.cut-cost-estimator-hero{padding:1rem 0}.pcf-results{display:block!important;margin:0;border:0;box-shadow:none}.pcf-results-grid{grid-template-columns:repeat(2,1fr)}}

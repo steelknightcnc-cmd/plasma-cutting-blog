@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Estimate plasma cutting time and cost from manual cut length or a DXF file, including machine rate, pierces, consumables, material cost, and waste.">
+  <meta name="description" content="Estimate CNC plasma cutting time and job cost from manual cut length or a DXF file, including machine time, pierces, consumables, material cost, and waste.">
   <title>Plasma Cut Cost &amp; Time Estimator | Plasma Cut Forge</title>
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -11,7 +11,9 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
   <meta name="theme-color" content="#070b14">
-  <link rel="stylesheet" href="/styles.css?v=46.0">
+  <link rel="stylesheet" href="/styles.css?v=47.0">
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js" defer></script>
+  <script src="/cut-cost-time-estimator.js?v=1.1" defer></script>
   <script src="/membership-widget.js?v=1.1" defer></script>
 </head>
 <body class="cut-cost-estimator-page">
@@ -49,38 +51,241 @@
 <main class="cut-cost-estimator-main">
   <section class="cut-cost-estimator-hero">
     <p class="industrial-kicker">Plasma job-cost planning</p>
-    <h1>Cut Cost &amp; Time Estimator</h1>
+    <h1>Plasma Cut Cost &amp; Time Estimator</h1>
     <p>
-      Estimate cutting time and project cost from a manual cut length or a DXF file. Adjust cutting speed,
-      pierce time, quantity, shop rate, consumables, sheet cost, and nesting waste to match your machine and shop.
+      Estimate machine time and job cost from a manual cut length or a DXF file. Adjust cutting speed,
+      pierce time, quantity, machine rate, consumables, material price, and nesting waste to match your shop.
     </p>
   </section>
 
   <section class="cut-cost-estimator-notice" aria-label="Estimator notice">
     <strong>Planning estimate only</strong>
     <p>
-      Verify DXF geometry and pierce count before quoting. Real job cost can also include programming, setup,
-      loading, unloading, secondary operations, scrap, and machine-specific performance.
+      Verify DXF geometry, pierce count, speed, and material usage before quoting. Real jobs may also include
+      programming, setup, loading, unloading, grinding, bending, welding, packaging, and delivery.
     </p>
   </section>
 
-  <section class="cut-cost-estimator-shell" aria-label="Cut cost and time estimator">
-    <iframe
-      src="https://testtalkhq.com/embed/cut-cost-time-estimator/"
-      width="100%"
-      height="1550"
-      frameborder="0"
-      loading="lazy"
-      title="Cut-Cost &amp; Time Estimator — TestTalkHQ"
-      style="border:0;max-width:100%;"
-    ></iframe>
+  <form class="pcf-cost-form" id="pcf-cost-form" novalidate>
+    <section class="pcf-cost-panel" aria-labelledby="geometry-heading">
+      <div class="pcf-cost-panel-heading">
+        <span>01</span>
+        <div>
+          <p>Geometry</p>
+          <h2 id="geometry-heading">Part geometry</h2>
+        </div>
+      </div>
+
+      <div class="pcf-segmented" role="group" aria-label="Geometry source">
+        <button class="is-active" type="button" data-geometry-mode="manual" aria-pressed="true">Manual entry</button>
+        <button type="button" data-geometry-mode="dxf" aria-pressed="false">Upload DXF</button>
+      </div>
+
+      <div class="pcf-cost-grid" data-geometry-panel="manual">
+        <label>
+          <span>Cut length per part</span>
+          <input id="cut-length" type="number" min="0.01" step="0.01" value="1000" inputmode="decimal" required>
+          <small>Total torch-on path length for one part.</small>
+        </label>
+        <label>
+          <span>Length unit</span>
+          <select id="length-unit">
+            <option value="mm" selected>mm</option>
+            <option value="in">inches</option>
+          </select>
+        </label>
+        <label>
+          <span>Pierces per part</span>
+          <input id="pierces" type="number" min="0" step="1" value="1" inputmode="numeric" required>
+          <small>Usually one pierce for each closed contour.</small>
+        </label>
+      </div>
+
+      <div class="pcf-dxf-panel" data-geometry-panel="dxf" hidden>
+        <div class="pcf-cost-grid">
+          <label class="pcf-file-field">
+            <span>DXF file</span>
+            <input id="dxf-file" type="file" accept=".dxf,text/plain,application/dxf">
+            <small>The DXF is processed in your browser and is not uploaded.</small>
+          </label>
+          <label>
+            <span>DXF drawing unit</span>
+            <select id="dxf-unit">
+              <option value="mm" selected>mm</option>
+              <option value="in">inches</option>
+            </select>
+          </label>
+        </div>
+        <div class="pcf-dxf-status" id="dxf-status" role="status">Choose a DXF file to calculate path length and approximate pierce count.</div>
+        <canvas id="dxf-preview" width="980" height="420" aria-label="DXF preview"></canvas>
+        <p class="pcf-dxf-warning" id="dxf-warning" hidden></p>
+      </div>
+    </section>
+
+    <section class="pcf-cost-panel" aria-labelledby="process-heading">
+      <div class="pcf-cost-panel-heading">
+        <span>02</span>
+        <div>
+          <p>Process</p>
+          <h2 id="process-heading">Cutting inputs</h2>
+        </div>
+      </div>
+
+      <div class="pcf-cost-grid">
+        <label>
+          <span>Material</span>
+          <select id="material">
+            <option value="mild-steel" selected>Mild steel</option>
+            <option value="stainless">Stainless steel</option>
+            <option value="aluminum">Aluminum</option>
+          </select>
+        </label>
+        <label>
+          <span>Thickness</span>
+          <input id="thickness" type="number" min="0.1" step="0.1" value="6" inputmode="decimal" required>
+        </label>
+        <label>
+          <span>Thickness unit</span>
+          <select id="thickness-unit">
+            <option value="mm" selected>mm</option>
+            <option value="in">inches</option>
+          </select>
+        </label>
+        <label>
+          <span>Cutting speed</span>
+          <div class="pcf-input-suffix"><input id="cut-speed" type="number" min="1" step="1" value="1800" inputmode="decimal" required><b>mm/min</b></div>
+          <small>Auto-filled as a general starting point; replace it with your machine's proven speed.</small>
+        </label>
+        <label>
+          <span>Pierce time</span>
+          <div class="pcf-input-suffix"><input id="pierce-time" type="number" min="0" step="0.1" value="0.8" inputmode="decimal" required><b>sec</b></div>
+        </label>
+        <label>
+          <span>Quantity</span>
+          <input id="quantity" type="number" min="1" step="1" value="1" inputmode="numeric" required>
+        </label>
+        <label>
+          <span>Machine rate</span>
+          <div class="pcf-input-prefix"><b>$</b><input id="machine-rate" type="number" min="0" step="0.01" value="120" inputmode="decimal" required><b>/hr</b></div>
+        </label>
+        <label>
+          <span>Consumable cost per pierce</span>
+          <div class="pcf-input-prefix"><b>$</b><input id="consumable-per-pierce" type="number" min="0" step="0.001" value="0" inputmode="decimal"></div>
+          <small>Leave at $0 when consumables are included in the machine rate.</small>
+        </label>
+        <label>
+          <span>Setup / programming time</span>
+          <div class="pcf-input-suffix"><input id="setup-minutes" type="number" min="0" step="0.1" value="0" inputmode="decimal"><b>min</b></div>
+        </label>
+      </div>
+    </section>
+
+    <section class="pcf-cost-panel" aria-labelledby="material-heading">
+      <div class="pcf-cost-panel-heading">
+        <span>03</span>
+        <div>
+          <p>Optional</p>
+          <h2 id="material-heading">Material cost</h2>
+        </div>
+      </div>
+
+      <div class="pcf-cost-grid">
+        <label>
+          <span>Material price basis</span>
+          <select id="material-basis">
+            <option value="none" selected>Do not include material</option>
+            <option value="area">Price per area</option>
+            <option value="sheet">Whole sheet price</option>
+          </select>
+        </label>
+        <label data-material-field="price" hidden>
+          <span>Material price</span>
+          <div class="pcf-input-prefix"><b>$</b><input id="material-price" type="number" min="0" step="0.01" value="0" inputmode="decimal"></div>
+        </label>
+        <label data-material-field="price-unit" hidden>
+          <span>Price area unit</span>
+          <select id="price-area-unit">
+            <option value="m2" selected>per m²</option>
+            <option value="ft2">per ft²</option>
+            <option value="in2">per in²</option>
+          </select>
+        </label>
+        <label data-material-field="sheet-width" hidden>
+          <span>Sheet width</span>
+          <input id="sheet-width" type="number" min="0.01" step="0.01" value="1250" inputmode="decimal">
+        </label>
+        <label data-material-field="sheet-height" hidden>
+          <span>Sheet length</span>
+          <input id="sheet-height" type="number" min="0.01" step="0.01" value="2500" inputmode="decimal">
+        </label>
+        <label data-material-field="sheet-unit" hidden>
+          <span>Sheet dimension unit</span>
+          <select id="sheet-unit">
+            <option value="mm" selected>mm</option>
+            <option value="in">inches</option>
+          </select>
+        </label>
+        <label data-material-field="part-area" hidden>
+          <span>Part area</span>
+          <input id="part-area" type="number" min="0" step="0.01" value="0" inputmode="decimal">
+          <small>DXF mode uses the drawing's bounding-box area as a conservative estimate.</small>
+        </label>
+        <label data-material-field="area-unit" hidden>
+          <span>Part area unit</span>
+          <select id="part-area-unit">
+            <option value="mm2" selected>mm²</option>
+            <option value="cm2">cm²</option>
+            <option value="m2">m²</option>
+            <option value="in2">in²</option>
+            <option value="ft2">ft²</option>
+          </select>
+        </label>
+        <label data-material-field="waste" hidden>
+          <span>Waste / nesting factor</span>
+          <input id="waste-factor" type="number" min="1" step="0.01" value="1.20" inputmode="decimal">
+          <small>1.20 adds 20% for spacing, kerf allowance, and nesting loss.</small>
+        </label>
+      </div>
+    </section>
+
+    <div class="pcf-cost-actions">
+      <button class="pcf-primary-button" type="submit">Compute estimate</button>
+      <button class="pcf-secondary-button" id="reset-estimator" type="button">Reset</button>
+    </div>
+  </form>
+
+  <section class="pcf-results" id="pcf-results" aria-live="polite" hidden>
+    <div class="pcf-results-header">
+      <div>
+        <p class="industrial-kicker">Plasma Cut Forge estimate</p>
+        <h2>Job estimate</h2>
+      </div>
+      <div class="pcf-export-actions">
+        <button id="download-pdf" type="button">Download PDF</button>
+        <button id="download-csv" type="button">Download CSV</button>
+      </div>
+    </div>
+
+    <div class="pcf-results-grid">
+      <article><span>Cut time per part</span><strong id="result-cut-time">—</strong></article>
+      <article><span>Pierce time per part</span><strong id="result-pierce-time">—</strong></article>
+      <article><span>Total shop time</span><strong id="result-total-time">—</strong></article>
+      <article><span>Machine &amp; setup cost</span><strong id="result-machine-cost">—</strong></article>
+      <article><span>Consumable cost</span><strong id="result-consumable-cost">—</strong></article>
+      <article><span>Material cost</span><strong id="result-material-cost">—</strong></article>
+      <article class="pcf-result-total"><span>Total estimate</span><strong id="result-total-cost">—</strong></article>
+      <article class="pcf-result-total"><span>Cost per part</span><strong id="result-per-part">—</strong></article>
+    </div>
+
+    <div class="pcf-estimate-summary" id="estimate-summary"></div>
   </section>
 
-  <section class="cut-cost-estimator-credit">
+  <section class="pcf-cost-explanation">
+    <h2>How the estimate is calculated</h2>
     <p>
-      Embedded calculator provided by
-      <a href="https://testtalkhq.com/cut-cost-time-estimator/" target="_blank" rel="noopener noreferrer">TestTalkHQ</a>.
-      The estimator supports manual geometry and in-browser DXF processing with PDF and CSV export.
+      Torch-on time is cut length divided by cutting speed. Pierce time is added for every contour, then multiplied
+      by quantity. Machine rate is applied to cutting, piercing, and setup time. Consumables and optional material
+      cost are added separately so you can match the way your shop quotes work.
     </p>
   </section>
 </main>
