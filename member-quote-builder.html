@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Forge Member advanced CNC plasma cut-cost and customer quote builder with saved quotes, PDF, and CSV export.">
+  <title>Advanced Cut Cost &amp; Quote Builder | Plasma Cut Forge</title>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="stylesheet" href="/styles.css?v=48.0">
+  <link rel="stylesheet" href="/member-quote-builder.css?v=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js" defer></script>
+  <script src="/supabase-config.js?v=5.0" defer></script>
+  <script src="/member-auth.js?v=1.0" defer></script>
+  <script src="/member-quote-builder.js?v=1.0" defer></script>
+  <script src="/membership-widget.js?v=1.1" defer></script>
+</head>
+<body data-member-page="builder">
+<header class="site-header industrial-header">
+  <a class="brand industrial-brand" href="/#top" aria-label="Plasma Cut Forge home">
+    <span class="brand-wordmark">PLASMA<span>CUT</span>FORGE</span>
+    <small>CNC plasma tools &amp; shop-floor guides</small>
+  </a>
+  <nav class="industrial-nav" aria-label="Primary navigation">
+    <a href="/#top">Home</a>
+    <div class="calculator-nav-dropdown">
+      <a class="calculator-nav-trigger active" href="/calculators.html">Calculators <span aria-hidden="true">▾</span></a>
+      <div class="calculator-nav-menu" aria-label="Calculator categories">
+        <a href="/calculators.html#plasma-cutting">Plasma Cutting</a>
+        <a href="/calculators.html#machining">Machining</a>
+        <a href="/calculators.html#welding">Welding</a>
+      </div>
+    </div>
+    <a href="/guides/">Guides</a>
+    <a href="/blog/">Blog</a>
+    <a href="/community/">Community</a>
+    <a href="/about-the-builder.html">About</a>
+    <a class="membership-nav-button" href="/members.html">Membership</a>
+  </nav>
+  <form class="global-search-form" action="/search.html" method="get" role="search">
+    <label class="sr-only" for="global-search-input">Search Plasma Cut Forge</label>
+    <input id="global-search-input" name="q" type="search" placeholder="Search the Forge" required>
+    <button type="submit">Search</button>
+  </form>
+</header>
+
+<main class="member-quote-main">
+  <section class="member-quote-hero">
+    <p class="industrial-kicker">Forge Member exclusive</p>
+    <h1>Advanced Cut Cost &amp; Quote Builder</h1>
+    <p>Build multi-part CNC plasma quotations with machine time, pierces, material, consumables, labor, markup or target margin, tax, discounts, minimum charges, saved drafts, and branded exports.</p>
+  </section>
+
+  <div class="pcf-member-status-bar">
+    <span data-member-connection-status>Checking Forge Member access…</span>
+    <div class="pcf-member-actions">
+      <a class="pcf-button secondary" href="/members.html">Member Home</a>
+      <button class="pcf-button secondary" type="button" data-member-signout>Sign out</button>
+    </div>
+  </div>
+
+  <section class="pcf-member-gate" data-member-loading>
+    <p class="industrial-kicker">Secure access</p>
+    <h2>Checking Membership</h2>
+    <p>Please wait while Plasma Cut Forge verifies your signed-in account.</p>
+  </section>
+
+  <section class="pcf-member-gate" data-member-guest hidden>
+    <p class="industrial-kicker">Member sign in required</p>
+    <h2>Unlock the Quote Builder</h2>
+    <p>Use the same email address attached to your active Ko-fi membership.</p>
+    <form class="pcf-member-login-form" data-member-login-form>
+      <label class="sr-only" for="builder-member-email">Member email</label>
+      <input id="builder-member-email" name="email" type="email" autocomplete="email" placeholder="member@example.com" required>
+      <button class="pcf-button" type="submit">Send Sign-In Link</button>
+      <p class="pcf-member-message" data-member-login-message></p>
+    </form>
+    <div class="pcf-member-actions" style="margin-top:20px">
+      <a class="pcf-button secondary" href="https://ko-fi.com/plasmacutforge/tiers" target="_blank" rel="noopener noreferrer">Become a Member</a>
+    </div>
+  </section>
+
+  <section class="pcf-member-gate" data-member-inactive hidden>
+    <p class="industrial-kicker">Membership not active</p>
+    <h2>Member Tool Locked</h2>
+    <p>Signed in as <strong data-member-account-email>—</strong>. Active Forge Member access was not found for this email.</p>
+    <div class="pcf-member-actions">
+      <a class="pcf-button" href="https://ko-fi.com/plasmacutforge/tiers" target="_blank" rel="noopener noreferrer">View Membership</a>
+      <a class="pcf-button secondary" href="/contact.html">Contact Plasma Cut Forge</a>
+    </div>
+  </section>
+
+  <section data-member-tool hidden>
+    <div class="mq-toolbar">
+      <label>
+        <span>Quote title</span>
+        <input class="mq-control" id="mq-quote-title" type="text" maxlength="100" value="CNC Plasma Cutting Quote">
+      </label>
+      <div class="mq-actions">
+        <button class="mq-button secondary" id="mq-new-quote" type="button">New Quote</button>
+        <button class="mq-button" id="mq-save-quote" type="button">Save Quote</button>
+      </div>
+    </div>
+
+    <div class="mq-layout">
+      <div class="mq-stack">
+        <section class="mq-panel">
+          <div class="mq-panel-header">
+            <div><p class="mq-panel-kicker">01 · Business</p><h2>Your Company</h2></div>
+          </div>
+          <div class="mq-grid">
+            <label class="mq-field"><span>Company name</span><input id="mq-company-name" type="text" value="Plasma Cut Forge Fabrication"></label>
+            <label class="mq-field"><span>Contact name</span><input id="mq-company-contact" type="text"></label>
+            <label class="mq-field"><span>Email</span><input id="mq-company-email" type="email"></label>
+            <label class="mq-field"><span>Phone</span><input id="mq-company-phone" type="text"></label>
+            <label class="mq-field full"><span>Address</span><textarea id="mq-company-address"></textarea></label>
+            <label class="mq-field"><span>Tax / VAT ID</span><input id="mq-company-tax-id" type="text"></label>
+            <label class="mq-field"><span>Company logo</span><input id="mq-company-logo" type="file" accept="image/png,image/jpeg"></label>
+            <div class="mq-logo-preview full" id="mq-logo-preview"><span>No logo selected. PDF exports will use the Plasma Cut Forge wordmark.</span></div>
+          </div>
+        </section>
+
+        <section class="mq-panel">
+          <div class="mq-panel-header">
+            <div><p class="mq-panel-kicker">02 · Customer</p><h2>Quote Details</h2></div>
+          </div>
+          <div class="mq-grid three">
+            <label class="mq-field"><span>Quote number</span><input id="mq-quote-number" type="text"></label>
+            <label class="mq-field"><span>Quote date</span><input id="mq-quote-date" type="date"></label>
+            <label class="mq-field"><span>Valid through</span><input id="mq-valid-through" type="date"></label>
+            <label class="mq-field"><span>Customer / company</span><input id="mq-customer-name" type="text"></label>
+            <label class="mq-field"><span>Customer contact</span><input id="mq-customer-contact" type="text"></label>
+            <label class="mq-field"><span>Customer email</span><input id="mq-customer-email" type="email"></label>
+            <label class="mq-field full"><span>Customer address</span><textarea id="mq-customer-address"></textarea></label>
+          </div>
+        </section>
+
+        <section class="mq-panel">
+          <div class="mq-panel-header">
+            <div><p class="mq-panel-kicker">03 · Parts</p><h2>Cutting Line Items</h2></div>
+            <button class="mq-button" id="mq-add-item" type="button">Add Part</button>
+          </div>
+          <div class="mq-items" id="mq-items"></div>
+        </section>
+
+        <section class="mq-panel">
+          <div class="mq-panel-header">
+            <div><p class="mq-panel-kicker">04 · Shop charges</p><h2>Additional Work</h2></div>
+          </div>
+          <div class="mq-grid three">
+            <label class="mq-field"><span>Setup / programming hours</span><input id="mq-setup-hours" type="number" min="0" step="0.1" value="0"></label>
+            <label class="mq-field"><span>Setup hourly rate</span><input id="mq-setup-rate" type="number" min="0" step="0.01" value="75"></label>
+            <label class="mq-field"><span>Design / CAD hours</span><input id="mq-design-hours" type="number" min="0" step="0.1" value="0"></label>
+            <label class="mq-field"><span>Design hourly rate</span><input id="mq-design-rate" type="number" min="0" step="0.01" value="85"></label>
+            <label class="mq-field"><span>Finishing hours</span><input id="mq-finishing-hours" type="number" min="0" step="0.1" value="0"></label>
+            <label class="mq-field"><span>Finishing hourly rate</span><input id="mq-finishing-rate" type="number" min="0" step="0.01" value="65"></label>
+            <label class="mq-field"><span>Delivery / shipping</span><input id="mq-delivery" type="number" min="0" step="0.01" value="0"></label>
+            <label class="mq-field"><span>Other direct cost</span><input id="mq-other-cost" type="number" min="0" step="0.01" value="0"></label>
+            <label class="mq-field"><span>Other description</span><input id="mq-other-description" type="text" value="Other shop cost"></label>
+          </div>
+        </section>
+
+        <section class="mq-panel">
+          <div class="mq-panel-header">
+            <div><p class="mq-panel-kicker">05 · Pricing</p><h2>Markup &amp; Terms</h2></div>
+          </div>
+          <div class="mq-grid three">
+            <label class="mq-field"><span>Currency</span>
+              <select id="mq-currency">
+                <option value="USD">US Dollar (USD $)</option>
+                <option value="CAD">Canadian Dollar (CAD CA$)</option>
+                <option value="AUD">Australian Dollar (AUD A$)</option>
+                <option value="EUR">Euro (EUR €)</option>
+              </select>
+            </label>
+            <label class="mq-field"><span>Pricing method</span>
+              <select id="mq-pricing-method">
+                <option value="markup">Separate markups</option>
+                <option value="margin">Target profit margin</option>
+              </select>
+            </label>
+            <label class="mq-field" data-pricing-field="material-markup"><span>Material markup %</span><input id="mq-material-markup" type="number" min="0" step="0.1" value="20"></label>
+            <label class="mq-field" data-pricing-field="processing-markup"><span>Processing markup %</span><input id="mq-processing-markup" type="number" min="0" step="0.1" value="30"></label>
+            <label class="mq-field mq-hidden" data-pricing-field="margin"><span>Target profit margin %</span><input id="mq-profit-margin" type="number" min="0" max="95" step="0.1" value="30"></label>
+            <label class="mq-field"><span>Minimum job charge</span><input id="mq-minimum-charge" type="number" min="0" step="0.01" value="0"></label>
+            <label class="mq-field"><span>Discount %</span><input id="mq-discount-percent" type="number" min="0" max="100" step="0.1" value="0"></label>
+            <label class="mq-field"><span>Fixed discount</span><input id="mq-discount-fixed" type="number" min="0" step="0.01" value="0"></label>
+            <label class="mq-field"><span>Sales tax / VAT %</span><input id="mq-tax-rate" type="number" min="0" step="0.1" value="0"></label>
+            <label class="mq-field"><span>Deposit required %</span><input id="mq-deposit-percent" type="number" min="0" max="100" step="0.1" value="0"></label>
+            <label class="mq-field full"><span>Customer notes</span><textarea id="mq-customer-notes" placeholder="Lead time, included services, exclusions, or customer-facing notes."></textarea></label>
+            <label class="mq-field full"><span>Terms &amp; conditions</span><textarea id="mq-terms">Estimate is based on the supplied geometry and stated quantities. Final pricing may change if drawings, material, quantities, finishing, delivery, or tolerances change. Quote subject to material availability.</textarea></label>
+          </div>
+        </section>
+      </div>
+
+      <aside class="mq-stack">
+        <section class="mq-summary-panel">
+          <div class="mq-summary-header">
+            <div><p class="mq-panel-kicker">Live quote</p><h2>Summary</h2></div>
+          </div>
+          <div class="mq-summary-metrics">
+            <article><span>Direct cost</span><strong id="mq-direct-cost">—</strong></article>
+            <article><span>Gross profit</span><strong id="mq-gross-profit">—</strong></article>
+            <article><span>Profit margin</span><strong id="mq-actual-margin">—</strong></article>
+            <article><span>Deposit</span><strong id="mq-deposit">—</strong></article>
+            <article class="total"><span>Customer total</span><strong id="mq-customer-total">—</strong></article>
+          </div>
+          <div class="mq-summary-breakdown" id="mq-summary-breakdown"></div>
+          <div class="mq-export-actions">
+            <button class="mq-button" id="mq-export-pdf" type="button">Customer PDF</button>
+            <button class="mq-button secondary" id="mq-export-csv" type="button">Detailed CSV</button>
+          </div>
+          <p class="pcf-member-message" id="mq-save-message" aria-live="polite"></p>
+        </section>
+
+        <section class="mq-saved-panel">
+          <div class="mq-saved-header">
+            <div><p class="mq-panel-kicker">Member cloud</p><h2>Saved Quotes</h2></div>
+            <button class="mq-button secondary" id="mq-refresh-quotes" type="button">Refresh</button>
+          </div>
+          <div class="mq-saved-list" id="mq-saved-list"><p class="mq-empty">Loading saved quotes…</p></div>
+        </section>
+      </aside>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer-primary">
+    <p>© 2026 Plasma Cut Forge.</p>
+    <p class="site-footer-warning">Review all geometry, rates, material, tax, and commercial terms before sending a quote.</p>
+  </div>
+</footer>
+</body>
+</html>

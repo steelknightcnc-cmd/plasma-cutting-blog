@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Secure Forge Member access for exclusive Plasma Cut Forge shop tools and resources.">
+  <title>Forge Member Access | Plasma Cut Forge</title>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="stylesheet" href="/styles.css?v=48.0">
+  <link rel="stylesheet" href="/member-quote-builder.css?v=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script src="/supabase-config.js?v=5.0" defer></script>
+  <script src="/member-auth.js?v=1.0" defer></script>
+  <script src="/membership-widget.js?v=1.1" defer></script>
+</head>
+<body data-member-page="hub">
+<header class="site-header industrial-header">
+  <a class="brand industrial-brand" href="/#top" aria-label="Plasma Cut Forge home">
+    <span class="brand-wordmark">PLASMA<span>CUT</span>FORGE</span>
+    <small>CNC plasma tools &amp; shop-floor guides</small>
+  </a>
+  <nav class="industrial-nav" aria-label="Primary navigation">
+    <a href="/#top">Home</a>
+    <div class="calculator-nav-dropdown">
+      <a class="calculator-nav-trigger" href="/calculators.html">Calculators <span aria-hidden="true">▾</span></a>
+      <div class="calculator-nav-menu" aria-label="Calculator categories">
+        <a href="/calculators.html#plasma-cutting">Plasma Cutting</a>
+        <a href="/calculators.html#machining">Machining</a>
+        <a href="/calculators.html#welding">Welding</a>
+      </div>
+    </div>
+    <a href="/guides/">Guides</a>
+    <a href="/blog/">Blog</a>
+    <a href="/community/">Community</a>
+    <a href="/#articles">Articles</a>
+    <a href="/about-the-builder.html">About</a>
+    <a class="membership-nav-button active" href="/members.html">Membership</a>
+  </nav>
+  <form class="global-search-form" action="/search.html" method="get" role="search">
+    <label class="sr-only" for="global-search-input">Search Plasma Cut Forge</label>
+    <input id="global-search-input" name="q" type="search" placeholder="Search the Forge" required>
+    <button type="submit">Search</button>
+  </form>
+</header>
+
+<main class="member-access-main">
+  <section class="member-access-hero">
+    <p class="industrial-kicker">Forge Member exclusive</p>
+    <h1>Member Access</h1>
+    <p>Sign in with the same email address used for your Ko-fi membership. Plasma Cut Forge uses a secure one-time email link—no password is required.</p>
+  </section>
+
+  <div class="pcf-member-status-bar">
+    <span data-member-connection-status>Checking your sign-in status…</span>
+    <button class="pcf-button secondary" type="button" data-member-signout>Sign out</button>
+  </div>
+
+  <section class="pcf-member-gate" data-member-guest hidden>
+    <p class="industrial-kicker">Secure sign in</p>
+    <h2>Open the Member Forge</h2>
+    <p>Enter the exact email address attached to your active Ko-fi membership. A secure access link will be sent to that address.</p>
+    <form class="pcf-member-login-form" data-member-login-form>
+      <label class="sr-only" for="member-email">Member email</label>
+      <input id="member-email" name="email" type="email" autocomplete="email" placeholder="member@example.com" required>
+      <button class="pcf-button" type="submit">Send Sign-In Link</button>
+      <p class="pcf-member-message" data-member-login-message></p>
+    </form>
+    <div class="pcf-member-actions" style="margin-top:20px">
+      <a class="pcf-button secondary" href="https://ko-fi.com/plasmacutforge/tiers" target="_blank" rel="noopener noreferrer">Become a Member</a>
+    </div>
+  </section>
+
+  <section class="pcf-member-hub-panel" data-member-active hidden>
+    <p class="industrial-kicker">Access confirmed</p>
+    <h2>Welcome to the Forge</h2>
+    <p>Signed in as <strong data-member-account-email>—</strong> · <strong data-member-tier>Forge Member</strong></p>
+    <article class="pcf-member-tool-card">
+      <span class="number">01</span>
+      <div>
+        <strong>Advanced Cut Cost &amp; Quote Builder</strong>
+        <p>Build multi-part plasma quotes, apply shop pricing, save drafts, and export branded PDF and CSV files.</p>
+      </div>
+      <a class="pcf-button" href="/member-quote-builder.html">Open Tool</a>
+    </article>
+  </section>
+
+  <section class="pcf-member-gate" data-member-inactive hidden>
+    <p class="industrial-kicker">Membership not active</p>
+    <h2>Access Is Locked</h2>
+    <p>Signed in as <strong data-member-account-email>—</strong>, but this email is not on the active Forge Member list. Confirm that your Ko-fi membership uses the same email address.</p>
+    <div class="pcf-member-actions">
+      <a class="pcf-button" href="https://ko-fi.com/plasmacutforge/tiers" target="_blank" rel="noopener noreferrer">View Membership</a>
+      <a class="pcf-button secondary" href="/contact.html">Contact Plasma Cut Forge</a>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer-primary">
+    <p>© 2026 Plasma Cut Forge.</p>
+    <p class="site-footer-warning">Member tools are planning aids—not guaranteed commercial quotations.</p>
+  </div>
+</footer>
+</body>
+</html>
