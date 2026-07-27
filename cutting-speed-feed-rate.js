@@ -1,25 +1,9 @@
-(() => {
- const ranges={
- mild:{hss:[80,100],carbide:[250,350],drilling:[80,100],turning:[100,150],chip:.0018},
- ss304:{hss:[60,80],carbide:[150,200],drilling:[50,80],turning:[80,120],chip:.0013},
- ss316:{hss:[50,70],carbide:[120,180],drilling:[40,70],turning:[60,100],chip:.0011},
- aluminum:{hss:[150,200],carbide:[400,600],drilling:[100,200],turning:[200,400],chip:.003},
- brass:{hss:[120,150],carbide:[300,400],drilling:[120,150],turning:[150,250],chip:.0025},
- castiron:{hss:[50,80],carbide:[150,250],drilling:[50,70],turning:[60,100],chip:.0015},
- titanium:{hss:[30,50],carbide:[100,150],drilling:[30,50],turning:[50,80],chip:.0008},
- toolsteel:{hss:[60,80],carbide:[180,250],drilling:[60,80],turning:[80,120],chip:.0012}
- };
- const f=document.querySelector("#speed-feed-form"),r=document.querySelector("#sf-results");
- f.addEventListener("submit",e=>{
-  e.preventDefault(); const d=new FormData(f),metric=d.get("units")==="metric";
-  const m=ranges[d.get("material")],op=d.get("operation"),dia0=+d.get("diameter"),dia=metric?dia0/25.4:dia0;
-  const fl=+d.get("flutes"),custom=+d.get("custom_sfm"),sfm=custom>0?(metric?custom*3.28084:custom):(m[op][0]+m[op][1])/2;
-  const rpm=sfm*12/(Math.PI*dia),chip=m.chip,feed=chip*fl*rpm;
-  document.querySelector("#sf-rpm").textContent=Math.round(rpm).toLocaleString()+" RPM";
-  document.querySelector("#sf-feed").textContent=(metric?feed*25.4:feed).toFixed(metric?1:2)+(metric?" mm/min":" IPM");
-  document.querySelector("#sf-chip").textContent=(metric?chip*25.4:chip).toFixed(metric?3:4)+(metric?" mm/tooth":" in/tooth");
-  document.querySelector("#sf-surface").textContent=(metric?sfm/3.28084:sfm).toFixed(0)+(metric?" m/min":" SFM");
-  r.hidden=false;
- });
- f.addEventListener("reset",()=>setTimeout(()=>r.hidden=true,0));
-})();
+
+(() => {"use strict";
+const M={mild:{r:{hss:[80,100],carbide:[250,350],drilling:[80,100],turning:[100,150]},c:.0018,u:1},ss304:{r:{hss:[60,80],carbide:[150,200],drilling:[50,80],turning:[80,120]},c:.0013,u:1.25},ss316:{r:{hss:[50,70],carbide:[120,180],drilling:[40,70],turning:[60,100]},c:.0011,u:1.4},aluminum:{r:{hss:[150,200],carbide:[400,600],drilling:[100,200],turning:[200,400]},c:.003,u:.35},brass:{r:{hss:[120,150],carbide:[300,400],drilling:[120,150],turning:[150,250]},c:.0025,u:.45},castiron:{r:{hss:[50,80],carbide:[150,250],drilling:[50,70],turning:[60,100]},c:.0015,u:.8},titanium:{r:{hss:[30,50],carbide:[100,150],drilling:[30,50],turning:[50,80]},c:.0008,u:1.6},toolsteel:{r:{hss:[60,80],carbide:[180,250],drilling:[60,80],turning:[80,120]},c:.0012,u:1.3}};
+const P={conservative:{s:0,c:.75,a:.5,r:.1},balanced:{s:.5,c:1,a:1,r:.2},aggressive:{s:1,c:1.2,a:1.5,r:.3}};
+const f=document.querySelector('#speed-feed-form'),res=document.querySelector('#sf-results'),msg=document.querySelector('#speed-feed-message'); if(!f||!res)return;
+const fmt=(v,d=0)=>Number(v).toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d}); const note=t=>{const l=document.createElement('li');l.textContent=t;document.querySelector('#sf-notes').append(l)};
+f.addEventListener('submit',e=>{e.preventDefault();msg.textContent='';if(!f.checkValidity()){f.reportValidity();return}const d=new FormData(f),metric=d.get('units')==='metric',mat=M[d.get('material')],op=String(d.get('operation')),modeName=String(d.get('mode')),mode=P[modeName],dia0=+d.get('diameter'),dia=metric?dia0/25.4:dia0,fl=+d.get('flutes'),custom=+d.get('custom_sfm'),min=+d.get('min_rpm'),max=+d.get('max_rpm'),kw=+d.get('spindle_kw'),pf=+d.get('power_factor');if(min>max){msg.textContent='Minimum spindle RPM cannot be higher than maximum spindle RPM.';return}const range=mat.r[op],sfm=custom>0?(metric?custom*3.28084:custom):range[0]+(range[1]-range[0])*mode.s,theo=sfm*12/(Math.PI*dia),rpm=Math.min(max,Math.max(min,theo)),chip=mat.c*mode.c;let feed=chip*fl*rpm;if(op==='drilling')feed*=.65;if(op==='turning')feed=chip*rpm;let axial=dia*mode.a,radial=dia*mode.r;if(op==='drilling'){axial=dia*.5;radial=dia}else if(op==='turning'){axial=dia*.1;radial=dia*.1}let mrr=axial*radial*feed,power=mrr*mat.u*.7457,usable=kw*pf,limited=false;if(power>usable&&power>0){const sc=usable/power;feed*=sc;mrr*=sc;power=usable;limited=true}const actual=Math.PI*dia*rpm/12;
+const set=(id,t)=>document.querySelector(id).textContent=t;set('#sf-rpm',`${fmt(rpm)} RPM`);set('#sf-feed',`${fmt(metric?feed*25.4:feed,metric?1:2)} ${metric?'mm/min':'IPM'}`);set('#sf-chip',`${fmt(metric?chip*25.4:chip,metric?3:4)} ${metric?'mm/tooth':'in/tooth'}`);set('#sf-surface',`${fmt(metric?actual/3.28084:actual)} ${metric?'m/min':'SFM'}`);set('#sf-axial',`${fmt(metric?axial*25.4:axial,metric?2:3)} ${metric?'mm':'in'}`);set('#sf-radial',`${fmt(metric?radial*25.4:radial,metric?2:3)} ${metric?'mm':'in'}`);set('#sf-mrr',`${fmt(metric?mrr*16387.064:mrr,metric?0:3)} ${metric?'mm³/min':'in³/min'}`);set('#sf-power',`${fmt(power,2)} kW`);
+set('#sf-rpm-note',theo<min?`Raised from ${fmt(theo)} theoretical RPM to machine minimum`:theo>max?`Limited from ${fmt(theo)} theoretical RPM to machine maximum`:'Inside entered spindle range');const st=document.querySelector('#sf-power-status'),tt=document.querySelector('#sf-power-title'),cp=document.querySelector('#sf-power-copy');st.className='speed-feed-power-status';if(limited){st.classList.add('warning');tt.textContent='Feed reduced by the spindle-power limit';cp.textContent=`Feed was reduced to stay within ${fmt(usable,2)} kW of usable spindle power.`}else{tt.textContent='Estimated power is inside the selected allowance';cp.textContent=`Estimated demand is below the ${fmt(usable,2)} kW planning limit.`}const ul=document.querySelector('#sf-notes');ul.replaceChildren();note(`Mode: ${modeName}.`);note('Confirm the tool manufacturer’s maximum speed, chip load, and axial depth.');note('Verify flute length exceeds the recommended axial engagement.');note('Reduce engagement for long stickout, weak workholding, poor evacuation, or chatter.');note('Do not use this engagement unchanged for full-width slotting.');if(theo<min)note('The machine cannot reach the theoretical low RPM; consider a smaller tool or different spindle range.');if(theo>max)note('RPM was capped and feed was recalculated from the capped RPM to preserve chip load.');res.hidden=false;res.scrollIntoView({behavior:'smooth',block:'start'})});f.addEventListener('reset',()=>setTimeout(()=>{res.hidden=true;msg.textContent=''},0));})();

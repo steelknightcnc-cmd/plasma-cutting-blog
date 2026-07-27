@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Cutting Speed & Feed Rate Calculator | Plasma Cut Forge</title>
-  <link rel="stylesheet" href="/styles.css?v=41.0">
-  <script src="/cutting-speed-feed-rate.js?v=1.0" defer></script>
+  <link rel="stylesheet" href="/styles.css?v=42.0">
+  <script src="/cutting-speed-feed-rate.js?v=1.1" defer></script>
   <script src="/membership-widget.js?v=1.1" defer></script>
 </head>
 <body class="speed-feed-page">
@@ -39,62 +39,45 @@
     <button type="submit">Search</button>
   </form>
 </header>
+
 <main class="speed-feed-main">
-  <section class="speed-feed-hero">
-    <p class="industrial-kicker">Machining calculator</p>
-    <h1>Cutting Speed &amp; Feed Rate Calculator</h1>
-    <p>Calculate starter RPM, feed rate, chip load, and surface speed.</p>
-  </section>
-
+  <section class="speed-feed-hero"><p class="industrial-kicker">Machining calculator</p><h1>Cutting Speed &amp; Feed Rate Calculator</h1><p>Calculate machine-limited RPM, feed rate, chip load, axial depth, radial engagement, material-removal rate, and estimated spindle-power demand.</p></section>
   <section class="speed-feed-calculator">
-    <form id="speed-feed-form">
+    <form id="speed-feed-form" novalidate>
       <div class="speed-feed-input-grid">
-        <label><span>Units</span><select name="units" id="sf-units"><option value="imperial">Imperial</option><option value="metric">Metric</option></select></label>
-        <label><span>Material</span><select name="material">
-          <option value="mild">Mild Steel</option><option value="ss304">Stainless 304</option>
-          <option value="ss316">Stainless 316</option><option value="aluminum">Aluminum</option>
-          <option value="brass">Brass</option><option value="castiron">Cast Iron</option>
-          <option value="titanium">Titanium</option><option value="toolsteel">Tool Steel</option>
-        </select></label>
-        <label><span>Operation</span><select name="operation">
-          <option value="hss">HSS Milling</option><option value="carbide" selected>Carbide Milling</option>
-          <option value="drilling">Drilling</option><option value="turning">Turning</option>
-        </select></label>
+        <div class="speed-feed-machine-heading">Cutting strategy</div>
+        <fieldset style="grid-column:1/-1;border:0;padding:0;margin:0"><legend style="margin-bottom:.5rem;font-weight:850">Calculation mode</legend><div class="machining-mode-grid">
+          <label class="machining-mode-option"><input type="radio" name="mode" value="conservative" checked><span><strong>Conservative</strong><small>Lower speed, chip load, radial engagement, and spindle load.</small></span></label>
+          <label class="machining-mode-option"><input type="radio" name="mode" value="balanced"><span><strong>Balanced</strong><small>General-purpose starting point for a rigid machine and setup.</small></span></label>
+          <label class="machining-mode-option"><input type="radio" name="mode" value="aggressive"><span><strong>Aggressive</strong><small>Higher engagement and power demand. Requires proven tooling and rigidity.</small></span></label>
+        </div></fieldset>
+        <label><span>Units</span><select name="units"><option value="imperial">Imperial</option><option value="metric">Metric</option></select></label>
+        <label><span>Material</span><select name="material"><option value="mild">Mild Steel</option><option value="ss304">Stainless 304</option><option value="ss316">Stainless 316</option><option value="aluminum">Aluminum 6061</option><option value="brass">Brass</option><option value="castiron">Cast Iron</option><option value="titanium">Titanium Ti-6Al-4V</option><option value="toolsteel">Tool Steel</option></select></label>
+        <label><span>Operation</span><select name="operation"><option value="hss">HSS Milling</option><option value="carbide" selected>Carbide Milling</option><option value="drilling">Drilling</option><option value="turning">Turning</option></select></label>
         <label><span>Tool diameter</span><input name="diameter" type="number" value="0.25" min="0.001" step="0.001" required></label>
-        <label><span>Flutes / teeth</span><input name="flutes" type="number" value="2" min="1" max="20" required></label>
+        <label><span>Flutes / teeth</span><input name="flutes" type="number" value="2" min="1" max="20" step="1" required></label>
         <label><span>Custom surface speed <em>optional</em></span><input name="custom_sfm" type="number" min="1" step="1"></label>
+        <div class="speed-feed-machine-heading">Machine limits</div>
+        <label><span>Minimum spindle RPM</span><input name="min_rpm" type="number" value="500" min="0" max="100000" step="1" required></label>
+        <label><span>Maximum spindle RPM</span><input name="max_rpm" type="number" value="24000" min="1" max="100000" step="1" required></label>
+        <label><span>Spindle power</span><input name="spindle_kw" type="number" value="2.2" min="0.1" max="500" step="0.1" required></label>
+        <label><span>Available power factor</span><select name="power_factor"><option value="0.65">65% — conservative small machine</option><option value="0.75" selected>75% — general planning</option><option value="0.85">85% — proven industrial setup</option></select></label>
       </div>
-      <div class="speed-feed-actions">
-        <button type="submit">Calculate Parameters</button>
-        <button type="reset">Reset</button>
-      </div>
+      <div class="speed-feed-actions"><button type="submit">Calculate Parameters</button><button type="reset">Reset</button><p id="speed-feed-message" aria-live="polite"></p></div>
     </form>
-
-    <section id="sf-results" class="speed-feed-results" hidden>
-      <div class="speed-feed-result-grid">
-        <article><span>Recommended RPM</span><strong id="sf-rpm">—</strong></article>
-        <article><span>Feed Rate</span><strong id="sf-feed">—</strong></article>
-        <article><span>Chip Load</span><strong id="sf-chip">—</strong></article>
-        <article><span>Surface Speed</span><strong id="sf-surface">—</strong></article>
+    <section id="sf-results" class="speed-feed-results" hidden aria-live="polite">
+      <div class="speed-feed-result-grid-v11">
+        <article><span>Commanded RPM</span><strong id="sf-rpm">—</strong><small id="sf-rpm-note">Machine-limited</small></article><article><span>Feed Rate</span><strong id="sf-feed">—</strong><small>Linear feed</small></article><article><span>Chip Load</span><strong id="sf-chip">—</strong><small>Per tooth</small></article><article><span>Surface Speed</span><strong id="sf-surface">—</strong><small>Actual after RPM limit</small></article>
+        <article><span>Axial Depth of Cut</span><strong id="sf-axial">—</strong><small>ADOC / stepdown</small></article><article><span>Radial Engagement</span><strong id="sf-radial">—</strong><small>RDOC / stepover</small></article><article><span>Material Removal Rate</span><strong id="sf-mrr">—</strong><small>Estimated volume per minute</small></article><article><span>Estimated Cutting Power</span><strong id="sf-power">—</strong><small>Planning estimate</small></article>
       </div>
-      <p>Use these as starter values. Confirm tool-manufacturer data and adjust from a controlled test cut.</p>
+      <div class="speed-feed-power-status" id="sf-power-status"><strong id="sf-power-title">Power check</strong><p id="sf-power-copy"></p></div>
+      <div class="speed-feed-notes"><h3>Recommended setup checks</h3><ul id="sf-notes"></ul></div>
+      <div class="speed-feed-assumptions">Axial depth, radial engagement, and power demand are planning estimates. Tool-manufacturer data, flute length, holder, runout, machine rigidity, coolant, workholding, and material hardness take priority. Full-width slotting requires a separate strategy.</div>
     </section>
   </section>
-
-  <section class="speed-feed-reference">
-    <p class="eyebrow">Reference</p>
-    <h2>Typical Surface-Speed Ranges</h2>
-    <div class="compressor-table-wrap"><table class="compressor-guide-table">
-      <thead><tr><th>Material</th><th>HSS Milling</th><th>Carbide Milling</th><th>Drilling</th><th>Turning</th></tr></thead>
-      <tbody>
-        <tr><td>Mild steel</td><td>80–100</td><td>250–350</td><td>80–100</td><td>100–150</td></tr>
-        <tr><td>Stainless 304</td><td>60–80</td><td>150–200</td><td>50–80</td><td>80–120</td></tr>
-        <tr><td>Stainless 316</td><td>50–70</td><td>120–180</td><td>40–70</td><td>60–100</td></tr>
-        <tr><td>Aluminum</td><td>150–200</td><td>400–600</td><td>100–200</td><td>200–400</td></tr>
-      </tbody>
-    </table></div>
-  </section>
+  <section class="speed-feed-reference"><p class="eyebrow">Calculation approach</p><h2>Conservative by Default</h2><div class="compressor-table-wrap"><table class="compressor-guide-table"><thead><tr><th>Mode</th><th>Surface-speed position</th><th>Chip-load factor</th><th>Axial depth</th><th>Radial engagement</th></tr></thead><tbody><tr><td>Conservative</td><td>Low end</td><td>75%</td><td>0.50 × diameter</td><td>10% × diameter</td></tr><tr><td>Balanced</td><td>Mid-range</td><td>100%</td><td>1.00 × diameter</td><td>20% × diameter</td></tr><tr><td>Aggressive</td><td>Upper range</td><td>120%</td><td>1.50 × diameter</td><td>30% × diameter</td></tr></tbody></table></div><p class="compressor-method-note">General planning profiles—not universal tool limits.</p></section>
 </main>
+
 <aside class="kofi-membership-widget is-expanded" data-membership-widget aria-label="Plasma Cut Forge membership">
   <button class="kofi-membership-tab" type="button" data-membership-toggle aria-expanded="true"><span>Join the Forge</span></button>
   <div class="kofi-membership-panel" data-membership-panel>
