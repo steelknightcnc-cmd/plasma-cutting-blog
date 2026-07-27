@@ -1136,7 +1136,23 @@
     return doc.splitTextToSize(String(text || ''), width);
   }
 
-  function exportPdf() {
+  function sellProcessingCost(cost) {
+    if (pricingMethod() === 'margin') {
+      const margin = Math.min(95, Math.max(0, number('mq-profit-margin', 0))) / 100;
+      return cost / Math.max(.05, 1 - margin);
+    }
+    return cost * (1 + Math.max(0, number('mq-processing-markup', 0)) / 100);
+  }
+
+  function exportCustomerPdf() {
+    buildQuotePdf(false);
+  }
+
+  function exportOwnerPdf() {
+    buildQuotePdf(true);
+  }
+
+  function buildQuotePdf(includeOwnerDetails = false) {
     const data = collectQuoteData();
     const jsPDF = window.jspdf?.jsPDF;
     if (!jsPDF) {
@@ -1285,16 +1301,232 @@
       doc.text(termLines, left, y); y += termLines.length * 4.2 + 7;
     }
 
-    const pages = doc.getNumberOfPages();
-    for (let page = 1; page <= pages; page += 1) {
+    const customerPageCount = doc.getNumberOfPages();
+    if (includeOwnerDetails) appendOwnerPages(doc, data, { left, right, pageWidth, pageHeight });
+
+    const allPages = doc.getNumberOfPages();
+    const ownerPageCount = Math.max(0, allPages - customerPageCount);
+    for (let page = 1; page <= allPages; page += 1) {
       doc.setPage(page);
       doc.setFontSize(7.5);
       doc.setTextColor(95, 105, 120);
-      doc.text('Generated with the Plasma Cut Forge Advanced Cut Cost & Quote Builder.', left, pageHeight - 9);
-      doc.text(`Page ${page} of ${pages}`, right, pageHeight - 9, { align: 'right' });
+      if (page <= customerPageCount) {
+        doc.text('Generated with the Plasma Cut Forge Advanced Cut Cost & Quote Builder.', left, pageHeight - 9);
+        const suffix = includeOwnerDetails ? `Customer quote - Page ${page} of ${customerPageCount}` : `Page ${page} of ${customerPageCount}`;
+        doc.text(suffix, right, pageHeight - 9, { align: 'right' });
+      } else {
+        const ownerPage = page - customerPageCount;
+        doc.setTextColor(155, 45, 45);
+        doc.text('OWNER ONLY - CONFIDENTIAL - DO NOT SEND TO CUSTOMER', left, pageHeight - 9);
+        doc.text(`Owner page ${ownerPage} of ${ownerPageCount}`, right, pageHeight - 9, { align: 'right' });
+      }
     }
 
-    doc.save(`${data.quoteNumber || 'plasma-quote'}.pdf`);
+    const suffix = includeOwnerDetails ? '-owner-copy' : '';
+    doc.save(`${data.quoteNumber || 'plasma-quote'}${suffix}.pdf`);
+  }
+
+  function appendOwnerPages(doc, data, layout) {
+    const { left, right, pageWidth, pageHeight } = layout;
+    const contentWidth = right - left;
+    let y = 18;
+    let currentSection = 'OWNER COST BREAKDOWN';
+
+    function addOwnerPage(title = currentSection) {
+      doc.addPage();
+      y = 16;
+      doc.setFillColor(11, 20, 32);
+      doc.rect(0, 0, pageWidth, 15, 'F');
+      doc.setTextColor(220, 45, 70);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(11);
+      doc.text('OWNER ONLY - CONFIDENTIAL', left, 10);
+      doc.setTextColor(20, 28, 38);
+      doc.setFontSize(16);
+      doc.text(title, left, y + 8);
+      doc.setFontSize(8.5);
+      doc.setFont('helvetica', 'normal');
+      doc.text(`Quote ${data.quoteNumber || '-'} | ${data.customer.name || 'No customer'} | ${data.currency}`, right, y + 8, { align: 'right' });
+      y += 17;
+      doc.setDrawColor(0, 190, 220);
+      doc.line(left, y, right, y);
+      y += 8;
+    }
+
+    function ownerEnsure(space = 20, title = currentSection) {
+      if (y + space > pageHeight - 18) addOwnerPage(`${title} - CONTINUED`);
+    }
+
+    function section(title, subtitle = '') {
+      currentSection = title;
+      ownerEnsure(18, title);
+      doc.setTextColor(0, 150, 180);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(11);
+      doc.text(title, left, y);
+      if (subtitle) {
+        doc.setTextColor(80, 95, 112);
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(8.5);
+        doc.text(subtitle, right, y, { align: 'right' });
+      }
+      y += 4;
+      doc.setDrawColor(145, 160, 177);
+      doc.line(left, y, right, y);
+      y += 7;
+    }
+
+    function pairRow(leftLabel, leftValue, rightLabel = '', rightValue = '') {
+      const leftLines = wrapLines(doc, String(leftValue ?? '-'), 48);
+      const rightLines = rightLabel ? wrapLines(doc, String(rightValue ?? '-'), 46) : [];
+      const lineCount = Math.max(1, leftLines.length, rightLines.length);
+      ownerEnsure(lineCount * 4 + 2, currentSection);
+      doc.setFontSize(8.3);
+      doc.setTextColor(75, 88, 104);
+      doc.setFont('helvetica', 'bold');
+      doc.text(String(leftLabel), left, y);
+      doc.setTextColor(20, 28, 38);
+      doc.setFont('helvetica', 'normal');
+      doc.text(leftLines, left + 35, y);
+      if (rightLabel) {
+        const rightCol = left + contentWidth / 2 + 4;
+        doc.setTextColor(75, 88, 104);
+        doc.setFont('helvetica', 'bold');
+        doc.text(String(rightLabel), rightCol, y);
+        doc.setTextColor(20, 28, 38);
+        doc.setFont('helvetica', 'normal');
+        doc.text(rightLines, rightCol + 34, y);
+      }
+      y += lineCount * 4 + 1.2;
+    }
+
+    function moneyRow(label, directCost, sellingPrice) {
+      ownerEnsure(7, currentSection);
+      doc.setFontSize(8.5);
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(20, 28, 38);
+      doc.text(label, left, y);
+      doc.text(money(directCost, data.currency), 145, y, { align: 'right' });
+      doc.text(money(sellingPrice, data.currency), right, y, { align: 'right' });
+      y += 5.5;
+    }
+
+    function lengthDisplay(item) {
+      if (item.lengthUnit === 'in') return `${fixed(item.lengthMm / MM_PER_INCH, 3)} in (${fixed(item.lengthMm, 1)} mm)`;
+      return `${fixed(item.lengthMm, 1)} mm`;
+    }
+
+    function speedDisplay(item) {
+      return `${fixed(item.cutSpeed, 0)} mm/min (${fixed(item.cutSpeed / MM_PER_INCH, 1)} IPM)`;
+    }
+
+    addOwnerPage('OWNER COST BREAKDOWN');
+    doc.setTextColor(20, 28, 38);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    const intro = 'This internal owner copy contains raw costs, machine data, markups, margin, and pricing controls. Keep it separate from the customer quotation.';
+    const introLines = wrapLines(doc, intro, contentWidth);
+    doc.text(introLines, left, y);
+    y += introLines.length * 4.5 + 7;
+
+    section('03 - PARTS', `${data.totals.itemCalcs.length} line item${data.totals.itemCalcs.length === 1 ? '' : 's'}`);
+    data.totals.itemCalcs.forEach((item, index) => {
+      ownerEnsure(82, '03 - PARTS');
+      doc.setFillColor(242, 246, 250);
+      doc.roundedRect(left, y - 4, contentWidth, 77, 2, 2, 'F');
+      doc.setTextColor(20, 28, 38);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(10);
+      doc.text(`Part ${index + 1} - ${item.description || `Plasma cut part ${index + 1}`}`, left + 3, y + 2);
+      y += 9;
+      const fileLabel = item.fileName && item.fileName.length > 46 ? `${item.fileName.slice(0, 43)}...` : item.fileName;
+      const geometry = item.geometryMode === 'file' ? `${item.fileType || 'Uploaded file'}${fileLabel ? ` - ${fileLabel}` : ''}` : 'Manual entry';
+      pairRow('Geometry', geometry, 'Material', item.material);
+      pairRow('Thickness', `${item.thickness} ${item.thicknessUnit}`, 'Quantity', item.quantity);
+      pairRow('Cut length / part', lengthDisplay(item), 'Pierces / part', fixed(item.pierces, 0));
+      pairRow('Cut speed', speedDisplay(item), 'Pierce time', `${fixed(item.pierceTime, 2)} s each`);
+      pairRow('Machine time', `${fixed(item.totalMachineMinutes, 2)} min total`, 'Machine rate', `${money(item.machineRate, data.currency)} / hr`);
+      pairRow('Machine cost', money(item.machineCost, data.currency), 'Consumables / part', money(item.consumablePerPart, data.currency));
+      pairRow('Consumables total', money(item.consumableCost, data.currency), 'Raw material / part', money(item.materialPerPart, data.currency));
+      pairRow('Raw material total', money(item.materialCost, data.currency), 'Labor min / part', fixed(item.laborMinutesPerPart, 1));
+      pairRow('Labor rate', `${money(item.laborRate, data.currency)} / hr`, 'Labor total', money(item.laborCost, data.currency));
+      pairRow('Direct cost', money(item.directCost, data.currency), 'Selling total', money(itemSellTotal(item), data.currency));
+      pairRow('Unit selling price', money(itemSellTotal(item) / Math.max(1, item.quantity), data.currency), 'Auto cut data', item.autoProcess ? 'Enabled' : 'Manual override');
+      y += 6;
+    });
+
+    section('04 - SHOP CHARGES', 'Direct cost and customer selling amount');
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(8.5);
+    doc.setTextColor(75, 88, 104);
+    doc.text('CHARGE', left, y);
+    doc.text('DIRECT COST', 145, y, { align: 'right' });
+    doc.text('SELLING AMOUNT', right, y, { align: 'right' });
+    y += 4;
+    doc.setDrawColor(145, 160, 177);
+    doc.line(left, y, right, y);
+    y += 6;
+    const additionalRows = [
+      [`Setup / programming (${fixed(data.additional.setupHours, 2)} hr × ${money(data.additional.setupRate, data.currency)}/hr)`, data.totals.additional.setup],
+      [`Design / CAD (${fixed(data.additional.designHours, 2)} hr × ${money(data.additional.designRate, data.currency)}/hr)`, data.totals.additional.design],
+      [`Finishing (${fixed(data.additional.finishingHours, 2)} hr × ${money(data.additional.finishingRate, data.currency)}/hr)`, data.totals.additional.finishing],
+      ['Delivery / shipping', data.totals.additional.delivery],
+      [data.additional.otherDescription || 'Other shop cost', data.totals.additional.other]
+    ];
+    additionalRows.forEach(([label, cost]) => moneyRow(label, cost, sellProcessingCost(cost)));
+    doc.setDrawColor(145, 160, 177);
+    doc.line(110, y, right, y);
+    y += 6;
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(20, 28, 38);
+    doc.text('Shop charges total', left, y);
+    doc.text(money(data.totals.additional.total, data.currency), 145, y, { align: 'right' });
+    doc.text(money(sellAdditional(data.totals.additional), data.currency), right, y, { align: 'right' });
+    y += 10;
+
+    section('05 - PRICING', 'Confidential pricing controls and profit summary');
+    pairRow('Currency', data.currency, 'Pricing method', data.pricing.method === 'margin' ? 'Target profit margin' : 'Separate markups');
+    if (data.pricing.method === 'margin') {
+      pairRow('Target margin', `${fixed(data.pricing.profitMargin, 1)}%`, 'Actual margin', `${fixed(data.totals.actualMargin, 1)}%`);
+    } else {
+      pairRow('Material markup', `${fixed(data.pricing.materialMarkup, 1)}%`, 'Processing markup', `${fixed(data.pricing.processingMarkup, 1)}%`);
+      pairRow('Actual margin', `${fixed(data.totals.actualMargin, 1)}%`, '', '');
+    }
+    pairRow('Minimum charge', money(data.pricing.minimumCharge, data.currency), 'Discount %', `${fixed(data.pricing.discountPercent, 1)}%`);
+    pairRow('Fixed discount', money(data.pricing.discountFixed, data.currency), 'Tax / VAT', `${fixed(data.pricing.taxRate, 1)}%`);
+    pairRow('Deposit required', `${fixed(data.pricing.depositPercent, 1)}%`, 'Deposit amount', money(data.totals.deposit, data.currency));
+    y += 4;
+
+    doc.setFillColor(242, 246, 250);
+    ownerEnsure(68, '05 - PRICING');
+    doc.roundedRect(left, y - 3, contentWidth, 62, 2, 2, 'F');
+    const summaryRows = [
+      ['Parts direct cost', data.totals.itemCalcs.reduce((sum, item) => sum + item.directCost, 0)],
+      ['Shop charges direct cost', data.totals.additional.total],
+      ['TOTAL DIRECT COST', data.totals.directCost],
+      ['Parts selling total', data.totals.itemSelling],
+      ['Shop charges selling total', sellAdditional(data.totals.additional)],
+      ['Gross selling amount', data.totals.grossSelling],
+      ['Discount', -data.totals.discount],
+      ['Minimum charge adjustment', data.totals.minimumAdjustment],
+      ['Tax / VAT', data.totals.tax],
+      ['CUSTOMER TOTAL', data.totals.total],
+      ['GROSS PROFIT BEFORE TAX', data.totals.grossProfit]
+    ];
+    doc.setFontSize(8.7);
+    summaryRows.forEach(([label, amount], index) => {
+      ownerEnsure(6, '05 - PRICING');
+      const important = ['TOTAL DIRECT COST', 'CUSTOMER TOTAL', 'GROSS PROFIT BEFORE TAX'].includes(label);
+      doc.setFont('helvetica', important ? 'bold' : 'normal');
+      doc.setTextColor(20, 28, 38);
+      doc.text(label, left + 3, y + 1);
+      doc.text(money(amount, data.currency), right - 3, y + 1, { align: 'right' });
+      y += 5.2;
+      if (index === 1 || index === 7) {
+        doc.setDrawColor(180, 190, 200);
+        doc.line(110, y - 2, right - 3, y - 2);
+      }
+    });
   }
 
   function trimLogoMargins(image) {
@@ -1412,7 +1644,8 @@
     });
     $('mq-save-quote').addEventListener('click', saveQuote);
     $('mq-refresh-quotes').addEventListener('click', loadSavedQuotes);
-    $('mq-export-pdf').addEventListener('click', exportPdf);
+    $('mq-export-pdf').addEventListener('click', exportCustomerPdf);
+    $('mq-export-owner-pdf').addEventListener('click', exportOwnerPdf);
     $('mq-export-csv').addEventListener('click', exportCsv);
     loadSavedQuotes();
   }

@@ -8,12 +8,12 @@
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="stylesheet" href="/styles.css?v=48.0">
-  <link rel="stylesheet" href="/member-quote-builder.css?v=1.2">
+  <link rel="stylesheet" href="/member-quote-builder.css?v=1.1">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js" defer></script>
   <script src="/supabase-config.js?v=5.0" defer></script>
-  <script src="/member-auth.js?v=1.4" defer></script>
-  <script src="/member-quote-builder.js?v=1.1" defer></script>
+  <script src="/member-auth.js?v=1.3" defer></script>
+  <script src="/member-quote-builder.js?v=1.2" defer></script>
   <script src="/membership-widget.js?v=1.1" defer></script>
 </head>
 <body data-member-page="builder">
@@ -217,7 +217,9 @@
           <div class="mq-summary-breakdown" id="mq-summary-breakdown"></div>
           <div class="mq-export-actions">
             <button class="mq-button" id="mq-export-pdf" type="button">Customer PDF</button>
+            <button class="mq-button secondary" id="mq-export-owner-pdf" type="button">Owner PDF</button>
             <button class="mq-button secondary" id="mq-export-csv" type="button">Detailed CSV</button>
+            <p class="mq-empty">Customer PDF contains customer-facing prices only. Owner PDF adds confidential internal Parts, Shop Charges, and Pricing pages.</p>
           </div>
           <p class="pcf-member-message" id="mq-save-message" aria-live="polite"></p>
         </section>
