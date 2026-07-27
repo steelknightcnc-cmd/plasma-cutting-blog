@@ -7,6 +7,12 @@
   const MM2_PER_M2 = 1_000_000;
   const MM2_PER_FT2 = 92_903.04;
   const MM2_PER_IN2 = 645.16;
+  const CURRENCY_CONFIG = {
+    USD: { name: 'US Dollar', inputSymbol: '$' },
+    CAD: { name: 'Canadian Dollar', inputSymbol: 'CA$' },
+    AUD: { name: 'Australian Dollar', inputSymbol: 'A$' },
+    EUR: { name: 'Euro', inputSymbol: '€' },
+  };
 
   const state = {
     geometryMode: 'manual',
@@ -55,8 +61,25 @@
     }
   }
 
-  function money(value) {
-    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
+  function selectedCurrency() {
+    const currency = $('currency')?.value || 'USD';
+    return CURRENCY_CONFIG[currency] ? currency : 'USD';
+  }
+
+  function money(value, currency = selectedCurrency()) {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency,
+      currencyDisplay: 'symbol',
+    }).format(value);
+  }
+
+  function updateCurrencyUi() {
+    const currency = selectedCurrency();
+    const symbol = CURRENCY_CONFIG[currency].inputSymbol;
+    qsa('[data-currency-symbol]').forEach((element) => {
+      element.textContent = symbol;
+    });
   }
 
   function fixed(value, digits = 2) {
@@ -205,6 +228,7 @@
       speedMmMin,
       pierceSeconds,
       quantity,
+      currency: selectedCurrency(),
       machineRate,
       setupMinutes,
       consumablePerPierce,
@@ -224,15 +248,15 @@
     };
   }
 
-  function renderEstimate(estimate) {
+  function renderEstimate(estimate, shouldScroll = true) {
     $('result-cut-time').textContent = duration(estimate.cutSecondsPerPart);
     $('result-pierce-time').textContent = duration(estimate.pierceSecondsPerPart);
     $('result-total-time').textContent = `${duration(estimate.totalShopSeconds)} (${fixed(estimate.totalShopSeconds / 3600, 3)} hr)`;
-    $('result-machine-cost').textContent = money(estimate.machineCost);
-    $('result-consumable-cost').textContent = money(estimate.consumableCost);
-    $('result-material-cost').textContent = money(estimate.materialCost);
-    $('result-total-cost').textContent = money(estimate.totalCost);
-    $('result-per-part').textContent = money(estimate.costPerPart);
+    $('result-machine-cost').textContent = money(estimate.machineCost, estimate.currency);
+    $('result-consumable-cost').textContent = money(estimate.consumableCost, estimate.currency);
+    $('result-material-cost').textContent = money(estimate.materialCost, estimate.currency);
+    $('result-total-cost').textContent = money(estimate.totalCost, estimate.currency);
+    $('result-per-part').textContent = money(estimate.costPerPart, estimate.currency);
 
     $('estimate-summary').innerHTML = `
       <div><span>Geometry source</span><strong>${escapeHtml(estimate.geometrySource)}</strong></div>
@@ -243,7 +267,7 @@
       <div><span>Quantity</span><strong>${fixed(estimate.quantity, 0)}</strong></div>
     `;
     $('pcf-results').hidden = false;
-    $('pcf-results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (shouldScroll) $('pcf-results').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   function escapeHtml(value) {
@@ -288,7 +312,8 @@
       ['Cutting speed (mm/min)', fixed(e.speedMmMin, 0)],
       ['Pierce time each (sec)', fixed(e.pierceSeconds, 2)],
       ['Quantity', fixed(e.quantity, 0)],
-      ['Machine rate ($/hr)', fixed(e.machineRate, 2)],
+      ['Currency', `${e.currency} — ${CURRENCY_CONFIG[e.currency].name}`],
+      [`Machine rate (${e.currency}/hr)`, fixed(e.machineRate, 2)],
       ['Setup / programming time (min)', fixed(e.setupMinutes, 2)],
       ['Cut time per part', duration(e.cutSecondsPerPart)],
       ['Pierce time per part', duration(e.pierceSecondsPerPart)],
@@ -355,7 +380,8 @@
       ['Pierces per part', fixed(e.pierces, 0)],
       ['Cutting speed used', `${fixed(e.speedMmMin, 0)} mm/min`],
       ['Quantity', `× ${fixed(e.quantity, 0)}`],
-      ['Machine rate', `${money(e.machineRate)} / hr`],
+      ['Currency', `${e.currency} — ${CURRENCY_CONFIG[e.currency].name}`],
+      ['Machine rate', `${money(e.machineRate, e.currency)} / hr`],
       ['Setup / programming', `${fixed(e.setupMinutes, 1)} min`],
     ];
     parameterRows.forEach(([label, value]) => {
@@ -374,9 +400,9 @@
       ['Cut time per part', duration(e.cutSecondsPerPart)],
       ['Pierce time per part', duration(e.pierceSecondsPerPart)],
       ['Total shop time', `${duration(e.totalShopSeconds)} (${fixed(e.totalShopSeconds / 3600, 3)} hr)`],
-      ['Machine & setup cost', money(e.machineCost)],
-      ['Consumable cost', money(e.consumableCost)],
-      ['Material cost', money(e.materialCost)],
+      ['Machine & setup cost', money(e.machineCost, e.currency)],
+      ['Consumable cost', money(e.consumableCost, e.currency)],
+      ['Material cost', money(e.materialCost, e.currency)],
     ];
     costRows.forEach(([label, value]) => {
       pdfLine(doc, label, value, y);
@@ -387,8 +413,8 @@
     doc.setFillColor(229, 248, 255);
     doc.roundedRect(16, y - 5, 178, 27, 2, 2, 'F');
     doc.setTextColor(15, 23, 42);
-    pdfLine(doc, `TOTAL ESTIMATE (${fixed(e.quantity, 0)} parts)`, money(e.totalCost), y + 4, true);
-    pdfLine(doc, 'Cost per part', money(e.costPerPart), y + 13, true);
+    pdfLine(doc, `TOTAL ESTIMATE (${fixed(e.quantity, 0)} parts)`, money(e.totalCost, e.currency), y + 4, true);
+    pdfLine(doc, 'Cost per part', money(e.costPerPart, e.currency), y + 13, true);
 
     y += 33;
     doc.setFont('helvetica', 'normal');
@@ -700,6 +726,7 @@
     setGeometryMode('manual');
     updateMaterialFields();
     updateProcessDefaults();
+    updateCurrencyUi();
     $('dxf-status').textContent = 'Choose a DXF file to calculate path length and approximate pierce count.';
     $('dxf-warning').hidden = true;
     $('pcf-results').hidden = true;
@@ -715,6 +742,17 @@
       button.addEventListener('click', () => setGeometryMode(button.dataset.geometryMode));
     });
     $('material-basis').addEventListener('change', updateMaterialFields);
+    $('currency').addEventListener('change', () => {
+      updateCurrencyUi();
+      if (state.estimate) {
+        try {
+          state.estimate = calculateEstimate();
+          renderEstimate(state.estimate, false);
+        } catch (error) {
+          showError(error.message);
+        }
+      }
+    });
     $('material').addEventListener('change', updateProcessDefaults);
     $('thickness').addEventListener('change', updateProcessDefaults);
     $('thickness-unit').addEventListener('change', updateProcessDefaults);
@@ -745,6 +783,7 @@
     setGeometryMode('manual');
     updateMaterialFields();
     updateProcessDefaults();
+    updateCurrencyUi();
     drawDxf(null);
   });
 

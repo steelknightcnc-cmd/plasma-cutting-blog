@@ -13,7 +13,7 @@
   <meta name="theme-color" content="#070b14">
   <link rel="stylesheet" href="/styles.css?v=47.0">
   <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js" defer></script>
-  <script src="/cut-cost-time-estimator.js?v=1.1" defer></script>
+  <script src="/cut-cost-time-estimator.js?v=1.2" defer></script>
   <script src="/membership-widget.js?v=1.1" defer></script>
 </head>
 <body class="cut-cost-estimator-page">
@@ -165,13 +165,23 @@
           <input id="quantity" type="number" min="1" step="1" value="1" inputmode="numeric" required>
         </label>
         <label>
+          <span>Currency</span>
+          <select id="currency">
+            <option value="USD" selected>US Dollar (USD $)</option>
+            <option value="CAD">Canadian Dollar (CAD CA$)</option>
+            <option value="AUD">Australian Dollar (AUD A$)</option>
+            <option value="EUR">Euro (EUR €)</option>
+          </select>
+          <small>Applies to every rate, cost, PDF, and CSV export. Amounts are not converted.</small>
+        </label>
+        <label>
           <span>Machine rate</span>
-          <div class="pcf-input-prefix"><b>$</b><input id="machine-rate" type="number" min="0" step="0.01" value="120" inputmode="decimal" required><b>/hr</b></div>
+          <div class="pcf-input-prefix"><b data-currency-symbol>$</b><input id="machine-rate" type="number" min="0" step="0.01" value="120" inputmode="decimal" required><b>/hr</b></div>
         </label>
         <label>
           <span>Consumable cost per pierce</span>
-          <div class="pcf-input-prefix"><b>$</b><input id="consumable-per-pierce" type="number" min="0" step="0.001" value="0" inputmode="decimal"></div>
-          <small>Leave at $0 when consumables are included in the machine rate.</small>
+          <div class="pcf-input-prefix"><b data-currency-symbol>$</b><input id="consumable-per-pierce" type="number" min="0" step="0.001" value="0" inputmode="decimal"></div>
+          <small>Leave at 0 when consumables are included in the machine rate.</small>
         </label>
         <label>
           <span>Setup / programming time</span>
@@ -200,7 +210,7 @@
         </label>
         <label data-material-field="price" hidden>
           <span>Material price</span>
-          <div class="pcf-input-prefix"><b>$</b><input id="material-price" type="number" min="0" step="0.01" value="0" inputmode="decimal"></div>
+          <div class="pcf-input-prefix"><b data-currency-symbol>$</b><input id="material-price" type="number" min="0" step="0.01" value="0" inputmode="decimal"></div>
         </label>
         <label data-material-field="price-unit" hidden>
           <span>Price area unit</span>
