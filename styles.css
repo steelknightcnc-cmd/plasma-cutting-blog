@@ -6095,3 +6095,78 @@ footer > * {
 /* Machining calculator v1.4 — 20 mm and fixed flute selector */
 .speed-feed-input-grid label > small {display:block;color:var(--muted);font-size:.72rem;line-height:1.4}
 #sf-flutes {cursor:pointer}
+
+/* Plasma Cut Cost & Time Estimator v1.0 */
+.cut-cost-estimator-page{
+  background:radial-gradient(circle at 80% 0%,rgba(0,217,255,.08),transparent 32rem),#080b10;
+}
+.cut-cost-estimator-main{
+  width:min(var(--max-width),90vw);
+  margin:auto;
+}
+.cut-cost-estimator-hero{
+  padding:clamp(4rem,8vw,7rem) 0 3rem;
+  border-bottom:1px solid var(--border);
+}
+.cut-cost-estimator-hero h1{
+  margin:0 0 1rem;
+  font-family:"Barlow Condensed","Arial Narrow",sans-serif;
+  font-size:clamp(3.6rem,7vw,6.5rem);
+  font-weight:900;
+  line-height:.88;
+  text-transform:uppercase;
+}
+.cut-cost-estimator-hero>p:last-child{
+  max-width:900px;
+  color:var(--muted);
+  font-size:1.05rem;
+  line-height:1.7;
+}
+.cut-cost-estimator-notice{
+  margin:2rem 0 1rem;
+  padding:1rem 1.1rem;
+  border:1px solid rgba(245,158,11,.35);
+  border-left:4px solid var(--warning);
+  border-radius:10px;
+  background:rgba(245,158,11,.055);
+}
+.cut-cost-estimator-notice strong{
+  display:block;
+  margin-bottom:.25rem;
+  color:var(--warning);
+  font-family:"Barlow Condensed","Arial Narrow",sans-serif;
+  font-size:1.25rem;
+  text-transform:uppercase;
+}
+.cut-cost-estimator-notice p,
+.cut-cost-estimator-credit p{
+  margin:0;
+  color:var(--muted);
+  line-height:1.6;
+}
+.cut-cost-estimator-shell{
+  margin:1rem 0;
+  overflow:hidden;
+  border:1px solid rgba(0,217,255,.3);
+  border-radius:18px;
+  background:#0d1622;
+  box-shadow:0 24px 70px rgba(0,0,0,.28);
+}
+.cut-cost-estimator-shell iframe{
+  display:block;
+  width:100%;
+  min-height:1550px;
+  background:#fff;
+}
+.cut-cost-estimator-credit{
+  margin:1rem 0 5rem;
+  padding:.85rem 1rem;
+  border:1px solid var(--border);
+  border-radius:9px;
+  background:rgba(255,255,255,.02);
+  font-size:.82rem;
+}
+.cut-cost-estimator-credit a{color:var(--accent)}
+@media(max-width:700px){
+  .cut-cost-estimator-shell iframe{min-height:1750px;height:1750px}
+}

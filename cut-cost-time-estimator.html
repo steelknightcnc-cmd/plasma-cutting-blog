@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Estimate plasma cutting time and cost from manual cut length or a DXF file, including machine rate, pierces, consumables, material cost, and waste.">
+  <title>Plasma Cut Cost &amp; Time Estimator | Plasma Cut Forge</title>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#070b14">
+  <link rel="stylesheet" href="/styles.css?v=46.0">
+  <script src="/membership-widget.js?v=1.1" defer></script>
+</head>
+<body class="cut-cost-estimator-page">
+<header class="site-header industrial-header">
+  <a class="brand industrial-brand" href="/#top" aria-label="Plasma Cut Forge home">
+    <span class="brand-wordmark">PLASMA<span>CUT</span>FORGE</span>
+    <small>CNC plasma tools &amp; shop-floor guides</small>
+  </a>
+  <nav class="industrial-nav" aria-label="Primary navigation">
+    <a href="/#top">Home</a>
+    <div class="calculator-nav-dropdown">
+      <a class="calculator-nav-trigger active" href="/calculators.html">
+        Calculators <span aria-hidden="true">▾</span>
+      </a>
+      <div class="calculator-nav-menu" aria-label="Calculator categories">
+        <a href="/calculators.html#plasma-cutting">Plasma Cutting</a>
+        <a href="/calculators.html#machining">Machining</a>
+        <a href="/calculators.html#welding">Welding</a>
+      </div>
+    </div>
+    <a href="/guides/">Guides</a>
+    <a href="/blog/">Blog</a>
+    <a href="/community/">Community</a>
+    <a href="/#articles">Articles</a>
+    <a href="/about-the-builder.html">About</a>
+    <a class="membership-nav-button" href="https://ko-fi.com/plasmacutforge/tiers" target="_blank" rel="noopener noreferrer">Membership</a>
+  </nav>
+  <form class="global-search-form" action="/search.html" method="get" role="search">
+    <label class="sr-only" for="global-search-input">Search Plasma Cut Forge</label>
+    <input id="global-search-input" name="q" type="search" placeholder="Search the Forge" required>
+    <button type="submit">Search</button>
+  </form>
+</header>
+
+<main class="cut-cost-estimator-main">
+  <section class="cut-cost-estimator-hero">
+    <p class="industrial-kicker">Plasma job-cost planning</p>
+    <h1>Cut Cost &amp; Time Estimator</h1>
+    <p>
+      Estimate cutting time and project cost from a manual cut length or a DXF file. Adjust cutting speed,
+      pierce time, quantity, shop rate, consumables, sheet cost, and nesting waste to match your machine and shop.
+    </p>
+  </section>
+
+  <section class="cut-cost-estimator-notice" aria-label="Estimator notice">
+    <strong>Planning estimate only</strong>
+    <p>
+      Verify DXF geometry and pierce count before quoting. Real job cost can also include programming, setup,
+      loading, unloading, secondary operations, scrap, and machine-specific performance.
+    </p>
+  </section>
+
+  <section class="cut-cost-estimator-shell" aria-label="Cut cost and time estimator">
+    <iframe
+      src="https://testtalkhq.com/embed/cut-cost-time-estimator/"
+      width="100%"
+      height="1550"
+      frameborder="0"
+      loading="lazy"
+      title="Cut-Cost &amp; Time Estimator — TestTalkHQ"
+      style="border:0;max-width:100%;"
+    ></iframe>
+  </section>
+
+  <section class="cut-cost-estimator-credit">
+    <p>
+      Embedded calculator provided by
+      <a href="https://testtalkhq.com/cut-cost-time-estimator/" target="_blank" rel="noopener noreferrer">TestTalkHQ</a>.
+      The estimator supports manual geometry and in-browser DXF processing with PDF and CSV export.
+    </p>
+  </section>
+</main>
+
+<aside class="kofi-membership-widget is-expanded" data-membership-widget aria-label="Plasma Cut Forge membership">
+  <button class="kofi-membership-tab" type="button" data-membership-toggle aria-expanded="true"><span>Join the Forge</span></button>
+  <div class="kofi-membership-panel" data-membership-panel>
+    <div class="kofi-membership-widget-copy">
+      <span class="kofi-membership-eyebrow">Ko-fi Membership</span>
+      <strong>Join the Forge</strong>
+      <small>Forge Supporter · $5/month</small>
+      <p>Support new tools, machine profiles, technical articles, and project-build updates.</p>
+    </div>
+    <div class="kofi-membership-widget-actions">
+      <a class="kofi-membership-primary" href="https://ko-fi.com/plasmacutforge/tiers" target="_blank" rel="noopener noreferrer">Become a Member</a>
+      <a class="kofi-membership-secondary" href="https://ko-fi.com/plasmacutforge" target="_blank" rel="noopener noreferrer">One-time support</a>
+    </div>
+  </div>
+</aside>
+
+<footer class="site-footer">
+  <div class="site-footer-primary">
+    <p>© 2026 Plasma Cut Forge.</p>
+    <p class="site-footer-warning">Estimator values are planning figures—not guaranteed quotes or machine settings.</p>
+  </div>
+</footer>
+</body>
+</html>
