@@ -8,14 +8,12 @@
     content="Meet Dom, founder and builder of Plasma Cut Forge—an internationally certified welder, CNC machine builder, fabricator, and developer of the Atlas Motion Controller."
   >
   <title>About the Builder | Plasma Cut Forge</title>
-
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
   <meta name="theme-color" content="#070b14">
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -23,16 +21,43 @@
     rel="stylesheet"
   >
   <link rel="stylesheet" href="/styles.css?v=41.0">
+  <style>
+    /* Keep the long Atlas title inside its column on desktop layouts. */
+    .builder-atlas-section {
+      grid-template-columns: minmax(360px, 0.95fr) minmax(0, 1.25fr);
+      gap: clamp(2rem, 5vw, 5rem);
+    }
+
+    .builder-atlas-heading {
+      min-width: 0;
+    }
+
+    .builder-atlas-heading h2 {
+      max-width: 100%;
+      font-size: clamp(3rem, 4.2vw, 5rem);
+      overflow-wrap: normal;
+      word-break: normal;
+    }
+
+    @media (max-width: 1180px) and (min-width: 981px) {
+      .builder-atlas-section {
+        grid-template-columns: minmax(330px, 0.9fr) minmax(0, 1.1fr);
+        gap: 3rem;
+      }
+
+      .builder-atlas-heading h2 {
+        font-size: clamp(3rem, 4.8vw, 4.5rem);
+      }
+    }
+  </style>
   <script src="/membership-widget.js?v=1.1" defer></script>
 </head>
-
 <body class="builder-page">
   <header class="site-header industrial-header">
     <a class="brand industrial-brand" href="/#top" aria-label="Plasma Cut Forge home">
       <span class="brand-wordmark">PLASMA<span>CUT</span>FORGE</span>
       <small>CNC plasma tools &amp; shop-floor guides</small>
     </a>
-
     <nav class="industrial-nav" aria-label="Primary navigation">
       <a href="/#top">Home</a>
       <div class="calculator-nav-dropdown">
@@ -59,7 +84,6 @@
       Membership
       </a>
     </nav>
-
 <form class="global-search-form" action="/search.html" method="get" role="search">
   <label class="sr-only" for="global-search-input">Search Plasma Cut Forge</label>
   <input
@@ -75,7 +99,6 @@
   <button type="submit" aria-label="Search Plasma Cut Forge">Search</button>
 </form>
   </header>
-
   <main class="builder-main">
     <section class="builder-hero">
       <div class="builder-hero-copy">
@@ -87,7 +110,6 @@
           machine builders and operators can use in the shop.
         </p>
       </div>
-
       <aside class="builder-identity-card" aria-label="Builder introduction">
         <p class="builder-card-label">Founder and builder</p>
         <h2>Dom</h2>
@@ -98,7 +120,6 @@
         </div>
       </aside>
     </section>
-
     <section class="builder-story-grid" aria-label="Builder experience">
       <article class="builder-story-card builder-story-card-wide">
         <p class="eyebrow">Hands-on foundation</p>
@@ -116,7 +137,6 @@
           improve results through controlled testing.
         </p>
       </article>
-
       <article class="builder-story-card builder-certification-card">
         <p class="eyebrow">Professional qualification</p>
         <h2>Internationally Certified Welding</h2>
@@ -124,7 +144,6 @@
           Dom is internationally certified in TIG and MIG/MAG welding, with
           qualification welds inspected by X-ray.
         </p>
-
         <ul class="builder-qualification-list">
           <li>
             <span>01</span>
@@ -149,7 +168,6 @@
           </li>
         </ul>
       </article>
-
       <article class="builder-story-card builder-principles-card">
         <p class="eyebrow">Publishing standard</p>
         <h2>Document, Test, and Verify</h2>
@@ -159,7 +177,6 @@
           machine limitations, and controlled test coupons are used wherever
           possible.
         </p>
-
         <div class="builder-principle-grid">
           <div>
             <strong>Documented</strong>
@@ -176,44 +193,42 @@
         </div>
       </article>
     </section>
-
     <section class="builder-atlas-section" aria-labelledby="builder-atlas-title">
       <div class="builder-atlas-heading">
         <p class="eyebrow">Engineering in progress</p>
         <h2 id="builder-atlas-title">Atlas Motion Controller</h2>
         <span>Under development</span>
       </div>
-
       <div class="builder-atlas-content">
         <p>
           Dom is developing the Atlas Motion Controller, a custom CNC and
-          machine-control platform designed around industrial 24 V I/O,
-          multi-axis motion control, diagnostics, modular expansion, and
-          practical shop-floor operation.
+          machine-control platform designed around industrial 48 V I/O,
+          six- to eight-axis motion control, diagnostics, modular expansion, and
+          practical shop-floor operation. The design will also support linear
+          encoders and glass scales for improved positioning accuracy and
+          closed-loop feedback.
         </p>
         <p>
           The project brings together PCB design, embedded electronics, firmware
           planning, machine integration, and real-world testing. It remains an
           active engineering project and is not presented as a finished product.
         </p>
-
         <div class="builder-atlas-tags" aria-label="Atlas engineering areas">
           <span>PCB design</span>
           <span>Embedded electronics</span>
-          <span>24 V industrial I/O</span>
-          <span>Multi-axis motion</span>
+          <span>48 V industrial I/O</span>
+          <span>6–8-axis motion</span>
+          <span>Linear / glass scales</span>
           <span>Diagnostics</span>
           <span>Machine integration</span>
         </div>
       </div>
     </section>
-
     <section class="builder-mission-section">
       <div>
         <p class="eyebrow">Why Plasma Cut Forge exists</p>
         <h2>Useful Information Without Pretending Every Machine Is the Same</h2>
       </div>
-
       <div>
         <p>
           Cut quality depends on more than amperage and speed. Torch height,
@@ -229,7 +244,6 @@
         </p>
       </div>
     </section>
-
     <section class="builder-cta-section" aria-labelledby="builder-cta-title">
       <div>
         <p class="eyebrow">Explore Plasma Cut Forge</p>
@@ -242,7 +256,6 @@
           <strong>Use the Calculator</strong>
           <p>Generate practical starting settings and printable cut cards.</p>
         </a>
-
         <a href="/guides/">
           <span>02</span>
           <strong>Browse the Guides</strong>
@@ -257,7 +270,6 @@
       </div>
     </section>
   </main>
-
   <section class="support-forge" aria-labelledby="support-forge-title">
     <div class="support-forge-copy">
       <p class="support-forge-kicker">Support independent CNC resources</p>
@@ -270,7 +282,6 @@
         keep improving the tools and publishing useful, independent content.
       </p>
     </div>
-
     <div class="support-forge-action">
       <a
         class="support-forge-button"
@@ -283,7 +294,6 @@
       <small>Secure one-time support through Ko-fi</small>
     </div>
   </section>
-
   <aside
   class="kofi-membership-widget is-expanded"
   data-membership-widget
@@ -298,7 +308,6 @@
   >
     <span>Join the Forge</span>
   </button>
-
   <div class="kofi-membership-panel" data-membership-panel>
     <div class="kofi-membership-widget-copy">
       <span class="kofi-membership-eyebrow">Ko-fi Membership</span>
@@ -309,7 +318,6 @@
         project-build updates.
       </p>
     </div>
-
     <div class="kofi-membership-widget-actions">
       <a
         class="kofi-membership-primary"
@@ -330,7 +338,6 @@
     </div>
   </div>
 </aside>
-
   <footer class="site-footer">
   <div class="site-footer-primary">
     <p>© 2026 Plasma Cut Forge.</p>
@@ -338,7 +345,6 @@
       Calculator values are starting recommendations—not guaranteed machine settings.
     </p>
   </div>
-
   <nav class="site-footer-links" aria-label="Legal and contact links">
     <a href="/email-updates.html">Email Updates</a>
     <a href="/contact.html">Contact</a>
