@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Forge Member private download library with professional CNC plasma worksheets, checklists, schedules and spreadsheets.">
+  <title>Member Download Library | Plasma Cut Forge</title>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="stylesheet" href="/styles.css?v=48.0">
+  <link rel="stylesheet" href="/member-quote-builder.css?v=1.1">
+  <link rel="stylesheet" href="/member-download-library.css?v=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script src="/supabase-config.js?v=5.0" defer></script>
+  <script src="/member-auth.js?v=1.4" defer></script>
+  <script src="/member-download-library.js?v=1.0" defer></script>
+  <script src="/membership-widget.js?v=1.1" defer></script>
+</head>
+<body data-member-page="builder">
+<header class="site-header industrial-header">
+  <a class="brand industrial-brand" href="/#top" aria-label="Plasma Cut Forge home">
+    <span class="brand-wordmark">PLASMA<span>CUT</span>FORGE</span>
+    <small>CNC plasma tools &amp; shop-floor guides</small>
+  </a>
+  <nav class="industrial-nav" aria-label="Primary navigation">
+    <a href="/#top">Home</a>
+    <div class="calculator-nav-dropdown">
+      <a class="calculator-nav-trigger" href="/calculators.html">Calculators <span aria-hidden="true">▾</span></a>
+      <div class="calculator-nav-menu" aria-label="Calculator categories">
+        <a href="/calculators.html#plasma-cutting">Plasma Cutting</a>
+        <a href="/calculators.html#machining">Machining</a>
+        <a href="/calculators.html#welding">Welding</a>
+      </div>
+    </div>
+    <a href="/guides/">Guides</a>
+    <a href="/blog/">Blog</a>
+    <a href="/community/">Community</a>
+    <a href="/about-the-builder.html">About</a>
+    <a class="membership-nav-button active" href="/members.html">Membership</a>
+  </nav>
+  <form class="global-search-form" action="/search.html" method="get" role="search">
+    <label class="sr-only" for="global-search-input">Search Plasma Cut Forge</label>
+    <input id="global-search-input" name="q" type="search" placeholder="Search the Forge" required>
+    <button type="submit">Search</button>
+  </form>
+</header>
+<main class="member-download-main">
+  <section class="member-download-hero">
+    <p class="industrial-kicker">Forge Member exclusive</p>
+    <h1>Member Download Library</h1>
+    <p>Professional printable worksheets, inspection checklists, maintenance schedules and formula-driven spreadsheets built for real shop-floor use.</p>
+  </section>
+  <div class="pcf-member-status-bar">
+    <span data-member-connection-status>Checking Forge Member access…</span>
+    <div class="pcf-member-actions">
+      <a class="pcf-button secondary" href="/members.html">Member Home</a>
+      <button class="pcf-button secondary" type="button" data-member-signout>Sign out</button>
+    </div>
+  </div>
+  <section class="pcf-member-gate" data-member-loading>
+    <p class="industrial-kicker">Secure access</p>
+    <h2>Checking Membership</h2>
+    <p>Please wait while Plasma Cut Forge verifies the signed-in paid member account.</p>
+  </section>
+  <section class="pcf-member-gate" data-member-guest hidden>
+    <p class="industrial-kicker">Member sign in required</p>
+    <h2>Unlock the Download Library</h2>
+    <p>A paid $5 Forge Membership is required. Sign in with the same email address used for the Ko-fi purchase.</p>
+    <form class="pcf-member-login-form" data-member-login-form>
+      <label class="pcf-member-field" for="library-member-email"><span>Member email</span>
+        <input id="library-member-email" name="email" type="email" autocomplete="email" placeholder="member@example.com" required>
+      </label>
+      <label class="pcf-member-field" for="library-member-password"><span>Password</span>
+        <input id="library-member-password" name="password" type="password" autocomplete="current-password" minlength="8" placeholder="At least 8 characters" required>
+      </label>
+      <div class="pcf-member-actions">
+        <button class="pcf-button" type="button" data-auth-action="sign-in">Sign In</button>
+        <button class="pcf-button secondary" type="button" data-auth-action="create-account">Create Member Account</button>
+        <button class="pcf-button secondary" type="button" data-auth-action="reset-password">Forgot / Set Password</button>
+      </div>
+      <p class="pcf-member-message" data-member-login-message aria-live="polite"></p>
+    </form>
+  </section>
+  <section class="pcf-member-gate" data-member-inactive hidden>
+    <p class="industrial-kicker">Membership not active</p>
+    <h2>Member Library Locked</h2>
+    <p>Signed in as <strong data-member-account-email>—</strong>. An active paid $5 Forge Membership was not found for this email.</p>
+    <div class="pcf-member-actions">
+      <a class="pcf-button" href="https://ko-fi.com/plasmacutforge/tiers" target="_blank" rel="noopener noreferrer">Buy the $5 Membership</a>
+      <a class="pcf-button secondary" href="/contact.html">Contact Plasma Cut Forge</a>
+    </div>
+  </section>
+  <section data-member-tool hidden>
+    <div class="mdl-overview">
+      <div>
+        <p class="industrial-kicker">Private member files</p>
+        <h2>Shop-Floor Resource Pack</h2>
+        <p>Signed in as <strong id="mdl-member-email">Forge Member</strong>. Downloads are delivered from a private Supabase Storage bucket and are not publicly accessible from the website.</p>
+      </div>
+      <div class="mdl-overview-stats">
+        <div class="mdl-stat"><strong id="mdl-total-count">12</strong><span>Individual resources</span></div>
+        <div class="mdl-stat"><strong id="mdl-complete-size">—</strong><span>Complete ZIP</span></div>
+        <button class="pcf-button" id="mdl-download-all" type="button">Download Complete Library</button>
+      </div>
+    </div>
+
+    <div class="mdl-controls">
+      <label class="mdl-search-wrap">
+        <span class="sr-only">Search member downloads</span>
+        <input id="mdl-search" type="search" placeholder="Search worksheets, checklists and spreadsheets">
+      </label>
+      <div class="mdl-filters" aria-label="Download categories">
+        <button class="mdl-filter active" type="button" data-library-category="All">All</button>
+        <button class="mdl-filter" type="button" data-library-category="Planning Worksheets">Planning</button>
+        <button class="mdl-filter" type="button" data-library-category="Inspection & Troubleshooting">Inspection</button>
+        <button class="mdl-filter" type="button" data-library-category="Maintenance">Maintenance</button>
+        <button class="mdl-filter" type="button" data-library-category="Spreadsheets">Spreadsheets</button>
+      </div>
+    </div>
+    <div class="mdl-results-line">
+      <span id="mdl-result-count">12 resources</span>
+      <span>PDFs are print-ready; XLSX files contain formulas and editable inputs.</span>
+    </div>
+    <div class="mdl-grid" id="mdl-resource-grid"></div>
+    <p class="pcf-member-message" id="mdl-message" aria-live="polite"></p>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="site-footer-primary">
+    <p>© 2026 Plasma Cut Forge.</p>
+    <p class="site-footer-warning">Member downloads are planning and record-keeping aids. Verify machine settings and follow equipment manufacturers' instructions.</p>
+  </div>
+</footer>
+</body>
+</html>
