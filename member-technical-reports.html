@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Forge Member premium CNC plasma technical reports, controlled test results and downloadable data.">
+  <title>Premium Technical Reports | Plasma Cut Forge</title>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="stylesheet" href="/styles.css?v=48.0">
+  <link rel="stylesheet" href="/member-quote-builder.css?v=1.1">
+  <link rel="stylesheet" href="/premium-technical-reports.css?v=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script src="/supabase-config.js?v=5.0" defer></script>
+  <script src="/member-auth.js?v=1.4" defer></script>
+  <script src="/member-technical-reports.js?v=1.0" defer></script>
+  <script src="/membership-widget.js?v=1.1" defer></script>
+</head>
+<body data-member-page="builder">
+<header class="site-header industrial-header">
+  <a class="brand industrial-brand" href="/#top" aria-label="Plasma Cut Forge home">
+    <span class="brand-wordmark">PLASMA<span>CUT</span>FORGE</span>
+    <small>CNC plasma tools &amp; shop-floor guides</small>
+  </a>
+  <nav class="industrial-nav" aria-label="Primary navigation">
+    <a href="/#top">Home</a>
+    <div class="calculator-nav-dropdown">
+      <a class="calculator-nav-trigger" href="/calculators.html">Calculators <span aria-hidden="true">▾</span></a>
+      <div class="calculator-nav-menu" aria-label="Calculator categories">
+        <a href="/calculators.html#plasma-cutting">Plasma Cutting</a>
+        <a href="/calculators.html#machining">Machining</a>
+        <a href="/calculators.html#welding">Welding</a>
+      </div>
+    </div>
+    <a href="/guides/">Guides</a>
+    <a href="/blog/">Blog</a>
+    <a href="/community/">Community</a>
+    <a href="/#articles">Articles</a>
+    <a href="/about-the-builder.html">About</a>
+    <a class="membership-nav-button active" href="/members.html">Membership</a>
+  </nav>
+  <form class="global-search-form" action="/search.html" method="get" role="search">
+    <label class="sr-only" for="global-search-input">Search Plasma Cut Forge</label>
+    <input id="global-search-input" name="q" type="search" placeholder="Search the Forge" required>
+    <button type="submit">Search</button>
+  </form>
+</header>
+<main class="ptr-main">
+  <section class="ptr-hero">
+    <p class="industrial-kicker">Forge Member exclusive</p>
+    <h1>Premium Technical Reports</h1>
+    <p>Complete testing methods, controlled data, machine observations, case studies, calculations and downloadable records that go beyond the free educational articles.</p>
+  </section>
+  <div class="pcf-member-status-bar">
+    <span data-member-connection-status>Checking Forge Member access…</span>
+    <div class="pcf-member-actions">
+      <a class="pcf-button secondary" href="/members.html">Member Home</a>
+      <button class="pcf-button secondary" type="button" data-member-signout>Sign out</button>
+    </div>
+  </div>
+  <section class="pcf-member-gate" data-member-loading>
+    <p class="industrial-kicker">Secure access</p>
+    <h2>Checking Membership</h2>
+    <p>Please wait while Plasma Cut Forge verifies the signed-in paid member account.</p>
+  </section>
+  <section class="pcf-member-gate" data-member-guest hidden>
+    <p class="industrial-kicker">Member sign in required</p>
+    <h2>Unlock Premium Reports</h2>
+    <p>A paid $5 Forge Membership is required. Sign in with the same email address used for the Ko-fi purchase.</p>
+    <form class="pcf-member-login-form" data-member-login-form>
+      <label class="pcf-member-field"><span>Member email</span><input name="email" type="email" autocomplete="email" required></label>
+      <label class="pcf-member-field"><span>Password</span><input name="password" type="password" autocomplete="current-password" minlength="8" required></label>
+      <div class="pcf-member-actions">
+        <button class="pcf-button" type="button" data-auth-action="sign-in">Sign In</button>
+        <button class="pcf-button secondary" type="button" data-auth-action="create-account">Create Member Account</button>
+        <button class="pcf-button secondary" type="button" data-auth-action="reset-password">Forgot / Set Password</button>
+      </div>
+      <p class="pcf-member-message" data-member-login-message aria-live="polite"></p>
+    </form>
+  </section>
+  <section class="pcf-member-gate" data-member-inactive hidden>
+    <p class="industrial-kicker">Membership not active</p>
+    <h2>Premium Reports Locked</h2>
+    <p>Signed in as <strong data-member-account-email>—</strong>, but an active paid $5 Forge Membership was not found.</p>
+    <div class="pcf-member-actions">
+      <a class="pcf-button" href="https://ko-fi.com/plasmacutforge/tiers" target="_blank" rel="noopener noreferrer">Buy the $5 Membership</a>
+      <a class="pcf-button secondary" href="/technical-reports.html">View Public Teasers</a>
+    </div>
+  </section>
+  <section data-member-tool hidden>
+    <div class="ptr-intro">
+      <div>
+        <p class="industrial-kicker">Research and shop-floor evidence</p>
+        <h2>Technical Report Library</h2>
+        <p>Use the filters to browse material tests, consumable comparisons, torch-height work, air experiments, cut-speed studies, THC case studies, EMI examples and detailed shop calculations.</p>
+      </div>
+      <div class="ptr-stats">
+        <div class="ptr-stat"><strong id="ptr-report-total">0</strong><span>Published reports</span></div>
+        <div class="ptr-stat"><strong id="ptr-test-total">0</strong><span>Recorded tests</span></div>
+        <a class="pcf-button secondary ptr-admin-link" id="ptr-admin-link" href="/member-technical-admin.html">Owner Admin</a>
+      </div>
+    </div>
+    <div class="ptr-controls">
+      <input class="ptr-search" id="ptr-search" type="search" placeholder="Search reports, materials, machines and findings">
+      <div class="ptr-filters" id="ptr-filters"></div>
+    </div>
+    <p class="ptr-count" id="ptr-count">Loading reports…</p>
+    <div class="ptr-grid" id="ptr-grid"></div>
+    <p class="pcf-member-message" id="ptr-message" aria-live="polite"></p>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="site-footer-primary">
+    <p>© 2026 Plasma Cut Forge.</p>
+    <p class="site-footer-warning">Member technical reports document testing and methods; they are not guaranteed specifications for every machine.</p>
+  </div>
+</footer>
+</body>
+</html>

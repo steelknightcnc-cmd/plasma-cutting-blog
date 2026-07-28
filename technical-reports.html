@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Public previews of Plasma Cut Forge premium technical testing reports and downloadable member data.">
+  <title>Technical Report Previews | Plasma Cut Forge</title>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="stylesheet" href="/styles.css?v=48.0">
+  <link rel="stylesheet" href="/premium-technical-reports.css?v=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script src="/supabase-config.js?v=5.0" defer></script>
+  <script src="/technical-reports.js?v=1.0" defer></script>
+  <script src="/membership-widget.js?v=1.1" defer></script>
+</head>
+<body>
+<header class="site-header industrial-header">
+  <a class="brand industrial-brand" href="/#top" aria-label="Plasma Cut Forge home">
+    <span class="brand-wordmark">PLASMA<span>CUT</span>FORGE</span>
+    <small>CNC plasma tools &amp; shop-floor guides</small>
+  </a>
+  <nav class="industrial-nav" aria-label="Primary navigation">
+    <a href="/#top">Home</a>
+    <div class="calculator-nav-dropdown">
+      <a class="calculator-nav-trigger" href="/calculators.html">Calculators <span aria-hidden="true">▾</span></a>
+      <div class="calculator-nav-menu" aria-label="Calculator categories">
+        <a href="/calculators.html#plasma-cutting">Plasma Cutting</a>
+        <a href="/calculators.html#machining">Machining</a>
+        <a href="/calculators.html#welding">Welding</a>
+      </div>
+    </div>
+    <a href="/guides/">Guides</a>
+    <a href="/blog/">Blog</a>
+    <a href="/community/">Community</a>
+    <a href="/#articles">Articles</a>
+    <a href="/about-the-builder.html">About</a>
+    <a class="membership-nav-button active" href="/members.html">Membership</a>
+  </nav>
+  <form class="global-search-form" action="/search.html" method="get" role="search">
+    <label class="sr-only" for="global-search-input">Search Plasma Cut Forge</label>
+    <input id="global-search-input" name="q" type="search" placeholder="Search the Forge" required>
+    <button type="submit">Search</button>
+  </form>
+</header>
+<main class="ptr-main">
+  <section class="ptr-hero">
+    <p class="industrial-kicker">Free overview · member data</p>
+    <h1>Technical Report Previews</h1>
+    <p>General educational articles remain free. These previews show the subjects tested and the evidence included in the full Forge Member reports.</p>
+  </section>
+  <div class="ptr-public-lock">
+    <p class="industrial-kicker">Complete reports require membership</p>
+    <h2>Full test methods, measurements and downloads</h2>
+    <p>Forge Members receive the complete article, key findings, controlled results tables, downloadable testing data and printable records.</p>
+    <div class="pcf-member-actions">
+      <a class="pcf-button" href="https://ko-fi.com/plasmacutforge/tiers" target="_blank" rel="noopener noreferrer">Join for $5 on Ko-fi</a>
+      <a class="pcf-button secondary" href="/members.html">Member Sign In</a>
+    </div>
+  </div>
+  <div class="ptr-controls">
+    <input class="ptr-search" id="public-ptr-search" type="search" placeholder="Search technical report previews">
+    <div class="ptr-filters" id="public-ptr-filters"></div>
+  </div>
+  <p class="ptr-count" id="public-ptr-count">Loading previews…</p>
+  <div class="ptr-grid" id="public-ptr-grid"></div>
+  <p class="pcf-member-message" id="public-ptr-message" aria-live="polite"></p>
+</main>
+<footer class="site-footer">
+  <div class="site-footer-primary">
+    <p>© 2026 Plasma Cut Forge.</p>
+    <p class="site-footer-warning">Member technical reports document testing and methods; they are not guaranteed specifications for every machine.</p>
+  </div>
+</footer>
+</body>
+</html>
