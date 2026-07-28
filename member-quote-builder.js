@@ -1196,6 +1196,10 @@
     }
 
     doc.setFont('helvetica', 'bold');
+    doc.setFontSize(8.5);
+    doc.setTextColor(0, 150, 180);
+    doc.text('CUSTOMER COPY', right, y - 1, { align: 'right' });
+    doc.setTextColor(20, 28, 38);
     doc.setFontSize(20);
     doc.text('QUOTATION', right, y + 7, { align: 'right' });
     doc.setFont('helvetica', 'normal');
@@ -1497,8 +1501,11 @@
     pairRow('Deposit required', `${fixed(data.pricing.depositPercent, 1)}%`, 'Deposit amount', money(data.totals.deposit, data.currency));
     y += 4;
 
-    doc.setFillColor(242, 246, 250);
+    // Check for a page break before setting the summary-card fill color.
+    // addOwnerPage() paints the dark confidential header and changes the active fill color.
+    // Setting the light fill after ownerEnsure() prevents dark text from disappearing on a dark card.
     ownerEnsure(68, '05 - PRICING');
+    doc.setFillColor(242, 246, 250);
     doc.roundedRect(left, y - 3, contentWidth, 62, 2, 2, 'F');
     const summaryRows = [
       ['Parts direct cost', data.totals.itemCalcs.reduce((sum, item) => sum + item.directCost, 0)],
