@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Owner administration for Atlas Motion Controller member development access.">
+  <title>Atlas Development Admin | Plasma Cut Forge</title>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="stylesheet" href="/styles.css?v=48.0">
+  <link rel="stylesheet" href="/member-quote-builder.css?v=1.1">
+  <link rel="stylesheet" href="/atlas-development.css?v=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script src="/supabase-config.js?v=5.0" defer></script>
+  <script src="/member-auth.js?v=1.4" defer></script>
+  <script src="/member-atlas-admin.js?v=1.0" defer></script>
+  <script src="/membership-widget.js?v=1.1" defer></script>
+</head>
+<body data-member-page="builder">
+<header class="site-header industrial-header">
+  <a class="brand industrial-brand" href="/#top" aria-label="Plasma Cut Forge home">
+    <span class="brand-wordmark">PLASMA<span>CUT</span>FORGE</span>
+    <small>CNC plasma tools &amp; shop-floor guides</small>
+  </a>
+  <nav class="industrial-nav" aria-label="Primary navigation">
+    <a href="/#top">Home</a>
+    <div class="calculator-nav-dropdown">
+      <a class="calculator-nav-trigger" href="/calculators.html">Calculators <span aria-hidden="true">▾</span></a>
+      <div class="calculator-nav-menu" aria-label="Calculator categories">
+        <a href="/calculators.html#plasma-cutting">Plasma Cutting</a>
+        <a href="/calculators.html#machining">Machining</a>
+        <a href="/calculators.html#welding">Welding</a>
+      </div>
+    </div>
+    <a href="/guides/">Guides</a>
+    <a href="/blog/">Blog</a>
+    <a href="/community/">Community</a>
+    <a href="/#articles">Articles</a>
+    <a href="/about-the-builder.html">About</a>
+    <a class="membership-nav-button active" href="/members.html">Membership</a>
+  </nav>
+  <form class="global-search-form" action="/search.html" method="get" role="search">
+    <label class="sr-only" for="global-search-input">Search Plasma Cut Forge</label>
+    <input id="global-search-input" name="q" type="search" placeholder="Search the Forge" required>
+    <button type="submit">Search</button>
+  </form>
+</header>
+<main class="atlas-main">
+  <section class="atlas-hero">
+    <p class="industrial-kicker">Owner-only publishing workspace</p>
+    <h1>Atlas Development Admin</h1>
+    <p>Publish development logs, engineering decisions, PCB progress, tests, photographs, documents, demonstrations and member polls.</p>
+  </section>
+  <div class="pcf-member-status-bar">
+    <span data-member-connection-status>Checking Forge Member access…</span>
+    <div class="pcf-member-actions">
+      <a class="pcf-button secondary" href="/members.html">Member Home</a>
+      <button class="pcf-button secondary" type="button" data-member-signout>Sign out</button>
+    </div>
+  </div>
+  <section class="pcf-member-gate" data-member-loading>
+    <p class="industrial-kicker">Secure access</p>
+    <h2>Checking Membership</h2>
+    <p>Please wait while Plasma Cut Forge verifies the signed-in paid member account.</p>
+  </section>
+  <section class="pcf-member-gate" data-member-guest hidden>
+    <p class="industrial-kicker">Member sign in required</p>
+    <h2>Unlock Atlas Development Access</h2>
+    <p>A paid $5 Forge Membership is required. Sign in with the same email address used for the Ko-fi purchase.</p>
+    <form class="pcf-member-login-form" data-member-login-form>
+      <label class="pcf-member-field"><span>Member email</span><input name="email" type="email" autocomplete="email" required></label>
+      <label class="pcf-member-field"><span>Password</span><input name="password" type="password" autocomplete="current-password" minlength="8" required></label>
+      <div class="pcf-member-actions">
+        <button class="pcf-button" type="button" data-auth-action="sign-in">Sign In</button>
+        <button class="pcf-button secondary" type="button" data-auth-action="create-account">Create Member Account</button>
+        <button class="pcf-button secondary" type="button" data-auth-action="reset-password">Forgot / Set Password</button>
+      </div>
+      <p class="pcf-member-message" data-member-login-message aria-live="polite"></p>
+    </form>
+  </section>
+  <section class="pcf-member-gate" data-member-inactive hidden>
+    <p class="industrial-kicker">Membership not active</p>
+    <h2>Atlas Development Access Locked</h2>
+    <p>Signed in as <strong data-member-account-email>—</strong>, but an active paid $5 Forge Membership was not found.</p>
+    <div class="pcf-member-actions">
+      <a class="pcf-button" href="https://ko-fi.com/plasmacutforge/tiers" target="_blank" rel="noopener noreferrer">Buy the $5 Membership</a>
+      <a class="pcf-button secondary" href="/about-the-builder.html">Read the Public Atlas Overview</a>
+    </div>
+  </section>
+  <section class="pcf-member-gate" id="atlas-admin-denied" hidden>
+    <p class="industrial-kicker">Owner access required</p>
+    <h2>Atlas Admin Locked</h2>
+    <p>This publishing workspace is restricted to approved Plasma Cut Forge administrator email addresses.</p>
+  </section>
+  <section data-member-tool hidden id="atlas-admin-tool">
+    <div class="atlas-admin-layout">
+      <aside class="atlas-admin-sidebar">
+        <div class="atlas-tabs">
+          <button class="atlas-tab active" type="button" data-atlas-tab="updates">Updates</button>
+          <button class="atlas-tab" type="button" data-atlas-tab="polls">Polls</button>
+        </div>
+        <div class="pcf-member-actions">
+          <button class="pcf-button" id="atlas-new-record" type="button">New Update</button>
+        </div>
+        <div class="atlas-admin-list" id="atlas-admin-list"></div>
+      </aside>
+
+      <div class="atlas-admin-editor" id="atlas-update-editor">
+        <div class="atlas-form-grid">
+          <label class="atlas-field"><span>Title</span><input id="aa-title" type="text"></label>
+          <label class="atlas-field"><span>Slug</span><input id="aa-slug" type="text"></label>
+          <label class="atlas-field"><span>Update type</span>
+            <select id="aa-type">
+              <option>Development Log</option><option>PCB Progress</option><option>Prototype</option>
+              <option>Test Result</option><option>Engineering Decision</option>
+              <option>Early Demonstration</option><option>Documentation</option>
+            </select>
+          </label>
+          <label class="atlas-field"><span>Phase</span><input id="aa-phase" type="text" value="Architecture & Requirements"></label>
+          <label class="atlas-field"><span>Milestone status</span>
+            <select id="aa-milestone"><option value="planned">Planned</option><option value="in-progress">In progress</option><option value="testing">Testing</option><option value="complete">Complete</option><option value="paused">Paused</option></select>
+          </label>
+          <label class="atlas-field"><span>Progress percent</span><input id="aa-progress" type="number" min="0" max="100" value="0"></label>
+          <label class="atlas-field"><span>Development date</span><input id="aa-date" type="date"></label>
+          <label class="atlas-field"><span>Publication status</span><select id="aa-status"><option value="draft">Draft</option><option value="published">Published</option><option value="archived">Archived</option></select></label>
+          <label class="atlas-field"><span>Featured update</span><select id="aa-featured"><option value="false">No</option><option value="true">Yes</option></select></label>
+          <label class="atlas-field full"><span>Summary</span><textarea id="aa-summary"></textarea></label>
+        </div>
+        <div class="atlas-admin-actions">
+          <button class="pcf-button secondary" id="aa-add-section" type="button">Add Section</button>
+          <button class="pcf-button" id="aa-save" type="button">Save Update</button>
+          <button class="pcf-button secondary" id="aa-delete" type="button">Delete Update</button>
+          <a class="pcf-button secondary" id="aa-preview" href="#" target="_blank" rel="noopener">Open Member Preview</a>
+        </div>
+        <h2>Update Sections</h2>
+        <div class="atlas-editor-sections" id="aa-sections"></div>
+        <h2>Private Assets</h2>
+        <label class="atlas-field"><span>Upload prototype photos or documents</span><input id="aa-files" type="file" multiple accept="image/*,.pdf,.csv,.xlsx,.zip,.txt"></label>
+        <div class="atlas-form-grid" style="margin-top:14px">
+          <label class="atlas-field"><span>Demo label</span><input id="aa-demo-label" type="text" placeholder="Early motion demonstration"></label>
+          <label class="atlas-field"><span>External demo URL</span><input id="aa-demo-url" type="url" placeholder="https://"></label>
+        </div>
+        <button class="pcf-button secondary" id="aa-add-demo" type="button" style="margin-top:12px">Add Demo Link</button>
+        <div id="aa-assets"></div>
+        <p class="pcf-member-message" id="aa-message" aria-live="polite"></p>
+      </div>
+
+      <div class="atlas-admin-editor" id="atlas-poll-editor" hidden>
+        <div class="atlas-form-grid">
+          <label class="atlas-field full"><span>Question</span><input id="ap-question" type="text"></label>
+          <label class="atlas-field full"><span>Description</span><textarea id="ap-description"></textarea></label>
+          <label class="atlas-field"><span>Status</span><select id="ap-status"><option value="draft">Draft</option><option value="open">Open</option><option value="closed">Closed</option></select></label>
+          <label class="atlas-field"><span>Opens at</span><input id="ap-opens" type="datetime-local"></label>
+          <label class="atlas-field"><span>Closes at</span><input id="ap-closes" type="datetime-local"></label>
+          <label class="atlas-field full"><span>Options - one per line</span><textarea id="ap-options"></textarea></label>
+        </div>
+        <div class="atlas-warning"><strong>Poll editing note:</strong> Changing poll options after members have voted removes the existing votes for that poll.</div>
+        <div class="atlas-admin-actions">
+          <button class="pcf-button" id="ap-save" type="button">Save Poll</button>
+          <button class="pcf-button secondary" id="ap-delete" type="button">Delete Poll</button>
+        </div>
+        <p class="pcf-member-message" id="ap-message" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="site-footer-primary">
+    <p>© 2026 Plasma Cut Forge.</p>
+    <p class="site-footer-warning">Atlas member content documents an active engineering project—not a finished, certified or commercially available controller.</p>
+  </div>
+</footer>
+</body>
+</html>
