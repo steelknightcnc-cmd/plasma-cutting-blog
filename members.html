@@ -43,7 +43,6 @@
     <button type="submit">Search</button>
   </form>
 </header>
-
 <main class="member-access-main">
   <section class="member-access-hero">
     <p class="industrial-kicker">Forge Member exclusive</p>
@@ -52,15 +51,14 @@
       A paid <strong>$5 Forge Membership</strong> is required before the exclusive member tools can be opened. Join through Ko-fi, then create or sign in to a member account using the same email address and your own password.
       <span class="pcf-member-actions" style="margin-top:18px">
         <a class="pcf-button" href="https://ko-fi.com/plasmacutforge/tiers" target="_blank" rel="noopener noreferrer">Join for $5 on Ko-fi</a>
+        <a class="pcf-button secondary" href="/machine-profiles.html">Browse Community Machine Profiles</a>
       </span>
     </p>
   </section>
-
   <div class="pcf-member-status-bar">
     <span data-member-connection-status>Checking your sign-in status…</span>
     <button class="pcf-button secondary" type="button" data-member-signout>Sign out</button>
   </div>
-
   <section class="pcf-member-gate" data-member-guest hidden>
     <p class="industrial-kicker">Secure member account</p>
     <h2>Open the Member Forge</h2>
@@ -83,7 +81,6 @@
       <a class="pcf-button secondary" href="https://ko-fi.com/plasmacutforge/tiers" target="_blank" rel="noopener noreferrer">Join for $5 on Ko-fi</a>
     </div>
   </section>
-
   <section class="pcf-member-gate" data-member-password-recovery hidden>
     <p class="industrial-kicker">Password setup</p>
     <h2>Create a New Password</h2>
@@ -95,13 +92,10 @@
       <label class="pcf-member-field" for="recovery-confirm-password"><span>Confirm password</span>
         <input id="recovery-confirm-password" name="confirm_password" type="password" autocomplete="new-password" minlength="8" required>
       </label>
-      <div class="pcf-member-actions">
-        <button class="pcf-button" type="submit">Save Password</button>
-      </div>
+      <div class="pcf-member-actions"><button class="pcf-button" type="submit">Save Password</button></div>
       <p class="pcf-member-message" data-member-password-message aria-live="polite"></p>
     </form>
   </section>
-
   <section class="pcf-member-hub-panel" data-member-active hidden>
     <p class="industrial-kicker">Access confirmed</p>
     <h2>Welcome to the Forge</h2>
@@ -113,6 +107,14 @@
         <p>Build multi-part plasma quotes, apply shop pricing, save drafts, and export branded PDF and CSV files.</p>
       </div>
       <a class="pcf-button" href="/member-quote-builder.html">Open Tool</a>
+    </article>
+    <article class="pcf-member-tool-card">
+      <span class="number">02</span>
+      <div>
+        <strong>Personal Machine Profiles &amp; Cut Charts</strong>
+        <p>Create private equipment profiles, record machine-specific cut settings, duplicate charts, and export PDF or CSV files. Profiles can also be submitted for community approval.</p>
+      </div>
+      <a class="pcf-button" href="/member-machine-profiles.html">Open Tool</a>
     </article>
     <div class="pcf-member-password-panel">
       <h3>Set or Change Password</h3>
@@ -129,7 +131,6 @@
       </form>
     </div>
   </section>
-
   <section class="pcf-member-gate" data-member-inactive hidden>
     <p class="industrial-kicker">Membership not active</p>
     <h2>Access Is Locked</h2>
@@ -140,11 +141,10 @@
     </div>
   </section>
 </main>
-
 <footer class="site-footer">
   <div class="site-footer-primary">
     <p>© 2026 Plasma Cut Forge.</p>
-    <p class="site-footer-warning">Member tools are planning aids—not guaranteed commercial quotations.</p>
+    <p class="site-footer-warning">Member tools are planning aids—not guaranteed machine specifications.</p>
   </div>
 </footer>
 </body>

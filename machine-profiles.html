@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Browse Plasma Cut Forge community machine profiles and approved CNC plasma cut charts.">
+  <title>Community Machine Profiles | Plasma Cut Forge</title>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="stylesheet" href="/styles.css?v=48.0">
+  <link rel="stylesheet" href="/member-machine-profiles.css?v=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script src="/supabase-config.js?v=5.0" defer></script>
+  <script src="/machine-profiles.js?v=1.0" defer></script>
+  <script src="/membership-widget.js?v=1.1" defer></script>
+</head>
+<body>
+<header class="site-header industrial-header">
+  <a class="brand industrial-brand" href="/#top" aria-label="Plasma Cut Forge home">
+    <span class="brand-wordmark">PLASMA<span>CUT</span>FORGE</span>
+    <small>CNC plasma tools &amp; shop-floor guides</small>
+  </a>
+  <nav class="industrial-nav" aria-label="Primary navigation">
+    <a href="/#top">Home</a>
+    <div class="calculator-nav-dropdown">
+      <a class="calculator-nav-trigger" href="/calculators.html">Calculators <span aria-hidden="true">▾</span></a>
+      <div class="calculator-nav-menu" aria-label="Calculator categories">
+        <a href="/calculators.html#plasma-cutting">Plasma Cutting</a>
+        <a href="/calculators.html#machining">Machining</a>
+        <a href="/calculators.html#welding">Welding</a>
+      </div>
+    </div>
+    <a href="/guides/">Guides</a>
+    <a href="/blog/">Blog</a>
+    <a class="active" href="/community/">Community</a>
+    <a href="/about-the-builder.html">About</a>
+    <a class="membership-nav-button" href="/members.html">Membership</a>
+  </nav>
+  <form class="global-search-form" action="/search.html" method="get" role="search">
+    <label class="sr-only" for="global-search-input">Search Plasma Cut Forge</label>
+    <input id="global-search-input" name="q" type="search" placeholder="Search the Forge" required>
+    <button type="submit">Search</button>
+  </form>
+</header>
+<main class="public-machine-main">
+  <section class="public-machine-hero">
+    <div>
+      <p class="industrial-kicker">Community reference library</p>
+      <h1>Approved Machine Profiles &amp; Cut Charts</h1>
+      <p>Browse machine-specific settings submitted by Forge Members and reviewed before public listing. These are practical starting points—not guaranteed factory specifications.</p>
+    </div>
+    <div class="mp-actions">
+      <a class="mp-button" href="/members.html">Create a Member Profile</a>
+      <a class="mp-button secondary" href="https://ko-fi.com/plasmacutforge/tiers" target="_blank" rel="noopener noreferrer">Join for $5</a>
+    </div>
+  </section>
+
+  <section class="mp-public-notice">
+    <strong>Always verify settings on your own equipment.</strong>
+    <p>Machine condition, torch, consumables, air quality, input power, material chemistry, motion performance, and controller tuning can change the correct operating point.</p>
+  </section>
+
+  <section class="mp-public-filters" aria-label="Machine profile filters">
+    <label><span>Search profiles</span><input id="public-profile-search" type="search" placeholder="Brand, model, torch, material…"></label>
+    <label><span>Plasma cutter brand</span><select id="public-brand-filter"><option value="">All brands</option></select></label>
+    <label><span>Material</span><select id="public-material-filter"><option value="">All materials</option></select></label>
+    <label><span>Display units</span><select id="public-unit-system"><option value="metric">Metric</option><option value="imperial">Imperial</option></select></label>
+  </section>
+
+  <div class="mp-public-summary"><strong id="public-profile-count">0</strong><span>approved profiles</span></div>
+  <section id="public-profile-list" class="mp-public-list" aria-live="polite"><p class="mp-empty">Loading approved profiles…</p></section>
+</main>
+<footer class="site-footer">
+  <div class="site-footer-primary">
+    <p>© 2026 Plasma Cut Forge.</p>
+    <p class="site-footer-warning">Community profiles are informational starting points. Follow the plasma-source manual and verify through controlled test cuts.</p>
+  </div>
+</footer>
+</body>
+</html>

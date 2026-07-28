@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Forge Member private plasma cutter machine profiles and machine-specific cut charts with PDF and CSV export.">
+  <title>Personal Machine Profiles &amp; Cut Charts | Plasma Cut Forge</title>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="stylesheet" href="/styles.css?v=48.0">
+  <link rel="stylesheet" href="/member-quote-builder.css?v=1.1">
+  <link rel="stylesheet" href="/member-machine-profiles.css?v=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.4/dist/jspdf.plugin.autotable.min.js" defer></script>
+  <script src="/supabase-config.js?v=5.0" defer></script>
+  <script src="/member-auth.js?v=1.4" defer></script>
+  <script src="/member-machine-profiles.js?v=1.0" defer></script>
+  <script src="/membership-widget.js?v=1.1" defer></script>
+</head>
+<body data-member-page="builder">
+<header class="site-header industrial-header">
+  <a class="brand industrial-brand" href="/#top" aria-label="Plasma Cut Forge home">
+    <span class="brand-wordmark">PLASMA<span>CUT</span>FORGE</span>
+    <small>CNC plasma tools &amp; shop-floor guides</small>
+  </a>
+  <nav class="industrial-nav" aria-label="Primary navigation">
+    <a href="/#top">Home</a>
+    <div class="calculator-nav-dropdown">
+      <a class="calculator-nav-trigger" href="/calculators.html">Calculators <span aria-hidden="true">▾</span></a>
+      <div class="calculator-nav-menu" aria-label="Calculator categories">
+        <a href="/calculators.html#plasma-cutting">Plasma Cutting</a>
+        <a href="/calculators.html#machining">Machining</a>
+        <a href="/calculators.html#welding">Welding</a>
+      </div>
+    </div>
+    <a href="/guides/">Guides</a>
+    <a href="/blog/">Blog</a>
+    <a href="/community/">Community</a>
+    <a href="/about-the-builder.html">About</a>
+    <a class="membership-nav-button active" href="/members.html">Membership</a>
+  </nav>
+  <form class="global-search-form" action="/search.html" method="get" role="search">
+    <label class="sr-only" for="global-search-input">Search Plasma Cut Forge</label>
+    <input id="global-search-input" name="q" type="search" placeholder="Search the Forge" required>
+    <button type="submit">Search</button>
+  </form>
+</header>
+<main class="member-machine-main">
+  <section class="member-machine-hero">
+    <p class="industrial-kicker">Forge Member exclusive</p>
+    <h1>Personal Machine Profiles &amp; Cut Charts</h1>
+    <p>Create private equipment profiles, record settings proven on your own machine, duplicate charts for testing, and export your machine-specific data. Public community profiles appear only after Plasma Cut Forge approval.</p>
+  </section>
+  <div class="pcf-member-status-bar">
+    <span data-member-connection-status>Checking Forge Member access…</span>
+    <div class="pcf-member-actions">
+      <a class="pcf-button secondary" href="/machine-profiles.html">Public Profiles</a>
+      <a class="pcf-button secondary" href="/members.html">Member Home</a>
+      <button class="pcf-button secondary" type="button" data-member-signout>Sign out</button>
+    </div>
+  </div>
+  <section class="pcf-member-gate" data-member-loading>
+    <p class="industrial-kicker">Secure access</p>
+    <h2>Checking Membership</h2>
+    <p>Please wait while Plasma Cut Forge verifies your signed-in account.</p>
+  </section>
+  <section class="pcf-member-gate" data-member-guest hidden>
+    <p class="industrial-kicker">Member sign in required</p>
+    <h2>Unlock Machine Profiles</h2>
+    <p>A paid $5 Forge Membership is required. Sign in with the same email address used for the Ko-fi purchase and your member password.</p>
+    <form class="pcf-member-login-form" data-member-login-form>
+      <label class="pcf-member-field" for="profiles-member-email"><span>Member email</span>
+        <input id="profiles-member-email" name="email" type="email" autocomplete="email" placeholder="member@example.com" required>
+      </label>
+      <label class="pcf-member-field" for="profiles-member-password"><span>Password</span>
+        <input id="profiles-member-password" name="password" type="password" autocomplete="current-password" minlength="8" placeholder="At least 8 characters" required>
+      </label>
+      <div class="pcf-member-actions">
+        <button class="pcf-button" type="button" data-auth-action="sign-in">Sign In</button>
+        <button class="pcf-button secondary" type="button" data-auth-action="create-account">Create Member Account</button>
+        <button class="pcf-button secondary" type="button" data-auth-action="reset-password">Forgot / Set Password</button>
+      </div>
+      <p class="pcf-member-message" data-member-login-message aria-live="polite"></p>
+    </form>
+  </section>
+  <section class="pcf-member-gate" data-member-inactive hidden>
+    <p class="industrial-kicker">Membership not active</p>
+    <h2>Member Tool Locked</h2>
+    <p>Signed in as <strong data-member-account-email>—</strong>. An active paid $5 Forge Membership was not found for this email.</p>
+    <div class="pcf-member-actions">
+      <a class="pcf-button" href="https://ko-fi.com/plasmacutforge/tiers" target="_blank" rel="noopener noreferrer">Buy the $5 Membership</a>
+      <a class="pcf-button secondary" href="/contact.html">Contact Plasma Cut Forge</a>
+    </div>
+  </section>
+  <section data-member-tool hidden>
+    <div class="mp-toolbar">
+      <div>
+        <p class="mp-kicker">Private member cloud</p>
+        <h2 id="mp-editor-heading">New Machine Profile</h2>
+      </div>
+      <div class="mp-actions">
+        <button class="mp-button secondary" id="mp-new-profile" type="button">New Profile</button>
+        <button class="mp-button" id="mp-save-profile" type="button">Save Profile</button>
+        <button class="mp-button secondary" id="mp-duplicate-profile" type="button">Duplicate</button>
+        <button class="mp-button danger" id="mp-delete-profile" type="button">Delete</button>
+      </div>
+    </div>
+
+    <div class="mp-layout">
+      <aside class="mp-sidebar">
+        <div class="mp-panel-heading">
+          <div><p class="mp-kicker">Your library</p><h2>Saved Profiles</h2></div>
+          <button class="mp-icon-button" id="mp-refresh-profiles" type="button">Refresh</button>
+        </div>
+        <div id="mp-profile-list" class="mp-profile-list"><p class="mp-empty">Loading profiles…</p></div>
+      </aside>
+
+      <div class="mp-stack">
+        <section class="mp-panel">
+          <div class="mp-panel-heading">
+            <div><p class="mp-kicker">01 · Equipment</p><h2>Machine Profile</h2></div>
+            <span class="mp-status private" id="mp-publication-status">Private</span>
+          </div>
+          <div class="mp-grid three">
+            <label class="mp-field"><span>Profile name</span><input id="mp-profile-name" type="text" maxlength="120" placeholder="Shop plasma — fine-cut chart"></label>
+            <label class="mp-field"><span>Plasma cutter brand</span><input id="mp-cutter-brand" type="text" maxlength="100" placeholder="Hypertherm, Stamos, Everlast…"></label>
+            <label class="mp-field"><span>Plasma cutter model</span><input id="mp-cutter-model" type="text" maxlength="120" placeholder="Powermax 45 XP, S-Plasma 85 CNC…"></label>
+            <label class="mp-field"><span>Torch type</span><input id="mp-torch-type" type="text" maxlength="120" placeholder="Machine torch model or family"></label>
+            <label class="mp-field"><span>Consumable type</span><input id="mp-consumable-type" type="text" maxlength="160" placeholder="Nozzle, electrode, shield or consumable family"></label>
+            <label class="mp-field"><span>Working units</span>
+              <select id="mp-unit-system"><option value="metric">Metric — mm, mm/min, bar</option><option value="imperial">Imperial — in, IPM, PSI</option></select>
+            </label>
+            <label class="mp-field"><span>Public display name (optional)</span><input id="mp-public-display-name" type="text" maxlength="60" placeholder="SteelKnight CNC"></label>
+            <label class="mp-field full"><span>Machine / profile notes</span><textarea id="mp-profile-notes" maxlength="5000" placeholder="Machine setup, air system, torch configuration, test conditions, consumable condition, or other profile-wide notes."></textarea></label>
+          </div>
+          <label class="mp-public-request">
+            <input id="mp-public-request" type="checkbox">
+            <span><strong>Submit this profile for community approval</strong><small>Your email remains private. Plasma Cut Forge reviews the chart before it can appear publicly. Editing a public profile sends it back for review.</small></span>
+          </label>
+        </section>
+
+        <section class="mp-panel">
+          <div class="mp-panel-heading">
+            <div><p class="mp-kicker">02 · Cut chart</p><h2>Machine-Specific Settings</h2></div>
+            <button class="mp-button" id="mp-add-row" type="button">Add Cut Setting</button>
+          </div>
+          <p class="mp-helper">Store settings that you have verified on your own machine. Required for every row: material, thickness, amperage, and cut speed.</p>
+          <div id="mp-cut-rows" class="mp-cut-rows"></div>
+        </section>
+
+        <section class="mp-panel mp-export-panel">
+          <div class="mp-panel-heading">
+            <div><p class="mp-kicker">03 · Files</p><h2>Export This Profile</h2></div>
+          </div>
+          <p>Exports use the currently selected working units. Only active Forge Members can create, save, duplicate, or export private profiles.</p>
+          <div class="mp-actions">
+            <button class="mp-button" id="mp-export-pdf" type="button">Export PDF</button>
+            <button class="mp-button secondary" id="mp-export-csv" type="button">Export CSV</button>
+          </div>
+          <p class="pcf-member-message" id="mp-message" aria-live="polite"></p>
+        </section>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="site-footer-primary">
+    <p>© 2026 Plasma Cut Forge.</p>
+    <p class="site-footer-warning">Machine profiles are starting points and test records. Verify every setting on the actual machine before production cutting.</p>
+  </div>
+</footer>
+</body>
+</html>
