@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Forge Member advanced CNC plasma troubleshooting sessions, guided diagnostics, photo evidence, test history, corrective actions and printable reports.">
+  <title>Advanced Troubleshooting Reports | Plasma Cut Forge</title>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="stylesheet" href="/styles.css?v=48.0">
+  <link rel="stylesheet" href="/member-quote-builder.css?v=1.1">
+  <link rel="stylesheet" href="/member-troubleshooting.css?v=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js" defer></script>
+  <script src="/supabase-config.js?v=5.0" defer></script>
+  <script src="/member-auth.js?v=1.4" defer></script>
+  <script src="/member-troubleshooting.js?v=1.0" defer></script>
+  <script src="/membership-widget.js?v=1.1" defer></script>
+</head>
+<body data-member-page="builder">
+<header class="site-header industrial-header">
+  <a class="brand industrial-brand" href="/#top" aria-label="Plasma Cut Forge home">
+    <span class="brand-wordmark">PLASMA<span>CUT</span>FORGE</span>
+    <small>CNC plasma tools &amp; shop-floor guides</small>
+  </a>
+  <nav class="industrial-nav" aria-label="Primary navigation">
+    <a href="/#top">Home</a>
+    <div class="calculator-nav-dropdown">
+      <a class="calculator-nav-trigger" href="/calculators.html">Calculators <span aria-hidden="true">▾</span></a>
+      <div class="calculator-nav-menu" aria-label="Calculator categories">
+        <a href="/calculators.html#plasma-cutting">Plasma Cutting</a>
+        <a href="/calculators.html#machining">Machining</a>
+        <a href="/calculators.html#welding">Welding</a>
+      </div>
+    </div>
+    <a href="/guides/">Guides</a>
+    <a href="/blog/">Blog</a>
+    <a href="/community/">Community</a>
+    <a href="/about-the-builder.html">About</a>
+    <a class="membership-nav-button active" href="/members.html">Membership</a>
+  </nav>
+  <form class="global-search-form" action="/search.html" method="get" role="search">
+    <label class="sr-only" for="global-search-input">Search Plasma Cut Forge</label>
+    <input id="global-search-input" name="q" type="search" placeholder="Search the Forge" required>
+    <button type="submit">Search</button>
+  </form>
+</header>
+
+<main class="tr-main">
+  <section class="tr-hero">
+    <p class="industrial-kicker">Forge Member exclusive</p>
+    <h1>Advanced Troubleshooting Reports</h1>
+    <p>Build a guided diagnostic path, attach the machine settings and photographic evidence, record every controlled test, preserve maintenance history, and export a complete private PDF report.</p>
+  </section>
+
+  <div class="pcf-member-status-bar">
+    <span data-member-connection-status>Checking Forge Member access…</span>
+    <div class="pcf-member-actions">
+      <a class="pcf-button secondary" href="/members.html">Member Home</a>
+      <button class="pcf-button secondary" type="button" data-member-signout>Sign out</button>
+    </div>
+  </div>
+
+  <section class="pcf-member-gate" data-member-loading>
+    <p class="industrial-kicker">Secure access</p>
+    <h2>Checking Membership</h2>
+    <p>Please wait while Plasma Cut Forge verifies the signed-in paid member account.</p>
+  </section>
+
+  <section class="pcf-member-gate" data-member-guest hidden>
+    <p class="industrial-kicker">Member sign in required</p>
+    <h2>Unlock Advanced Troubleshooting</h2>
+    <p>A paid $5 Forge Membership is required. Sign in with the same email used for the Ko-fi purchase.</p>
+    <form class="pcf-member-login-form" data-member-login-form>
+      <label class="pcf-member-field" for="tr-member-email"><span>Member email</span>
+        <input id="tr-member-email" name="email" type="email" autocomplete="email" placeholder="member@example.com" required>
+      </label>
+      <label class="pcf-member-field" for="tr-member-password"><span>Password</span>
+        <input id="tr-member-password" name="password" type="password" autocomplete="current-password" minlength="8" placeholder="At least 8 characters" required>
+      </label>
+      <div class="pcf-member-actions">
+        <button class="pcf-button" type="button" data-auth-action="sign-in">Sign In</button>
+        <button class="pcf-button secondary" type="button" data-auth-action="create-account">Create Member Account</button>
+        <button class="pcf-button secondary" type="button" data-auth-action="reset-password">Forgot / Set Password</button>
+      </div>
+      <p class="pcf-member-message" data-member-login-message aria-live="polite"></p>
+    </form>
+  </section>
+
+  <section class="pcf-member-gate" data-member-inactive hidden>
+    <p class="industrial-kicker">Membership not active</p>
+    <h2>Troubleshooting Reports Locked</h2>
+    <p>Signed in as <strong data-member-account-email>—</strong>. An active paid $5 Forge Membership was not found for this email.</p>
+    <div class="pcf-member-actions">
+      <a class="pcf-button" href="https://ko-fi.com/plasmacutforge/tiers" target="_blank" rel="noopener noreferrer">Buy the $5 Membership</a>
+      <a class="pcf-button secondary" href="/contact.html">Contact Plasma Cut Forge</a>
+    </div>
+  </section>
+
+  <section class="tr-app" data-member-tool hidden>
+    <aside class="tr-sidebar">
+      <div class="tr-sidebar-head">
+        <div>
+          <p class="industrial-kicker">Private sessions</p>
+          <h2>Diagnostic History</h2>
+        </div>
+        <button class="pcf-button" id="tr-new-session" type="button">New Session</button>
+      </div>
+      <label class="tr-field">
+        <span>Search saved sessions</span>
+        <input id="tr-session-search" type="search" placeholder="Title, symptom or report ID">
+      </label>
+      <label class="tr-field">
+        <span>Status filter</span>
+        <select id="tr-session-filter">
+          <option value="all">All statuses</option>
+          <option value="open">Open</option>
+          <option value="testing">Testing</option>
+          <option value="resolved">Resolved</option>
+          <option value="archived">Archived</option>
+        </select>
+      </label>
+      <div class="tr-session-list" id="tr-session-list"></div>
+    </aside>
+
+    <div class="tr-workspace">
+      <div class="tr-toolbar">
+        <div>
+          <span class="tr-report-code" id="tr-session-code">NEW REPORT</span>
+          <strong id="tr-unsaved-state">New unsaved session</strong>
+        </div>
+        <div class="tr-toolbar-actions">
+          <button class="pcf-button" id="tr-save" type="button">Save Session</button>
+          <button class="pcf-button secondary" id="tr-duplicate" type="button">Duplicate</button>
+          <button class="pcf-button secondary" id="tr-export-pdf" type="button">Export PDF</button>
+          <button class="pcf-button secondary" id="tr-export-csv" type="button">Export CSV</button>
+          <button class="pcf-button danger" id="tr-delete" type="button">Delete</button>
+        </div>
+      </div>
+      <p class="pcf-member-message" id="tr-message" aria-live="polite"></p>
+
+      <section class="tr-panel">
+        <div class="tr-section-title"><span>01</span><div><h2>Problem &amp; Equipment</h2><p>Identify the symptom and capture the machine configuration before changing anything.</p></div></div>
+        <div class="tr-grid four">
+          <label class="tr-field span-2"><span>Session title</span><input id="tr-title" maxlength="160" placeholder="Example: Heavy bottom dross on 6 mm mild steel"></label>
+          <label class="tr-field"><span>Status</span><select id="tr-status"><option value="open">Open</option><option value="testing">Testing</option><option value="resolved">Resolved</option><option value="archived">Archived</option></select></label>
+          <label class="tr-field"><span>Severity</span><select id="tr-severity"><option value="minor">Minor</option><option value="moderate" selected>Moderate</option><option value="major">Major</option><option value="machine_down">Machine down</option></select></label>
+          <label class="tr-field span-2"><span>Primary symptom</span><select id="tr-symptom"></select></label>
+          <label class="tr-field"><span>Opened date</span><input id="tr-opened-date" type="date"></label>
+          <label class="tr-field"><span>Working units</span><select id="tr-unit"><option value="metric">Metric</option><option value="imperial">Imperial</option></select></label>
+        </div>
+
+        <div class="tr-subpanel">
+          <div class="tr-subpanel-head"><h3>Load a Personal Machine Profile</h3><p>Optional: populate equipment and settings from a saved member cut chart.</p></div>
+          <div class="tr-grid three">
+            <label class="tr-field"><span>Machine profile</span><select id="tr-machine-profile"><option value="">Manual entry</option></select></label>
+            <label class="tr-field"><span>Cut-chart row</span><select id="tr-profile-row" disabled><option value="">Select a saved setting</option></select></label>
+            <div class="tr-field button-field"><span>Apply saved data</span><button class="pcf-button secondary" id="tr-apply-profile" type="button">Apply Profile</button></div>
+          </div>
+        </div>
+
+        <div class="tr-grid three">
+          <label class="tr-field"><span>Plasma cutter brand</span><input id="tr-cutter-brand" maxlength="100"></label>
+          <label class="tr-field"><span>Plasma cutter model</span><input id="tr-cutter-model" maxlength="120"></label>
+          <label class="tr-field"><span>Torch type</span><input id="tr-torch" maxlength="120"></label>
+          <label class="tr-field span-2"><span>Consumables installed</span><input id="tr-consumables" maxlength="180" placeholder="Nozzle, electrode, shield, swirl ring and amperage rating"></label>
+          <label class="tr-field"><span>Controller / THC</span><input id="tr-controller" maxlength="120"></label>
+        </div>
+      </section>
+
+      <section class="tr-panel">
+        <div class="tr-section-title"><span>02</span><div><h2>Guided Diagnostic Path</h2><p>Follow a controlled sequence. Complete the checks in order and record evidence instead of changing several variables at once.</p></div></div>
+        <div class="tr-guide-summary">
+          <div><p class="industrial-kicker">Selected symptom</p><h3 id="tr-guide-title">Bottom dross</h3><p id="tr-guide-summary"></p></div>
+          <div class="tr-progress"><strong id="tr-progress-value">0%</strong><span>Path complete</span></div>
+        </div>
+        <div class="tr-likely-causes" id="tr-likely-causes"></div>
+        <div class="tr-guide-actions">
+          <button class="pcf-button" id="tr-build-path" type="button">Build Recommended Path</button>
+          <button class="pcf-button secondary" id="tr-add-step" type="button">Add Custom Step</button>
+        </div>
+        <div id="tr-guide-steps" class="tr-guide-steps"></div>
+        <p class="tr-disclaimer">Use the plasma-cutter and torch manufacturer’s cut chart as the controlling reference. The guide organizes tests; it does not replace the equipment manual or safe work procedures.</p>
+      </section>
+
+      <section class="tr-panel">
+        <div class="tr-section-title"><span>03</span><div><h2>Machine Settings Attached to the Problem</h2><p>Values are stored internally in metric units and displayed in the selected working units.</p></div></div>
+        <div class="tr-grid four">
+          <label class="tr-field"><span>Material</span><select id="tr-material"><option>Mild steel</option><option>Stainless steel</option><option>Aluminum</option><option>Galvanized steel</option><option>Copper</option><option>Brass</option><option>Other</option></select></label>
+          <label class="tr-field"><span>Thickness <small data-unit-label="length">mm</small></span><input id="tr-thickness" type="number" min="0" step="0.01"></label>
+          <label class="tr-field"><span>Amperage <small>A</small></span><input id="tr-amperage" type="number" min="0" step="1"></label>
+          <label class="tr-field"><span>Cut speed <small data-unit-label="speed">mm/min</small></span><input id="tr-cut-speed" type="number" min="0" step="1"></label>
+          <label class="tr-field"><span>Arc voltage <small>V</small></span><input id="tr-voltage" type="number" min="0" step="0.1"></label>
+          <label class="tr-field"><span>Air pressure <small data-unit-label="pressure">bar</small></span><input id="tr-pressure" type="number" min="0" step="0.01"></label>
+          <label class="tr-field"><span>Pierce height <small data-unit-label="length">mm</small></span><input id="tr-pierce-height" type="number" min="0" step="0.01"></label>
+          <label class="tr-field"><span>Pierce delay <small>s</small></span><input id="tr-pierce-delay" type="number" min="0" step="0.01"></label>
+          <label class="tr-field"><span>Cut height <small data-unit-label="length">mm</small></span><input id="tr-cut-height" type="number" min="0" step="0.01"></label>
+          <label class="tr-field"><span>THC enabled</span><select id="tr-thc"><option value="true">Yes</option><option value="false">No</option></select></label>
+          <label class="tr-field"><span>Water table / downdraft</span><select id="tr-table-type"><option value="water">Water table</option><option value="downdraft">Downdraft</option><option value="open">Open / other</option></select></label>
+          <label class="tr-field"><span>Consumable condition</span><select id="tr-consumable-condition"><option value="new">New</option><option value="good">Good</option><option value="worn">Worn</option><option value="unknown">Unknown</option></select></label>
+          <label class="tr-field span-4"><span>Additional starting conditions</span><textarea id="tr-settings-notes" rows="3" maxlength="5000" placeholder="Work lead location, material surface condition, ambient conditions, air dryer state, program details…"></textarea></label>
+        </div>
+      </section>
+
+      <section class="tr-panel">
+        <div class="tr-section-title"><span>04</span><div><h2>Before-and-After Evidence</h2><p>Attach private photos to the session. Each image is stored in the member’s protected Supabase folder.</p></div></div>
+        <div class="tr-evidence-grid">
+          <div class="tr-evidence-column">
+            <div class="tr-subpanel-head"><h3>Before Testing</h3><p>Document the original defect before changing settings or parts.</p></div>
+            <label class="tr-field"><span>Before notes</span><textarea id="tr-before-notes" rows="5" maxlength="10000"></textarea></label>
+            <label class="tr-upload"><span>Add before photos</span><input id="tr-before-files" type="file" accept="image/jpeg,image/png,image/webp,image/gif" multiple></label>
+            <div class="tr-photo-grid" id="tr-before-photos"></div>
+          </div>
+          <div class="tr-evidence-column">
+            <div class="tr-subpanel-head"><h3>After Testing</h3><p>Show the final result or the latest condition after corrective actions.</p></div>
+            <label class="tr-field"><span>After notes</span><textarea id="tr-after-notes" rows="5" maxlength="10000"></textarea></label>
+            <label class="tr-upload"><span>Add after photos</span><input id="tr-after-files" type="file" accept="image/jpeg,image/png,image/webp,image/gif" multiple></label>
+            <div class="tr-photo-grid" id="tr-after-photos"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="tr-panel">
+        <div class="tr-section-title"><span>05</span><div><h2>Controlled Test Sequence</h2><p>Record the exact change and its result. The history remains attached to the report.</p></div></div>
+        <div class="tr-section-actions"><button class="pcf-button" id="tr-add-test" type="button">Add Test</button></div>
+        <div id="tr-tests" class="tr-record-list"></div>
+      </section>
+
+      <section class="tr-panel">
+        <div class="tr-section-title"><span>06</span><div><h2>Maintenance &amp; Corrective-Action History</h2><p>Record cleaning, consumable replacement, air-system service, grounding repairs, mechanical adjustment and other work.</p></div></div>
+        <div class="tr-section-actions"><button class="pcf-button" id="tr-add-action" type="button">Add Action</button></div>
+        <div id="tr-actions" class="tr-record-list"></div>
+      </section>
+
+      <section class="tr-panel">
+        <div class="tr-section-title"><span>07</span><div><h2>Resolution &amp; Verification</h2><p>Close the diagnostic loop with a confirmed root cause, corrective action and production verification.</p></div></div>
+        <div class="tr-grid two">
+          <label class="tr-field"><span>Final diagnosis</span><textarea id="tr-final-diagnosis" rows="4" maxlength="10000"></textarea></label>
+          <label class="tr-field"><span>Root cause</span><textarea id="tr-root-cause" rows="4" maxlength="10000"></textarea></label>
+          <label class="tr-field"><span>Corrective action</span><textarea id="tr-final-action" rows="4" maxlength="10000"></textarea></label>
+          <label class="tr-field"><span>Verification / final result</span><textarea id="tr-verification" rows="4" maxlength="10000"></textarea></label>
+          <label class="tr-field"><span>Resolved date</span><input id="tr-resolved-date" type="date"></label>
+          <label class="tr-field"><span>Production verified</span><select id="tr-production-verified"><option value="false">Not yet</option><option value="true">Yes</option></select></label>
+        </div>
+      </section>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer-primary">
+    <p>© 2026 Plasma Cut Forge.</p>
+    <p class="site-footer-warning">Troubleshooting reports are planning and documentation aids. Follow the equipment manufacturer’s manuals and safe work procedures.</p>
+  </div>
+</footer>
+</body>
+</html>
