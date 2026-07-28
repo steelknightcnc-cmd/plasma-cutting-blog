@@ -1,6 +1,20 @@
 (() => {
   "use strict";
 
+  if (document.querySelector('script[data-pcf-analytics-consent]')) {
+    return;
+  }
+
+  const consentScript = document.createElement("script");
+  consentScript.src = "/analytics-consent.js";
+  consentScript.async = true;
+  consentScript.setAttribute("data-pcf-analytics-consent", "");
+
+  document.head.appendChild(consentScript);
+})();
+(() => {
+  "use strict";
+
   const widgets = [...document.querySelectorAll("[data-membership-widget]")];
   if (!widgets.length) return;
 
