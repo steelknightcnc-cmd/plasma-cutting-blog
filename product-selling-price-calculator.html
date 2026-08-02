@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Free basic product cost and selling price calculator for CNC, laser, plasma, engraving, handmade products and resale items.">
+  <title>Product Selling Price Calculator | Plasma Cut Forge</title>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="stylesheet" href="/styles.css?v=48.0">
+  <link rel="stylesheet" href="/public-product-pricing.css?v=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js" defer></script>
+  <script src="/public-product-pricing.js?v=1.0" defer></script>
+  <script src="/membership-widget.js?v=1.1" defer></script>
+</head>
+<body>
+<header class="site-header industrial-header">
+  <a class="brand industrial-brand" href="/#top" aria-label="Plasma Cut Forge home">
+    <span class="brand-wordmark">PLASMA<span>CUT</span>FORGE</span>
+    <small>CNC plasma tools &amp; shop-floor guides</small>
+  </a>
+  <nav class="industrial-nav" aria-label="Primary navigation">
+    <a href="/#top">Home</a>
+    <div class="calculator-nav-dropdown">
+      <a class="calculator-nav-trigger active" href="/calculators.html">Calculators <span aria-hidden="true">▾</span></a>
+      <div class="calculator-nav-menu" aria-label="Calculator categories">
+        <a href="/calculators.html#plasma-cutting">Plasma Cutting</a>
+        <a href="/calculators.html#machining">Machining</a>
+        <a href="/calculators.html#welding">Welding</a>
+        <a href="/calculators.html#business-selling">Business &amp; Selling</a>
+      </div>
+    </div>
+    <a href="/guides/">Guides</a><a href="/blog/">Blog</a><a href="/community/">Community</a>
+    <a href="/#articles">Articles</a><a href="/about-the-builder.html">About</a><a class="membership-nav-button" href="/members.html">Membership</a>
+  </nav>
+  <form class="global-search-form" action="/search.html" method="get" role="search">
+    <label class="sr-only" for="global-search-input">Search Plasma Cut Forge</label>
+    <input id="global-search-input" name="q" type="search" placeholder="Search the Forge" required>
+    <button type="submit">Search</button>
+  </form>
+</header>
+<main class="pub-price-main">
+  <section class="pub-price-hero">
+    <p class="industrial-kicker">Free basic business calculator</p>
+    <h1>Product Selling Price</h1>
+    <p>Estimate the cost and selling price of a simple CNC, laser-engraved, plasma-cut, handmade, customized, or resale product.</p>
+  </section>
+
+  <section class="pub-price-note">
+    <strong>Basic public version:</strong> This calculator handles one base product, one material allowance, one shop operation, labor, packaging, fees, profit, and tax. It does not save projects or create customer quotations.
+  </section>
+
+  <div class="pub-price-layout">
+    <div class="pub-price-inputs">
+      <section class="pub-price-panel">
+        <h2>Product and Quantity</h2>
+        <div class="pub-price-grid">
+          <label class="pub-price-field full"><span>Product / object name</span><input id="basic-name" type="text" placeholder="Laser-engraved bottle opener"></label>
+          <label class="pub-price-field"><span>Quantity being sold</span><input id="basic-quantity" type="number" min="1" step="1" value="1"></label>
+          <label class="pub-price-field"><span>Currency</span><select id="basic-currency"><option value="EUR">EUR - Euro</option><option value="USD">USD - US dollar</option><option value="GBP">GBP - British pound</option><option value="CAD">CAD - Canadian dollar</option><option value="AUD">AUD - Australian dollar</option></select></label>
+          <label class="pub-price-field full"><span>Base object cost entry</span><select id="basic-base-mode"><option value="per-item">Cost per individual item / blank</option><option value="bulk">Bulk purchase / pack total</option></select></label>
+          <label class="pub-price-field full base-mode-field" data-base-mode="per-item"><span>Price paid per individual item / blank</span><input id="basic-base-cost" type="number" min="0" step="0.01" value="0"></label>
+          <label class="pub-price-field base-mode-field" data-base-mode="bulk" hidden><span>Quantity purchased in pack</span><input id="basic-pack-quantity" type="number" min="1" step="1" value="20"></label>
+          <label class="pub-price-field base-mode-field" data-base-mode="bulk" hidden><span>Total pack price</span><input id="basic-pack-total" type="number" min="0" step="0.01" value="19.79"></label>
+          <div class="pub-price-field pub-price-output-field base-mode-field" data-base-mode="bulk" hidden><span>Calculated cost per item</span><output id="basic-base-unit-cost">—</output><small>The full calculated value is used, even when the display is rounded.</small></div>
+          <label class="pub-price-field"><span>Extra material cost per finished item</span><input id="basic-material-cost" type="number" min="0" step="0.01" value="0"><small>Paint, finish, engraving compound, hardware, inserts, labels, or other materials.</small></label>
+          <label class="pub-price-field"><span>Packaging cost per finished item</span><input id="basic-packaging-cost" type="number" min="0" step="0.01" value="0"></label>
+        </div>
+      </section>
+
+      <section class="pub-price-panel">
+        <h2>CNC, Laser or Shop Work</h2>
+        <div class="pub-price-grid">
+          <label class="pub-price-field"><span>Operation type</span><select id="basic-operation"><option>Laser engraving</option><option>Laser cutting</option><option>CNC routing / milling</option><option>Plasma cutting</option><option>3D printing</option><option>Welding / fabrication</option><option>Manual customization</option><option>Other shop work</option></select></label>
+          <label class="pub-price-field"><span>Machine time per item, minutes</span><input id="basic-machine-minutes" type="number" min="0" step="0.1" value="0"></label>
+          <label class="pub-price-field"><span>Machine hourly rate</span><input id="basic-machine-rate" type="number" min="0" step="0.01" value="0"><small>Can include machine cost, electricity, tooling, and consumables.</small></label>
+          <label class="pub-price-field"><span>Manual labor per item, minutes</span><input id="basic-labor-minutes" type="number" min="0" step="0.1" value="0"></label>
+          <label class="pub-price-field"><span>Labor hourly rate</span><input id="basic-labor-rate" type="number" min="0" step="0.01" value="20"></label>
+          <label class="pub-price-field"><span>One-time setup / design minutes</span><input id="basic-setup-minutes" type="number" min="0" step="0.1" value="0"><small>Charged once per order at the labor hourly rate.</small></label>
+          <label class="pub-price-field"><span>Other fixed cost for the order</span><input id="basic-fixed-cost" type="number" min="0" step="0.01" value="0"><small>Shipping paid by the seller, listing cost, special tooling, or another order expense.</small></label>
+        </div>
+      </section>
+
+      <section class="pub-price-panel">
+        <h2>Fees, Profit and Tax</h2>
+        <div class="pub-price-grid">
+          <label class="pub-price-field"><span>Selling / payment fees %</span><input id="basic-fee-rate" type="number" min="0" max="95" step="0.01" value="0"><small>Combined percentage charged by the marketplace and payment processor.</small></label>
+          <label class="pub-price-field"><span>Target profit margin %</span><input id="basic-margin-target" type="number" min="0" max="95" step="0.1" value="35"></label>
+          <label class="pub-price-field"><span>Actual selling price per item</span><input id="basic-actual-price" type="number" min="0" step="0.01" value="0"><small>Leave at zero to use the recommended selling price.</small></label>
+          <label class="pub-price-field"><span>Tax / VAT rate %</span><input id="basic-tax-rate" type="number" min="0" max="100" step="0.01" value="20"></label>
+        </div>
+        <div class="pub-price-actions">
+          <button class="pub-price-button secondary" id="basic-use-recommended" type="button">Use Recommended Price</button>
+          <button class="pub-price-button secondary" id="basic-reset" type="button">Reset Calculator</button>
+        </div>
+      </section>
+
+      <section class="pub-price-upgrade">
+        <p class="industrial-kicker">Need a complete business tool?</p>
+        <h2>Advanced Forge Member Calculator</h2>
+        <p>The member version adds multiple materials and shop operations, private saved projects, customer and company information, discounts, deposits, overhead, detailed fees, and separate owner-cost and customer-quote PDFs.</p>
+        <a class="pub-price-button" href="/member-product-pricing.html">Open Member Tool 07</a>
+      </section>
+    </div>
+
+    <aside class="pub-price-summary">
+      <section class="pub-price-summary-card">
+        <h2>Cost Breakdown</h2>
+        <div class="pub-price-summary-list">
+          <div><span>Base objects / blanks</span><strong id="sum-base">—</strong></div>
+          <div><span>Extra materials</span><strong id="sum-material">—</strong></div>
+          <div><span>Machine operation</span><strong id="sum-machine">—</strong></div>
+          <div><span>Labor and setup</span><strong id="sum-labor">—</strong></div>
+          <div><span>Packaging</span><strong id="sum-packaging">—</strong></div>
+          <div><span>Other fixed cost</span><strong id="sum-fixed">—</strong></div>
+          <div class="total"><span>Total production cost</span><strong id="sum-production">—</strong></div>
+          <div><span>Production cost per item</span><strong id="sum-cost-item">—</strong></div>
+        </div>
+      </section>
+
+      <section class="pub-price-summary-card">
+        <h2>Price and Profit</h2>
+        <div class="pub-price-result-grid">
+          <article><span>Break-even / item</span><strong id="sum-break-even">—</strong></article>
+          <article class="recommended"><span>Recommended / item</span><strong id="sum-recommended">—</strong></article>
+          <article><span>Price used / item</span><strong id="sum-price-used">—</strong></article>
+          <article><span>Selling fees</span><strong id="sum-fees">—</strong></article>
+          <article class="profit"><span>Profit per item</span><strong id="sum-profit-item">—</strong></article>
+          <article class="profit"><span>Total order profit</span><strong id="sum-profit-order">—</strong></article>
+          <article><span>Actual profit margin</span><strong id="sum-margin">—</strong></article>
+          <article><span>Tax / VAT</span><strong id="sum-tax">—</strong></article>
+          <article class="customer-total"><span>Customer order total</span><strong id="sum-customer-total">—</strong></article>
+        </div>
+        <p class="pub-price-warning" id="basic-warning" hidden></p>
+        <div class="pub-price-actions stacked">
+          <button class="pub-price-button" id="basic-pdf" type="button">Download Basic PDF</button>
+        </div>
+      </section>
+    </aside>
+  </div>
+</main>
+<aside class="kofi-membership-widget is-expanded" data-membership-widget aria-label="Plasma Cut Forge membership">
+  <button class="kofi-membership-tab" type="button" data-membership-toggle aria-expanded="true"><span>Join the Forge</span></button>
+  <div class="kofi-membership-panel" data-membership-panel>
+    <div class="kofi-membership-widget-copy"><span class="kofi-membership-eyebrow">Ko-fi Membership</span><strong>Join the Forge</strong><small>Forge Supporter · $5/month</small><p>Unlock advanced calculators, saved projects, private reports, and Atlas development access.</p></div>
+    <div class="kofi-membership-widget-actions"><a class="kofi-membership-primary" href="https://ko-fi.com/plasmacutforge/tiers" target="_blank" rel="noopener noreferrer">Become a Member</a><a class="kofi-membership-secondary" href="https://ko-fi.com/plasmacutforge" target="_blank" rel="noopener noreferrer">Support the Atlas Build</a></div>
+  </div>
+</aside>
+<footer class="site-footer"><div class="site-footer-primary"><p>© 2026 Plasma Cut Forge.</p><p class="site-footer-warning">This calculator provides estimates only. Verify taxes, fees, costs, and business requirements before quoting or selling.</p></div></footer>
+</body>
+</html>

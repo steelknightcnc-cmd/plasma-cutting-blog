@@ -1,0 +1,45 @@
+.pub-price-main{width:min(1500px,calc(100% - 36px));margin:0 auto;padding:68px 0 100px}
+.pub-price-hero{padding:24px 0 38px;border-bottom:1px solid #2a405a}
+.pub-price-hero h1{font-size:clamp(3rem,7vw,6.2rem);line-height:.92;text-transform:uppercase;margin:14px 0 18px}
+.pub-price-hero>p:last-child{max-width:950px;color:#a9c8f3;font-size:1.1rem;line-height:1.7}
+.pub-price-note{margin:26px 0;background:#0d1a2b;border:1px solid #2e4965;border-radius:16px;padding:18px 20px;color:#b9d1ef;line-height:1.6}
+.pub-price-note strong{color:#00cfee}
+.pub-price-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(330px,430px);gap:24px;align-items:start}
+.pub-price-inputs{display:grid;gap:20px}
+.pub-price-panel,.pub-price-summary-card,.pub-price-upgrade{background:#0c1929;border:1px solid #2a405a;border-radius:18px;padding:24px}
+.pub-price-panel h2,.pub-price-summary-card h2,.pub-price-upgrade h2{margin:0 0 20px;text-transform:uppercase}
+.pub-price-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px}
+.pub-price-field{display:grid;gap:8px;align-content:start}
+.pub-price-field.full{grid-column:1/-1}
+.pub-price-field>span{font-size:.79rem;text-transform:uppercase;letter-spacing:.05em;font-weight:900;color:#e5f0ff}
+.pub-price-field input,.pub-price-field select{width:100%;min-height:58px;border:1px solid #304a68;border-radius:12px;background:#112139;color:#fff;padding:12px 14px;font:inherit}
+.pub-price-field input:focus,.pub-price-field select:focus{outline:2px solid rgba(0,207,239,.25);border-color:#00cfee}
+.pub-price-field small{color:#8ea8c6;line-height:1.45}
+.pub-price-output-field{border:1px solid #2f526c;border-radius:12px;background:#081522;padding:14px}
+.pub-price-output-field output{font-size:1.45rem;color:#00cfee;font-weight:900}
+.pub-price-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.pub-price-actions.stacked{display:grid}
+.pub-price-button{display:inline-flex;align-items:center;justify-content:center;min-height:46px;border:1px solid #00cfee;border-radius:10px;background:#00cfee;color:#02111b;padding:11px 16px;font:inherit;font-weight:950;text-decoration:none;cursor:pointer}
+.pub-price-button:hover{filter:brightness(1.08)}
+.pub-price-button.secondary{background:#081522;color:#eaf8ff;border-color:#38536f}
+.pub-price-upgrade{border-color:#00cfee;background:linear-gradient(145deg,#0b1c2d,#082832)}
+.pub-price-upgrade p{color:#b4cdea;line-height:1.65}
+.pub-price-summary{position:sticky;top:20px;display:grid;gap:20px}
+.pub-price-summary-list{display:grid;gap:0}
+.pub-price-summary-list>div{display:flex;justify-content:space-between;gap:15px;padding:12px 0;border-bottom:1px solid #243a52;color:#9fb6d3}
+.pub-price-summary-list strong{color:#eef7ff;text-align:right}
+.pub-price-summary-list .total{margin-top:5px;border-top:1px solid #00cfee;border-bottom:0;padding-top:17px;color:#dffaff;font-size:1.03rem}
+.pub-price-summary-list .total strong{color:#00cfee;font-size:1.22rem}
+.pub-price-result-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.pub-price-result-grid article{background:#081522;border:1px solid #2d4560;border-radius:13px;padding:14px;min-height:90px}
+.pub-price-result-grid span{display:block;color:#8fa9c7;font-size:.78rem;text-transform:uppercase;font-weight:850;line-height:1.35}
+.pub-price-result-grid strong{display:block;color:#fff;font-size:1.35rem;margin-top:8px}
+.pub-price-result-grid .recommended{border-color:#00cfee;background:#082a33}
+.pub-price-result-grid .recommended strong{color:#00cfee}
+.pub-price-result-grid .profit strong{color:#57dda2}
+.pub-price-result-grid .customer-total{grid-column:1/-1;border-color:#00cfee}
+.pub-price-result-grid .customer-total strong{color:#00cfee;font-size:1.7rem}
+.pub-price-warning{border:1px solid #f2a94e;background:#261a0c;color:#ffd6a0;border-radius:12px;padding:13px;line-height:1.5}
+@media(max-width:1050px){.pub-price-layout{grid-template-columns:1fr}.pub-price-summary{position:static}.pub-price-summary-card{max-width:none}}
+@media(max-width:680px){.pub-price-main{width:min(100% - 22px,1500px);padding-top:40px}.pub-price-grid,.pub-price-result-grid{grid-template-columns:1fr}.pub-price-field.full,.pub-price-result-grid .customer-total{grid-column:auto}.pub-price-hero h1{font-size:2.75rem}}
+@media print{.site-header,.site-footer,.kofi-membership-widget,.pub-price-actions,.pub-price-upgrade{display:none!important}.pub-price-main{width:100%;padding:0}.pub-price-layout{grid-template-columns:1fr}.pub-price-summary{position:static}}
