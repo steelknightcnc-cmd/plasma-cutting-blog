@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Forge Member product cost, selling price and customer quote calculator for CNC, laser, plasma and handmade products.">
+  <title>Product Cost &amp; Selling Price Calculator | Plasma Cut Forge</title>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="stylesheet" href="/styles.css?v=48.0">
+  <link rel="stylesheet" href="/member-quote-builder.css?v=1.1">
+  <link rel="stylesheet" href="/member-product-pricing.css?v=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js" defer></script>
+  <script src="/supabase-config.js?v=5.0" defer></script>
+  <script src="/member-auth.js?v=1.4" defer></script>
+  <script src="/member-product-pricing.js?v=1.0" defer></script>
+  <script src="/membership-widget.js?v=1.1" defer></script>
+</head>
+<body data-member-page="builder">
+<header class="site-header industrial-header">
+  <a class="brand industrial-brand" href="/#top" aria-label="Plasma Cut Forge home">
+    <span class="brand-wordmark">PLASMA<span>CUT</span>FORGE</span>
+    <small>CNC plasma tools &amp; shop-floor guides</small>
+  </a>
+  <nav class="industrial-nav" aria-label="Primary navigation">
+    <a href="/#top">Home</a>
+    <div class="calculator-nav-dropdown">
+      <a class="calculator-nav-trigger active" href="/calculators.html">Calculators <span aria-hidden="true">▾</span></a>
+      <div class="calculator-nav-menu" aria-label="Calculator categories">
+        <a href="/calculators.html#plasma-cutting">Plasma Cutting</a>
+        <a href="/calculators.html#machining">Machining</a>
+        <a href="/calculators.html#welding">Welding</a>
+      </div>
+    </div>
+    <a href="/guides/">Guides</a><a href="/blog/">Blog</a><a href="/community/">Community</a>
+    <a href="/about-the-builder.html">About</a><a class="membership-nav-button" href="/members.html">Membership</a>
+  </nav>
+  <form class="global-search-form" action="/search.html" method="get" role="search">
+    <label class="sr-only" for="global-search-input">Search Plasma Cut Forge</label>
+    <input id="global-search-input" name="q" type="search" placeholder="Search the Forge" required>
+    <button type="submit">Search</button>
+  </form>
+</header>
+<main class="pp-main">
+  <section class="pp-hero"><p class="industrial-kicker">Forge Member tool 07</p><h1>Product Cost &amp; Selling Price</h1><p>Price engraved products, CNC work, laser jobs, plasma-cut items, fabricated products, candles, woodwork and other items using actual material, machine, labor, overhead, fee and tax costs.</p></section>
+  <div class="pp-private-note"><strong>Private owner calculator:</strong> saved projects and owner PDFs contain internal costs and profit figures. Customer PDFs hide those private figures.</div>
+  <div class="pcf-member-status-bar">
+    <span data-member-connection-status>Checking Forge Member access…</span>
+    <div class="pcf-member-actions"><a class="pcf-button secondary" href="/members.html">Member Home</a><button class="pcf-button secondary" type="button" data-member-signout>Sign out</button></div>
+  </div>
+  <section class="pcf-member-gate" data-member-loading><p class="industrial-kicker">Secure access</p><h2>Checking Membership</h2><p>Please wait while Plasma Cut Forge verifies the signed-in paid member account.</p></section>
+  <section class="pcf-member-gate" data-member-guest hidden>
+    <p class="industrial-kicker">Member sign in required</p><h2>Unlock Product Pricing</h2>
+    <p>A paid $5 Forge Membership is required. Sign in with the same email address used for the Ko-fi purchase.</p>
+    <form class="pcf-member-login-form" data-member-login-form>
+      <label class="pcf-member-field"><span>Member email</span><input name="email" type="email" autocomplete="email" required></label>
+      <label class="pcf-member-field"><span>Password</span><input name="password" type="password" autocomplete="current-password" minlength="8" required></label>
+      <div class="pcf-member-actions"><button class="pcf-button" type="button" data-auth-action="sign-in">Sign In</button><button class="pcf-button secondary" type="button" data-auth-action="create-account">Create Member Account</button><button class="pcf-button secondary" type="button" data-auth-action="reset-password">Forgot / Set Password</button></div>
+      <p class="pcf-member-message" data-member-login-message aria-live="polite"></p>
+    </form>
+  </section>
+  <section class="pcf-member-gate" data-member-inactive hidden>
+    <p class="industrial-kicker">Membership not active</p><h2>Product Pricing Locked</h2>
+    <p>Signed in as <strong data-member-account-email>—</strong>, but an active paid $5 Forge Membership was not found.</p>
+    <div class="pcf-member-actions"><a class="pcf-button" href="https://ko-fi.com/plasmacutforge/tiers" target="_blank" rel="noopener noreferrer">Buy the $5 Membership</a></div>
+  </section>
+  <section data-member-tool hidden>
+    <div class="pp-status-row"><p id="pp-project-status">New unsaved product</p><div class="pp-actions"><button class="pp-button secondary" id="pp-new" type="button">New Product</button><button class="pp-button" id="pp-save" type="button">Save Project</button></div></div>
+    <div class="pp-workspace">
+      <div>
+        <section class="pp-panel">
+          <h2>Product and Order</h2>
+          <div class="pp-grid">
+            <label class="pp-field"><span>Product / object name</span><input id="pp-product-name" type="text" placeholder="Engraved wooden book stand"></label>
+            <label class="pp-field"><span>SKU or item number</span><input id="pp-sku" type="text" placeholder="BKS-001"></label>
+            <label class="pp-field"><span>Quote number</span><input id="pp-quote-number" type="text"></label>
+            <label class="pp-field"><span>Quantity being sold</span><input id="pp-quantity" type="number" min="1" step="1" value="1"></label>
+            <label class="pp-field"><span>Currency</span><select id="pp-currency"><option value="EUR">EUR - Euro</option><option value="USD">USD - US dollar</option><option value="GBP">GBP - British pound</option><option value="CAD">CAD - Canadian dollar</option><option value="AUD">AUD - Australian dollar</option></select></label>
+            <label class="pp-field"><span>Project status</span><select id="pp-status"><option value="draft">Draft</option><option value="quoted">Quoted</option><option value="completed">Completed</option><option value="archived">Archived</option></select></label>
+            <label class="pp-field"><span>Price paid for base object / blank, per item</span><input id="pp-base-cost" type="number" min="0" step="0.01" value="0"><small>Examples: blank coaster, candle jar, purchased box, wood blank or metal blank.</small></label>
+            <label class="pp-field"><span>Quote date</span><input id="pp-quote-date" type="date"></label>
+            <label class="pp-field"><span>Quote valid for days</span><input id="pp-valid-days" type="number" min="1" step="1" value="30"></label>
+            <label class="pp-field full"><span>Product description</span><textarea id="pp-description" placeholder="Describe the finished item, customization, dimensions, material and included work."></textarea></label>
+          </div>
+        </section>
+
+        <section class="pp-panel">
+          <h2>Additional Materials, Parts and Packaging</h2>
+          <p class="pp-inline-note">Enter cost per purchased unit, the quantity used in one finished item, and optional waste. The calculator multiplies it by the customer order quantity.</p>
+          <div class="pp-table-wrap"><table class="pp-table"><thead><tr><th>Description</th><th>Category</th><th>Cost per purchased unit</th><th>Qty used per finished item</th><th>Waste %</th><th>Order cost</th><th></th></tr></thead><tbody id="pp-material-body"></tbody></table></div>
+          <div class="pp-actions"><button class="pp-button secondary" id="pp-add-material" type="button">Add Cost Item</button></div>
+        </section>
+
+        <section class="pp-panel">
+          <h2>CNC, Laser and Shop Operations</h2>
+          <p class="pp-inline-note">Run time is multiplied by the order quantity. Setup time is charged once per order. The hourly rate can include machine depreciation, electricity, tooling, consumables and labor.</p>
+          <div class="pp-table-wrap"><table class="pp-table"><thead><tr><th>Operation</th><th>Run min / item</th><th>Setup min / order</th><th>Hourly rate</th><th>Notes</th><th>Order cost</th><th></th></tr></thead><tbody id="pp-operation-body"></tbody></table></div>
+          <div class="pp-actions"><button class="pp-button secondary" id="pp-add-operation" type="button">Add Operation</button></div>
+        </section>
+
+        <section class="pp-panel">
+          <h2>Overhead, Shipping and Selling Fees</h2>
+          <div class="pp-grid">
+            <label class="pp-field"><span>Fixed overhead per order</span><input id="pp-fixed-overhead" type="number" min="0" step="0.01" value="0"></label>
+            <label class="pp-field"><span>Overhead % of direct production cost</span><input id="pp-overhead-percent" type="number" min="0" step="0.1" value="10"></label>
+            <label class="pp-field"><span>Shipping cost paid by seller</span><input id="pp-shipping-cost" type="number" min="0" step="0.01" value="0"></label>
+            <label class="pp-field"><span>Shipping charged to customer, before tax</span><input id="pp-shipping-charged" type="number" min="0" step="0.01" value="0"></label>
+            <label class="pp-field"><span>Marketplace fee %</span><input id="pp-marketplace-fee" type="number" min="0" max="99" step="0.01" value="0"><small>For example, Etsy or another selling platform.</small></label>
+            <label class="pp-field"><span>Payment-processing fee %</span><input id="pp-payment-fee" type="number" min="0" max="99" step="0.01" value="0"></label>
+            <label class="pp-field"><span>Fixed transaction fee per order</span><input id="pp-fixed-fee" type="number" min="0" step="0.01" value="0"></label>
+            <label class="pp-field"><span>Percentage fees are charged on</span><select id="pp-fee-basis"><option value="pretax">Pre-tax customer revenue</option><option value="total">Customer total including tax</option></select></label>
+          </div>
+        </section>
+
+        <section class="pp-panel">
+          <h2>Price, Profit and Tax</h2>
+          <div class="pp-grid">
+            <label class="pp-field"><span>Target profit margin %</span><input id="pp-target-margin" type="number" min="0" max="95" step="0.1" value="35"><small>Profit divided by pre-tax sales revenue.</small></label>
+            <label class="pp-field"><span>Actual selling price per item, before tax</span><input id="pp-actual-price" type="number" min="0" step="0.01" value="0"><small>Leave at zero to use the recommended price.</small></label>
+            <label class="pp-field"><span>Order discount, before tax</span><input id="pp-discount" type="number" min="0" step="0.01" value="0"></label>
+            <label class="pp-field"><span>Tax label</span><input id="pp-tax-label" type="text" value="VAT"></label>
+            <label class="pp-field"><span>Tax / VAT rate %</span><input id="pp-tax-rate" type="number" min="0" max="100" step="0.01" value="20"></label>
+            <label class="pp-field"><span>Deposit requested %</span><input id="pp-deposit-percent" type="number" min="0" max="100" step="0.1" value="0"></label>
+          </div>
+          <div class="pp-actions"><button class="pp-button secondary" id="pp-use-recommended" type="button">Use Recommended Price</button></div>
+        </section>
+
+        <section class="pp-panel">
+          <h2>Company and Customer PDF Details</h2>
+          <div class="pp-grid two">
+            <label class="pp-field"><span>Company name</span><input id="pp-company-name" type="text" placeholder="Your company"></label>
+            <label class="pp-field"><span>Contact name</span><input id="pp-company-contact" type="text"></label>
+            <label class="pp-field"><span>Company email</span><input id="pp-company-email" type="email"></label>
+            <label class="pp-field"><span>Company phone</span><input id="pp-company-phone" type="text"></label>
+            <label class="pp-field full"><span>Company address</span><textarea id="pp-company-address"></textarea></label>
+            <label class="pp-field"><span>Tax / VAT ID</span><input id="pp-company-tax-id" type="text"></label>
+            <label class="pp-field"><span>Company logo for this browser session</span><input id="pp-company-logo" type="file" accept="image/png,image/jpeg"></label>
+            <label class="pp-field"><span>Customer name</span><input id="pp-customer-name" type="text"></label>
+            <label class="pp-field"><span>Customer email</span><input id="pp-customer-email" type="email"></label>
+            <label class="pp-field full"><span>Customer address</span><textarea id="pp-customer-address"></textarea></label>
+            <label class="pp-field full"><span>Customer quote notes</span><textarea id="pp-customer-notes" placeholder="Customization details, production time, delivery method or what is included."></textarea></label>
+            <label class="pp-field full"><span>Terms</span><textarea id="pp-terms">Prices are valid for the stated period. Production begins after approval and any required deposit. Custom work may not be returnable unless defective or damaged.</textarea></label>
+          </div>
+        </section>
+      </div>
+
+      <aside class="pp-summary">
+        <section class="pp-summary-card"><h2>Order Cost Summary</h2><div class="pp-summary-list">
+          <div class="pp-summary-line"><span>Purchased blanks</span><strong id="pp-sum-base">—</strong></div>
+          <div class="pp-summary-line"><span>Additional materials</span><strong id="pp-sum-materials">—</strong></div>
+          <div class="pp-summary-line"><span>Machine and labor operations</span><strong id="pp-sum-operations">—</strong></div>
+          <div class="pp-summary-line"><span>Overhead</span><strong id="pp-sum-overhead">—</strong></div>
+          <div class="pp-summary-line"><span>Seller shipping cost</span><strong id="pp-sum-shipping">—</strong></div>
+          <div class="pp-summary-line total"><span>Total production cost</span><strong id="pp-sum-production">—</strong></div>
+          <div class="pp-summary-line"><span>Production cost per item</span><strong id="pp-sum-cost-unit">—</strong></div>
+        </div></section>
+        <section class="pp-summary-card"><h2>Price and Profit</h2><div class="pp-price-box">
+          <article><span>Break-even / item</span><strong id="pp-break-even">—</strong></article>
+          <article class="recommended"><span>Recommended / item</span><strong id="pp-recommended">—</strong></article>
+          <article><span>Actual / item</span><strong id="pp-actual">—</strong></article>
+          <article class="profit" id="pp-profit-card"><span>Order profit</span><strong id="pp-profit">—</strong></article>
+          <article><span>Profit margin</span><strong id="pp-margin">—</strong></article>
+          <article><span>Selling fees</span><strong id="pp-fees">—</strong></article>
+        </div><div class="pp-summary-list" style="margin-top:14px">
+          <div class="pp-summary-line"><span>Product subtotal</span><strong id="pp-customer-subtotal">—</strong></div>
+          <div class="pp-summary-line"><span>Shipping charged</span><strong id="pp-customer-shipping">—</strong></div>
+          <div class="pp-summary-line"><span>Discount</span><strong id="pp-customer-discount">—</strong></div>
+          <div class="pp-summary-line"><span id="pp-tax-summary-label">VAT</span><strong id="pp-customer-tax">—</strong></div>
+          <div class="pp-summary-line total"><span>Customer total</span><strong id="pp-customer-total">—</strong></div>
+          <div class="pp-summary-line"><span>Requested deposit</span><strong id="pp-deposit">—</strong></div>
+        </div><div class="pp-actions"><button class="pp-button" id="pp-owner-pdf" type="button">Owner Cost PDF</button><button class="pp-button secondary" id="pp-customer-pdf" type="button">Customer Quote PDF</button></div></section>
+        <section class="pp-summary-card"><h3>Saved Product Projects</h3><div class="pp-saved-list" id="pp-saved-list"><p>Loading saved projects…</p></div><p class="pp-message" id="pp-message" aria-live="polite"></p></section>
+      </aside>
+    </div>
+  </section>
+</main>
+<footer class="site-footer"><div class="site-footer-primary"><p>© 2026 Plasma Cut Forge.</p><p class="site-footer-warning">Pricing results depend on the costs and rates entered by the member. Verify tax and marketplace rules for the actual business.</p></div></footer>
+</body></html>
