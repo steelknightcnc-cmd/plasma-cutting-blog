@@ -7,12 +7,12 @@
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="stylesheet" href="/styles.css?v=48.0">
   <link rel="stylesheet" href="/member-quote-builder.css?v=1.1">
-  <link rel="stylesheet" href="/member-product-pricing.css?v=1.0">
+  <link rel="stylesheet" href="/member-product-pricing.css?v=1.1">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js" defer></script>
   <script src="/supabase-config.js?v=5.0" defer></script>
   <script src="/member-auth.js?v=1.4" defer></script>
-  <script src="/member-product-pricing.js?v=1.0" defer></script>
+  <script src="/member-product-pricing.js?v=1.1" defer></script>
   <script src="/membership-widget.js?v=1.1" defer></script>
 </head>
 <body data-member-page="builder">
@@ -76,9 +76,16 @@
             <label class="pp-field"><span>Quantity being sold</span><input id="pp-quantity" type="number" min="1" step="1" value="1"></label>
             <label class="pp-field"><span>Currency</span><select id="pp-currency"><option value="EUR">EUR - Euro</option><option value="USD">USD - US dollar</option><option value="GBP">GBP - British pound</option><option value="CAD">CAD - Canadian dollar</option><option value="AUD">AUD - Australian dollar</option></select></label>
             <label class="pp-field"><span>Project status</span><select id="pp-status"><option value="draft">Draft</option><option value="quoted">Quoted</option><option value="completed">Completed</option><option value="archived">Archived</option></select></label>
-            <label class="pp-field"><span>Price paid for base object / blank, per item</span><input id="pp-base-cost" type="number" min="0" step="0.01" value="0"><small>Examples: blank coaster, candle jar, purchased box, wood blank or metal blank.</small></label>
+            <label class="pp-field"><span>Base object cost entry</span><select id="pp-base-cost-mode"><option value="per-item">Cost per individual blank</option><option value="bulk">Bulk purchase / pack total</option></select></label>
             <label class="pp-field"><span>Quote date</span><input id="pp-quote-date" type="date"></label>
             <label class="pp-field"><span>Quote valid for days</span><input id="pp-valid-days" type="number" min="1" step="1" value="30"></label>
+
+            <label class="pp-field pp-base-cost-field" data-base-cost-mode="per-item"><span>Price paid per base object / blank</span><input id="pp-base-cost" type="number" min="0" step="0.01" value="0"><small>Use this when you purchased one blank or already know the individual cost.</small></label>
+
+            <label class="pp-field pp-base-cost-field" data-base-cost-mode="bulk" hidden><span>Quantity purchased in bulk</span><input id="pp-base-bulk-quantity" type="number" min="1" step="1" value="1"><small>Example: 20 bottle openers.</small></label>
+            <label class="pp-field pp-base-cost-field" data-base-cost-mode="bulk" hidden><span>Total price paid for bulk purchase</span><input id="pp-base-bulk-total" type="number" min="0" step="0.01" value="0"><small>Example: 19.79 for the complete pack.</small></label>
+            <div class="pp-field pp-calculated-field pp-base-cost-field" data-base-cost-mode="bulk" hidden><span>Calculated cost per base object</span><output id="pp-base-unit-cost">—</output><small>The calculator applies this amount to each item being sold.</small></div>
+
             <label class="pp-field full"><span>Product description</span><textarea id="pp-description" placeholder="Describe the finished item, customization, dimensions, material and included work."></textarea></label>
           </div>
         </section>
