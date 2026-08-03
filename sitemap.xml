@@ -6,10 +6,12 @@
 
   <url>
     <loc>https://plasmacutforge.com/</loc>
+    <lastmod>2026-08-03</lastmod>
   </url>
 
   <url>
     <loc>https://plasmacutforge.com/calculators.html</loc>
+    <lastmod>2026-08-03</lastmod>
   </url>
 
   <url>
@@ -22,6 +24,11 @@
 
 
   <!-- Primary plasma tools -->
+
+  <url>
+    <loc>https://plasmacutforge.com/plasma-cutting-calculator.html</loc>
+    <lastmod>2026-08-03</lastmod>
+  </url>
 
   <url>
     <loc>https://plasmacutforge.com/plasma-cutting-settings-guide.html</loc>
