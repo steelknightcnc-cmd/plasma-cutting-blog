@@ -2,245 +2,1775 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
   <meta
     name="description"
-    content="Interactive CNC plasma cut-quality troubleshooter for dross, bevel, rough edges, kerf problems, holes, incomplete cuts, and consumable wear."
+    content="Free CNC plasma cut quality troubleshooter for dross, bevel, rough edges, incomplete cuts, poor holes, THC, air, motion, and consumable wear."
   >
-  <title>Cut Quality Troubleshooter | Plasma Cut Forge</title>
+
+  <meta
+    name="robots"
+    content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+  >
+
+  <title>CNC Plasma Cut Quality Troubleshooter: Dross &amp; Bevel</title>
+
+  <link
+    rel="canonical"
+    href="https://plasmacutforge.com/cut-quality-troubleshooter.html"
+  >
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Plasma Cut Forge">
+
+  <meta
+    property="og:title"
+    content="CNC Plasma Cut Quality Troubleshooter"
+  >
+
+  <meta
+    property="og:description"
+    content="Diagnose plasma-cutting dross, bevel, rough edges, poor holes, incomplete cuts, THC behavior, air problems, and consumable wear."
+  >
+
+  <meta
+    property="og:url"
+    content="https://plasmacutforge.com/cut-quality-troubleshooter.html"
+  >
+
+  <meta
+    property="og:image"
+    content="https://plasmacutforge.com/plasma-torch-hero.png"
+  >
+
+  <meta
+    property="og:image:alt"
+    content="CNC plasma torch cutting metal with a bright plasma arc"
+  >
+
+  <meta name="twitter:card" content="summary_large_image">
+
+  <meta
+    name="twitter:title"
+    content="CNC Plasma Cut Quality Troubleshooter"
+  >
+
+  <meta
+    name="twitter:description"
+    content="Diagnose CNC plasma dross, bevel, rough cuts, poor holes, THC problems, air issues, and consumable wear."
+  >
+
+  <meta
+    name="twitter:image"
+    content="https://plasmacutforge.com/plasma-torch-hero.png"
+  >
 
   <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="32x32"
+    href="/favicon-32x32.png"
+  >
+
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="16x16"
+    href="/favicon-16x16.png"
+  >
+
+  <link
+    rel="apple-touch-icon"
+    sizes="180x180"
+    href="/apple-touch-icon.png"
+  >
+
   <link rel="manifest" href="/site.webmanifest">
+
   <meta name="theme-color" content="#070b14">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
   <link
     href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap"
     rel="stylesheet"
   >
-  <link rel="stylesheet" href="/styles.css?v=41.0">
-  <script src="/cut-quality-troubleshooter.js?v=2.0" defer></script>
-  <script src="/membership-widget.js?v=1.1" defer></script>
+
+  <link rel="stylesheet" href="/styles.css?v=48.0">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "@id": "https://plasmacutforge.com/cut-quality-troubleshooter.html#application",
+    "name": "CNC Plasma Cut Quality Troubleshooter",
+    "url": "https://plasmacutforge.com/cut-quality-troubleshooter.html",
+    "description": "A free interactive CNC plasma cut quality troubleshooter for diagnosing dross, bevel, rough edges, incomplete cuts, poor holes, THC behavior, air problems, motion problems, and consumable wear.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires JavaScript",
+    "isAccessibleForFree": true,
+    "dateModified": "2026-08-03",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Plasma Cut Forge",
+      "url": "https://plasmacutforge.com/"
+    },
+    "featureList": [
+      "Low-speed plasma dross diagnosis",
+      "High-speed plasma dross diagnosis",
+      "Positive and negative bevel diagnosis",
+      "Directional bevel diagnosis",
+      "Incomplete plasma cut diagnosis",
+      "Poor plasma-cut hole diagnosis",
+      "Rough cut-face diagnosis",
+      "Kerf-width diagnosis",
+      "Consumable-wear diagnosis",
+      "Torch height control diagnosis",
+      "Air pressure and air quality checks",
+      "Machine motion and work-lead checks",
+      "Printable corrective-action plan"
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://plasmacutforge.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Calculators",
+        "item": "https://plasmacutforge.com/calculators.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "CNC Plasma Cut Quality Troubleshooter",
+        "item": "https://plasmacutforge.com/cut-quality-troubleshooter.html"
+      }
+    ]
+  }
+  </script>
+
+  <script
+    src="/cut-quality-troubleshooter.js?v=2.0"
+    defer
+  ></script>
+
+  <script
+    src="/membership-widget.js?v=1.1"
+    defer
+  ></script>
 </head>
 
 <body class="cut-quality-page">
   <header class="site-header industrial-header">
-    <a class="brand industrial-brand" href="/#top" aria-label="Plasma Cut Forge home">
-      <span class="brand-wordmark">PLASMA<span>CUT</span>FORGE</span>
-      <small>CNC plasma tools &amp; shop-floor guides</small>
+    <a
+      class="brand industrial-brand"
+      href="/#top"
+      aria-label="Plasma Cut Forge home"
+    >
+      <span class="brand-wordmark">
+        PLASMA<span>CUT</span>FORGE
+      </span>
+
+      <small>
+        CNC plasma tools &amp; shop-floor guides
+      </small>
     </a>
 
     <nav class="industrial-nav" aria-label="Primary navigation">
       <a href="/#top">Home</a>
+
       <div class="calculator-nav-dropdown">
-  <a class="calculator-nav-trigger" href="/calculators.html">
-    Calculators <span aria-hidden="true">▾</span>
-  </a>
-  <div class="calculator-nav-menu" aria-label="Calculator categories">
-    <a href="/calculators.html#plasma-cutting">Plasma Cutting</a>
-    <a href="/calculators.html#machining">Machining</a>
-    <a href="/calculators.html#welding">Welding</a>
-  </div>
-</div>
-      <a class="active" href="/guides/">Guides</a>
+        <a
+          class="calculator-nav-trigger active"
+          href="/calculators.html"
+          aria-current="page"
+        >
+          Calculators <span aria-hidden="true">▾</span>
+        </a>
+
+        <div
+          class="calculator-nav-menu"
+          aria-label="Calculator categories"
+        >
+          <a href="/calculators.html#plasma-cutting">
+            Plasma Cutting
+          </a>
+
+          <a href="/calculators.html#machining">
+            Machining
+          </a>
+
+          <a href="/calculators.html#welding">
+            Welding
+          </a>
+
+          <a href="/calculators.html#business-selling">
+            Business &amp; Selling
+          </a>
+        </div>
+      </div>
+
+      <a href="/guides/">Guides</a>
       <a href="/blog/">Blog</a>
       <a href="/community/">Community</a>
       <a href="/#articles">Articles</a>
       <a href="/about-the-builder.html">About</a>
+
       <a
-      class="membership-nav-button"
-      href="https://ko-fi.com/plasmacutforge/tiers"
-      target="_blank"
-      rel="noopener noreferrer"
+        class="membership-nav-button"
+        href="/members.html"
       >
-      Membership
+        Membership
       </a>
     </nav>
 
-<form class="global-search-form" action="/search.html" method="get" role="search">
-  <label class="sr-only" for="global-search-input">Search Plasma Cut Forge</label>
-  <input
-    id="global-search-input"
-    data-global-search-input
-    name="q"
-    type="search"
-    maxlength="100"
-    placeholder="Search the Forge"
-    autocomplete="off"
-    required
-  >
-  <button type="submit" aria-label="Search Plasma Cut Forge">Search</button>
-</form>
+    <form
+      class="global-search-form"
+      action="/search.html"
+      method="get"
+      role="search"
+    >
+      <label
+        class="sr-only"
+        for="global-search-input"
+      >
+        Search Plasma Cut Forge
+      </label>
+
+      <input
+        id="global-search-input"
+        data-global-search-input
+        name="q"
+        type="search"
+        maxlength="100"
+        placeholder="Search the Forge"
+        autocomplete="off"
+        required
+      >
+
+      <button
+        type="submit"
+        aria-label="Search Plasma Cut Forge"
+      >
+        Search
+      </button>
+    </form>
   </header>
 
+  <main class="quality-main">
+    <nav
+      class="plasma-guide-breadcrumbs"
+      aria-label="Breadcrumb"
+    >
+      <a href="/">Home</a>
+      <span aria-hidden="true">›</span>
+      <a href="/calculators.html">Calculators</a>
+      <span aria-hidden="true">›</span>
 
-<main class="quality-main">
-  <section class="quality-hero quality-v2-hero">
-    <div>
-      <p class="industrial-kicker">Guided diagnostic wizard</p>
-      <h1>Diagnose the Cut—Then Test One Change</h1>
-      <p>
-        Record the visible defect, the cut setup, torch-height behavior, and
-        where the problem appears. The tool ranks likely causes and produces
-        a printable corrective-action plan for the shop floor.
-      </p>
-    </div>
-    <aside class="quality-hero-note">
-      <span>Version 2 adds</span>
-      <strong>Four guided steps</strong>
-      <strong>Setup comparison</strong>
-      <strong>Ranked causes</strong>
-      <strong>Printable action plan</strong>
-    </aside>
-  </section>
-
-  <section class="quality-disclaimer">
-    <strong>Official cut charts take priority.</strong>
-    <p>
-      This diagnostic output is a ranked starting point—not a guaranteed
-      setting. Verify changes on controlled coupons and change one variable
-      at a time.
-    </p>
-  </section>
-
-  <section class="quality-wizard-shell" aria-labelledby="quality-wizard-title">
-    <header class="quality-wizard-header">
-      <div>
-        <p class="eyebrow">Cut Quality Troubleshooter v2</p>
-        <h2 id="quality-wizard-title">Build the Diagnostic Picture</h2>
-      </div>
-      <div class="quality-progress">
-        <span id="quality-progress-label">Step 1 of 4</span>
-        <div class="quality-progress-track"><span id="quality-progress-bar"></span></div>
-      </div>
-    </header>
-
-    <nav class="quality-step-tabs" aria-label="Troubleshooter steps">
-      <button type="button" class="active" data-step-jump="1"><span>01</span> Defect</button>
-      <button type="button" data-step-jump="2"><span>02</span> Cut setup</button>
-      <button type="button" data-step-jump="3"><span>03</span> Height &amp; THC</button>
-      <button type="button" data-step-jump="4"><span>04</span> Pattern</button>
+      <span aria-current="page">
+        Plasma Cut Quality Troubleshooter
+      </span>
     </nav>
 
-    <form class="quality-wizard-form" id="quality-wizard-form" novalidate>
-      <section class="quality-wizard-step active" data-step="1">
-        <div class="quality-step-heading">
-          <p class="quality-step-number">Step 01</p>
-          <h3>What is the main visible defect?</h3>
-          <p>Select the closest match. Run a second diagnosis for a separate symptom.</p>
+    <section class="quality-hero quality-v2-hero">
+      <div>
+        <p class="industrial-kicker">
+          Free guided CNC plasma diagnosis
+        </p>
+
+        <h1>
+          CNC Plasma Cut Quality Troubleshooter
+        </h1>
+
+        <p>
+          Diagnose low-speed and high-speed dross, positive or negative
+          bevel, rough cut faces, poor holes, incomplete cuts, kerf problems,
+          consumable wear, torch-height-control behavior, air-system problems,
+          and machine-motion defects.
+        </p>
+
+        <p>
+          Record the visible defect and cutting setup, then follow a ranked
+          corrective-action plan that changes one variable at a time.
+        </p>
+
+        <div class="industrial-hero-actions">
+          <a
+            class="industrial-button industrial-button-primary"
+            href="#diagnostic-wizard"
+          >
+            Start Cut Diagnosis
+          </a>
+
+          <a
+            class="industrial-button"
+            href="/plasma-cutting-settings-guide.html"
+          >
+            View Settings Chart
+          </a>
+
+          <a
+            class="industrial-button"
+            href="/plasma-cutting-calculator.html"
+          >
+            Open Plasma Calculator
+          </a>
         </div>
-        <fieldset class="quality-fieldset">
-          <legend class="sr-only">Select the main cut defect</legend>
-          <div class="symptom-grid quality-v2-symptom-grid">
-            <label class="symptom-option"><input type="radio" name="symptom" value="low-speed-dross" required><span><strong>Large bubbly bottom dross</strong><small>Thick rounded buildup, often easier to remove</small></span></label>
-            <label class="symptom-option"><input type="radio" name="symptom" value="high-speed-dross"><span><strong>Small hard bottom bead</strong><small>Thin tightly bonded dross</small></span></label>
-            <label class="symptom-option"><input type="radio" name="symptom" value="top-spatter"><span><strong>Top spatter</strong><small>Re-solidified metal along the top edge</small></span></label>
-            <label class="symptom-option"><input type="radio" name="symptom" value="positive-bevel"><span><strong>Positive bevel</strong><small>Top of cut wider than bottom</small></span></label>
-            <label class="symptom-option"><input type="radio" name="symptom" value="negative-bevel"><span><strong>Negative bevel</strong><small>Bottom of cut wider than top</small></span></label>
-            <label class="symptom-option"><input type="radio" name="symptom" value="directional-bevel"><span><strong>Directional bevel</strong><small>One side or direction is consistently worse</small></span></label>
-            <label class="symptom-option"><input type="radio" name="symptom" value="incomplete-cut"><span><strong>Incomplete cut</strong><small>Part does not fully separate</small></span></label>
-            <label class="symptom-option"><input type="radio" name="symptom" value="poor-holes"><span><strong>Poor holes</strong><small>Out-of-round, tapered, or damaged lead-in</small></span></label>
-            <label class="symptom-option"><input type="radio" name="symptom" value="rough-cut"><span><strong>Rough cut face</strong><small>Heavy striations, chatter, or changing finish</small></span></label>
-            <label class="symptom-option"><input type="radio" name="symptom" value="wide-kerf"><span><strong>Kerf too wide</strong><small>Too much material removed</small></span></label>
-            <label class="symptom-option"><input type="radio" name="symptom" value="narrow-kerf"><span><strong>Kerf too narrow</strong><small>Poor lower-edge clearing</small></span></label>
-            <label class="symptom-option"><input type="radio" name="symptom" value="consumable-wear"><span><strong>Rapid consumable wear</strong><small>Nozzle or electrode life is too short</small></span></label>
+      </div>
+
+      <aside class="quality-hero-note">
+        <span>
+          Diagnostic output
+        </span>
+
+        <strong>
+          Four guided steps
+        </strong>
+
+        <strong>
+          Setup comparison
+        </strong>
+
+        <strong>
+          Ranked likely causes
+        </strong>
+
+        <strong>
+          Printable action plan
+        </strong>
+      </aside>
+    </section>
+
+    <section
+      class="quality-disclaimer"
+      aria-label="Important cut-quality troubleshooting notice"
+    >
+      <strong>
+        The official machine cut chart takes priority.
+      </strong>
+
+      <p>
+        This tool provides a ranked troubleshooting starting point—not a
+        guaranteed repair or machine setting. Confirm the correct material,
+        thickness, amperage, consumables, speed, pressure, pierce height, cut
+        height, and delay in the manufacturer documentation. Test changes on
+        controlled coupons and change only one variable at a time.
+      </p>
+    </section>
+
+    <section
+      class="quality-method"
+      aria-labelledby="common-plasma-problems-heading"
+    >
+      <div class="quality-method-heading">
+        <p class="eyebrow">
+          Common CNC plasma defects
+        </p>
+
+        <h2 id="common-plasma-problems-heading">
+          Identify the Visible Cut-Quality Problem
+        </h2>
+
+        <p>
+          Begin with what the finished edge shows. Similar-looking defects
+          can have different causes, so the wizard also compares speed,
+          pressure, physical torch height, THC behavior, consumables, work
+          connection, and machine motion.
+        </p>
+      </div>
+
+      <div class="quality-method-grid">
+        <article>
+          <span>01</span>
+
+          <h3>
+            Low-speed plasma dross
+          </h3>
+
+          <p>
+            Large, rounded, bubbly deposits on the lower edge often point
+            toward excessive heat input or a cutting speed below the correct
+            chart value.
+          </p>
+        </article>
+
+        <article>
+          <span>02</span>
+
+          <h3>
+            High-speed plasma dross
+          </h3>
+
+          <p>
+            A small, hard, tightly bonded lower bead can indicate excessive
+            travel speed, insufficient arc energy, excessive torch height, or
+            restricted airflow.
+          </p>
+        </article>
+
+        <article>
+          <span>03</span>
+
+          <h3>
+            Positive or negative bevel
+          </h3>
+
+          <p>
+            Bevel may be related to physical cut height, speed, torch
+            squareness, cut direction, consumable condition, or a distorted
+            plasma jet.
+          </p>
+        </article>
+
+        <article>
+          <span>04</span>
+
+          <h3>
+            Rough cuts and incomplete separation
+          </h3>
+
+          <p>
+            Check the complete chart process, consumables, flowing air
+            pressure, work-lead connection, torch height, speed, and machine
+            motion before fine-tuning.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section
+      class="quality-wizard-shell"
+      id="diagnostic-wizard"
+      aria-labelledby="quality-wizard-title"
+    >
+      <header class="quality-wizard-header">
+        <div>
+          <p class="eyebrow">
+            CNC Plasma Cut Quality Troubleshooter
+          </p>
+
+          <h2 id="quality-wizard-title">
+            Build the Diagnostic Picture
+          </h2>
+        </div>
+
+        <div class="quality-progress">
+          <span id="quality-progress-label">
+            Step 1 of 4
+          </span>
+
+          <div class="quality-progress-track">
+            <span id="quality-progress-bar"></span>
           </div>
-        </fieldset>
-      </section>
-
-      <section class="quality-wizard-step" data-step="2" hidden>
-        <div class="quality-step-heading"><p class="quality-step-number">Step 02</p><h3>What setup produced the defect?</h3><p>Chart values are optional, but they allow a direct comparison.</p></div>
-        <div class="quality-input-grid">
-          <label><span>Material</span><select name="material" required><option value="">Select material</option><option>Mild steel</option><option>Stainless steel</option><option>Aluminum</option><option>Other conductive metal</option></select></label>
-          <label><span>Measurement units</span><select name="units" id="quality-units"><option value="metric">Metric — mm, mm/min, bar</option><option value="imperial">Imperial — in, ipm, psi</option></select></label>
-          <label><span>Material thickness</span><div class="quality-number-unit"><input name="thickness" type="number" min="0.01" max="300" step="0.01" required><small data-unit="length">mm</small></div></label>
-          <label><span>Cutting current</span><div class="quality-number-unit"><input name="amperage" type="number" min="5" max="400" step="1" required><small>A</small></div></label>
-          <label><span>Actual cutting speed</span><div class="quality-number-unit"><input name="actual_speed" type="number" min="1" max="100000" step="0.1" required><small data-unit="speed">mm/min</small></div></label>
-          <label><span>Official chart speed <em>optional</em></span><div class="quality-number-unit"><input name="chart_speed" type="number" min="1" max="100000" step="0.1"><small data-unit="speed">mm/min</small></div></label>
-          <label><span>Actual pressure under flow <em>optional</em></span><div class="quality-number-unit"><input name="actual_pressure" type="number" min="0" max="300" step="0.01"><small data-unit="pressure">bar</small></div></label>
-          <label><span>Official pressure target <em>optional</em></span><div class="quality-number-unit"><input name="chart_pressure" type="number" min="0" max="300" step="0.01"><small data-unit="pressure">bar</small></div></label>
-          <label class="quality-full-field"><span>Machine or torch model <em>optional</em></span><input name="machine" type="text" maxlength="120" placeholder="Example: Powermax45 XP with mechanized torch"></label>
         </div>
-      </section>
+      </header>
 
-      <section class="quality-wizard-step" data-step="3" hidden>
-        <div class="quality-step-heading"><p class="quality-step-number">Step 03</p><h3>How was torch height controlled?</h3><p>Physical cut height matters more than voltage alone.</p></div>
-        <div class="quality-input-grid">
-          <label><span>Pierce height <em>optional</em></span><div class="quality-number-unit"><input name="pierce_height" type="number" min="0" max="100" step="0.01"><small data-unit="length">mm</small></div></label>
-          <label><span>Actual cut height <em>optional</em></span><div class="quality-number-unit"><input name="actual_cut_height" type="number" min="0" max="100" step="0.01"><small data-unit="length">mm</small></div></label>
-          <label><span>Official cut height <em>optional</em></span><div class="quality-number-unit"><input name="chart_cut_height" type="number" min="0" max="100" step="0.01"><small data-unit="length">mm</small></div></label>
-          <label><span>THC status</span><select name="thc_status"><option value="enabled">Enabled</option><option value="disabled">Disabled</option><option value="not-installed">Not installed</option><option value="unknown">Unknown</option></select></label>
-          <label><span>Observed THC behavior</span><select name="thc_behavior"><option value="stable">Physically stable</option><option value="dives">Dives near corners or slow moves</option><option value="rises">Rises too far from plate</option><option value="hunts">Repeatedly moves up and down</option><option value="unknown">Unknown</option></select></label>
-          <label><span>Arc-voltage target <em>optional</em></span><div class="quality-number-unit"><input name="voltage_target" type="number" min="20" max="400" step="0.1"><small>V</small></div></label>
+      <nav
+        class="quality-step-tabs"
+        aria-label="Troubleshooter steps"
+      >
+        <button
+          type="button"
+          class="active"
+          data-step-jump="1"
+        >
+          <span>01</span>
+          Defect
+        </button>
+
+        <button
+          type="button"
+          data-step-jump="2"
+        >
+          <span>02</span>
+          Cut setup
+        </button>
+
+        <button
+          type="button"
+          data-step-jump="3"
+        >
+          <span>03</span>
+          Height &amp; THC
+        </button>
+
+        <button
+          type="button"
+          data-step-jump="4"
+        >
+          <span>04</span>
+          Pattern
+        </button>
+      </nav>
+
+      <form
+        class="quality-wizard-form"
+        id="quality-wizard-form"
+        novalidate
+      >
+        <section
+          class="quality-wizard-step active"
+          data-step="1"
+        >
+          <div class="quality-step-heading">
+            <p class="quality-step-number">
+              Step 01
+            </p>
+
+            <h3>
+              What Is the Main Visible Plasma-Cut Defect?
+            </h3>
+
+            <p>
+              Select the closest match. Run a separate diagnosis when the
+              same part shows more than one unrelated symptom.
+            </p>
+          </div>
+
+          <fieldset class="quality-fieldset">
+            <legend class="sr-only">
+              Select the main plasma cut defect
+            </legend>
+
+            <div class="symptom-grid quality-v2-symptom-grid">
+              <label class="symptom-option">
+                <input
+                  type="radio"
+                  name="symptom"
+                  value="low-speed-dross"
+                  required
+                >
+
+                <span>
+                  <strong>
+                    Large bubbly bottom dross
+                  </strong>
+
+                  <small>
+                    Thick rounded buildup that is often easier to remove
+                  </small>
+                </span>
+              </label>
+
+              <label class="symptom-option">
+                <input
+                  type="radio"
+                  name="symptom"
+                  value="high-speed-dross"
+                >
+
+                <span>
+                  <strong>
+                    Small hard bottom bead
+                  </strong>
+
+                  <small>
+                    Thin, tightly bonded lower-edge dross
+                  </small>
+                </span>
+              </label>
+
+              <label class="symptom-option">
+                <input
+                  type="radio"
+                  name="symptom"
+                  value="top-spatter"
+                >
+
+                <span>
+                  <strong>
+                    Top spatter
+                  </strong>
+
+                  <small>
+                    Re-solidified metal along the top cut edge
+                  </small>
+                </span>
+              </label>
+
+              <label class="symptom-option">
+                <input
+                  type="radio"
+                  name="symptom"
+                  value="positive-bevel"
+                >
+
+                <span>
+                  <strong>
+                    Positive bevel
+                  </strong>
+
+                  <small>
+                    Top of the cut is wider than the bottom
+                  </small>
+                </span>
+              </label>
+
+              <label class="symptom-option">
+                <input
+                  type="radio"
+                  name="symptom"
+                  value="negative-bevel"
+                >
+
+                <span>
+                  <strong>
+                    Negative bevel
+                  </strong>
+
+                  <small>
+                    Bottom of the cut is wider than the top
+                  </small>
+                </span>
+              </label>
+
+              <label class="symptom-option">
+                <input
+                  type="radio"
+                  name="symptom"
+                  value="directional-bevel"
+                >
+
+                <span>
+                  <strong>
+                    Directional bevel
+                  </strong>
+
+                  <small>
+                    One side or machine direction is consistently worse
+                  </small>
+                </span>
+              </label>
+
+              <label class="symptom-option">
+                <input
+                  type="radio"
+                  name="symptom"
+                  value="incomplete-cut"
+                >
+
+                <span>
+                  <strong>
+                    Incomplete cut
+                  </strong>
+
+                  <small>
+                    The part does not fully separate from the plate
+                  </small>
+                </span>
+              </label>
+
+              <label class="symptom-option">
+                <input
+                  type="radio"
+                  name="symptom"
+                  value="poor-holes"
+                >
+
+                <span>
+                  <strong>
+                    Poor plasma-cut holes
+                  </strong>
+
+                  <small>
+                    Out-of-round, tapered, or damaged near the lead-in
+                  </small>
+                </span>
+              </label>
+
+              <label class="symptom-option">
+                <input
+                  type="radio"
+                  name="symptom"
+                  value="rough-cut"
+                >
+
+                <span>
+                  <strong>
+                    Rough cut face
+                  </strong>
+
+                  <small>
+                    Heavy striations, chatter, or changing edge finish
+                  </small>
+                </span>
+              </label>
+
+              <label class="symptom-option">
+                <input
+                  type="radio"
+                  name="symptom"
+                  value="wide-kerf"
+                >
+
+                <span>
+                  <strong>
+                    Plasma kerf too wide
+                  </strong>
+
+                  <small>
+                    The process removes too much material
+                  </small>
+                </span>
+              </label>
+
+              <label class="symptom-option">
+                <input
+                  type="radio"
+                  name="symptom"
+                  value="narrow-kerf"
+                >
+
+                <span>
+                  <strong>
+                    Plasma kerf too narrow
+                  </strong>
+
+                  <small>
+                    Poor clearing or incomplete lower-edge separation
+                  </small>
+                </span>
+              </label>
+
+              <label class="symptom-option">
+                <input
+                  type="radio"
+                  name="symptom"
+                  value="consumable-wear"
+                >
+
+                <span>
+                  <strong>
+                    Rapid consumable wear
+                  </strong>
+
+                  <small>
+                    Nozzle or electrode service life is too short
+                  </small>
+                </span>
+              </label>
+            </div>
+          </fieldset>
+        </section>
+
+        <section
+          class="quality-wizard-step"
+          data-step="2"
+          hidden
+        >
+          <div class="quality-step-heading">
+            <p class="quality-step-number">
+              Step 02
+            </p>
+
+            <h3>
+              What Cutting Setup Produced the Defect?
+            </h3>
+
+            <p>
+              Official chart values are optional, but entering them allows
+              the tool to compare the actual speed and pressure with the
+              intended process.
+            </p>
+          </div>
+
+          <div class="quality-input-grid">
+            <label>
+              <span>
+                Material
+              </span>
+
+              <select
+                name="material"
+                required
+              >
+                <option value="">
+                  Select material
+                </option>
+
+                <option>
+                  Mild steel
+                </option>
+
+                <option>
+                  Stainless steel
+                </option>
+
+                <option>
+                  Aluminum
+                </option>
+
+                <option>
+                  Other conductive metal
+                </option>
+              </select>
+            </label>
+
+            <label>
+              <span>
+                Measurement units
+              </span>
+
+              <select
+                name="units"
+                id="quality-units"
+              >
+                <option value="metric">
+                  Metric — mm, mm/min, bar
+                </option>
+
+                <option value="imperial">
+                  Imperial — in, ipm, psi
+                </option>
+              </select>
+            </label>
+
+            <label>
+              <span>
+                Material thickness
+              </span>
+
+              <div class="quality-number-unit">
+                <input
+                  name="thickness"
+                  type="number"
+                  min="0.01"
+                  max="300"
+                  step="0.01"
+                  inputmode="decimal"
+                  required
+                >
+
+                <small data-unit="length">
+                  mm
+                </small>
+              </div>
+            </label>
+
+            <label>
+              <span>
+                Cutting current
+              </span>
+
+              <div class="quality-number-unit">
+                <input
+                  name="amperage"
+                  type="number"
+                  min="5"
+                  max="400"
+                  step="1"
+                  inputmode="decimal"
+                  required
+                >
+
+                <small>
+                  A
+                </small>
+              </div>
+            </label>
+
+            <label>
+              <span>
+                Actual cutting speed
+              </span>
+
+              <div class="quality-number-unit">
+                <input
+                  name="actual_speed"
+                  type="number"
+                  min="1"
+                  max="100000"
+                  step="0.1"
+                  inputmode="decimal"
+                  required
+                >
+
+                <small data-unit="speed">
+                  mm/min
+                </small>
+              </div>
+            </label>
+
+            <label>
+              <span>
+                Official chart speed
+                <em>optional</em>
+              </span>
+
+              <div class="quality-number-unit">
+                <input
+                  name="chart_speed"
+                  type="number"
+                  min="1"
+                  max="100000"
+                  step="0.1"
+                  inputmode="decimal"
+                >
+
+                <small data-unit="speed">
+                  mm/min
+                </small>
+              </div>
+            </label>
+
+            <label>
+              <span>
+                Actual pressure under flow
+                <em>optional</em>
+              </span>
+
+              <div class="quality-number-unit">
+                <input
+                  name="actual_pressure"
+                  type="number"
+                  min="0"
+                  max="300"
+                  step="0.01"
+                  inputmode="decimal"
+                >
+
+                <small data-unit="pressure">
+                  bar
+                </small>
+              </div>
+            </label>
+
+            <label>
+              <span>
+                Official pressure target
+                <em>optional</em>
+              </span>
+
+              <div class="quality-number-unit">
+                <input
+                  name="chart_pressure"
+                  type="number"
+                  min="0"
+                  max="300"
+                  step="0.01"
+                  inputmode="decimal"
+                >
+
+                <small data-unit="pressure">
+                  bar
+                </small>
+              </div>
+            </label>
+
+            <label class="quality-full-field">
+              <span>
+                Machine or torch model
+                <em>optional</em>
+              </span>
+
+              <input
+                name="machine"
+                type="text"
+                maxlength="120"
+                placeholder="Example: Powermax45 XP with mechanized torch"
+              >
+            </label>
+          </div>
+        </section>
+
+        <section
+          class="quality-wizard-step"
+          data-step="3"
+          hidden
+        >
+          <div class="quality-step-heading">
+            <p class="quality-step-number">
+              Step 03
+            </p>
+
+            <h3>
+              How Was Torch Height Controlled?
+            </h3>
+
+            <p>
+              Physical cut height matters more than voltage alone. Record
+              measured height whenever possible.
+            </p>
+          </div>
+
+          <div class="quality-input-grid">
+            <label>
+              <span>
+                Pierce height
+                <em>optional</em>
+              </span>
+
+              <div class="quality-number-unit">
+                <input
+                  name="pierce_height"
+                  type="number"
+                  min="0"
+                  max="100"
+                  step="0.01"
+                  inputmode="decimal"
+                >
+
+                <small data-unit="length">
+                  mm
+                </small>
+              </div>
+            </label>
+
+            <label>
+              <span>
+                Actual cut height
+                <em>optional</em>
+              </span>
+
+              <div class="quality-number-unit">
+                <input
+                  name="actual_cut_height"
+                  type="number"
+                  min="0"
+                  max="100"
+                  step="0.01"
+                  inputmode="decimal"
+                >
+
+                <small data-unit="length">
+                  mm
+                </small>
+              </div>
+            </label>
+
+            <label>
+              <span>
+                Official cut height
+                <em>optional</em>
+              </span>
+
+              <div class="quality-number-unit">
+                <input
+                  name="chart_cut_height"
+                  type="number"
+                  min="0"
+                  max="100"
+                  step="0.01"
+                  inputmode="decimal"
+                >
+
+                <small data-unit="length">
+                  mm
+                </small>
+              </div>
+            </label>
+
+            <label>
+              <span>
+                THC status
+              </span>
+
+              <select name="thc_status">
+                <option value="enabled">
+                  Enabled
+                </option>
+
+                <option value="disabled">
+                  Disabled
+                </option>
+
+                <option value="not-installed">
+                  Not installed
+                </option>
+
+                <option value="unknown">
+                  Unknown
+                </option>
+              </select>
+            </label>
+
+            <label>
+              <span>
+                Observed THC behavior
+              </span>
+
+              <select name="thc_behavior">
+                <option value="stable">
+                  Physically stable
+                </option>
+
+                <option value="dives">
+                  Dives near corners or slow moves
+                </option>
+
+                <option value="rises">
+                  Rises too far from the plate
+                </option>
+
+                <option value="hunts">
+                  Repeatedly moves up and down
+                </option>
+
+                <option value="unknown">
+                  Unknown
+                </option>
+              </select>
+            </label>
+
+            <label>
+              <span>
+                Arc-voltage target
+                <em>optional</em>
+              </span>
+
+              <div class="quality-number-unit">
+                <input
+                  name="voltage_target"
+                  type="number"
+                  min="20"
+                  max="400"
+                  step="0.1"
+                  inputmode="decimal"
+                >
+
+                <small>
+                  V
+                </small>
+              </div>
+            </label>
+          </div>
+        </section>
+
+        <section
+          class="quality-wizard-step"
+          data-step="4"
+          hidden
+        >
+          <div class="quality-step-heading">
+            <p class="quality-step-number">
+              Step 04
+            </p>
+
+            <h3>
+              Where Does the Plasma-Cut Problem Occur?
+            </h3>
+
+            <p>
+              Directional, corner-only, start-only, and intermittent defects
+              often point away from a simple global cutting-speed problem.
+            </p>
+          </div>
+
+          <div class="quality-input-grid">
+            <label>
+              <span>
+                Defect pattern
+              </span>
+
+              <select name="pattern">
+                <option value="everywhere">
+                  Everywhere on the part
+                </option>
+
+                <option value="one-side">
+                  Mostly one side of the cut
+                </option>
+
+                <option value="one-direction">
+                  Mostly one machine direction
+                </option>
+
+                <option value="corners-holes">
+                  Mostly corners, holes, or short moves
+                </option>
+
+                <option value="start-leadin">
+                  Mostly at the pierce or lead-in
+                </option>
+
+                <option value="intermittent">
+                  Randomly or in certain table areas
+                </option>
+              </select>
+            </label>
+
+            <label>
+              <span>
+                Cut direction
+              </span>
+
+              <select name="cut_direction">
+                <option value="verified">
+                  Inside and outside directions verified
+                </option>
+
+                <option value="not-verified">
+                  Not verified
+                </option>
+
+                <option value="suspected">
+                  Good kerf side may be on the scrap
+                </option>
+
+                <option value="unknown">
+                  Unknown
+                </option>
+              </select>
+            </label>
+
+            <label>
+              <span>
+                Consumables
+              </span>
+
+              <select name="consumables">
+                <option value="unknown">
+                  Not recently inspected
+                </option>
+
+                <option value="worn">
+                  Used or visibly worn
+                </option>
+
+                <option value="new">
+                  New
+                </option>
+
+                <option value="known-good">
+                  Confirmed good
+                </option>
+              </select>
+            </label>
+
+            <label>
+              <span>
+                Air quality
+              </span>
+
+              <select name="air_quality">
+                <option value="unknown">
+                  Not tested
+                </option>
+
+                <option value="moisture">
+                  Moisture or oil present
+                </option>
+
+                <option value="pressure-drop">
+                  Pressure drops during cutting
+                </option>
+
+                <option value="known-good">
+                  Clean, dry, stable air confirmed
+                </option>
+              </select>
+            </label>
+
+            <label>
+              <span>
+                Work-lead connection
+              </span>
+
+              <select name="work_lead">
+                <option value="unknown">
+                  Unknown or connected through dirty slats
+                </option>
+
+                <option value="poor">
+                  Paint, rust, weak clamp, or hot connection
+                </option>
+
+                <option value="known-good">
+                  Clean direct connection confirmed
+                </option>
+              </select>
+            </label>
+
+            <label>
+              <span>
+                Machine motion
+              </span>
+
+              <select name="motion">
+                <option value="unknown">
+                  Not checked
+                </option>
+
+                <option value="problem">
+                  Play, vibration, binding, or lost position
+                </option>
+
+                <option value="known-good">
+                  Rigid and repeatable
+                </option>
+              </select>
+            </label>
+
+            <label class="quality-full-field">
+              <span>
+                Additional observation
+                <em>optional</em>
+              </span>
+
+              <textarea
+                name="notes"
+                rows="4"
+                maxlength="500"
+                placeholder="Example: The defect becomes worse on one Y-axis edge after crossing warped plate."
+              ></textarea>
+            </label>
+          </div>
+        </section>
+
+        <p
+          class="quality-form-message"
+          id="quality-form-message"
+          aria-live="polite"
+        ></p>
+
+        <footer class="quality-wizard-controls">
+          <button
+            class="quality-secondary-button"
+            id="quality-back"
+            type="button"
+            disabled
+          >
+            Back
+          </button>
+
+          <button
+            class="quality-submit"
+            id="quality-next"
+            type="button"
+          >
+            Continue to Cut Setup
+          </button>
+
+          <button
+            class="quality-submit"
+            id="quality-diagnose"
+            type="submit"
+            hidden
+          >
+            Generate Corrective-Action Plan
+          </button>
+        </footer>
+      </form>
+    </section>
+
+    <section
+      class="quality-results quality-v2-results"
+      id="quality-results"
+      hidden
+      aria-live="polite"
+    >
+      <header class="quality-results-header">
+        <div>
+          <p class="eyebrow">
+            Ranked CNC plasma diagnostic result
+          </p>
+
+          <h2 id="quality-result-title">
+            Corrective-Action Plan
+          </h2>
+
+          <p id="quality-result-summary"></p>
         </div>
-      </section>
 
-      <section class="quality-wizard-step" data-step="4" hidden>
-        <div class="quality-step-heading"><p class="quality-step-number">Step 04</p><h3>Where does it happen?</h3><p>Directional and intermittent defects often point away from basic speed settings.</p></div>
-        <div class="quality-input-grid">
-          <label><span>Defect pattern</span><select name="pattern"><option value="everywhere">Everywhere on the part</option><option value="one-side">Mostly one side of the cut</option><option value="one-direction">Mostly one machine direction</option><option value="corners-holes">Mostly corners, holes, or short moves</option><option value="start-leadin">Mostly at the pierce or lead-in</option><option value="intermittent">Randomly or in certain table areas</option></select></label>
-          <label><span>Cut direction</span><select name="cut_direction"><option value="verified">Inside/outside direction verified</option><option value="not-verified">Not verified</option><option value="suspected">Good side may be on the scrap</option><option value="unknown">Unknown</option></select></label>
-          <label><span>Consumables</span><select name="consumables"><option value="unknown">Not recently inspected</option><option value="worn">Used or visibly worn</option><option value="new">New</option><option value="known-good">Confirmed good</option></select></label>
-          <label><span>Air quality</span><select name="air_quality"><option value="unknown">Not tested</option><option value="moisture">Moisture or oil present</option><option value="pressure-drop">Pressure drops during cutting</option><option value="known-good">Clean, dry, stable air confirmed</option></select></label>
-          <label><span>Work-lead connection</span><select name="work_lead"><option value="unknown">Unknown or through dirty slats</option><option value="poor">Paint, rust, weak clamp, or hot connection</option><option value="known-good">Clean direct connection confirmed</option></select></label>
-          <label><span>Machine motion</span><select name="motion"><option value="unknown">Not checked</option><option value="problem">Play, vibration, binding, or lost position</option><option value="known-good">Rigid and repeatable</option></select></label>
-          <label class="quality-full-field"><span>Additional observation <em>optional</em></span><textarea name="notes" rows="4" maxlength="500" placeholder="Example: The defect becomes worse on one Y-axis edge after crossing warped plate."></textarea></label>
+        <div class="quality-result-actions">
+          <button
+            class="quality-print-button"
+            id="quality-print"
+            type="button"
+          >
+            Print Plan
+          </button>
+
+          <button
+            class="quality-copy-button"
+            id="quality-copy"
+            type="button"
+          >
+            Copy Plan
+          </button>
+
+          <button
+            class="quality-reset"
+            id="quality-reset"
+            type="button"
+          >
+            Start Over
+          </button>
         </div>
-      </section>
+      </header>
 
-      <p class="quality-form-message" id="quality-form-message" aria-live="polite"></p>
-      <footer class="quality-wizard-controls">
-        <button class="quality-secondary-button" id="quality-back" type="button" disabled>Back</button>
-        <button class="quality-submit" id="quality-next" type="button">Continue to Cut Setup</button>
-        <button class="quality-submit" id="quality-diagnose" type="submit" hidden>Generate Corrective-Action Plan</button>
-      </footer>
-    </form>
-  </section>
+      <article
+        class="quality-plan"
+        id="quality-print-area"
+      >
+        <header class="quality-plan-header">
+          <div>
+            <p class="quality-plan-brand">
+              PLASMA CUT FORGE
+            </p>
 
-  <section class="quality-results quality-v2-results" id="quality-results" hidden aria-live="polite">
-    <header class="quality-results-header">
-      <div><p class="eyebrow">Ranked diagnostic result</p><h2 id="quality-result-title">Corrective-Action Plan</h2><p id="quality-result-summary"></p></div>
-      <div class="quality-result-actions"><button class="quality-print-button" id="quality-print" type="button">Print Plan</button><button class="quality-copy-button" id="quality-copy" type="button">Copy Plan</button><button class="quality-reset" id="quality-reset" type="button">Start Over</button></div>
-    </header>
+            <h2>
+              CNC Plasma Cut Quality Corrective-Action Plan
+            </h2>
 
-    <article class="quality-plan" id="quality-print-area">
-      <header class="quality-plan-header"><div><p class="quality-plan-brand">PLASMA CUT FORGE</p><h2>Cut Quality Corrective-Action Plan</h2><p id="quality-plan-date"></p></div><span class="quality-plan-badge">Starting diagnosis</span></header>
-      <section class="quality-job-snapshot"><div class="quality-section-heading"><p class="quality-section-label">Recorded setup</p><h3>Job Snapshot</h3></div><dl id="quality-job-snapshot"></dl></section>
-      <section class="quality-priority-plan"><div class="quality-section-heading"><p class="quality-section-label">Controlled test sequence</p><h3>Do These Checks in Order</h3></div><ol id="quality-check-sequence"></ol></section>
-      <section class="quality-ranked-diagnosis"><div class="quality-section-heading"><p class="quality-section-label">Ranked causes</p><h3>Most Likely Causes</h3></div><div class="quality-cause-list" id="quality-cause-list"></div></section>
-      <section class="quality-test-log"><div class="quality-section-heading"><p class="quality-section-label">Shop-floor record</p><h3>Test Coupon Log</h3></div><div class="quality-test-log-grid"><div><strong>Change tested</strong><span></span><span></span></div><div><strong>Result observed</strong><span></span><span></span></div><div><strong>Final retained setting</strong><span></span><span></span></div></div></section>
-      <aside class="quality-safety"><strong>Safety and setup note</strong><p>Isolate power before inspecting the torch or removing consumables. Follow the plasma-source manual, use suitable PPE and ventilation, and verify physical cut height instead of changing voltage blindly.</p></aside>
-      <footer class="quality-plan-footer"><p>Starting recommendation—not a guaranteed machine setting.</p><p>plasmacutforge.com</p></footer>
-    </article>
-    <p class="quality-copy-message" id="quality-copy-message" aria-live="polite"></p>
-  </section>
+            <p id="quality-plan-date"></p>
+          </div>
 
-  <section class="quality-method">
-    <div class="quality-method-heading"><p class="eyebrow">Diagnostic discipline</p><h2>Why the Order Matters</h2></div>
-    <div class="quality-method-grid">
-      <article><span>01</span><h3>Confirm the chart</h3><p>Match material, thickness, amperage, process, and consumables to one official mechanized chart row.</p></article>
-      <article><span>02</span><h3>Inspect the system</h3><p>Consumables, air, work lead, torch squareness, and motion must be reliable before fine tuning.</p></article>
-      <article><span>03</span><h3>Verify physical height</h3><p>Arc voltage is indirect. Measure the physical distance before changing the target.</p></article>
-      <article><span>04</span><h3>Change one variable</h3><p>Use repeatable coupons and retain only the adjustment that creates a measurable improvement.</p></article>
-    </div>
-  </section>
-</main>
+          <span class="quality-plan-badge">
+            Starting diagnosis
+          </span>
+        </header>
 
+        <section class="quality-job-snapshot">
+          <div class="quality-section-heading">
+            <p class="quality-section-label">
+              Recorded plasma setup
+            </p>
 
-  <section class="support-forge" aria-labelledby="support-forge-title">
+            <h3>
+              Job Snapshot
+            </h3>
+          </div>
+
+          <dl id="quality-job-snapshot"></dl>
+        </section>
+
+        <section class="quality-priority-plan">
+          <div class="quality-section-heading">
+            <p class="quality-section-label">
+              Controlled test sequence
+            </p>
+
+            <h3>
+              Perform These Checks in Order
+            </h3>
+          </div>
+
+          <ol id="quality-check-sequence"></ol>
+        </section>
+
+        <section class="quality-ranked-diagnosis">
+          <div class="quality-section-heading">
+            <p class="quality-section-label">
+              Ranked possible causes
+            </p>
+
+            <h3>
+              Most Likely Causes
+            </h3>
+          </div>
+
+          <div
+            class="quality-cause-list"
+            id="quality-cause-list"
+          ></div>
+        </section>
+
+        <section class="quality-test-log">
+          <div class="quality-section-heading">
+            <p class="quality-section-label">
+              Shop-floor record
+            </p>
+
+            <h3>
+              Plasma Test-Coupon Log
+            </h3>
+          </div>
+
+          <div class="quality-test-log-grid">
+            <div>
+              <strong>
+                Change tested
+              </strong>
+
+              <span></span>
+              <span></span>
+            </div>
+
+            <div>
+              <strong>
+                Result observed
+              </strong>
+
+              <span></span>
+              <span></span>
+            </div>
+
+            <div>
+              <strong>
+                Final retained setting
+              </strong>
+
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+        </section>
+
+        <aside class="quality-safety">
+          <strong>
+            Safety and setup note
+          </strong>
+
+          <p>
+            Isolate power before inspecting the torch or removing
+            consumables. Follow the plasma-source manual, use suitable PPE
+            and ventilation, and verify physical cut height instead of
+            changing arc voltage blindly.
+          </p>
+        </aside>
+
+        <footer class="quality-plan-footer">
+          <p>
+            Starting recommendation—not a guaranteed machine setting.
+          </p>
+
+          <p>
+            plasmacutforge.com
+          </p>
+        </footer>
+      </article>
+
+      <p
+        class="quality-copy-message"
+        id="quality-copy-message"
+        aria-live="polite"
+      ></p>
+    </section>
+
+    <section
+      class="quality-method"
+      aria-labelledby="diagnostic-order-heading"
+    >
+      <div class="quality-method-heading">
+        <p class="eyebrow">
+          CNC plasma diagnostic discipline
+        </p>
+
+        <h2 id="diagnostic-order-heading">
+          Why the Troubleshooting Order Matters
+        </h2>
+      </div>
+
+      <div class="quality-method-grid">
+        <article>
+          <span>01</span>
+
+          <h3>
+            Confirm one complete cut-chart process
+          </h3>
+
+          <p>
+            Match the material, thickness, amperage, torch, consumables,
+            speed, pressure, pierce height, cut height, and delay to one
+            official mechanized chart row.
+          </p>
+        </article>
+
+        <article>
+          <span>02</span>
+
+          <h3>
+            Inspect the physical system
+          </h3>
+
+          <p>
+            Consumables, clean dry air, the work lead, torch squareness,
+            plate support, and machine motion must be reliable before
+            fine-tuning process values.
+          </p>
+        </article>
+
+        <article>
+          <span>03</span>
+
+          <h3>
+            Verify physical torch height
+          </h3>
+
+          <p>
+            Arc voltage is an indirect height signal. Measure the actual
+            torch-to-plate distance before changing voltage calibration,
+            offsets, or targets.
+          </p>
+        </article>
+
+        <article>
+          <span>04</span>
+
+          <h3>
+            Change one variable per coupon
+          </h3>
+
+          <p>
+            Use repeatable test coupons and retain only the adjustment that
+            produces a measurable improvement without creating a new defect.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section
+      class="quality-method"
+      aria-labelledby="plasma-quality-questions-heading"
+    >
+      <div class="quality-method-heading">
+        <p class="eyebrow">
+          Plasma cut-quality questions
+        </p>
+
+        <h2 id="plasma-quality-questions-heading">
+          Common CNC Plasma Troubleshooting Questions
+        </h2>
+      </div>
+
+      <div class="quality-method-grid">
+        <article>
+          <span>01</span>
+
+          <h3>
+            Why does my plasma cutter leave bottom dross?
+          </h3>
+
+          <p>
+            Bottom dross may be associated with cutting speed, torch height,
+            amperage, airflow, consumables, or a process that does not match
+            the correct chart row. The shape and attachment of the dross help
+            distinguish low-speed from high-speed conditions.
+          </p>
+        </article>
+
+        <article>
+          <span>02</span>
+
+          <h3>
+            What causes excessive bevel on a plasma cut?
+          </h3>
+
+          <p>
+            Check physical cut height, cutting speed, torch squareness,
+            nozzle condition, cut direction, machine motion, and whether the
+            defect consistently follows one side or direction.
+          </p>
+        </article>
+
+        <article>
+          <span>03</span>
+
+          <h3>
+            Why does the plasma torch dive in corners?
+          </h3>
+
+          <p>
+            When the machine decelerates, arc voltage can change and cause
+            inappropriate THC correction. Review anti-dive, minimum-speed
+            lockout, delay, and THC inhibit behavior for corners, holes, and
+            short moves.
+          </p>
+        </article>
+
+        <article>
+          <span>04</span>
+
+          <h3>
+            Why do plasma consumables wear out quickly?
+          </h3>
+
+          <p>
+            Common areas to inspect include moisture or oil in the air,
+            incorrect amperage or consumables, insufficient pierce height,
+            excessive pierce delay, torch collisions, worn electrodes, and
+            unstable airflow.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section
+      class="quality-disclaimer"
+      aria-label="Related CNC plasma cutting resources"
+    >
+      <strong>
+        Use the related tool that matches the next test.
+      </strong>
+
+      <p>
+        Establish a starting process with the
+        <a href="/plasma-cutting-calculator.html">
+          CNC Plasma Cutting Calculator
+        </a>
+        or compare material-thickness values in the
+        <a href="/plasma-cutting-settings-guide.html">
+          Plasma Cutter Settings Chart
+        </a>.
+      </p>
+
+      <p>
+        Check required pressure and airflow with the
+        <a href="/air-compressor-sizing-plasma-cutters.html">
+          Plasma Cutter Air Compressor Sizing Guide
+        </a>,
+        then learn how to record proven values in the
+        <a href="/blog/how-to-build-a-machine-specific-cut-chart/">
+          Machine-Specific Plasma Cut Chart Guide
+        </a>.
+      </p>
+    </section>
+  </main>
+
+  <section
+    class="support-forge"
+    aria-labelledby="support-forge-title"
+  >
     <div class="support-forge-copy">
-      <p class="support-forge-kicker">Support independent CNC resources</p>
-      <h2 id="support-forge-title">Help Keep Plasma Cut Forge Growing</h2>
+      <p class="support-forge-kicker">
+        Support independent CNC resources
+      </p>
+
+      <h2 id="support-forge-title">
+        Help Keep Plasma Cut Forge Growing
+      </h2>
+
       <p>
         Plasma Cut Forge is built to provide practical calculators, reliable
-        technical guides, testing methods, and troubleshooting resources for the
-        CNC plasma community. The site is continually researched, tested, and
-        updated. Your support helps cover website costs and makes it possible to
-        keep improving the tools and publishing useful, independent content.
+        technical guides, testing methods, and troubleshooting resources for
+        the CNC plasma community. The site is continually researched, tested,
+        and updated. Your support helps cover website costs and makes it
+        possible to keep improving the tools and publishing useful,
+        independent content.
       </p>
     </div>
 
@@ -253,73 +1783,98 @@
       >
         Support the Forge
       </a>
-      <small>Secure one-time support through Ko-fi</small>
+
+      <small>
+        Secure one-time support through Ko-fi
+      </small>
     </div>
   </section>
 
   <aside
-  class="kofi-membership-widget is-expanded"
-  data-membership-widget
-  aria-label="Plasma Cut Forge membership"
->
-  <button
-    class="kofi-membership-tab"
-    type="button"
-    data-membership-toggle
-    aria-expanded="true"
-    aria-label="Open Plasma Cut Forge membership options"
+    class="kofi-membership-widget is-expanded"
+    data-membership-widget
+    aria-label="Plasma Cut Forge membership"
   >
-    <span>Join the Forge</span>
-  </button>
+    <button
+      class="kofi-membership-tab"
+      type="button"
+      data-membership-toggle
+      aria-expanded="true"
+      aria-label="Open Plasma Cut Forge membership options"
+    >
+      <span>
+        Join the Forge
+      </span>
+    </button>
 
-  <div class="kofi-membership-panel" data-membership-panel>
-    <div class="kofi-membership-widget-copy">
-      <span class="kofi-membership-eyebrow">Ko-fi Membership</span>
-      <strong>Join the Forge</strong>
-      <small>Forge Supporter · $5/month</small>
+    <div
+      class="kofi-membership-panel"
+      data-membership-panel
+    >
+      <div class="kofi-membership-widget-copy">
+        <span class="kofi-membership-eyebrow">
+          Ko-fi Membership
+        </span>
+
+        <strong>
+          Join the Forge
+        </strong>
+
+        <small>
+          Forge Supporter · $5/month
+        </small>
+
+        <p>
+          Support new tools, machine profiles, technical articles, and
+          project-build updates.
+        </p>
+      </div>
+
+      <div class="kofi-membership-widget-actions">
+        <a
+          class="kofi-membership-primary"
+          href="https://ko-fi.com/plasmacutforge/tiers"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Become a Member
+        </a>
+
+        <a
+          class="kofi-membership-secondary"
+          href="https://ko-fi.com/plasmacutforge"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          One-time support
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <footer class="site-footer">
+    <div class="site-footer-primary">
       <p>
-        Support new tools, machine profiles, technical articles, and
-        project-build updates.
+        © 2026 Plasma Cut Forge.
+      </p>
+
+      <p class="site-footer-warning">
+        Troubleshooting results are starting recommendations—not guaranteed
+        repairs or machine settings.
       </p>
     </div>
 
-    <div class="kofi-membership-widget-actions">
-      <a
-        class="kofi-membership-primary"
-        href="https://ko-fi.com/plasmacutforge/tiers"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Become a Member
-      </a>
-      <a
-        class="kofi-membership-secondary"
-        href="https://ko-fi.com/plasmacutforge"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        One-time support
-      </a>
-    </div>
-  </div>
-</aside>
-
-  <footer class="site-footer">
-  <div class="site-footer-primary">
-    <p>© 2026 Plasma Cut Forge.</p>
-    <p class="site-footer-warning">
-      Calculator values are starting recommendations—not guaranteed machine settings.
-    </p>
-  </div>
-
-  <nav class="site-footer-links" aria-label="Legal and contact links">
-    <a href="/email-updates.html">Email Updates</a>
-    <a href="/contact.html">Contact</a>
-    <a href="/privacy-policy.html">Privacy Policy</a>
-    <a href="/website-disclaimer.html">Website Disclaimer</a>
-    <a href="/terms-of-use.html">Terms of Use</a>
-    <a href="/affiliate-disclosure.html">Affiliate Disclosure</a>
-  </nav>
-</footer>
+    <nav
+      class="site-footer-links"
+      aria-label="Legal and contact links"
+    >
+      <a href="/email-updates.html">Email Updates</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy-policy.html">Privacy Policy</a>
+      <a href="/website-disclaimer.html">Website Disclaimer</a>
+      <a href="/terms-of-use.html">Terms of Use</a>
+      <a href="/affiliate-disclosure.html">Affiliate Disclosure</a>
+    </nav>
+  </footer>
 </body>
 </html>
