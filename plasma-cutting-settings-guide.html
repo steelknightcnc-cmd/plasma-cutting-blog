@@ -2,175 +2,708 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Plasma Cut Forge reference guide for starting plasma cutting amperage, air pressure, speed, and standoff on mild steel, stainless steel, and aluminum in metric or imperial units.">
-  <title>Plasma Cutting Settings Guide | Plasma Cut Forge</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta
+    name="description"
+    content="Free CNC plasma cutter settings chart for mild steel, stainless steel, and aluminum. Compare starting amps, cutting speed, air pressure, and torch standoff by material thickness."
+  >
+
+  <meta
+    name="robots"
+    content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+  >
+
+  <title>Plasma Cutter Settings Chart: Amps, Speed &amp; Air Pressure</title>
+
+  <link
+    rel="canonical"
+    href="https://plasmacutforge.com/plasma-cutting-settings-guide.html"
+  >
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Plasma Cut Forge">
+  <meta property="og:title" content="Plasma Cutter Settings Chart: Amps, Speed &amp; Air Pressure">
+  <meta
+    property="og:description"
+    content="Compare starting plasma cutter amperage, cutting speed, air pressure, and torch standoff for mild steel, stainless steel, and aluminum."
+  >
+  <meta property="og:url" content="https://plasmacutforge.com/plasma-cutting-settings-guide.html">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Plasma Cutter Settings Chart: Amps, Speed &amp; Air Pressure">
+  <meta
+    name="twitter:description"
+    content="Free CNC plasma cutter starting settings for mild steel, stainless steel, and aluminum."
+  >
+
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
   <meta name="theme-color" content="#070b14">
+
   <link rel="stylesheet" href="/styles.css?v=48.0">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://plasmacutforge.com/plasma-cutting-settings-guide.html#webpage",
+    "url": "https://plasmacutforge.com/plasma-cutting-settings-guide.html",
+    "name": "Plasma Cutter Settings Chart: Amps, Speed & Air Pressure",
+    "description": "Free CNC plasma cutter settings chart for mild steel, stainless steel, and aluminum, including starting amperage, cutting speed, air pressure, and torch standoff.",
+    "dateModified": "2026-08-03",
+    "inLanguage": "en",
+    "isPartOf": {
+      "@type": "WebSite",
+      "@id": "https://plasmacutforge.com/#website",
+      "url": "https://plasmacutforge.com/",
+      "name": "Plasma Cut Forge"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Plasma Cut Forge",
+      "url": "https://plasmacutforge.com/"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://plasmacutforge.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Calculators",
+        "item": "https://plasmacutforge.com/calculators.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Plasma Cutter Settings Chart",
+        "item": "https://plasmacutforge.com/plasma-cutting-settings-guide.html"
+      }
+    ]
+  }
+  </script>
+
   <script src="/plasma-cutting-settings-guide.js?v=1.1" defer></script>
   <script src="/membership-widget.js?v=1.1" defer></script>
 </head>
+
 <body class="plasma-settings-guide-page">
-<header class="site-header industrial-header">
-  <a class="brand industrial-brand" href="/#top" aria-label="Plasma Cut Forge home">
-    <span class="brand-wordmark">PLASMA<span>CUT</span>FORGE</span>
-    <small>CNC plasma tools &amp; shop-floor guides</small>
-  </a>
-  <nav class="industrial-nav" aria-label="Primary navigation">
-    <a href="/#top">Home</a>
-    <div class="calculator-nav-dropdown">
-      <a class="calculator-nav-trigger active" href="/calculators.html">
-        Calculators <span aria-hidden="true">▾</span>
+  <header class="site-header industrial-header">
+    <a class="brand industrial-brand" href="/#top" aria-label="Plasma Cut Forge home">
+      <span class="brand-wordmark">PLASMA<span>CUT</span>FORGE</span>
+      <small>CNC plasma tools &amp; shop-floor guides</small>
+    </a>
+
+    <nav class="industrial-nav" aria-label="Primary navigation">
+      <a href="/#top">Home</a>
+
+      <div class="calculator-nav-dropdown">
+        <a class="calculator-nav-trigger active" href="/calculators.html">
+          Calculators <span aria-hidden="true">▾</span>
+        </a>
+
+        <div class="calculator-nav-menu" aria-label="Calculator categories">
+          <a href="/calculators.html#plasma-cutting">Plasma Cutting</a>
+          <a href="/calculators.html#machining">Machining</a>
+          <a href="/calculators.html#welding">Welding</a>
+        </div>
+      </div>
+
+      <a href="/guides/">Guides</a>
+      <a href="/blog/">Blog</a>
+      <a href="/community/">Community</a>
+      <a href="/#articles">Articles</a>
+      <a href="/about-the-builder.html">About</a>
+
+      <a
+        class="membership-nav-button"
+        href="https://ko-fi.com/plasmacutforge/tiers"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Membership
       </a>
-      <div class="calculator-nav-menu" aria-label="Calculator categories">
-        <a href="/calculators.html#plasma-cutting">Plasma Cutting</a>
-        <a href="/calculators.html#machining">Machining</a>
-        <a href="/calculators.html#welding">Welding</a>
+    </nav>
+
+    <form class="global-search-form" action="/search.html" method="get" role="search">
+      <label class="sr-only" for="global-search-input">Search Plasma Cut Forge</label>
+      <input
+        id="global-search-input"
+        name="q"
+        type="search"
+        maxlength="100"
+        placeholder="Search the Forge"
+        autocomplete="off"
+        required
+      >
+      <button type="submit" aria-label="Search Plasma Cut Forge">Search</button>
+    </form>
+  </header>
+
+  <main class="plasma-settings-guide-main">
+    <nav class="plasma-guide-breadcrumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span aria-hidden="true">›</span>
+      <a href="/calculators.html">Calculators</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">Plasma Cutter Settings Chart</span>
+    </nav>
+
+    <section class="plasma-settings-guide-hero">
+      <p class="industrial-kicker">CNC plasma cutting reference</p>
+
+      <h1>Plasma Cutter Settings Chart by Material and Thickness</h1>
+
+      <p>
+        Use this free CNC plasma cutter settings chart to compare practical starting amperage,
+        cutting speed, air pressure, and torch standoff for mild steel, stainless steel, and
+        aluminum. Select the material and measurement system, then use the thickness chart as
+        a starting reference for your plasma table.
+      </p>
+
+      <div class="plasma-guide-hero-actions">
+        <a class="plasma-guide-primary-link" href="#settings-table">
+          View the Plasma Cutter Settings Chart
+        </a>
+
+        <a class="plasma-guide-secondary-link" href="/#calculator">
+          Open the Plasma Cutting Settings Calculator
+        </a>
       </div>
-    </div>
-    <a href="/guides/">Guides</a>
-    <a href="/blog/">Blog</a>
-    <a href="/community/">Community</a>
-    <a href="/#articles">Articles</a>
-    <a href="/about-the-builder.html">About</a>
-    <a class="membership-nav-button" href="https://ko-fi.com/plasmacutforge/tiers" target="_blank" rel="noopener noreferrer">Membership</a>
-  </nav>
-  <form class="global-search-form" action="/search.html" method="get" role="search">
-    <label class="sr-only" for="global-search-input">Search Plasma Cut Forge</label>
-    <input id="global-search-input" name="q" type="search" placeholder="Search the Forge" required>
-    <button type="submit">Search</button>
-  </form>
-</header>
+    </section>
 
-<main class="plasma-settings-guide-main">
-  <section class="plasma-settings-guide-hero">
-    <p class="industrial-kicker">Plasma cutting reference</p>
-    <h1>Plasma Cutting Settings Guide</h1>
-    <p>
-      Compare practical starting ranges for mild steel, stainless steel, and aluminum. Switch the complete guide
-      between metric and imperial units without leaving the page.
-    </p>
-    <div class="plasma-guide-hero-actions">
-      <a class="plasma-guide-primary-link" href="#settings-table">View settings</a>
-      <a class="plasma-guide-secondary-link" href="/#calculator">Open settings calculator</a>
-    </div>
-  </section>
+    <section class="plasma-guide-disclaimer" aria-label="Important plasma cutter settings notice">
+      <strong>Starting reference—not a machine-specific cut chart.</strong>
+      <p>
+        Confirm the consumable, amperage, pressure, airflow, and duty-cycle limits in your
+        plasma cutter manual. Make one change at a time and record the settings that produce
+        repeatable results on your machine.
+      </p>
+    </section>
 
-  <section class="plasma-guide-disclaimer" aria-label="Important settings notice">
-    <strong>Starting reference—not a machine-specific cut chart.</strong>
-    <p>Confirm the consumable, amperage, pressure, and duty-cycle limits in your plasma cutter manual. Make one change at a time and record proven settings for your machine.</p>
-  </section>
-
-  <section class="plasma-guide-controls" aria-labelledby="guide-controls-heading">
-    <div>
-      <p class="industrial-kicker">Display controls</p>
-      <h2 id="guide-controls-heading">Choose units and material</h2>
-    </div>
-    <div class="plasma-guide-control-grid">
-      <label>
-        <span>Measurement system</span>
-        <select id="guide-unit-system">
-          <option value="metric" selected>Millimetres — mm / mm/min / bar</option>
-          <option value="imperial">Inches — in / IPM / PSI</option>
-        </select>
-      </label>
-      <label>
-        <span>Material</span>
-        <select id="guide-material-filter">
-          <option value="mild-steel" selected>Mild steel</option>
-          <option value="stainless">Stainless steel</option>
-          <option value="aluminum">Aluminum</option>
-          <option value="all">Show all materials</option>
-        </select>
-      </label>
-    </div>
-  </section>
-
-  <section class="plasma-guide-table-section" id="settings-table" aria-labelledby="settings-heading">
-    <div class="plasma-guide-section-heading">
+    <section class="plasma-guide-controls" aria-labelledby="guide-controls-heading">
       <div>
-        <p class="industrial-kicker">Quick-reference chart</p>
-        <h2 id="settings-heading">Starting cutting settings</h2>
+        <p class="industrial-kicker">Chart controls</p>
+        <h2 id="guide-controls-heading">Choose the measurement system and material</h2>
       </div>
-      <span id="guide-unit-badge" class="plasma-guide-unit-badge">Metric</span>
-    </div>
-    <div id="plasma-settings-tables" class="plasma-settings-tables" aria-live="polite"></div>
-  </section>
 
-  <section class="plasma-guide-factors" aria-labelledby="factors-heading">
-    <div class="plasma-guide-section-heading">
-      <div>
-        <p class="industrial-kicker">Five variables</p>
-        <h2 id="factors-heading">What controls cut quality</h2>
+      <div class="plasma-guide-control-grid">
+        <label>
+          <span>Measurement system</span>
+          <select id="guide-unit-system">
+            <option value="metric" selected>Millimetres — mm / mm/min / bar</option>
+            <option value="imperial">Inches — in / IPM / PSI</option>
+          </select>
+        </label>
+
+        <label>
+          <span>Material</span>
+          <select id="guide-material-filter">
+            <option value="mild-steel">Mild steel</option>
+            <option value="stainless">Stainless steel</option>
+            <option value="aluminum">Aluminum</option>
+            <option value="all" selected>Show all materials</option>
+          </select>
+        </label>
+      </div>
+    </section>
+
+    <section
+      class="plasma-guide-table-section"
+      id="settings-table"
+      aria-labelledby="settings-heading"
+    >
+      <div class="plasma-guide-section-heading">
+        <div>
+          <p class="industrial-kicker">Amps, speed, pressure and standoff</p>
+          <h2 id="settings-heading">Plasma Cutter Starting Settings by Material Thickness</h2>
+        </div>
+
+        <span id="guide-unit-badge" class="plasma-guide-unit-badge">Metric · mm</span>
+      </div>
+
+      <p class="plasma-guide-table-introduction">
+        The chart compares general starting settings for common mild-steel, stainless-steel,
+        and aluminum thicknesses. Use the listed amperage, cutting speed, air pressure, and
+        torch standoff as a test starting point rather than a replacement for the official
+        cut chart supplied with your machine.
+      </p>
+
+      <div
+        id="plasma-settings-tables"
+        class="plasma-settings-tables"
+        aria-live="polite"
+      >
+        <article class="plasma-guide-material-card" data-material="mild-steel">
+          <header>
+            <div>
+              <p>Material reference</p>
+              <h3>Mild steel</h3>
+            </div>
+            <span>32 thicknesses</span>
+          </header>
+          <p class="plasma-guide-material-description">General air-plasma starting ranges for common mild-steel plate and sheet.</p>
+          <div class="plasma-guide-table-wrap">
+            <table class="plasma-guide-table">
+              <thead>
+                <tr>
+                  <th scope="col">Thickness</th>
+                  <th scope="col">Amperage</th>
+                  <th scope="col">Air pressure</th>
+                  <th scope="col">Cut speed</th>
+                  <th scope="col">Cut standoff</th>
+                </tr>
+              </thead>
+              <tbody>
+              <tr><td data-label="Thickness"><strong>1 mm</strong></td><td data-label="Amperage">20–30 A</td><td data-label="Air pressure">3.8–4.1 bar</td><td data-label="Cut speed">3,810–5,080 mm/min</td><td data-label="Cut standoff">1.6 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>1.5 mm</strong></td><td data-label="Amperage">20–30 A</td><td data-label="Air pressure">3.8–4.1 bar</td><td data-label="Cut speed">3,810–5,080 mm/min</td><td data-label="Cut standoff">1.6 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>2 mm</strong></td><td data-label="Amperage">30–40 A</td><td data-label="Air pressure">4–4.3 bar</td><td data-label="Cut speed">2,980–3,962 mm/min</td><td data-label="Cut standoff">1.7 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>2.5 mm</strong></td><td data-label="Amperage">30–40 A</td><td data-label="Air pressure">4.1–4.4 bar</td><td data-label="Cut speed">2,642–3,454 mm/min</td><td data-label="Cut standoff">2.2 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>3 mm</strong></td><td data-label="Amperage">40 A</td><td data-label="Air pressure">4.1–4.4 bar</td><td data-label="Cut speed">2,303–2,946 mm/min</td><td data-label="Cut standoff">2.8 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>4 mm</strong></td><td data-label="Amperage">40 A</td><td data-label="Air pressure">4.2–4.6 bar</td><td data-label="Cut speed">1,651–2,159 mm/min</td><td data-label="Cut standoff">3.2 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>5 mm</strong></td><td data-label="Amperage">40–50 A</td><td data-label="Air pressure">4.3–4.7 bar</td><td data-label="Cut speed">1,177–1,685 mm/min</td><td data-label="Cut standoff">3.2 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>6 mm</strong></td><td data-label="Amperage">60 A</td><td data-label="Air pressure">4.4–4.8 bar</td><td data-label="Cut speed">1,346–1,854 mm/min</td><td data-label="Cut standoff">3.2 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>7 mm</strong></td><td data-label="Amperage">60 A</td><td data-label="Air pressure">4.5–4.9 bar</td><td data-label="Cut speed">1,258–1,738 mm/min</td><td data-label="Cut standoff">3.2 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>8 mm</strong></td><td data-label="Amperage">60–80 A</td><td data-label="Air pressure">4.6–5 bar</td><td data-label="Cut speed">1,060–1,500 mm/min</td><td data-label="Cut standoff">3.2 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>9 mm</strong></td><td data-label="Amperage">60–80 A</td><td data-label="Air pressure">4.7–5.1 bar</td><td data-label="Cut speed">861–1,262 mm/min</td><td data-label="Cut standoff">3.2 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>10 mm</strong></td><td data-label="Amperage">60–80 A</td><td data-label="Air pressure">4.7–5.2 bar</td><td data-label="Cut speed">730–1,103 mm/min</td><td data-label="Cut standoff">3.2–3.4 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>11 mm</strong></td><td data-label="Amperage">80 A</td><td data-label="Air pressure">4.8–5.3 bar</td><td data-label="Cut speed">667–1,024 mm/min</td><td data-label="Cut standoff">3.2–3.9 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>12 mm</strong></td><td data-label="Amperage">80 A</td><td data-label="Air pressure">4.8–5.3 bar</td><td data-label="Cut speed">603–945 mm/min</td><td data-label="Cut standoff">3.2–4.4 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>13 mm</strong></td><td data-label="Amperage">80 A</td><td data-label="Air pressure">4.8–5.4 bar</td><td data-label="Cut speed">547–868 mm/min</td><td data-label="Cut standoff">3.3–4.8 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>14 mm</strong></td><td data-label="Amperage">80–100 A</td><td data-label="Air pressure">4.9–5.4 bar</td><td data-label="Cut speed">506–800 mm/min</td><td data-label="Cut standoff">3.5–4.8 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>15 mm</strong></td><td data-label="Amperage">80–100 A</td><td data-label="Air pressure">5–5.4 bar</td><td data-label="Cut speed">466–731 mm/min</td><td data-label="Cut standoff">3.8–4.8 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>16 mm</strong></td><td data-label="Amperage">80–100 A</td><td data-label="Air pressure">5–5.5 bar</td><td data-label="Cut speed">426–663 mm/min</td><td data-label="Cut standoff">4–4.8 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>17 mm</strong></td><td data-label="Amperage">80–100 A</td><td data-label="Air pressure">5.1–5.5 bar</td><td data-label="Cut speed">385–594 mm/min</td><td data-label="Cut standoff">4.3–4.8 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>18 mm</strong></td><td data-label="Amperage">80–100 A</td><td data-label="Air pressure">5.1–5.5 bar</td><td data-label="Cut speed">345–526 mm/min</td><td data-label="Cut standoff">4.5–4.8 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>19 mm</strong></td><td data-label="Amperage">80–100 A</td><td data-label="Air pressure">5.2–5.5 bar</td><td data-label="Cut speed">305–457 mm/min</td><td data-label="Cut standoff">4.8 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>20 mm</strong></td><td data-label="Amperage">100 A+</td><td data-label="Air pressure">5.2–5.6 bar</td><td data-label="Cut speed">289–433 mm/min</td><td data-label="Cut standoff">4.8 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>21 mm</strong></td><td data-label="Amperage">100 A+</td><td data-label="Air pressure">5.2–5.6 bar</td><td data-label="Cut speed">273–410 mm/min</td><td data-label="Cut standoff">4.8 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>22 mm</strong></td><td data-label="Amperage">100 A+</td><td data-label="Air pressure">5.3–5.7 bar</td><td data-label="Cut speed">257–386 mm/min</td><td data-label="Cut standoff">4.8 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>23 mm</strong></td><td data-label="Amperage">100 A+</td><td data-label="Air pressure">5.3–5.7 bar</td><td data-label="Cut speed">241–362 mm/min</td><td data-label="Cut standoff">4.8 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>24 mm</strong></td><td data-label="Amperage">100 A+</td><td data-label="Air pressure">5.3–5.8 bar</td><td data-label="Cut speed">225–338 mm/min</td><td data-label="Cut standoff">4.8 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>25 mm</strong></td><td data-label="Amperage">100 A+</td><td data-label="Air pressure">5.4–5.8 bar</td><td data-label="Cut speed">210–314 mm/min</td><td data-label="Cut standoff">4.8 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>26 mm</strong></td><td data-label="Amperage">100 A+</td><td data-label="Air pressure">5.4–5.9 bar</td><td data-label="Cut speed">197–295 mm/min</td><td data-label="Cut standoff">4.8–5 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>27 mm</strong></td><td data-label="Amperage">100 A+</td><td data-label="Air pressure">5.5–6 bar</td><td data-label="Cut speed">186–278 mm/min</td><td data-label="Cut standoff">4.8–5.3 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>28 mm</strong></td><td data-label="Amperage">100 A+</td><td data-label="Air pressure">5.5–6.1 bar</td><td data-label="Cut speed">174–262 mm/min</td><td data-label="Cut standoff">4.8–5.7 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>29 mm</strong></td><td data-label="Amperage">100 A+</td><td data-label="Air pressure">5.6–6.1 bar</td><td data-label="Cut speed">163–245 mm/min</td><td data-label="Cut standoff">4.8–6 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>30 mm</strong></td><td data-label="Amperage">100 A+</td><td data-label="Air pressure">5.7–6.2 bar</td><td data-label="Cut speed">152–229 mm/min</td><td data-label="Cut standoff">4.8–6.3 mm</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="plasma-guide-material-card" data-material="stainless">
+          <header>
+            <div>
+              <p>Material reference</p>
+              <h3>Stainless steel</h3>
+            </div>
+            <span>32 thicknesses</span>
+          </header>
+          <p class="plasma-guide-material-description">Conservative starting ranges for air-plasma cutting on stainless steel.</p>
+          <div class="plasma-guide-table-wrap">
+            <table class="plasma-guide-table">
+              <thead>
+                <tr>
+                  <th scope="col">Thickness</th>
+                  <th scope="col">Amperage</th>
+                  <th scope="col">Air pressure</th>
+                  <th scope="col">Cut speed</th>
+                  <th scope="col">Cut standoff</th>
+                </tr>
+              </thead>
+              <tbody>
+              <tr><td data-label="Thickness"><strong>1 mm</strong></td><td data-label="Amperage">20–30 A</td><td data-label="Air pressure">3.8–4.1 bar</td><td data-label="Cut speed">3,048–4,064 mm/min</td><td data-label="Cut standoff">1.6 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>1.5 mm</strong></td><td data-label="Amperage">20–30 A</td><td data-label="Air pressure">3.8–4.1 bar</td><td data-label="Cut speed">3,048–4,064 mm/min</td><td data-label="Cut standoff">1.6 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>2 mm</strong></td><td data-label="Amperage">40 A</td><td data-label="Air pressure">3.9–4.2 bar</td><td data-label="Cut speed">2,647–3,529 mm/min</td><td data-label="Cut standoff">2 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>2.5 mm</strong></td><td data-label="Amperage">40 A</td><td data-label="Air pressure">4–4.3 bar</td><td data-label="Cut speed">2,246–2,995 mm/min</td><td data-label="Cut standoff">2.4 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>3 mm</strong></td><td data-label="Amperage">40 A</td><td data-label="Air pressure">4.1–4.4 bar</td><td data-label="Cut speed">1,845–2,460 mm/min</td><td data-label="Cut standoff">2.8 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>4 mm</strong></td><td data-label="Amperage">60 A</td><td data-label="Air pressure">4.2–4.6 bar</td><td data-label="Cut speed">1,419–1,901 mm/min</td><td data-label="Cut standoff">3.2 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>5 mm</strong></td><td data-label="Amperage">60 A</td><td data-label="Air pressure">4.3–4.7 bar</td><td data-label="Cut speed">1,244–1,682 mm/min</td><td data-label="Cut standoff">3.2 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>6 mm</strong></td><td data-label="Amperage">60 A</td><td data-label="Air pressure">4.4–4.8 bar</td><td data-label="Cut speed">1,069–1,463 mm/min</td><td data-label="Cut standoff">3.2 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>7 mm</strong></td><td data-label="Amperage">60 A</td><td data-label="Air pressure">4.6–4.9 bar</td><td data-label="Cut speed">933–1,286 mm/min</td><td data-label="Cut standoff">3.2 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>8 mm</strong></td><td data-label="Amperage">80 A</td><td data-label="Air pressure">4.7–5 bar</td><td data-label="Cut speed">814–1,127 mm/min</td><td data-label="Cut standoff">3.2 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>9 mm</strong></td><td data-label="Amperage">80 A</td><td data-label="Air pressure">4.8–5.1 bar</td><td data-label="Cut speed">695–968 mm/min</td><td data-label="Cut standoff">3.2 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>10 mm</strong></td><td data-label="Amperage">80 A</td><td data-label="Air pressure">4.8–5.2 bar</td><td data-label="Cut speed">591–829 mm/min</td><td data-label="Cut standoff">3.4 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>11 mm</strong></td><td data-label="Amperage">80 A</td><td data-label="Air pressure">4.9–5.3 bar</td><td data-label="Cut speed">504–710 mm/min</td><td data-label="Cut standoff">3.9 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>12 mm</strong></td><td data-label="Amperage">80 A</td><td data-label="Air pressure">4.9–5.3 bar</td><td data-label="Cut speed">417–591 mm/min</td><td data-label="Cut standoff">4.4 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>13 mm</strong></td><td data-label="Amperage">80 A</td><td data-label="Air pressure">5–5.4 bar</td><td data-label="Cut speed">348–500 mm/min</td><td data-label="Cut standoff">4.8 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>14 mm</strong></td><td data-label="Amperage">100 A</td><td data-label="Air pressure">5–5.4 bar</td><td data-label="Cut speed">324–471 mm/min</td><td data-label="Cut standoff">4.8 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>15 mm</strong></td><td data-label="Amperage">100 A</td><td data-label="Air pressure">5–5.5 bar</td><td data-label="Cut speed">300–443 mm/min</td><td data-label="Cut standoff">4.8 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>16 mm</strong></td><td data-label="Amperage">100 A</td><td data-label="Air pressure">5.1–5.5 bar</td><td data-label="Cut speed">276–415 mm/min</td><td data-label="Cut standoff">4.8 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>17 mm</strong></td><td data-label="Amperage">100 A</td><td data-label="Air pressure">5.1–5.6 bar</td><td data-label="Cut speed">252–387 mm/min</td><td data-label="Cut standoff">4.8 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>18 mm</strong></td><td data-label="Amperage">100 A</td><td data-label="Air pressure">5.1–5.6 bar</td><td data-label="Cut speed">227–358 mm/min</td><td data-label="Cut standoff">4.8 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>19 mm</strong></td><td data-label="Amperage">100 A</td><td data-label="Air pressure">5.2–5.7 bar</td><td data-label="Cut speed">203–330 mm/min</td><td data-label="Cut standoff">4.8 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>20 mm</strong></td><td data-label="Amperage">100 A+</td><td data-label="Air pressure">5.2–5.7 bar</td><td data-label="Cut speed">191–310 mm/min</td><td data-label="Cut standoff">4.8–5 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>21 mm</strong></td><td data-label="Amperage">100 A+</td><td data-label="Air pressure">5.3–5.8 bar</td><td data-label="Cut speed">179–291 mm/min</td><td data-label="Cut standoff">4.8–5.3 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>22 mm</strong></td><td data-label="Amperage">100 A+</td><td data-label="Air pressure">5.3–5.8 bar</td><td data-label="Cut speed">167–271 mm/min</td><td data-label="Cut standoff">4.8–5.5 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>23 mm</strong></td><td data-label="Amperage">100 A+</td><td data-label="Air pressure">5.4–5.9 bar</td><td data-label="Cut speed">156–251 mm/min</td><td data-label="Cut standoff">4.8–5.8 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>24 mm</strong></td><td data-label="Amperage">100 A+</td><td data-label="Air pressure">5.4–6 bar</td><td data-label="Cut speed">144–231 mm/min</td><td data-label="Cut standoff">4.8–6 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>25 mm</strong></td><td data-label="Amperage">100 A+</td><td data-label="Air pressure">5.5–6 bar</td><td data-label="Cut speed">132–211 mm/min</td><td data-label="Cut standoff">4.8–6.3 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>26 mm</strong></td><td data-label="Amperage">100 A+</td><td data-label="Air pressure">5.6–6.1 bar</td><td data-label="Cut speed">124–197 mm/min</td><td data-label="Cut standoff">5–6.3 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>27 mm</strong></td><td data-label="Amperage">100 A+</td><td data-label="Air pressure">5.6–6.2 bar</td><td data-label="Cut speed">118–186 mm/min</td><td data-label="Cut standoff">5.3–6.3 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>28 mm</strong></td><td data-label="Amperage">100 A+</td><td data-label="Air pressure">5.7–6.2 bar</td><td data-label="Cut speed">113–174 mm/min</td><td data-label="Cut standoff">5.7–6.3 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>29 mm</strong></td><td data-label="Amperage">100 A+</td><td data-label="Air pressure">5.7–6.3 bar</td><td data-label="Cut speed">107–163 mm/min</td><td data-label="Cut standoff">6–6.3 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>30 mm</strong></td><td data-label="Amperage">100 A+</td><td data-label="Air pressure">5.8–6.3 bar</td><td data-label="Cut speed">102–152 mm/min</td><td data-label="Cut standoff">6.3 mm</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="plasma-guide-material-card" data-material="aluminum">
+          <header>
+            <div>
+              <p>Material reference</p>
+              <h3>Aluminum</h3>
+            </div>
+            <span>32 thicknesses</span>
+          </header>
+          <p class="plasma-guide-material-description">Starting ranges for air-plasma cutting on common aluminum plate thicknesses.</p>
+          <div class="plasma-guide-table-wrap">
+            <table class="plasma-guide-table">
+              <thead>
+                <tr>
+                  <th scope="col">Thickness</th>
+                  <th scope="col">Amperage</th>
+                  <th scope="col">Air pressure</th>
+                  <th scope="col">Cut speed</th>
+                  <th scope="col">Cut standoff</th>
+                </tr>
+              </thead>
+              <tbody>
+              <tr><td data-label="Thickness"><strong>1 mm</strong></td><td data-label="Amperage">40 A</td><td data-label="Air pressure">4–4.4 bar</td><td data-label="Cut speed">4,572–6,096 mm/min</td><td data-label="Cut standoff">1.6 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>1.5 mm</strong></td><td data-label="Amperage">40 A</td><td data-label="Air pressure">4.1–4.5 bar</td><td data-label="Cut speed">4,399–5,865 mm/min</td><td data-label="Cut standoff">1.6–1.9 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>2 mm</strong></td><td data-label="Amperage">40 A</td><td data-label="Air pressure">4.1–4.5 bar</td><td data-label="Cut speed">4,226–5,634 mm/min</td><td data-label="Cut standoff">1.6–2.3 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>2.5 mm</strong></td><td data-label="Amperage">40 A</td><td data-label="Air pressure">4.2–4.6 bar</td><td data-label="Cut speed">4,052–5,403 mm/min</td><td data-label="Cut standoff">1.6–2.7 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>3 mm</strong></td><td data-label="Amperage">40 A</td><td data-label="Air pressure">4.2–4.7 bar</td><td data-label="Cut speed">3,879–5,172 mm/min</td><td data-label="Cut standoff">1.6–3 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>4 mm</strong></td><td data-label="Amperage">40–50 A</td><td data-label="Air pressure">4.4–4.8 bar</td><td data-label="Cut speed">3,175–4,318 mm/min</td><td data-label="Cut standoff">2.4–3.2 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>5 mm</strong></td><td data-label="Amperage">40–50 A</td><td data-label="Air pressure">4.5–4.8 bar</td><td data-label="Cut speed">2,472–3,421 mm/min</td><td data-label="Cut standoff">3.2 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>6 mm</strong></td><td data-label="Amperage">60 A</td><td data-label="Air pressure">4.6–4.9 bar</td><td data-label="Cut speed">2,134–2,743 mm/min</td><td data-label="Cut standoff">3.2 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>7 mm</strong></td><td data-label="Amperage">60 A</td><td data-label="Air pressure">4.7–5 bar</td><td data-label="Cut speed">1,810–2,318 mm/min</td><td data-label="Cut standoff">3.2 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>8 mm</strong></td><td data-label="Amperage">80 A</td><td data-label="Air pressure">4.8–5.1 bar</td><td data-label="Cut speed">1,492–2,000 mm/min</td><td data-label="Cut standoff">3.2 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>9 mm</strong></td><td data-label="Amperage">80 A</td><td data-label="Air pressure">4.8–5.2 bar</td><td data-label="Cut speed">1,175–1,683 mm/min</td><td data-label="Cut standoff">3.2 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>10 mm</strong></td><td data-label="Amperage">80 A</td><td data-label="Air pressure">4.8–5.3 bar</td><td data-label="Cut speed">937–1,405 mm/min</td><td data-label="Cut standoff">3.4 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>11 mm</strong></td><td data-label="Amperage">80 A</td><td data-label="Air pressure">4.9–5.3 bar</td><td data-label="Cut speed">778–1,167 mm/min</td><td data-label="Cut standoff">3.9 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>12 mm</strong></td><td data-label="Amperage">80 A</td><td data-label="Air pressure">4.9–5.3 bar</td><td data-label="Cut speed">619–929 mm/min</td><td data-label="Cut standoff">4.4 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>13 mm</strong></td><td data-label="Amperage">80 A</td><td data-label="Air pressure">5–5.4 bar</td><td data-label="Cut speed">496–745 mm/min</td><td data-label="Cut standoff">4.8 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>14 mm</strong></td><td data-label="Amperage">100 A</td><td data-label="Air pressure">5–5.4 bar</td><td data-label="Cut speed">456–689 mm/min</td><td data-label="Cut standoff">4.8 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>15 mm</strong></td><td data-label="Amperage">100 A</td><td data-label="Air pressure">5–5.5 bar</td><td data-label="Cut speed">415–632 mm/min</td><td data-label="Cut standoff">4.8 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>16 mm</strong></td><td data-label="Amperage">100 A</td><td data-label="Air pressure">5.1–5.5 bar</td><td data-label="Cut speed">375–576 mm/min</td><td data-label="Cut standoff">4.8 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>17 mm</strong></td><td data-label="Amperage">100 A</td><td data-label="Air pressure">5.1–5.6 bar</td><td data-label="Cut speed">335–519 mm/min</td><td data-label="Cut standoff">4.8 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>18 mm</strong></td><td data-label="Amperage">100 A</td><td data-label="Air pressure">5.1–5.6 bar</td><td data-label="Cut speed">294–463 mm/min</td><td data-label="Cut standoff">4.8 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>19 mm</strong></td><td data-label="Amperage">100 A</td><td data-label="Air pressure">5.2–5.7 bar</td><td data-label="Cut speed">254–406 mm/min</td><td data-label="Cut standoff">4.8 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>20 mm</strong></td><td data-label="Amperage">100 A+</td><td data-label="Air pressure">5.2–5.7 bar</td><td data-label="Cut speed">238–383 mm/min</td><td data-label="Cut standoff">4.8–5 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>21 mm</strong></td><td data-label="Amperage">100 A+</td><td data-label="Air pressure">5.3–5.8 bar</td><td data-label="Cut speed">222–359 mm/min</td><td data-label="Cut standoff">4.8–5.3 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>22 mm</strong></td><td data-label="Amperage">100 A+</td><td data-label="Air pressure">5.3–5.8 bar</td><td data-label="Cut speed">206–335 mm/min</td><td data-label="Cut standoff">4.8–5.5 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>23 mm</strong></td><td data-label="Amperage">100 A+</td><td data-label="Air pressure">5.4–5.9 bar</td><td data-label="Cut speed">190–311 mm/min</td><td data-label="Cut standoff">4.8–5.8 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>24 mm</strong></td><td data-label="Amperage">100 A+</td><td data-label="Air pressure">5.4–6 bar</td><td data-label="Cut speed">175–287 mm/min</td><td data-label="Cut standoff">4.8–6 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>25 mm</strong></td><td data-label="Amperage">100 A+</td><td data-label="Air pressure">5.5–6 bar</td><td data-label="Cut speed">159–264 mm/min</td><td data-label="Cut standoff">4.8–6.3 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>26 mm</strong></td><td data-label="Amperage">100 A+</td><td data-label="Air pressure">5.6–6.1 bar</td><td data-label="Cut speed">146–244 mm/min</td><td data-label="Cut standoff">5–6.3 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>27 mm</strong></td><td data-label="Amperage">100 A+</td><td data-label="Air pressure">5.6–6.2 bar</td><td data-label="Cut speed">135–227 mm/min</td><td data-label="Cut standoff">5.3–6.3 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>28 mm</strong></td><td data-label="Amperage">100 A+</td><td data-label="Air pressure">5.7–6.2 bar</td><td data-label="Cut speed">124–211 mm/min</td><td data-label="Cut standoff">5.7–6.3 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>29 mm</strong></td><td data-label="Amperage">100 A+</td><td data-label="Air pressure">5.7–6.3 bar</td><td data-label="Cut speed">113–194 mm/min</td><td data-label="Cut standoff">6–6.3 mm</td></tr>
+              <tr><td data-label="Thickness"><strong>30 mm</strong></td><td data-label="Amperage">100 A+</td><td data-label="Air pressure">5.8–6.3 bar</td><td data-label="Cut speed">102–178 mm/min</td><td data-label="Cut standoff">6.3 mm</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="plasma-guide-factors" aria-labelledby="factors-heading">
+      <div class="plasma-guide-section-heading">
+        <div>
+          <p class="industrial-kicker">Five important variables</p>
+          <h2 id="factors-heading">What Controls CNC Plasma Cut Quality</h2>
+        </div>
+      </div>
+
+      <div class="plasma-guide-factor-grid">
+        <article>
+          <span>01</span>
+          <h3>Plasma cutter amperage</h3>
+          <p>
+            Match amperage to the installed consumables and material thickness. Too little
+            power usually requires an excessively slow cut, while using amperage outside the
+            consumable rating can damage the nozzle or electrode.
+          </p>
+        </article>
+
+        <article>
+          <span>02</span>
+          <h3>Plasma cutting speed</h3>
+          <p>
+            Cutting speed strongly affects dross, penetration, and bevel. Adjust speed in
+            small steps only after confirming the torch, airflow, height, and consumables
+            are correct.
+          </p>
+        </article>
+
+        <article>
+          <span>03</span>
+          <h3>Air pressure and airflow</h3>
+          <p>
+            Pressure must remain stable while cutting. Clean, dry air and adequate sustained
+            airflow matter more than the compressor tank pressure alone.
+          </p>
+        </article>
+
+        <article>
+          <span>04</span>
+          <h3>Torch standoff and cut height</h3>
+          <p>
+            Hold the torch at the correct cutting height and use a higher pierce height when
+            required. Incorrect standoff can increase bevel, damage consumables, and
+            destabilize the arc.
+          </p>
+        </article>
+
+        <article>
+          <span>05</span>
+          <h3>Plasma cutter consumables</h3>
+          <p>
+            A damaged nozzle, worn swirl ring, or deeply pitted electrode can ruin a cut even
+            when the numerical settings appear correct.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="plasma-guide-diagnostics" aria-labelledby="dross-heading">
+      <div class="plasma-guide-section-heading">
+        <div>
+          <p class="industrial-kicker">Shop-floor diagnosis</p>
+          <h2 id="dross-heading">Read the Plasma Cut Before Changing Settings</h2>
+        </div>
+      </div>
+
+      <div class="plasma-guide-diagnostic-grid">
+        <article>
+          <strong>Heavy removable bottom dross</strong>
+          <p>
+            This commonly indicates a cut that is too slow. Increase cutting speed gradually
+            and retest before changing several other settings.
+          </p>
+        </article>
+
+        <article>
+          <strong>Top spatter or incomplete penetration</strong>
+          <p>
+            This can indicate excessive cutting speed, insufficient amperage, incorrect
+            consumables, unstable air pressure, or insufficient airflow.
+          </p>
+        </article>
+
+        <article>
+          <strong>Excessive plasma-cut bevel</strong>
+          <p>
+            Check torch squareness, torch standoff, consumable condition, cut direction,
+            machine motion, and arc stability before changing amperage.
+          </p>
+        </article>
+
+        <article>
+          <strong>Rough or wandering cut face</strong>
+          <p>
+            Inspect the nozzle and electrode, then verify clean dry air, stable flowing
+            pressure, correct torch height, and smooth machine movement.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="plasma-guide-air" aria-labelledby="air-heading">
+      <div class="plasma-guide-section-heading">
+        <div>
+          <p class="industrial-kicker">Plasma cutter air-system reference</p>
+          <h2 id="air-heading">Typical Plasma Cutter Air Demand by Amperage</h2>
+        </div>
+      </div>
+
+      <p class="plasma-guide-table-introduction">
+        A plasma cutter requires both adequate pressure and sustained airflow. Compressor
+        tank pressure alone does not prove that the machine is receiving enough air while
+        the torch is operating.
+      </p>
+
+      <div class="plasma-guide-table-wrap">
+        <table class="plasma-guide-table plasma-guide-air-table">
+          <thead>
+            <tr>
+              <th scope="col">Amperage range</th>
+              <th id="air-pressure-heading" scope="col">Pressure (bar)</th>
+              <th id="air-flow-heading" scope="col">Flow (L/min)</th>
+              <th scope="col">Shop starting point</th>
+            </tr>
+          </thead>
+
+          <tbody id="plasma-air-table-body">
+              <tr><td><strong>20–30 A</strong></td><td>3.8–4.5</td><td>99–127</td><td>2–3 hp class</td></tr>
+              <tr><td><strong>30–50 A</strong></td><td>4.1–4.8</td><td>127–170</td><td>3–5 hp class</td></tr>
+              <tr><td><strong>50–70 A</strong></td><td>4.5–5.2</td><td>170–212</td><td>5 hp class</td></tr>
+              <tr><td><strong>70–100 A</strong></td><td>4.8–5.9</td><td>212–283</td><td>5–7.5 hp class</td></tr>
+              <tr><td><strong>100 A+</strong></td><td>5.5–6.6</td><td>283–425</td><td>7.5–10 hp class</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="plasma-guide-table-note">
+        Measure pressure at the plasma cutter while air is flowing. Always verify the
+        required pressure and airflow in the manufacturer documentation for your exact
+        plasma cutter, torch, and consumables.
+      </p>
+
+      <p class="plasma-guide-table-note">
+        Need help checking compressor capacity?
+        <a href="/air-compressor-sizing-plasma-cutters.html">
+          Use the Plasma Cutter Air Compressor Sizing Guide
+        </a>.
+      </p>
+    </section>
+
+    <section class="plasma-guide-faq" aria-labelledby="plasma-settings-faq-heading">
+      <div class="plasma-guide-section-heading">
+        <div>
+          <p class="industrial-kicker">Frequently asked questions</p>
+          <h2 id="plasma-settings-faq-heading">Plasma Cutter Settings Questions</h2>
+        </div>
+      </div>
+
+      <div class="plasma-guide-diagnostic-grid">
+        <article>
+          <h3>What plasma cutter settings should I use?</h3>
+          <p>
+            Start with settings matched to the material, thickness, installed consumables,
+            and available amperage. Confirm the ranges in the plasma cutter manual and make
+            one controlled adjustment at a time.
+          </p>
+        </article>
+
+        <article>
+          <h3>How much air pressure does a plasma cutter need?</h3>
+          <p>
+            Required air pressure and airflow depend on the machine and amperage. Measure
+            pressure while air is flowing and verify both pressure and sustained flow
+            against the manufacturer documentation.
+          </p>
+        </article>
+
+        <article>
+          <h3>How does cutting speed affect plasma cut quality?</h3>
+          <p>
+            Cutting too slowly commonly produces heavy removable bottom dross. Cutting too
+            quickly can cause incomplete penetration, top spatter, excessive lag lines, or
+            a trailing arc.
+          </p>
+        </article>
+
+        <article>
+          <h3>Should amperage match the plasma cutter consumables?</h3>
+          <p>
+            Yes. The selected amperage must remain within the rating of the installed
+            electrode and nozzle. Incorrect or mismatched consumables can reduce cut quality
+            and consumable life.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="plasma-guide-disclaimer" aria-label="Additional plasma cutting resources">
+      <strong>Continue improving your machine-specific settings.</strong>
+
+      <p>
+        Use the
+        <a href="/cut-quality-troubleshooter.html">Plasma Cut Quality Troubleshooter</a>
+        to diagnose dross, bevel, rough edges, arc-transfer problems, and consumable damage.
+      </p>
+
+      <p>
+        Learn how to validate and document repeatable values in the
+        <a href="/blog/how-to-build-a-machine-specific-cut-chart/">
+          Machine-Specific Plasma Cut Chart Guide
+        </a>.
+      </p>
+    </section>
+  </main>
+
+  <aside
+    class="kofi-membership-widget is-expanded"
+    data-membership-widget
+    aria-label="Plasma Cut Forge membership"
+  >
+    <button
+      class="kofi-membership-tab"
+      type="button"
+      data-membership-toggle
+      aria-expanded="true"
+      aria-label="Open Plasma Cut Forge membership options"
+    >
+      <span>Join the Forge</span>
+    </button>
+
+    <div class="kofi-membership-panel" data-membership-panel>
+      <div class="kofi-membership-widget-copy">
+        <span class="kofi-membership-eyebrow">Ko-fi Membership</span>
+        <strong>Join the Forge</strong>
+        <small>Forge Supporter · $5/month</small>
+        <p>
+          Support new tools, machine profiles, technical articles, and
+          project-build updates.
+        </p>
+      </div>
+
+      <div class="kofi-membership-widget-actions">
+        <a
+          class="kofi-membership-primary"
+          href="https://ko-fi.com/plasmacutforge/tiers"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Become a Member
+        </a>
+
+        <a
+          class="kofi-membership-secondary"
+          href="https://ko-fi.com/plasmacutforge"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          One-time support
+        </a>
       </div>
     </div>
-    <div class="plasma-guide-factor-grid">
-      <article><span>01</span><h3>Amperage</h3><p>Match amperage to the installed consumables and material thickness. Too little power usually forces an excessively slow cut.</p></article>
-      <article><span>02</span><h3>Cutting speed</h3><p>Speed strongly affects dross and bevel. Tune it in small steps after confirming the torch, air, and consumables are correct.</p></article>
-      <article><span>03</span><h3>Air supply</h3><p>Pressure must remain stable while cutting. Clean, dry air and adequate sustained flow matter more than tank pressure alone.</p></article>
-      <article><span>04</span><h3>Standoff</h3><p>Hold the torch at the correct cut height and use a higher pierce height when required to reduce blowback damage.</p></article>
-      <article><span>05</span><h3>Consumables</h3><p>A damaged nozzle or deeply pitted electrode can ruin a cut even when every numerical setting is correct.</p></article>
-    </div>
-  </section>
+  </aside>
 
-  <section class="plasma-guide-diagnostics" aria-labelledby="dross-heading">
-    <div class="plasma-guide-section-heading">
-      <div>
-        <p class="industrial-kicker">Shop-floor diagnosis</p>
-        <h2 id="dross-heading">Read the cut before changing settings</h2>
-      </div>
+  <footer class="site-footer">
+    <div class="site-footer-primary">
+      <p>© 2026 Plasma Cut Forge.</p>
+      <p class="site-footer-warning">
+        Guide values are starting references—not guaranteed machine settings.
+      </p>
     </div>
-    <div class="plasma-guide-diagnostic-grid">
-      <article><strong>Heavy removable bottom dross</strong><p>Usually points to a cut that is too slow. Increase speed gradually and retest.</p></article>
-      <article><strong>Top spatter or incomplete penetration</strong><p>Often means the torch is moving too fast, the amperage is too low, or the air supply is unstable.</p></article>
-      <article><strong>Excessive bevel</strong><p>Check torch squareness, standoff, consumable condition, cut direction, and machine motion before changing amperage.</p></article>
-      <article><strong>Rough or wandering cut face</strong><p>Inspect the nozzle and electrode, then verify dry air, stable pressure, correct height, and smooth motion.</p></article>
-    </div>
-  </section>
 
-  <section class="plasma-guide-air" aria-labelledby="air-heading">
-    <div class="plasma-guide-section-heading">
-      <div>
-        <p class="industrial-kicker">Air-system reference</p>
-        <h2 id="air-heading">Typical air demand by amperage</h2>
-      </div>
-    </div>
-    <div class="plasma-guide-table-wrap">
-      <table class="plasma-guide-table plasma-guide-air-table">
-        <thead><tr><th>Amperage range</th><th id="air-pressure-heading">Pressure</th><th id="air-flow-heading">Flow</th><th>Shop starting point</th></tr></thead>
-        <tbody id="plasma-air-table-body"></tbody>
-      </table>
-    </div>
-    <p class="plasma-guide-table-note">Use the pressure shown at the plasma cutter while air is flowing. Always verify the required flow and pressure in the manufacturer documentation for your exact machine.</p>
-  </section>
-</main>
-
-<aside class="kofi-membership-widget is-expanded" data-membership-widget aria-label="Plasma Cut Forge membership">
-  <button class="kofi-membership-tab" type="button" data-membership-toggle aria-expanded="true"><span>Join the Forge</span></button>
-  <div class="kofi-membership-panel" data-membership-panel>
-    <div class="kofi-membership-widget-copy">
-      <span class="kofi-membership-eyebrow">Ko-fi Membership</span>
-      <strong>Join the Forge</strong>
-      <small>Forge Supporter · $5/month</small>
-      <p>Support new tools, machine profiles, technical articles, and project-build updates.</p>
-    </div>
-    <div class="kofi-membership-widget-actions">
-      <a class="kofi-membership-primary" href="https://ko-fi.com/plasmacutforge/tiers" target="_blank" rel="noopener noreferrer">Become a Member</a>
-      <a class="kofi-membership-secondary" href="https://ko-fi.com/plasmacutforge" target="_blank" rel="noopener noreferrer">One-time support</a>
-    </div>
-  </div>
-</aside>
-
-<footer class="site-footer">
-  <div class="site-footer-primary">
-    <p>© 2026 Plasma Cut Forge.</p>
-    <p class="site-footer-warning">Guide values are starting references—not guaranteed machine settings.</p>
-  </div>
-</footer>
+    <nav class="site-footer-links" aria-label="Legal and contact links">
+      <a href="/email-updates.html">Email Updates</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy-policy.html">Privacy Policy</a>
+      <a href="/website-disclaimer.html">Website Disclaimer</a>
+      <a href="/terms-of-use.html">Terms of Use</a>
+      <a href="/affiliate-disclosure.html">Affiliate Disclosure</a>
+    </nav>
+  </footer>
 </body>
 </html>
