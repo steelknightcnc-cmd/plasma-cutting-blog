@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Main website -->
 
   <url>
     <loc>https://plasmacutforge.com/</loc>
@@ -7,6 +10,22 @@
 
   <url>
     <loc>https://plasmacutforge.com/calculators.html</loc>
+  </url>
+
+  <url>
+    <loc>https://plasmacutforge.com/guides/</loc>
+  </url>
+
+  <url>
+    <loc>https://plasmacutforge.com/blog/</loc>
+  </url>
+
+
+  <!-- Primary plasma tools -->
+
+  <url>
+    <loc>https://plasmacutforge.com/plasma-cutting-settings-guide.html</loc>
+    <lastmod>2026-08-03</lastmod>
   </url>
 
   <url>
@@ -21,33 +40,37 @@
     <loc>https://plasmacutforge.com/air-compressor-sizing-plasma-cutters.html</loc>
   </url>
 
-  <url>
-    <loc>https://plasmacutforge.com/plasma-cutting-settings-guide.html</loc>
-  </url>
+
+  <!-- Other public calculators -->
 
   <url>
     <loc>https://plasmacutforge.com/cutting-speed-feed-rate-calculator.html</loc>
   </url>
 
   <url>
-    <loc>https://plasmacutforge.com/guides/</loc>
+    <loc>https://plasmacutforge.com/product-selling-price-calculator.html</loc>
+  </url>
+
+
+  <!-- Technical articles -->
+
+  <url>
+    <loc>https://plasmacutforge.com/blog/how-to-choose-plasma-settings/</loc>
+    <lastmod>2026-07-23</lastmod>
   </url>
 
   <url>
-    <loc>https://plasmacutforge.com/blog/</loc>
+    <loc>https://plasmacutforge.com/blog/why-clean-dry-air-changes-consumable-life/</loc>
+    <lastmod>2026-07-24</lastmod>
   </url>
 
   <url>
-    <loc>https://plasmacutforge.com/how-to-choose-plasma-settings.html</loc>
+    <loc>https://plasmacutforge.com/blog/how-to-build-a-machine-specific-cut-chart/</loc>
+    <lastmod>2026-07-24</lastmod>
   </url>
 
-  <url>
-    <loc>https://plasmacutforge.com/community/</loc>
-  </url>
 
-  <url>
-    <loc>https://plasmacutforge.com/community-guidelines.html</loc>
-  </url>
+  <!-- Machine information and community -->
 
   <url>
     <loc>https://plasmacutforge.com/machine-profiles.html</loc>
@@ -62,12 +85,15 @@
   </url>
 
   <url>
-    <loc>https://plasmacutforge.com/members.html</loc>
+    <loc>https://plasmacutforge.com/community/</loc>
   </url>
 
   <url>
-    <loc>https://plasmacutforge.com/email-updates.html</loc>
+    <loc>https://plasmacutforge.com/community-guidelines.html</loc>
   </url>
+
+
+  <!-- Website and contact information -->
 
   <url>
     <loc>https://plasmacutforge.com/about-the-builder.html</loc>
@@ -75,6 +101,30 @@
 
   <url>
     <loc>https://plasmacutforge.com/contact.html</loc>
+  </url>
+
+  <url>
+    <loc>https://plasmacutforge.com/email-updates.html</loc>
+  </url>
+
+
+  <!-- Legal and transparency pages -->
+
+  <url>
+    <loc>https://plasmacutforge.com/privacy-policy.html</loc>
+    <lastmod>2026-07-28</lastmod>
+  </url>
+
+  <url>
+    <loc>https://plasmacutforge.com/website-disclaimer.html</loc>
+  </url>
+
+  <url>
+    <loc>https://plasmacutforge.com/terms-of-use.html</loc>
+  </url>
+
+  <url>
+    <loc>https://plasmacutforge.com/affiliate-disclosure.html</loc>
   </url>
 
 </urlset>
