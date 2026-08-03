@@ -2,480 +2,726 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="CNC plasma cutting calculator, cut charts, troubleshooting guides, and practical shop-floor resources.">
-  <title>Plasma Cut Forge | CNC Plasma Tools & Guides</title>
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <meta
+    name="description"
+    content="Free CNC plasma cutting calculators, settings charts, cut-quality troubleshooting, machine testing guides, and practical shop-floor resources."
+  >
+
+  <meta
+    name="robots"
+    content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+  >
+
+  <title>CNC Plasma Cutting Calculators, Charts &amp; Guides | Plasma Cut Forge</title>
+
+  <link
+    rel="canonical"
+    href="https://plasmacutforge.com/"
+  >
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Plasma Cut Forge">
+
+  <meta
+    property="og:title"
+    content="CNC Plasma Cutting Calculators, Charts &amp; Guides"
+  >
+
+  <meta
+    property="og:description"
+    content="Free CNC plasma calculators, settings charts, troubleshooting tools, and practical technical guides."
+  >
+
+  <meta
+    property="og:url"
+    content="https://plasmacutforge.com/"
+  >
+
+  <meta
+    property="og:image"
+    content="https://plasmacutforge.com/plasma-torch-hero.png"
+  >
+
+  <meta
+    property="og:image:alt"
+    content="CNC plasma torch cutting metal with a bright plasma arc"
+  >
+
+  <meta name="twitter:card" content="summary_large_image">
+
+  <meta
+    name="twitter:title"
+    content="CNC Plasma Cutting Calculators, Charts &amp; Guides"
+  >
+
+  <meta
+    name="twitter:description"
+    content="Free CNC plasma calculators, settings charts, troubleshooting tools, and technical guides."
+  >
+
+  <meta
+    name="twitter:image"
+    content="https://plasmacutforge.com/plasma-torch-hero.png"
+  >
+
   <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="32x32"
+    href="/favicon-32x32.png"
+  >
+
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="16x16"
+    href="/favicon-16x16.png"
+  >
+
+  <link
+    rel="apple-touch-icon"
+    sizes="180x180"
+    href="/apple-touch-icon.png"
+  >
+
   <link rel="manifest" href="/site.webmanifest">
+
   <meta name="theme-color" content="#070b14">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=41.0">
-  <script src="cut-chart-data.js?v=4.1" defer></script>
-  <script src="supabase-config.js?v=5.0" defer></script>
-  <script src="app.js?v=5.3" defer></script>
-  <script src="/membership-widget.js?v=1.1" defer></script>
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="/styles.css?v=48.0">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://plasmacutforge.com/#website",
+    "url": "https://plasmacutforge.com/",
+    "name": "Plasma Cut Forge",
+    "alternateName": "PlasmaCutForge",
+    "description": "Free CNC plasma cutting calculators, settings charts, troubleshooting tools, testing guides, and practical shop-floor resources.",
+    "inLanguage": "en",
+    "publisher": {
+      "@id": "https://plasmacutforge.com/#organization"
+    },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://plasmacutforge.com/search.html?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://plasmacutforge.com/#organization",
+    "name": "Plasma Cut Forge",
+    "url": "https://plasmacutforge.com/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://plasmacutforge.com/apple-touch-icon.png"
+    },
+    "description": "Independent CNC plasma cutting calculators, technical guides, machine testing methods, and troubleshooting resources."
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://plasmacutforge.com/#webpage",
+    "url": "https://plasmacutforge.com/",
+    "name": "CNC Plasma Cutting Calculators, Charts and Guides",
+    "description": "Free CNC plasma cutting calculators, settings charts, cut-quality troubleshooting, machine testing guides, and practical shop-floor resources.",
+    "dateModified": "2026-08-03",
+    "inLanguage": "en",
+    "isPartOf": {
+      "@id": "https://plasmacutforge.com/#website"
+    },
+    "about": [
+      {
+        "@type": "Thing",
+        "name": "CNC plasma cutting"
+      },
+      {
+        "@type": "Thing",
+        "name": "Plasma cutter settings"
+      },
+      {
+        "@type": "Thing",
+        "name": "Plasma cut quality"
+      },
+      {
+        "@type": "Thing",
+        "name": "Plasma cutting calculators"
+      }
+    ]
+  }
+  </script>
+
+  <script
+    src="/membership-widget.js?v=1.1"
+    defer
+  ></script>
 </head>
+
 <body>
   <header class="site-header industrial-header">
-    <a class="brand industrial-brand" href="#top" aria-label="Plasma Cut Forge home">
-      <span class="brand-wordmark">PLASMA<span>CUT</span>FORGE</span>
-      <small>CNC plasma tools &amp; shop-floor guides</small>
+    <a
+      class="brand industrial-brand"
+      href="/#top"
+      aria-label="Plasma Cut Forge home"
+    >
+      <span class="brand-wordmark">
+        PLASMA<span>CUT</span>FORGE
+      </span>
+
+      <small>
+        CNC plasma tools &amp; shop-floor guides
+      </small>
     </a>
 
     <nav class="industrial-nav" aria-label="Primary navigation">
-      <a class="active" href="#top">Home</a>
-      <div class="calculator-nav-dropdown">
-  <a class="calculator-nav-trigger" href="/calculators.html">
-    Calculators <span aria-hidden="true">▾</span>
-  </a>
-  <div class="calculator-nav-menu" aria-label="Calculator categories">
-    <a href="/calculators.html#plasma-cutting">Plasma Cutting</a>
-    <a href="/calculators.html#machining">Machining</a>
-    <a href="/calculators.html#welding">Welding</a>
-  </div>
-</div>
-      <a href="guides/">Guides</a>
-      <a href="blog/">Blog</a>
-      <a href="community/">Community</a>
-      <a href="#articles">Articles</a>
-      <a href="about-the-builder.html">About</a>
       <a
-      class="membership-nav-button"
-      href="https://ko-fi.com/plasmacutforge/tiers"
-      target="_blank"
-      rel="noopener noreferrer"
+        class="active"
+        href="/#top"
+        aria-current="page"
       >
-      Membership
+        Home
+      </a>
+
+      <div class="calculator-nav-dropdown">
+        <a
+          class="calculator-nav-trigger"
+          href="/calculators.html"
+        >
+          Calculators <span aria-hidden="true">▾</span>
+        </a>
+
+        <div
+          class="calculator-nav-menu"
+          aria-label="Calculator categories"
+        >
+          <a href="/calculators.html#plasma-cutting">
+            Plasma Cutting
+          </a>
+
+          <a href="/calculators.html#machining">
+            Machining
+          </a>
+
+          <a href="/calculators.html#welding">
+            Welding
+          </a>
+
+          <a href="/calculators.html#business-selling">
+            Business &amp; Selling
+          </a>
+        </div>
+      </div>
+
+      <a href="/guides/">Guides</a>
+      <a href="/blog/">Blog</a>
+      <a href="/community/">Community</a>
+      <a href="/#articles">Articles</a>
+      <a href="/about-the-builder.html">About</a>
+
+      <a
+        class="membership-nav-button"
+        href="/members.html"
+      >
+        Membership
       </a>
     </nav>
 
-<form class="global-search-form" action="/search.html" method="get" role="search">
-  <label class="sr-only" for="global-search-input">Search Plasma Cut Forge</label>
-  <input
-    id="global-search-input"
-    data-global-search-input
-    name="q"
-    type="search"
-    maxlength="100"
-    placeholder="Search the Forge"
-    autocomplete="off"
-    required
-  >
-  <button type="submit" aria-label="Search Plasma Cut Forge">Search</button>
-</form>
+    <form
+      class="global-search-form"
+      action="/search.html"
+      method="get"
+      role="search"
+    >
+      <label
+        class="sr-only"
+        for="global-search-input"
+      >
+        Search Plasma Cut Forge
+      </label>
+
+      <input
+        id="global-search-input"
+        data-global-search-input
+        name="q"
+        type="search"
+        maxlength="100"
+        placeholder="Search the Forge"
+        autocomplete="off"
+        required
+      >
+
+      <button
+        type="submit"
+        aria-label="Search Plasma Cut Forge"
+      >
+        Search
+      </button>
+    </form>
   </header>
 
   <main id="top">
     <section class="hero industrial-hero">
       <div class="industrial-hero-copy">
-        <p class="industrial-kicker">CNC plasma cutting resources</p>
+        <p class="industrial-kicker">
+          Free CNC plasma cutting resources
+        </p>
 
         <h1>
-          Built for the
-          <span>plasma table.</span>
+          CNC Plasma Cutting
+          <span>Calculators, Charts &amp; Troubleshooting</span>
         </h1>
 
         <p class="industrial-hero-description">
-          Practical calculators, cut-chart guidance, troubleshooting articles,
-          and community knowledge. No filler—just useful information for better,
-          more repeatable plasma cuts.
+          Built for the plasma table. Calculate practical starting settings,
+          compare material and thickness charts, diagnose cut-quality
+          problems, and build repeatable machine-specific data.
         </p>
 
         <div class="industrial-hero-actions">
-          <a class="industrial-button industrial-button-primary" href="#calculator">
-            Launch calculator
+          <a
+            class="industrial-button industrial-button-primary"
+            href="/plasma-cutting-calculator.html"
+          >
+            Open Plasma Calculator
           </a>
-          <a class="industrial-button" href="blog/">
-            View Blog
+
+          <a
+            class="industrial-button"
+            href="/plasma-cutting-settings-guide.html"
+          >
+            View Settings Chart
           </a>
-          <a class="industrial-button" href="community/">
-            Community Q&amp;A
+
+          <a
+            class="industrial-button"
+            href="/cut-quality-troubleshooter.html"
+          >
+            Troubleshoot a Cut
           </a>
-          <a class="industrial-button" href="cut-quality-troubleshooter.html">
-            Diagnose Cut
+
+          <a
+            class="industrial-button"
+            href="/calculators.html"
+          >
+            View All Tools
           </a>
         </div>
       </div>
 
       <figure class="industrial-hero-media">
         <img
-          src="plasma-torch-hero.png"
-          alt="CNC plasma torch firing a bright blue plasma arc"
+          src="/plasma-torch-hero.png"
+          alt="CNC plasma torch cutting metal with a bright blue plasma arc"
+          width="1200"
+          height="800"
         >
-        <figcaption>Cut charts • testing • troubleshooting</figcaption>
+
+        <figcaption>
+          Cut settings • testing • troubleshooting
+        </figcaption>
       </figure>
     </section>
 
-    <div class="industrial-category-strip" aria-label="Main resource categories">
-      <a href="cut-quality-troubleshooter.html">
+    <div
+      class="industrial-category-strip"
+      aria-label="Main CNC plasma resource categories"
+    >
+      <a href="/plasma-cutting-calculator.html">
         <span>01</span>
-        Cut quality
+        Plasma calculator
       </a>
-      <a href="blog/why-clean-dry-air-changes-consumable-life/">
+
+      <a href="/plasma-cutting-settings-guide.html">
         <span>02</span>
-        Air systems
+        Settings chart
       </a>
-      <a href="blog/how-to-build-a-machine-specific-cut-chart/">
+
+      <a href="/cut-quality-troubleshooter.html">
         <span>03</span>
-        Machine testing
+        Cut troubleshooting
       </a>
-      <a href="community/">
+
+      <a href="/blog/how-to-build-a-machine-specific-cut-chart/">
         <span>04</span>
-        Community
+        Machine testing
       </a>
     </div>
 
-    <section class="calculator-section"  id="calculator">
-      <div class="section-heading industrial-section-heading">
-        <p class="industrial-section-label">Technical core</p>
-        <p class="eyebrow">Plasma cutting calculator</p>
-        <h2>Calculate starting settings</h2>
-        <p>
-          Choose a machine profile and calculate practical starting settings. Reference profiles are clearly labeled, and unsupported combinations are blocked.
-        </p>
-      </div>
-
-      <div class="calculator-grid">
-        <form class="calculator-card" id="cut-form">
-          <div class="field">
-            <label for="material">Material</label>
-            <select id="material" name="material">
-              <option value="mild-steel">Mild steel</option>
-              <option value="stainless-steel">Stainless steel</option>
-              <option value="aluminum">Aluminum</option>
-            </select>
-          </div>
-
-          <fieldset class="field">
-            <legend>Thickness</legend>
-            <div class="input-group">
-              <input
-                id="thickness"
-                name="thickness"
-                type="number"
-                min="0.1"
-                step="0.1"
-                value="6"
-                inputmode="decimal"
-                required
-              >
-              <select id="thickness-unit" name="thickness-unit" aria-label="Thickness unit">
-                <option value="mm">mm</option>
-                <option value="in">inches</option>
-              </select>
-            </div>
-            <p class="field-help" id="converted-thickness">6.00 mm / 0.236 in</p>
-          </fieldset>
-
-          <div class="field">
-            <label for="machine-amps">Machine maximum amperage</label>
-            <div class="input-suffix">
-              <input
-                id="machine-amps"
-                name="machine-amps"
-                type="number"
-                min="20"
-                max="200"
-                step="1"
-                value="85"
-                required
-              >
-              <span>A max</span>
-            </div>
-            <p class="field-help">
-              This is a capacity limit—not necessarily the recommended cutting current.
-            </p>
-          </div>
-
-          <fieldset class="field">
-            <legend>Cut priority</legend>
-            <div class="priority-grid">
-              <label class="priority-option">
-                <input type="radio" name="priority" value="quality">
-                <span>
-                  <strong>Quality</strong>
-                  <small>Best edge and accuracy</small>
-                </span>
-              </label>
-
-              <label class="priority-option">
-                <input type="radio" name="priority" value="balanced" checked>
-                <span>
-                  <strong>Balanced</strong>
-                  <small>Quality and productivity</small>
-                </span>
-              </label>
-
-              <label class="priority-option">
-                <input type="radio" name="priority" value="speed">
-                <span>
-                  <strong>Speed</strong>
-                  <small>Higher production rate</small>
-                </span>
-              </label>
-            </div>
-          </fieldset>
-
-          <div class="field">
-            <label for="machine-profile">Cut-chart profile</label>
-            <select id="machine-profile" name="machine-profile">
-              <option value="stamos-s-plasma-85">Stamos S-Plasma 85 CNC</option>
-            </select>
-            <p class="field-help">Compressed-air process, manual pressure control.</p>
-
-            <aside class="machine-profile-request-prompt">
-              <div>
-                <strong>Don’t see your plasma cutter?</strong>
-                <p>
-                  Request a machine profile and include the manual or official
-                  cut-chart information when available.
-                </p>
-              </div>
-              <a href="/machine-profile-request.html">Request My Plasma Cutter</a>
-            </aside>
-          </div>
-
-          <button class="calculate-button" type="submit">Calculate settings</button>
-        </form>
-
-        <section class="result-card" aria-live="polite" aria-labelledby="result-title">
-          <div class="result-header">
-            <div>
-              <p class="eyebrow">Calculated side</p>
-              <h3 id="result-title">Recommended starting settings</h3>
-            </div>
-            <span class="status-pill" id="result-status">Awaiting input</span>
-          </div>
-
-          <div class="result-message" id="result-message">
-            Enter your settings and select <strong>Calculate settings</strong>.
-          </div>
-
-          <div class="result-grid" id="result-grid" hidden>
-            <article class="metric metric-wide">
-              <span>Feed rate</span>
-              <strong id="feed-mm">—</strong>
-              <small id="feed-ipm">—</small>
-            </article>
-
-            <article class="metric">
-              <span>Pierce delay</span>
-              <strong id="pierce-delay">—</strong>
-            </article>
-
-            <article class="metric">
-              <span>Gas pressure</span>
-              <strong id="gas-bar">—</strong>
-              <small id="gas-psi">—</small>
-            </article>
-
-            <article class="metric">
-              <span>Cutting current</span>
-              <strong id="cutting-amps">—</strong>
-            </article>
-
-            <article class="metric">
-              <span>Recommended cut voltage</span>
-              <strong id="cut-voltage">—</strong>
-              <small id="cut-voltage-note">Verify with test coupon</small>
-            </article>
-          </div>
-
-          <dl class="result-details" id="result-details" hidden>
-            <div>
-              <dt>Material</dt>
-              <dd id="result-material">—</dd>
-            </div>
-            <div>
-              <dt>Thickness</dt>
-              <dd id="result-thickness">—</dd>
-            </div>
-            <div>
-              <dt>Priority</dt>
-              <dd id="result-priority">—</dd>
-            </div>
-            <div>
-              <dt>Data source</dt>
-              <dd id="result-source">—</dd>
-            </div>
-          </dl>
-
-          <section
-            class="cut-card-actions"
-            id="cut-card-actions"
-            aria-labelledby="cut-card-actions-title"
-            hidden
-          >
-            <div class="cut-card-actions-copy">
-              <p class="eyebrow">Save your settings</p>
-              <h4 id="cut-card-actions-title">Print or download this cut card</h4>
-              <p>
-                Keep a shop-floor copy of the recommended starting values, then
-                record your tested settings and notes.
-              </p>
-            </div>
-
-            <div class="cut-card-action-buttons">
-              <button type="button" class="cut-card-button primary" id="print-cut-card">
-                Print Settings
-              </button>
-              <button type="button" class="cut-card-button" id="download-cut-card">
-                Download Cut Card
-              </button>
-              <button type="button" class="cut-card-button" id="copy-cut-results">
-                Copy Results
-              </button>
-            </div>
-
-            <p class="cut-card-action-message" id="cut-card-action-message" aria-live="polite"></p>
-          </section>
-
-          <div class="safety-warning">
-            <strong>Important</strong>
-            <p>
-              These values are starting recommendations. Actual settings vary with
-              the plasma source, torch, consumables, air quality, table motion,
-              material composition, and consumable wear. Verify settings using the
-              manufacturer’s manual and test cuts.
-            </p>
-          </div>
-
-          <section class="helpfulness-vote" id="helpfulness-vote" aria-labelledby="helpfulness-question">
-            <div class="helpfulness-copy">
-              <p class="eyebrow">Your feedback</p>
-              <h4 id="helpfulness-question">Did this calculator help?</h4>
-              <p>Your answer helps improve future cut-chart profiles and calculator features.</p>
-            </div>
-
-            <div class="helpfulness-actions" role="group" aria-label="Was this calculator helpful?">
-              <button type="button" class="vote-button" data-vote="yes" aria-pressed="false">
-                <span aria-hidden="true">👍</span>
-                Yes
-              </button>
-
-              <button type="button" class="vote-button" data-vote="no" aria-pressed="false">
-                <span aria-hidden="true">👎</span>
-                No
-              </button>
-            </div>
-
-            <div class="vote-totals" aria-live="polite" aria-label="Community vote totals">
-              <span><strong id="likes-count">—</strong> likes</span>
-              <span><strong id="dislikes-count">—</strong> dislikes</span>
-            </div>
-
-            <p class="vote-message" id="vote-message" aria-live="polite"></p>
-          </section>
-
-        </section>
-      </div>
-    </section>
-
-    <section class="articles-section" id="articles">
+    <section
+      class="articles-section"
+      id="tools"
+      aria-labelledby="tools-heading"
+    >
       <div class="section-heading">
-        <p class="eyebrow">From the blog</p>
-        <h2>Build an evidence-based plasma-cutting library</h2>
+        <p class="eyebrow">
+          Free CNC plasma tools
+        </p>
+
+        <h2 id="tools-heading">
+          Start with the Tool That Matches Your Problem
+        </h2>
+
+        <p>
+          Each tool has its own dedicated page, focused instructions, and
+          related technical resources.
+        </p>
       </div>
 
       <div class="article-grid">
         <article class="article-card-featured">
-          <a class="article-card-link" href="blog/how-to-choose-plasma-settings/">
-            <span class="article-card-category">Beginner guide</span>
-            <h3>How to choose plasma cutting settings</h3>
-            <p>Understand amperage, feed rate, pierce delay, air pressure, and torch height before making your first test cut.</p>
-            <span class="read-link">Read the guide <span aria-hidden="true">→</span></span>
+          <a
+            class="article-card-link"
+            href="/plasma-cutting-calculator.html"
+          >
+            <span class="article-card-category">
+              Primary calculator
+            </span>
+
+            <h3>
+              CNC Plasma Cutting Calculator
+            </h3>
+
+            <p>
+              Calculate starting cut speed, amperage, air pressure, pierce
+              delay, cut voltage, and material-thickness settings.
+            </p>
+
+            <span class="read-link">
+              Open the plasma calculator
+              <span aria-hidden="true">→</span>
+            </span>
           </a>
         </article>
 
         <article class="article-card-featured">
-          <a class="article-card-link" href="blog/why-clean-dry-air-changes-consumable-life/">
-            <span class="article-card-category">Air system</span>
-            <h3>Why clean, dry air changes consumable life</h3>
-            <p>A practical guide to filtration, pressure, airflow, and water contamination.</p>
-            <span class="read-link">Read the guide <span aria-hidden="true">→</span></span>
+          <a
+            class="article-card-link"
+            href="/plasma-cutting-settings-guide.html"
+          >
+            <span class="article-card-category">
+              Material reference
+            </span>
+
+            <h3>
+              Plasma Cutter Settings Chart
+            </h3>
+
+            <p>
+              Compare starting amperage, cutting speed, air pressure, and
+              torch standoff by material and thickness.
+            </p>
+
+            <span class="read-link">
+              View the settings chart
+              <span aria-hidden="true">→</span>
+            </span>
           </a>
         </article>
 
         <article class="article-card-featured">
-          <a class="article-card-link" href="blog/how-to-build-a-machine-specific-cut-chart/">
-            <span class="article-card-category">Testing</span>
-            <h3>How to build a machine-specific cut chart</h3>
-            <p>Use controlled test coupons to calibrate speed, delay, voltage, and kerf.</p>
-            <span class="read-link">Read the guide <span aria-hidden="true">→</span></span>
+          <a
+            class="article-card-link"
+            href="/cut-quality-troubleshooter.html"
+          >
+            <span class="article-card-category">
+              Diagnostic tool
+            </span>
+
+            <h3>
+              Plasma Cut Quality Troubleshooter
+            </h3>
+
+            <p>
+              Diagnose dross, bevel, rough edges, poor penetration, air
+              problems, consumable wear, THC behavior, and machine motion.
+            </p>
+
+            <span class="read-link">
+              Diagnose a plasma cut
+              <span aria-hidden="true">→</span>
+            </span>
+          </a>
+        </article>
+
+        <article class="article-card-featured">
+          <a
+            class="article-card-link"
+            href="/cut-cost-time-estimator.html"
+          >
+            <span class="article-card-category">
+              Job-cost calculator
+            </span>
+
+            <h3>
+              Plasma Cut Cost &amp; Time Estimator
+            </h3>
+
+            <p>
+              Estimate cutting time, machine cost, consumables, and optional
+              material cost using manual geometry or a DXF file.
+            </p>
+
+            <span class="read-link">
+              Estimate cutting cost
+              <span aria-hidden="true">→</span>
+            </span>
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <section
+      class="articles-section"
+      id="articles"
+      aria-labelledby="articles-heading"
+    >
+      <div class="section-heading">
+        <p class="eyebrow">
+          CNC plasma technical guides
+        </p>
+
+        <h2 id="articles-heading">
+          Build an Evidence-Based Plasma-Cutting Library
+        </h2>
+
+        <p>
+          Learn what each setting controls, how to test changes, and how to
+          document repeatable results for your own plasma cutter and table.
+        </p>
+      </div>
+
+      <div class="article-grid">
+        <article class="article-card-featured">
+          <a
+            class="article-card-link"
+            href="/blog/how-to-choose-plasma-settings/"
+          >
+            <span class="article-card-category">
+              Beginner guide
+            </span>
+
+            <h3>
+              How to Choose Plasma Cutting Settings
+            </h3>
+
+            <p>
+              Understand amperage, cutting speed, pierce delay, air pressure,
+              and torch height before making the first test cut.
+            </p>
+
+            <span class="read-link">
+              Read the plasma settings guide
+              <span aria-hidden="true">→</span>
+            </span>
+          </a>
+        </article>
+
+        <article class="article-card-featured">
+          <a
+            class="article-card-link"
+            href="/blog/why-clean-dry-air-changes-consumable-life/"
+          >
+            <span class="article-card-category">
+              Plasma air system
+            </span>
+
+            <h3>
+              Why Clean, Dry Air Changes Consumable Life
+            </h3>
+
+            <p>
+              Learn how filtration, pressure, airflow, moisture, oil, and
+              restrictions affect plasma-cutting performance.
+            </p>
+
+            <span class="read-link">
+              Read the plasma air guide
+              <span aria-hidden="true">→</span>
+            </span>
+          </a>
+        </article>
+
+        <article class="article-card-featured">
+          <a
+            class="article-card-link"
+            href="/blog/how-to-build-a-machine-specific-cut-chart/"
+          >
+            <span class="article-card-category">
+              Controlled testing
+            </span>
+
+            <h3>
+              How to Build a Machine-Specific Plasma Cut Chart
+            </h3>
+
+            <p>
+              Use controlled test coupons to calibrate cutting speed, pierce
+              delay, voltage, torch height, kerf, and hole quality.
+            </p>
+
+            <span class="read-link">
+              Build a machine cut chart
+              <span aria-hidden="true">→</span>
+            </span>
           </a>
         </article>
 
         <!-- SCHEDULED-CUT-QUALITY-ARTICLE:START -->
         <article class="article-card-featured">
-          <div class="article-card-link" aria-label="Upcoming article">
-            <span class="article-card-category">Cut quality</span>
-            <h3>How to diagnose dross, bevel, and rough plasma cuts</h3>
-            <p>Read the cut edge to identify speed, height, air, consumable, and motion problems.</p>
-            <span class="read-link">Coming August 15, 2026</span>
+          <div
+            class="article-card-link"
+            aria-label="Upcoming cut-quality article"
+          >
+            <span class="article-card-category">
+              Cut quality
+            </span>
+
+            <h3>
+              How to Diagnose Dross, Bevel, and Rough Plasma Cuts
+            </h3>
+
+            <p>
+              Read the cut edge to identify cutting-speed, torch-height, air,
+              consumable, and machine-motion problems.
+            </p>
+
+            <span class="read-link">
+              Coming August 15, 2026
+            </span>
           </div>
         </article>
         <!-- SCHEDULED-CUT-QUALITY-ARTICLE:END -->
       </div>
     </section>
 
-    <section class="about-section" id="about">
+    <section
+      class="about-section"
+      id="about"
+      aria-labelledby="about-heading"
+    >
       <div>
-        <p class="eyebrow">About the builder</p>
-        <h2>Built from shop-floor experience.</h2>
+        <p class="eyebrow">
+          About the builder
+        </p>
+
+        <h2 id="about-heading">
+          Built from Shop-Floor Experience
+        </h2>
       </div>
 
       <div class="about-section-builder-copy">
         <p>
-          Plasma Cut Forge is built by Dom, an internationally certified welder,
-          fabricator, CNC machine builder, and U.S. Army veteran. The project
-          combines practical testing, machine troubleshooting, and developing
-          engineering work.
+          Plasma Cut Forge is built by Dom, an internationally certified
+          welder, fabricator, CNC machine builder, and U.S. Army veteran.
+          The project combines practical testing, machine troubleshooting,
+          fabrication experience, and developing engineering work.
         </p>
-        <a class="about-builder-link" href="about-the-builder.html">
-          Meet the Builder <span aria-hidden="true">→</span>
+
+        <a
+          class="about-builder-link"
+          href="/about-the-builder.html"
+        >
+          Meet the Builder
+          <span aria-hidden="true">→</span>
         </a>
       </div>
     </section>
   </main>
 
-<section class="email-updates-home" aria-labelledby="email-updates-home-title">
-  <div class="email-updates-home-copy">
-    <p class="eyebrow">Meaningful updates only</p>
-    <h2 id="email-updates-home-title">Get Plasma Cut Forge Updates</h2>
-    <p>
-      Choose the updates that matter to you: calculator improvements, new
-      machine profiles, newly published articles, and project-build progress.
-      No daily spam and no generic email blasts.
-    </p>
-  </div>
+  <section
+    class="email-updates-home"
+    aria-labelledby="email-updates-home-title"
+  >
+    <div class="email-updates-home-copy">
+      <p class="eyebrow">
+        Meaningful updates only
+      </p>
 
-  <div class="email-updates-home-topics" aria-label="Available update topics">
-    <span>Calculator features</span>
-    <span>Machine profiles</span>
-    <span>New articles</span>
-    <span>Project builds</span>
-  </div>
+      <h2 id="email-updates-home-title">
+        Get Plasma Cut Forge Updates
+      </h2>
 
-  <a class="email-updates-home-button" href="email-updates.html">
-    Choose My Updates
-  </a>
-</section>
+      <p>
+        Choose the updates that matter to you: calculator improvements, new
+        machine profiles, newly published articles, and project-build
+        progress. No daily spam and no generic email blasts.
+      </p>
+    </div>
 
-  <section class="support-forge" aria-labelledby="support-forge-title">
+    <div
+      class="email-updates-home-topics"
+      aria-label="Available update topics"
+    >
+      <span>Calculator features</span>
+      <span>Machine profiles</span>
+      <span>New articles</span>
+      <span>Project builds</span>
+    </div>
+
+    <a
+      class="email-updates-home-button"
+      href="/email-updates.html"
+    >
+      Choose My Updates
+    </a>
+  </section>
+
+  <section
+    class="support-forge"
+    aria-labelledby="support-forge-title"
+  >
     <div class="support-forge-copy">
-      <p class="support-forge-kicker">Support independent CNC resources</p>
-      <h2 id="support-forge-title">Help Keep Plasma Cut Forge Growing</h2>
+      <p class="support-forge-kicker">
+        Support independent CNC resources
+      </p>
+
+      <h2 id="support-forge-title">
+        Help Keep Plasma Cut Forge Growing
+      </h2>
+
       <p>
         Plasma Cut Forge is built to provide practical calculators, reliable
-        technical guides, testing methods, and troubleshooting resources for the
-        CNC plasma community. The site is continually researched, tested, and
-        updated. Your support helps cover website costs and makes it possible to
-        keep improving the tools and publishing useful, independent content.
+        technical guides, testing methods, and troubleshooting resources for
+        the CNC plasma community. The site is continually researched, tested,
+        and updated. Your support helps cover website costs and makes it
+        possible to keep improving the tools and publishing useful,
+        independent content.
       </p>
     </div>
 
@@ -488,73 +734,98 @@
       >
         Support the Forge
       </a>
-      <small>Secure one-time support through Ko-fi</small>
+
+      <small>
+        Secure one-time support through Ko-fi
+      </small>
     </div>
   </section>
 
   <aside
-  class="kofi-membership-widget is-expanded"
-  data-membership-widget
-  aria-label="Plasma Cut Forge membership"
->
-  <button
-    class="kofi-membership-tab"
-    type="button"
-    data-membership-toggle
-    aria-expanded="true"
-    aria-label="Open Plasma Cut Forge membership options"
+    class="kofi-membership-widget is-expanded"
+    data-membership-widget
+    aria-label="Plasma Cut Forge membership"
   >
-    <span>Join the Forge</span>
-  </button>
+    <button
+      class="kofi-membership-tab"
+      type="button"
+      data-membership-toggle
+      aria-expanded="true"
+      aria-label="Open Plasma Cut Forge membership options"
+    >
+      <span>
+        Join the Forge
+      </span>
+    </button>
 
-  <div class="kofi-membership-panel" data-membership-panel>
-    <div class="kofi-membership-widget-copy">
-      <span class="kofi-membership-eyebrow">Ko-fi Membership</span>
-      <strong>Join the Forge</strong>
-      <small>Forge Supporter · $5/month</small>
+    <div
+      class="kofi-membership-panel"
+      data-membership-panel
+    >
+      <div class="kofi-membership-widget-copy">
+        <span class="kofi-membership-eyebrow">
+          Ko-fi Membership
+        </span>
+
+        <strong>
+          Join the Forge
+        </strong>
+
+        <small>
+          Forge Supporter · $5/month
+        </small>
+
+        <p>
+          Support new tools, machine profiles, technical articles, and
+          project-build updates.
+        </p>
+      </div>
+
+      <div class="kofi-membership-widget-actions">
+        <a
+          class="kofi-membership-primary"
+          href="https://ko-fi.com/plasmacutforge/tiers"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Become a Member
+        </a>
+
+        <a
+          class="kofi-membership-secondary"
+          href="https://ko-fi.com/plasmacutforge"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          One-time support
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <footer class="site-footer">
+    <div class="site-footer-primary">
       <p>
-        Support new tools, machine profiles, technical articles, and
-        project-build updates.
+        © 2026 Plasma Cut Forge.
+      </p>
+
+      <p class="site-footer-warning">
+        Calculator and guide values are starting references—not guaranteed
+        machine settings.
       </p>
     </div>
 
-    <div class="kofi-membership-widget-actions">
-      <a
-        class="kofi-membership-primary"
-        href="https://ko-fi.com/plasmacutforge/tiers"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Become a Member
-      </a>
-      <a
-        class="kofi-membership-secondary"
-        href="https://ko-fi.com/plasmacutforge"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        One-time support
-      </a>
-    </div>
-  </div>
-</aside>
-
-  <footer class="site-footer">
-  <div class="site-footer-primary">
-    <p>© <span id="current-year"></span> Plasma Cut Forge.</p>
-    <p class="site-footer-warning">
-      Calculator values are starting recommendations—not guaranteed machine settings.
-    </p>
-  </div>
-
-  <nav class="site-footer-links" aria-label="Legal and contact links">
-    <a href="email-updates.html">Email Updates</a>
-    <a href="contact.html">Contact</a>
-    <a href="privacy-policy.html">Privacy Policy</a>
-    <a href="website-disclaimer.html">Website Disclaimer</a>
-    <a href="terms-of-use.html">Terms of Use</a>
-    <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
-  </nav>
-</footer>
+    <nav
+      class="site-footer-links"
+      aria-label="Legal and contact links"
+    >
+      <a href="/email-updates.html">Email Updates</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy-policy.html">Privacy Policy</a>
+      <a href="/website-disclaimer.html">Website Disclaimer</a>
+      <a href="/terms-of-use.html">Terms of Use</a>
+      <a href="/affiliate-disclosure.html">Affiliate Disclosure</a>
+    </nav>
+  </footer>
 </body>
 </html>
