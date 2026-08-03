@@ -2,341 +2,1383 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Size an air compressor for a plasma cutter using official SCFM and PSI requirements, duty cycle, tank reserve, pressure loss, and moisture control.">
-  <title>Air Compressor Sizing for Plasma Cutters | Plasma Cut Forge</title>
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <meta
+    name="description"
+    content="Free plasma cutter air compressor size calculator. Compare required SCFM, PSI, duty cycle, tank reserve, pressure loss, and operating margin for CNC plasma cutting."
+  >
+
+  <meta
+    name="robots"
+    content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+  >
+
+  <title>Plasma Cutter Air Compressor Size Calculator: SCFM &amp; PSI</title>
+
+  <link
+    rel="canonical"
+    href="https://plasmacutforge.com/air-compressor-sizing-plasma-cutters.html"
+  >
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Plasma Cut Forge">
+
+  <meta
+    property="og:title"
+    content="Plasma Cutter Air Compressor Size Calculator"
+  >
+
+  <meta
+    property="og:description"
+    content="Calculate the SCFM, PSI, operating margin, and tank reserve needed for a plasma cutter or CNC plasma table."
+  >
+
+  <meta
+    property="og:url"
+    content="https://plasmacutforge.com/air-compressor-sizing-plasma-cutters.html"
+  >
+
+  <meta
+    property="og:image"
+    content="https://plasmacutforge.com/plasma-torch-hero.png"
+  >
+
+  <meta
+    property="og:image:alt"
+    content="CNC plasma torch cutting metal with a bright plasma arc"
+  >
+
+  <meta name="twitter:card" content="summary_large_image">
+
+  <meta
+    name="twitter:title"
+    content="Plasma Cutter Air Compressor Size Calculator"
+  >
+
+  <meta
+    name="twitter:description"
+    content="Calculate required SCFM, PSI, compressor margin, and receiver-tank reserve for plasma cutting."
+  >
+
+  <meta
+    name="twitter:image"
+    content="https://plasmacutforge.com/plasma-torch-hero.png"
+  >
 
   <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="stylesheet" href="/styles.css?v=41.0">
-  <script src="/air-compressor-sizing.js?v=1.0" defer></script>
-  <script src="/membership-widget.js?v=1.1" defer></script>
+
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="32x32"
+    href="/favicon-32x32.png"
+  >
+
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="16x16"
+    href="/favicon-16x16.png"
+  >
+
+  <link
+    rel="apple-touch-icon"
+    sizes="180x180"
+    href="/apple-touch-icon.png"
+  >
+
+  <link rel="manifest" href="/site.webmanifest">
+
+  <meta name="theme-color" content="#070b14">
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="/styles.css?v=48.0">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "@id": "https://plasmacutforge.com/air-compressor-sizing-plasma-cutters.html#calculator",
+    "name": "Plasma Cutter Air Compressor Size Calculator",
+    "url": "https://plasmacutforge.com/air-compressor-sizing-plasma-cutters.html",
+    "description": "A free calculator for comparing plasma cutter SCFM and PSI requirements with compressor output, operating margin, other air demand, and receiver-tank reserve.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires JavaScript",
+    "isAccessibleForFree": true,
+    "dateModified": "2026-08-03",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Plasma Cut Forge",
+      "url": "https://plasmacutforge.com/"
+    },
+    "featureList": [
+      "Plasma cutter SCFM calculation",
+      "Required PSI comparison",
+      "Compressor operating margin",
+      "Simultaneous shop-air demand",
+      "Receiver-tank reserve estimate",
+      "Compressor deficit runtime estimate",
+      "CNC plasma usage planning",
+      "Printable compressor buying checklist"
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://plasmacutforge.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Calculators",
+        "item": "https://plasmacutforge.com/calculators.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Plasma Cutter Air Compressor Sizing",
+        "item": "https://plasmacutforge.com/air-compressor-sizing-plasma-cutters.html"
+      }
+    ]
+  }
+  </script>
+
+  <script
+    src="/air-compressor-sizing.js?v=1.0"
+    defer
+  ></script>
+
+  <script
+    src="/membership-widget.js?v=1.1"
+    defer
+  ></script>
 </head>
 
 <body class="compressor-guide-page">
   <header class="site-header industrial-header">
-    <a class="brand industrial-brand" href="/#top" aria-label="Plasma Cut Forge home">
-      <span class="brand-wordmark">PLASMA<span>CUT</span>FORGE</span>
-      <small>CNC plasma tools &amp; shop-floor guides</small>
+    <a
+      class="brand industrial-brand"
+      href="/#top"
+      aria-label="Plasma Cut Forge home"
+    >
+      <span class="brand-wordmark">
+        PLASMA<span>CUT</span>FORGE
+      </span>
+
+      <small>
+        CNC plasma tools &amp; shop-floor guides
+      </small>
     </a>
 
     <nav class="industrial-nav" aria-label="Primary navigation">
       <a href="/#top">Home</a>
+
       <div class="calculator-nav-dropdown">
-  <a class="calculator-nav-trigger" href="/calculators.html">
-    Calculators <span aria-hidden="true">▾</span>
-  </a>
-  <div class="calculator-nav-menu" aria-label="Calculator categories">
-    <a href="/calculators.html#plasma-cutting">Plasma Cutting</a>
-    <a href="/calculators.html#machining">Machining</a>
-    <a href="/calculators.html#welding">Welding</a>
-  </div>
-</div>
-      <a class="active" href="/guides/">Guides</a>
+        <a
+          class="calculator-nav-trigger active"
+          href="/calculators.html"
+          aria-current="page"
+        >
+          Calculators <span aria-hidden="true">▾</span>
+        </a>
+
+        <div
+          class="calculator-nav-menu"
+          aria-label="Calculator categories"
+        >
+          <a href="/calculators.html#plasma-cutting">
+            Plasma Cutting
+          </a>
+
+          <a href="/calculators.html#machining">
+            Machining
+          </a>
+
+          <a href="/calculators.html#welding">
+            Welding
+          </a>
+
+          <a href="/calculators.html#business-selling">
+            Business &amp; Selling
+          </a>
+        </div>
+      </div>
+
+      <a href="/guides/">Guides</a>
       <a href="/blog/">Blog</a>
       <a href="/community/">Community</a>
       <a href="/#articles">Articles</a>
       <a href="/about-the-builder.html">About</a>
-      <a class="membership-nav-button" href="https://ko-fi.com/plasmacutforge/tiers" target="_blank" rel="noopener noreferrer">Membership</a>
+
+      <a
+        class="membership-nav-button"
+        href="/members.html"
+      >
+        Membership
+      </a>
     </nav>
 
-    <form class="global-search-form" action="/search.html" method="get" role="search">
-      <label class="sr-only" for="global-search-input">Search Plasma Cut Forge</label>
-      <input id="global-search-input" data-global-search-input name="q" type="search" maxlength="100" placeholder="Search the Forge" autocomplete="off" required>
-      <button type="submit">Search</button>
+    <form
+      class="global-search-form"
+      action="/search.html"
+      method="get"
+      role="search"
+    >
+      <label
+        class="sr-only"
+        for="global-search-input"
+      >
+        Search Plasma Cut Forge
+      </label>
+
+      <input
+        id="global-search-input"
+        data-global-search-input
+        name="q"
+        type="search"
+        maxlength="100"
+        placeholder="Search the Forge"
+        autocomplete="off"
+        required
+      >
+
+      <button
+        type="submit"
+        aria-label="Search Plasma Cut Forge"
+      >
+        Search
+      </button>
     </form>
   </header>
 
   <main class="compressor-guide-main">
+    <nav
+      class="plasma-guide-breadcrumbs"
+      aria-label="Breadcrumb"
+    >
+      <a href="/">Home</a>
+      <span aria-hidden="true">›</span>
+      <a href="/calculators.html">Calculators</a>
+      <span aria-hidden="true">›</span>
+
+      <span aria-current="page">
+        Plasma Cutter Air Compressor Sizing
+      </span>
+    </nav>
+
     <article>
       <header class="compressor-guide-hero">
         <div>
-          <p class="industrial-kicker">Air-system guide and calculator</p>
-          <h1>Air Compressor Sizing for Plasma Cutters</h1>
-          <p>
-            Start with the cutter manufacturer’s official <strong>SCFM at PSI</strong>
-            requirement. The compressor pump must sustain the airflow; the tank only
-            provides temporary reserve.
+          <p class="industrial-kicker">
+            Free SCFM and PSI sizing calculator
           </p>
+
+          <h1>
+            Plasma Cutter Air Compressor Size Calculator
+          </h1>
+
+          <p>
+            Calculate how much delivered <strong>SCFM</strong> and
+            <strong>PSI</strong> a compressor should provide for a plasma
+            cutter or CNC plasma table. Compare the manufacturer’s official
+            air requirement with compressor output, operating margin,
+            simultaneous shop demand, tank reserve, and expected cut length.
+          </p>
+
           <div class="compressor-hero-actions">
-            <a href="#compressor-calculator">Size My Compressor</a>
-            <a href="#buying-checklist">Buying Checklist</a>
+            <a href="#compressor-calculator">
+              Size My Air Compressor
+            </a>
+
+            <a href="#buying-checklist">
+              View Buying Checklist
+            </a>
+
+            <a href="#model-examples">
+              Compare Official Examples
+            </a>
           </div>
         </div>
 
         <aside class="compressor-fast-answer">
-          <span>Fast answer</span>
-          <strong>Find official SCFM and PSI.</strong>
-          <strong>Add operating margin.</strong>
-          <strong>Compare delivered SCFM at pressure.</strong>
-          <strong>Then evaluate tank and duty cycle.</strong>
+          <span>
+            Fast answer
+          </span>
+
+          <strong>
+            Find the official SCFM and PSI.
+          </strong>
+
+          <strong>
+            Add operating margin.
+          </strong>
+
+          <strong>
+            Compare delivered SCFM at pressure.
+          </strong>
+
+          <strong>
+            Then check duty cycle and tank reserve.
+          </strong>
         </aside>
       </header>
 
       <section class="compressor-warning">
-        <strong>Do not size from amperage alone.</strong>
-        <p>Use the exact operator manual for the plasma cutter model, torch, and process.</p>
+        <strong>
+          Do not size an air compressor from plasma-cutter amperage alone.
+        </strong>
+
+        <p>
+          Use the exact operator manual or manufacturer specification for the
+          plasma cutter model, torch, and process. Machines with similar
+          amperage ratings can require different airflow.
+        </p>
       </section>
 
       <section class="compressor-guide-section">
-        <p class="eyebrow">Practical planning margin</p>
-        <h2>Recommended Compressor Margin</h2>
+        <p class="eyebrow">
+          Quick sizing explanation
+        </p>
+
+        <h2>
+          How Much CFM Does a Plasma Cutter Need?
+        </h2>
+
+        <p>
+          The required airflow depends on the exact plasma cutter. Begin with
+          the manufacturer’s published air demand, normally stated as SCFM at
+          a specific inlet pressure. The compressor should deliver at least
+          that airflow at the stated PSI while the torch is flowing.
+        </p>
+
+        <p>
+          For CNC plasma cutting and long contours, additional capacity is
+          useful because the compressor may run for extended periods while
+          filters, regulators, hoses, dryers, fittings, and other shop tools
+          create additional demand or pressure loss.
+        </p>
+
+        <div class="compressor-two-column">
+          <article>
+            <h3>
+              CFM versus SCFM
+            </h3>
+
+            <p>
+              Use the compressor’s delivered-air rating at the required
+              pressure. Do not rely on displacement CFM, peak CFM, or an
+              unqualified marketing number.
+            </p>
+          </article>
+
+          <article>
+            <h3>
+              PSI under airflow
+            </h3>
+
+            <p>
+              Tank pressure while idle does not prove that the plasma cutter
+              receives enough pressure. Measure pressure while air is flowing
+              through the complete system.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="compressor-guide-section">
+        <p class="eyebrow">
+          Practical planning margin
+        </p>
+
+        <h2>
+          Recommended Plasma Compressor Margin
+        </h2>
+
+        <p>
+          The percentages below are planning targets used by this calculator.
+          They provide additional capacity for longer cuts, pressure loss,
+          compressor cycling, and other shop-air demand.
+        </p>
+
         <div class="compressor-table-wrap">
           <table class="compressor-guide-table">
             <thead>
               <tr>
-                <th>Use</th>
-                <th>Planning target</th>
-                <th>Priority</th>
+                <th scope="col">
+                  Usage pattern
+                </th>
+
+                <th scope="col">
+                  Planning target
+                </th>
+
+                <th scope="col">
+                  Main priority
+                </th>
               </tr>
             </thead>
+
             <tbody>
-              <tr><td>Short hobby cuts</td><td>125% of cutter demand</td><td>Basic reserve</td></tr>
-              <tr><td>Regular fabrication</td><td>140% of cutter demand</td><td>Strong duty cycle</td></tr>
-              <tr><td>CNC table / long contours</td><td>150% of cutter demand</td><td>High continuous capacity</td></tr>
-              <tr><td>Production / shared air</td><td>160% plus other loads</td><td>Continuous-rated system</td></tr>
+              <tr>
+                <td>
+                  Short hobby cuts
+                </td>
+
+                <td>
+                  125% of total active demand
+                </td>
+
+                <td>
+                  Basic operating reserve
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  Regular fabrication
+                </td>
+
+                <td>
+                  140% of total active demand
+                </td>
+
+                <td>
+                  Stronger duty-cycle margin
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  CNC table and long contours
+                </td>
+
+                <td>
+                  150% of total active demand
+                </td>
+
+                <td>
+                  High continuous capacity
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  Production or shared shop air
+                </td>
+
+                <td>
+                  160% plus all simultaneous loads
+                </td>
+
+                <td>
+                  Continuous-rated air system
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
       </section>
 
-      <section class="compressor-calculator" id="compressor-calculator">
-        <p class="eyebrow">Interactive sizing tool</p>
-        <h2>Air Compressor Sizing Calculator</h2>
-        <p>Enter the official cutter requirement and the compressor’s delivered output at the same pressure.</p>
+      <section
+        class="compressor-calculator"
+        id="compressor-calculator"
+        aria-labelledby="compressor-calculator-heading"
+      >
+        <p class="eyebrow">
+          Interactive air-system calculator
+        </p>
 
-        <form id="compressor-sizing-form" novalidate>
+        <h2 id="compressor-calculator-heading">
+          Plasma Cutter Air Compressor Sizing Calculator
+        </h2>
+
+        <p>
+          Enter the plasma cutter’s official SCFM and PSI requirement. Then
+          enter the compressor’s delivered output at the same pressure. Add
+          other simultaneous shop-air demand when applicable.
+        </p>
+
+        <form
+          id="compressor-sizing-form"
+          novalidate
+        >
           <div class="compressor-input-grid">
             <label>
-              <span>Cutter demand</span>
+              <span>
+                Plasma cutter demand
+              </span>
+
               <div class="compressor-number-unit">
-                <input name="cutter_scfm" type="number" min="0.5" max="100" step="0.1" value="6.7" required>
-                <small>SCFM</small>
+                <input
+                  name="cutter_scfm"
+                  type="number"
+                  min="0.5"
+                  max="100"
+                  step="0.1"
+                  value="6.7"
+                  inputmode="decimal"
+                  required
+                >
+
+                <small>
+                  SCFM
+                </small>
               </div>
             </label>
 
             <label>
-              <span>Required inlet pressure</span>
+              <span>
+                Required inlet pressure
+              </span>
+
               <div class="compressor-number-unit">
-                <input name="required_psi" type="number" min="20" max="200" step="1" value="90" required>
-                <small>PSI</small>
+                <input
+                  name="required_psi"
+                  type="number"
+                  min="20"
+                  max="200"
+                  step="1"
+                  value="90"
+                  inputmode="decimal"
+                  required
+                >
+
+                <small>
+                  PSI
+                </small>
               </div>
             </label>
 
             <label>
-              <span>Usage pattern</span>
+              <span>
+                Plasma-cutting usage
+              </span>
+
               <select name="usage">
-                <option value="1.25">Short hobby cuts — 25% margin</option>
-                <option value="1.40">Regular fabrication — 40% margin</option>
-                <option value="1.50" selected>CNC / long contours — 50% margin</option>
-                <option value="1.60">Production / shared air — 60% margin</option>
+                <option value="1.25">
+                  Short hobby cuts — 25% margin
+                </option>
+
+                <option value="1.40">
+                  Regular fabrication — 40% margin
+                </option>
+
+                <option
+                  value="1.50"
+                  selected
+                >
+                  CNC and long contours — 50% margin
+                </option>
+
+                <option value="1.60">
+                  Production or shared air — 60% margin
+                </option>
               </select>
             </label>
 
             <label>
-              <span>Compressor delivered output</span>
+              <span>
+                Compressor delivered output
+              </span>
+
               <div class="compressor-number-unit">
-                <input name="compressor_scfm" type="number" min="0" max="300" step="0.1" value="10" required>
-                <small>SCFM</small>
+                <input
+                  name="compressor_scfm"
+                  type="number"
+                  min="0"
+                  max="300"
+                  step="0.1"
+                  value="10"
+                  inputmode="decimal"
+                  required
+                >
+
+                <small>
+                  SCFM
+                </small>
               </div>
             </label>
 
             <label>
-              <span>Receiver tank</span>
+              <span>
+                Receiver-tank capacity
+              </span>
+
               <div class="compressor-number-unit">
-                <input name="tank_gallons" type="number" min="0" max="2000" step="1" value="60">
-                <small>gal</small>
+                <input
+                  name="tank_gallons"
+                  type="number"
+                  min="0"
+                  max="2000"
+                  step="1"
+                  value="60"
+                  inputmode="decimal"
+                >
+
+                <small>
+                  gal
+                </small>
               </div>
             </label>
 
             <label>
-              <span>Starting tank pressure</span>
+              <span>
+                Starting tank pressure
+              </span>
+
               <div class="compressor-number-unit">
-                <input name="start_psi" type="number" min="1" max="300" step="1" value="135">
-                <small>PSI</small>
+                <input
+                  name="start_psi"
+                  type="number"
+                  min="1"
+                  max="300"
+                  step="1"
+                  value="135"
+                  inputmode="decimal"
+                >
+
+                <small>
+                  PSI
+                </small>
               </div>
             </label>
 
             <label>
-              <span>Lowest usable pressure</span>
+              <span>
+                Lowest usable tank pressure
+              </span>
+
               <div class="compressor-number-unit">
-                <input name="end_psi" type="number" min="0" max="300" step="1" value="100">
-                <small>PSI</small>
+                <input
+                  name="end_psi"
+                  type="number"
+                  min="0"
+                  max="300"
+                  step="1"
+                  value="100"
+                  inputmode="decimal"
+                >
+
+                <small>
+                  PSI
+                </small>
               </div>
             </label>
 
             <label>
-              <span>Other simultaneous demand</span>
+              <span>
+                Other simultaneous air demand
+              </span>
+
               <div class="compressor-number-unit">
-                <input name="other_scfm" type="number" min="0" max="300" step="0.1" value="0">
-                <small>SCFM</small>
+                <input
+                  name="other_scfm"
+                  type="number"
+                  min="0"
+                  max="300"
+                  step="0.1"
+                  value="0"
+                  inputmode="decimal"
+                >
+
+                <small>
+                  SCFM
+                </small>
               </div>
             </label>
           </div>
 
           <div class="compressor-form-actions">
-            <button type="submit">Calculate Capacity</button>
-            <button type="button" id="compressor-reset">Reset</button>
-            <p id="compressor-form-message" aria-live="polite"></p>
+            <button type="submit">
+              Calculate Compressor Capacity
+            </button>
+
+            <button
+              type="button"
+              id="compressor-reset"
+            >
+              Reset
+            </button>
+
+            <p
+              id="compressor-form-message"
+              aria-live="polite"
+            ></p>
           </div>
         </form>
 
-        <section class="compressor-results" id="compressor-results" hidden>
+        <section
+          class="compressor-results"
+          id="compressor-results"
+          hidden
+          aria-live="polite"
+        >
           <div class="compressor-result-summary">
-            <span id="compressor-result-status">—</span>
-            <h3 id="compressor-result-title">Air-system result</h3>
+            <span id="compressor-result-status">
+              —
+            </span>
+
+            <h3 id="compressor-result-title">
+              Plasma air-system result
+            </h3>
+
             <p id="compressor-result-description"></p>
           </div>
 
           <div class="compressor-result-metrics">
-            <article><span>Planning target</span><strong id="compressor-target-scfm">—</strong><small>Delivered SCFM at pressure</small></article>
-            <article><span>Demand coverage</span><strong id="compressor-coverage">—</strong><small>Compressor output versus active demand</small></article>
-            <article><span>Tank-only reserve</span><strong id="compressor-tank-runtime">—</strong><small>Approximate pressure-band reserve</small></article>
-            <article><span>Reserve with pump</span><strong id="compressor-deficit-runtime">—</strong><small>When pump output is below demand</small></article>
+            <article>
+              <span>
+                Recommended planning target
+              </span>
+
+              <strong id="compressor-target-scfm">
+                —
+              </strong>
+
+              <small>
+                Delivered SCFM at the required pressure
+              </small>
+            </article>
+
+            <article>
+              <span>
+                Active-demand coverage
+              </span>
+
+              <strong id="compressor-coverage">
+                —
+              </strong>
+
+              <small>
+                Compressor output versus total active demand
+              </small>
+            </article>
+
+            <article>
+              <span>
+                Tank-only reserve
+              </span>
+
+              <strong id="compressor-tank-runtime">
+                —
+              </strong>
+
+              <small>
+                Approximate reserve within the entered pressure band
+              </small>
+            </article>
+
+            <article>
+              <span>
+                Reserve with the pump running
+              </span>
+
+              <strong id="compressor-deficit-runtime">
+                —
+              </strong>
+
+              <small>
+                Estimated reserve when pump output remains below demand
+              </small>
+            </article>
           </div>
 
           <div class="compressor-result-plan">
-            <h3>Recommended next checks</h3>
+            <h3>
+              Recommended Next Checks
+            </h3>
+
             <ol id="compressor-result-actions"></ol>
           </div>
 
           <p class="compressor-limit">
-            Runtime is an idealized estimate. Real results vary with compressor controls,
-            heat, leakage, hose restrictions, filter loss, and duty cycle.
+            Runtime is an idealized estimate. Actual performance varies with
+            compressor controls, temperature, leakage, hose restrictions,
+            coupler size, filter pressure loss, regulator flow, electrical
+            supply, and compressor duty cycle.
           </p>
         </section>
       </section>
 
       <section class="compressor-guide-section">
-        <p class="eyebrow">Core concept</p>
-        <h2>SCFM Sustains the Cut; the Tank Delays the Shortage</h2>
+        <p class="eyebrow">
+          Core air-system principle
+        </p>
+
+        <h2>
+          SCFM Sustains the Cut; the Tank Delays the Shortage
+        </h2>
+
         <div class="compressor-two-column">
           <article>
-            <h3>Delivered SCFM</h3>
-            <p>The pump must meet total airflow demand at the required operating pressure.</p>
+            <h3>
+              Delivered SCFM
+            </h3>
+
+            <p>
+              The compressor pump must meet the total airflow demand at the
+              plasma cutter’s required inlet pressure. For sustained cutting,
+              pump output matters more than stored tank volume.
+            </p>
           </article>
+
           <article>
-            <h3>Tank capacity</h3>
-            <p>A larger tank extends short cuts and reduces cycling but cannot permanently fix an undersized pump.</p>
+            <h3>
+              Receiver-tank capacity
+            </h3>
+
+            <p>
+              A larger tank can extend short cuts and reduce compressor
+              cycling, but it cannot permanently compensate for a pump that
+              produces less air than the plasma system consumes.
+            </p>
           </article>
         </div>
       </section>
 
       <section class="compressor-guide-section">
-        <p class="eyebrow">Long-cut reliability</p>
-        <h2>Duty Cycle Matters</h2>
-        <div class="compressor-check-grid">
-          <article><strong>Check rated duty cycle</strong><p>Confirm the compressor can run through long CNC contours.</p></article>
-          <article><strong>Use delivered SCFM</strong><p>Do not use displacement or peak CFM.</p></article>
-          <article><strong>Include other loads</strong><p>Add dryers, blow guns, and simultaneous shop tools.</p></article>
-          <article><strong>Check cooling</strong><p>Hot rooms and poor ventilation reduce reliability.</p></article>
-        </div>
-      </section>
-
-      <section class="compressor-guide-section">
-        <p class="eyebrow">Protect delivered pressure</p>
-        <h2>Hose, Couplers, Filters, and Regulators</h2>
-        <div class="compressor-check-grid">
-          <article><strong>Measure under flow</strong><p>Static tank pressure does not prove pressure at the cutter.</p></article>
-          <article><strong>Avoid restrictive couplers</strong><p>Small fittings can choke a large compressor.</p></article>
-          <article><strong>Account for long runs</strong><p>Distance, bends, and small internal diameter increase pressure loss.</p></article>
-          <article><strong>Inspect filter drop</strong><p>Saturated or undersized filters can starve the torch.</p></article>
-        </div>
-      </section>
-
-      <section class="compressor-guide-section">
-        <p class="eyebrow">Consumable protection</p>
-        <h2>Clean, Dry, Oil-Free Air</h2>
-        <p>
-          Moisture and oil can destabilize the arc and shorten consumable life.
-          Drain the receiver, allow air to cool, use correctly sized separation and
-          filtration, and verify pressure at the cutter while air is flowing.
+        <p class="eyebrow">
+          Long-cut reliability
         </p>
-        <a class="compressor-related-link" href="/blog/why-clean-dry-air-changes-consumable-life/">
-          Read: Why Clean, Dry Air Changes Consumable Life →
+
+        <h2>
+          Compressor Duty Cycle Matters for CNC Plasma Cutting
+        </h2>
+
+        <div class="compressor-check-grid">
+          <article>
+            <strong>
+              Check the rated duty cycle
+            </strong>
+
+            <p>
+              Confirm that the compressor can operate through the longest
+              expected CNC contour without overheating or requiring extended
+              recovery time.
+            </p>
+          </article>
+
+          <article>
+            <strong>
+              Use delivered SCFM
+            </strong>
+
+            <p>
+              Compare the rated delivered airflow at or above the plasma
+              cutter’s required pressure—not displacement or peak CFM.
+            </p>
+          </article>
+
+          <article>
+            <strong>
+              Include all other air loads
+            </strong>
+
+            <p>
+              Add simultaneous demand from blow guns, pneumatic tools,
+              dryers, purge cycles, or other equipment connected to the same
+              compressor.
+            </p>
+          </article>
+
+          <article>
+            <strong>
+              Check cooling and ventilation
+            </strong>
+
+            <p>
+              High ambient temperature, restricted airflow, dirty cooling
+              surfaces, and poor equipment-room ventilation reduce
+              reliability.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="compressor-guide-section">
+        <p class="eyebrow">
+          Protect delivered pressure
+        </p>
+
+        <h2>
+          Hose, Couplers, Filters, Dryers, and Regulators
+        </h2>
+
+        <div class="compressor-check-grid">
+          <article>
+            <strong>
+              Measure pressure under flow
+            </strong>
+
+            <p>
+              Static receiver pressure does not prove that adequate pressure
+              reaches the plasma cutter while the torch is flowing.
+            </p>
+          </article>
+
+          <article>
+            <strong>
+              Avoid restrictive couplers
+            </strong>
+
+            <p>
+              Small quick-connect fittings, narrow passages, or undersized
+              regulators can restrict an otherwise capable compressor.
+            </p>
+          </article>
+
+          <article>
+            <strong>
+              Account for long hose runs
+            </strong>
+
+            <p>
+              Long distance, small internal diameter, multiple bends, and
+              excessive fittings increase pressure loss.
+            </p>
+          </article>
+
+          <article>
+            <strong>
+              Inspect filters and dryers
+            </strong>
+
+            <p>
+              Saturated, clogged, frozen, or undersized air-treatment
+              components can reduce pressure and airflow at the cutter.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="compressor-guide-section">
+        <p class="eyebrow">
+          Consumable protection
+        </p>
+
+        <h2>
+          Supply Clean, Dry, Oil-Free Plasma Air
+        </h2>
+
+        <p>
+          Moisture and oil can destabilize the plasma arc, damage internal
+          torch components, and shorten consumable life. Drain the receiver,
+          allow compressed air to cool before final filtration, use
+          appropriately sized moisture separation and filtration, and verify
+          flowing pressure at the plasma cutter.
+        </p>
+
+        <a
+          class="compressor-related-link"
+          href="/blog/why-clean-dry-air-changes-consumable-life/"
+        >
+          Read Why Clean, Dry Air Changes Plasma Consumable Life →
         </a>
       </section>
 
-      <section class="compressor-guide-section" id="buying-checklist">
-        <p class="eyebrow">Before buying</p>
-        <h2>Compressor Purchase Checklist</h2>
+      <section
+        class="compressor-guide-section"
+        id="buying-checklist"
+      >
+        <p class="eyebrow">
+          Before buying an air compressor
+        </p>
+
+        <h2>
+          Plasma Cutter Compressor Purchase Checklist
+        </h2>
+
         <div class="compressor-buying-checklist">
-          <label><input type="checkbox"> Official cutter SCFM requirement confirmed</label>
-          <label><input type="checkbox"> Required PSI confirmed</label>
-          <label><input type="checkbox"> Compressor output compared at the same PSI</label>
-          <label><input type="checkbox"> Operating margin added</label>
-          <label><input type="checkbox"> Other shop-air loads included</label>
-          <label><input type="checkbox"> Duty cycle supports expected cut length</label>
-          <label><input type="checkbox"> Tank treated as reserve, not replacement CFM</label>
-          <label><input type="checkbox"> Hose and fittings flow-rated</label>
-          <label><input type="checkbox"> Moisture and oil-control plan included</label>
-          <label><input type="checkbox"> Electrical supply and service access checked</label>
+          <label>
+            <input type="checkbox">
+            Official plasma cutter SCFM requirement confirmed
+          </label>
+
+          <label>
+            <input type="checkbox">
+            Required plasma cutter inlet PSI confirmed
+          </label>
+
+          <label>
+            <input type="checkbox">
+            Compressor delivered output compared at the same PSI
+          </label>
+
+          <label>
+            <input type="checkbox">
+            Operating margin added for the intended usage
+          </label>
+
+          <label>
+            <input type="checkbox">
+            Other simultaneous shop-air loads included
+          </label>
+
+          <label>
+            <input type="checkbox">
+            Compressor duty cycle supports expected cut length
+          </label>
+
+          <label>
+            <input type="checkbox">
+            Receiver tank treated as reserve—not replacement SCFM
+          </label>
+
+          <label>
+            <input type="checkbox">
+            Hose, regulator, filters, and fittings are flow-rated
+          </label>
+
+          <label>
+            <input type="checkbox">
+            Moisture and oil-control system included
+          </label>
+
+          <label>
+            <input type="checkbox">
+            Electrical supply, ventilation, noise, and service access checked
+          </label>
         </div>
-        <button type="button" class="compressor-print-checklist" id="compressor-print-guide">Print Guide and Checklist</button>
+
+        <button
+          type="button"
+          class="compressor-print-checklist"
+          id="compressor-print-guide"
+        >
+          Print Guide and Checklist
+        </button>
       </section>
 
-      <section class="compressor-guide-section">
-        <p class="eyebrow">Official examples</p>
-        <h2>Why Model-Specific Data Matters</h2>
+      <section
+        class="compressor-guide-section"
+        id="model-examples"
+      >
+        <p class="eyebrow">
+          Manufacturer examples
+        </p>
+
+        <h2>
+          Why Model-Specific Plasma Cutter Air Data Matters
+        </h2>
+
+        <p>
+          The examples below show why compressor sizing should begin with the
+          exact plasma cutter specification instead of amperage alone.
+        </p>
+
         <div class="compressor-table-wrap">
           <table class="compressor-guide-table">
             <thead>
-              <tr><th>System</th><th>Published requirement</th><th>Lesson</th></tr>
+              <tr>
+                <th scope="col">
+                  Plasma system
+                </th>
+
+                <th scope="col">
+                  Published cutting-air requirement
+                </th>
+
+                <th scope="col">
+                  Sizing lesson
+                </th>
+              </tr>
             </thead>
+
             <tbody>
-              <tr><td>Powermax45 SYNC</td><td>6.7 SCFM at 90 PSI</td><td>Compare output at the specified pressure.</td></tr>
-              <tr><td>Powermax85</td><td>6.7 SCFM at 85 PSI</td><td>Amperage alone does not determine airflow.</td></tr>
-              <tr><td>Powermax85 SYNC</td><td>7.5 SCFM at 85 PSI</td><td>Model generations can differ.</td></tr>
-              <tr><td>Powermax105</td><td>7.7 SCFM at 85 PSI</td><td>Use the exact manual and process.</td></tr>
+              <tr>
+                <td>
+                  <a
+                    href="https://www.hypertherm.com/hypertherm/powermax/powermax45-sync/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Hypertherm Powermax45 SYNC
+                  </a>
+                </td>
+
+                <td>
+                  6.7 SCFM at 90 PSI
+                </td>
+
+                <td>
+                  Compare compressor output at the specified pressure.
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <a
+                    href="https://www.hypertherm.com/hypertherm/powermax/powermax85/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Hypertherm Powermax85
+                  </a>
+                </td>
+
+                <td>
+                  6.7 SCFM at 85 PSI for cutting
+                </td>
+
+                <td>
+                  Amperage alone does not determine airflow.
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <a
+                    href="https://www.hypertherm.com/hypertherm/powermax/powermax85-sync/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Hypertherm Powermax85 SYNC
+                  </a>
+                </td>
+
+                <td>
+                  7.5 SCFM at 85 PSI for cutting
+                </td>
+
+                <td>
+                  Different model generations can have different demand.
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  Hypertherm Powermax105
+                </td>
+
+                <td>
+                  7.7 SCFM at 85 PSI for cutting
+                </td>
+
+                <td>
+                  Use the exact manual and cutting process.
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
+
+        <p class="compressor-limit">
+          Manufacturer specifications can vary by model, generation, torch,
+          process, region, and operating mode. Verify the current manual or
+          official product documentation before purchasing a compressor.
+        </p>
       </section>
 
       <section class="compressor-guide-section compressor-faq">
-        <p class="eyebrow">FAQ</p>
-        <h2>Common Compressor Questions</h2>
-        <details><summary>Is tank size or SCFM more important?</summary><p>SCFM determines sustained airflow. Tank size provides temporary reserve.</p></details>
-        <details><summary>Can an auxiliary tank fix low output?</summary><p>It increases stored air but does not eliminate an ongoing pump deficit.</p></details>
-        <details><summary>Why does pressure fall only while cutting?</summary><p>Hose, fittings, filters, or the pump may be unable to deliver enough air under flow.</p></details>
+        <p class="eyebrow">
+          Frequently asked questions
+        </p>
+
+        <h2>
+          Plasma Cutter Air Compressor Questions
+        </h2>
+
+        <details>
+          <summary>
+            Is SCFM or tank size more important for a plasma cutter?
+          </summary>
+
+          <p>
+            SCFM determines whether the compressor can sustain the required
+            airflow. Tank size provides temporary reserve and reduces cycling,
+            but it cannot permanently correct inadequate pump output.
+          </p>
+        </details>
+
+        <details>
+          <summary>
+            Can an auxiliary tank fix a compressor with low SCFM?
+          </summary>
+
+          <p>
+            An auxiliary tank increases stored air and may extend short cuts,
+            but pressure will still fall during sustained cutting when total
+            demand exceeds compressor output.
+          </p>
+        </details>
+
+        <details>
+          <summary>
+            Why does compressor pressure drop only while plasma cutting?
+          </summary>
+
+          <p>
+            The pump, hose, couplers, filters, dryer, regulator, or fittings
+            may be unable to deliver the required airflow under load. Measure
+            pressure at the plasma cutter while air is flowing.
+          </p>
+        </details>
+
+        <details>
+          <summary>
+            Should I size a plasma compressor using horsepower?
+          </summary>
+
+          <p>
+            Horsepower alone is not enough. Compare delivered SCFM at the
+            plasma cutter’s required PSI, then verify duty cycle, tank size,
+            air treatment, electrical requirements, and simultaneous loads.
+          </p>
+        </details>
+
+        <details>
+          <summary>
+            Can I use a lubricated air compressor for plasma cutting?
+          </summary>
+
+          <p>
+            The plasma cutter must receive clean, dry, oil-free air. When a
+            lubricated compressor is used, the complete air-treatment system
+            must prevent oil and moisture from reaching the plasma cutter.
+          </p>
+        </details>
       </section>
 
       <section class="compressor-next-tools">
         <div>
-          <p class="eyebrow">Continue diagnosing</p>
-          <h2>Use the Other Plasma Cut Forge Tools</h2>
+          <p class="eyebrow">
+            Continue planning and troubleshooting
+          </p>
+
+          <h2>
+            Use the Related Plasma Cut Forge Tools
+          </h2>
         </div>
+
         <div>
-          <a href="/#calculator">Settings Calculator</a>
-          <a href="/cut-quality-troubleshooter.html">Cut Quality Troubleshooter</a>
+          <a href="/plasma-cutting-calculator.html">
+            CNC Plasma Cutting Calculator
+          </a>
+
+          <a href="/plasma-cutting-settings-guide.html">
+            Plasma Cutter Settings Chart
+          </a>
+
+          <a href="/cut-quality-troubleshooter.html">
+            Cut Quality Troubleshooter
+          </a>
         </div>
       </section>
     </article>
   </main>
 
-  <aside class="kofi-membership-widget is-expanded" data-membership-widget aria-label="Plasma Cut Forge membership">
-    <button class="kofi-membership-tab" type="button" data-membership-toggle aria-expanded="true">
-      <span>Join the Forge</span>
+  <aside
+    class="kofi-membership-widget is-expanded"
+    data-membership-widget
+    aria-label="Plasma Cut Forge membership"
+  >
+    <button
+      class="kofi-membership-tab"
+      type="button"
+      data-membership-toggle
+      aria-expanded="true"
+      aria-label="Open Plasma Cut Forge membership options"
+    >
+      <span>
+        Join the Forge
+      </span>
     </button>
-    <div class="kofi-membership-panel" data-membership-panel>
+
+    <div
+      class="kofi-membership-panel"
+      data-membership-panel
+    >
       <div class="kofi-membership-widget-copy">
-        <span class="kofi-membership-eyebrow">Ko-fi Membership</span>
-        <strong>Join the Forge</strong>
-        <small>Forge Supporter · $5/month</small>
-        <p>Support new tools, machine profiles, technical articles, and project-build updates.</p>
+        <span class="kofi-membership-eyebrow">
+          Ko-fi Membership
+        </span>
+
+        <strong>
+          Join the Forge
+        </strong>
+
+        <small>
+          Forge Supporter · $5/month
+        </small>
+
+        <p>
+          Support new tools, machine profiles, technical articles, and
+          project-build updates.
+        </p>
       </div>
+
       <div class="kofi-membership-widget-actions">
-        <a class="kofi-membership-primary" href="https://ko-fi.com/plasmacutforge/tiers" target="_blank" rel="noopener noreferrer">Become a Member</a>
-        <a class="kofi-membership-secondary" href="https://ko-fi.com/plasmacutforge" target="_blank" rel="noopener noreferrer">One-time support</a>
+        <a
+          class="kofi-membership-primary"
+          href="https://ko-fi.com/plasmacutforge/tiers"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Become a Member
+        </a>
+
+        <a
+          class="kofi-membership-secondary"
+          href="https://ko-fi.com/plasmacutforge"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          One-time support
+        </a>
       </div>
     </div>
   </aside>
 
   <footer class="site-footer">
     <div class="site-footer-primary">
-      <p>© 2026 Plasma Cut Forge.</p>
-      <p class="site-footer-warning">Calculator values are starting recommendations—not guaranteed machine settings.</p>
+      <p>
+        © 2026 Plasma Cut Forge.
+      </p>
+
+      <p class="site-footer-warning">
+        Calculator results are planning estimates—not guaranteed compressor
+        or plasma cutter performance.
+      </p>
     </div>
-    <nav class="site-footer-links">
+
+    <nav
+      class="site-footer-links"
+      aria-label="Legal and contact links"
+    >
       <a href="/email-updates.html">Email Updates</a>
       <a href="/contact.html">Contact</a>
       <a href="/privacy-policy.html">Privacy Policy</a>
